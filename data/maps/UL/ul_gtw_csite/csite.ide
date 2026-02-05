@@ -1,0 +1,43 @@
+objs
+4030, gtw_cs_scaff02b, gt_csite, 1, 25, 0
+4031, gtw_cs_scaff02a, gt_csite, 1, 25, 0
+4032, gtw_cs_scaff01, gt_csite, 1, 25, 0
+4033, gtw_cs_scaff_cr04, gt_csite, 1, 25, 0
+4034, gtw_cs_scaff_cr03, gt_csite, 1, 25, 0
+4035, gtw_cs_scaff_cr02, gt_csite, 1, 25, 0
+4036, gtw_cs_scaff_cr01, gt_csite, 1, 25, 0
+4037, gtw_cs_scaff_car, gt_csite, 1, 25, 0
+4038, gtw_cs_scaff_btm, gt_csite, 1, 25, 0
+4039, gtw_cs_stairs, gt_csite, 1, 65, 0
+4040, gtw_cs_planks, gt_csite, 1, 100, 0
+4041, gtw_cs_walls_top, gt_csite, 1, 150, 0
+4042, gtw_cs_walls_btm, gt_csite, 1, 270, 0
+4043, gtw_cs_walls, gt_csite, 1, 270, 0
+4044, gtw_cs_wood, gt_csite, 1, 100, 0
+4045, gtw_cs_wallthing, gt_csite, 1, 100, 0
+4046, gtw_cs_scaff_mid, gt_csite, 1, 100, 0
+4047, gtw_cs_scaff_crbtm, gt_csite, 1, 75, 0
+4048, gtw_cs_joists, gt_csite, 1, 100, 0
+4049, gtw_cs_floorceil, gt_csite, 1, 100, 0
+4050, gtw_cs_crane02, gt_csite, 1, 200, 4
+4051, gtw_cs_crane01, gt_csite, 1, 220, 4
+4052, gtw_cs_bits, gt_csite, 1, 100, 0
+4053, gtw_cs_airvent, gt_csite, 1, 100, 0
+4054, gtw_cs_inwalls, gt_csite, 1, 100, 0
+4055, gtw_cs_doorway, gt_csite, 1, 65, 0
+4056, gtw_cs_gird, gt_csite, 1, 65, 0
+4057, LOD_cs_gird, gt_csite, 1, 301, 0
+4058, LOD_cs_crane02, gtw_LOD, 1, 2000, 0
+4059, LOD_cs_crane01, gtw_LOD, 1, 2000, 0
+4060, gtw_cs_lodscaff, gt_csite, 1, 250, 0
+end
+tobj
+end
+path
+end
+2dfx
+4050, 6.08691, 12.0483, 41.869, 255, 0, 0, 200, 0, "coronastar", "shad_exp", 200, 0, 5, 0, 40, 9, 0, 0, 0
+4051, 0.373779, 0.130127, 106.484, 255, 0, 0, 200, 0, "coronastar", "shad_exp", 220, 0, 5, 0, 40, 9, 0, 0, 0
+4058, 6.08691, 12.0483, 41.869, 255, 0, 0, 200, 0, "coronastar", "shad_exp", 2000, 0, 5, 0, 40, 9, 0, 0, 0
+4059, 0.373779, 0.130127, 106.484, 255, 0, 0, 200, 0, "coronastar", "shad_exp", 2000, 0, 5, 0, 40, 9, 0, 0, 0
+end

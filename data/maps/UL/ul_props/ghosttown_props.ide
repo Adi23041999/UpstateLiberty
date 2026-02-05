@@ -1,0 +1,47 @@
+objs
+3666, gtw_carcersign, ul_details, 1, 299, 4
+3667, LOD_warehouse02, gtw_LOD, 1, 700, 0
+3668, LOD_warehouse01, gtw_LOD, 1, 700, 0
+3669, LOD_blockgrg01, ul_LOD, 1, 600, 0
+3676, gtw_airpshadow02, ul_details, 1, 290, 68
+3677, gtw_airpshadow01, ul_details, 1, 290, 68
+3678, gtw_decals08, ul_details, 1, 290, 68
+3679, gtw_decals07, ul_details, 1, 290, 68
+3680, gtw_decals06, ul_details, 1, 290, 68
+3681, gtw_decals05, ul_details, 1, 290, 68
+3682, gtw_decals04, ul_details, 1, 290, 68
+3683, gtw_decals03, ul_details, 1, 290, 68
+3684, gtw_decals02, ul_details, 1, 290, 68
+3685, gtw_decals01, ul_details, 1, 290, 68
+3699, gtw_signs06, ul_details, 1, 200, 4
+3700, gtw_signs05, ul_details, 1, 100, 4
+3701, gtw_signs04, ul_details, 1, 200, 4
+3702, gtw_signs03, ul_details, 1, 100, 4
+3703, gtw_signs02, ul_details, 1, 200, 4
+3704, gtw_signs01, ul_details, 1, 100, 4
+3705, gtw_billboards05, ul_details, 1, 290, 0
+3706, gtw_billboards04, ul_details, 1, 290, 0
+3707, gtw_billboards03, ul_details, 1, 290, 0
+3708, gtw_billboards02, ul_details, 1, 290, 0
+3709, gtw_billboards01, ul_details, 1, 290, 0
+3712, gtw_cutrubbish01, gt_rubbish, 1, 100, 0
+end
+tobj
+3686, LOD_buildlights07, ul_LOD, 1, 1200, 14, 19, 5
+3687, LOD_buildlights06, ul_LOD, 1, 1200, 14, 19, 5
+3688, LOD_buildlights05, ul_LOD, 1, 1200, 14, 19, 5
+3689, LOD_buildlights02, ul_LOD, 1, 1200, 14, 19, 5
+3690, LOD_buildlights01, ul_LOD, 1, 1200, 14, 19, 5
+3691, gtw_buildlights08, ul_details, 1, 200, 14, 19, 5
+3692, gtw_buildlights07, ul_details, 1, 200, 14, 19, 5
+3693, gtw_buildlights06, ul_details, 1, 200, 14, 19, 5
+3694, gtw_buildlights05, ul_details, 1, 200, 14, 19, 5
+3695, gtw_buildlights04, ul_details, 1, 200, 14, 19, 5
+3696, gtw_buildlights03, ul_details, 1, 200, 14, 19, 5
+3697, gtw_buildlights02, ul_details, 1, 200, 14, 19, 5
+3698, gtw_buildlights01, ul_details, 1, 200, 14, 19, 5
+end
+path
+end
+2dfx
+end

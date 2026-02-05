@@ -1,0 +1,11 @@
+data/maps/UL/*
+data/maps/landne/landne.ipl
+data/maps/landsw/landsw.ipl
+data/main.scm
+data/gta3.dat
+data/CULLZONE.dat
+CLEO/ul*
+CLEO/CLEO_TEXT/ul*
+scripts/III.OpenLimitAdjuster.asi
+scripts/III.VC.SA.LimitAdjuster.ini
+_dev/ul_readme.txt

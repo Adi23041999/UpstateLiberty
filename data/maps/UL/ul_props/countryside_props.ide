@@ -1,0 +1,77 @@
+objs
+3572, LOD_trees1_sub, suburb2, 1, 1000, 4
+3573, lcc_trees1_sub, trees2, 1, 299, 4
+3575, lcc_billboards04, ul_details, 1, 290, 0
+3576, lcc_billboards03, ul_details, 1, 290, 0
+3577, lcc_billboards02, ul_details, 1, 290, 0
+3578, lcc_billboards01, ul_details, 1, 290, 0
+3579, lcc_signs11, ul_details, 1, 299, 4
+3580, lcc_signs10, ul_details, 1, 290, 4
+3581, lcc_signs09, ul_details, 1, 290, 4
+3582, lcc_signs08, ul_details, 1, 290, 4
+3583, lcc_signs07, ul_details, 1, 290, 4
+3584, lcc_signs06, ul_details, 1, 290, 4
+3585, lcc_signs05, ul_details, 1, 290, 4
+3586, lcc_signs04, ul_details, 1, 290, 4
+3587, lcc_signs03, ul_details, 1, 290, 4
+3588, lcc_signs02, ul_details, 1, 290, 4
+3589, lcc_signs01, ul_details, 1, 290, 4
+3593, lcc_decals13, ul_details, 1, 290, 68
+3594, lcc_decals12, ul_details, 1, 290, 68
+3595, lcc_decals11, ul_details, 1, 290, 68
+3596, lcc_decals10, ul_details, 1, 290, 68
+3597, lcc_decals09, ul_details, 1, 290, 68
+3598, lcc_decals08, ul_details, 1, 290, 68
+3599, lcc_decals07, ul_details, 1, 290, 68
+3600, lcc_decals06, ul_details, 1, 290, 68
+3601, lcc_decals05, ul_details, 1, 290, 68
+3602, lcc_decals04, ul_details, 1, 290, 68
+3603, lcc_decals03, ul_details, 1, 290, 68
+3604, lcc_decals02, ul_details, 1, 290, 68
+3605, lcc_decals01, ul_details, 1, 290, 68
+3713, lcc_t3_telewire02, ul_details, 1, 250, 4
+3714, lcc_t3_telewire01, ul_details, 1, 250, 4
+3715, lcc_t2_telewire03, ul_details, 1, 250, 4
+3716, lcc_t2_telewire02, ul_details, 1, 250, 4
+3717, lcc_t2_telewire01, ul_details, 1, 250, 4
+3718, lcc_t1_telewire02, ul_details, 1, 250, 4
+3719, lcc_t1_telewire01, ul_details, 1, 250, 4
+3801, lcc_telewire21, ul_details, 1, 250, 4
+3802, lcc_telewire20, ul_details, 1, 250, 4
+3803, lcc_telewire19, ul_details, 1, 250, 4
+3804, lcc_telewire18, ul_details, 1, 250, 4
+3805, lcc_telewire17, ul_details, 1, 250, 4
+3806, lcc_telewire16, ul_details, 1, 250, 4
+3807, lcc_telewire15, ul_details, 1, 250, 4
+3808, lcc_telewire14, ul_details, 1, 250, 4
+3809, lcc_powerline11, ul_details, 1, 270, 4
+3810, lcc_powerline10, ul_details, 1, 270, 4
+3811, lcc_powerline09, ul_details, 1, 270, 4
+3812, lcc_powerline08, ul_details, 1, 270, 4
+3813, lcc_powerline07, ul_details, 1, 270, 4
+3814, lcc_powerline06, ul_details, 1, 270, 4
+3918, lcc_telewire13, ul_details, 1, 250, 4
+3919, lcc_telewire12, ul_details, 1, 250, 4
+3920, lcc_telewire11, ul_details, 1, 250, 4
+3921, lcc_telewire10, ul_details, 1, 250, 4
+3922, lcc_telewire09, ul_details, 1, 250, 4
+3923, lcc_telewire08, ul_details, 1, 250, 4
+5136, lcc_telewire07, ul_details, 1, 250, 4
+5196, lcc_telewire06, ul_details, 1, 250, 4
+5205, lcc_telewire05, ul_details, 1, 250, 4
+5232, lcc_telewire04, ul_details, 1, 250, 4
+5233, lcc_powerline05, ul_details, 1, 270, 4
+5234, lcc_powerline04, ul_details, 1, 270, 4
+5235, lcc_powerline03, ul_details, 1, 270, 4
+5236, lcc_powerline02, ul_details, 1, 270, 4
+5237, lcc_powerline01, ul_details, 1, 270, 4
+5241, lcc_telewire03, ul_details, 1, 250, 4
+5243, lcc_telewire02, ul_details, 1, 250, 4
+5418, lcc_telewire01, ul_details, 1, 250, 4
+end
+tobj
+end
+path
+end
+2dfx
+end
