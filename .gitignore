@@ -1,5 +1,6 @@
 ﻿/**
 !/.gitignore
+!/.gitattributes
 !/_dev/
 !/_dev/*
 !/_dev/**/*
@@ -31,6 +32,7 @@ dff
 !main.scm
 !gta3.dat
 !CULLZONE.dat
+!waterpro.dat
 
 !/scripts/
 !III.OpenLimitAdjuster.asi
