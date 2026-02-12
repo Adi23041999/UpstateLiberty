@@ -1,0 +1,7 @@
+# IPL generated from Max file superlod2.max
+inst
+402, IslandLODsubCOM, -475.154, 280.46, 84.1606, 1, 1, 1, 0, 0, 0, 1
+403, IslandLODsubIND, -475.154, 280.46, 84.1606, 1, 1, 1, 0, 0, 0, 1
+end
+cull
+end
