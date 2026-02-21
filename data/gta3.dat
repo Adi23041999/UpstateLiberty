@@ -78,9 +78,7 @@ SPLASH loadsc3
 
 # have to load map.zon before any of the IPLs
 MAPZONE DATA\MAP.ZON
-MAPZONE DATA\MAPS\UL\UL_ZONES\UL_MAP.ZON
 IPL DATA\GTA3.ZON
-IPL DATA\MAPS\UL\UL_ZONES\UL_ZONE.ZON
 #
 # Scene information
 #
@@ -109,4 +107,4 @@ IPL DATA\MAPS\UL\ul_gtw_csite\csite.IPL
 IPL DATA\MAPS\UL\ul_props\countryside_props.IPL
 IPL DATA\MAPS\UL\ul_props\ghosttown_props.IPL
 IPL DATA\MAPS\UL\ul_props\shadows.IPL
-IPL DATA\MAPS\UL\ul_zones\ul_cull.IPL
+IPL DATA\MAPS\UL\ul_cull.IPL
