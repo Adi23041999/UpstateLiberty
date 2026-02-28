@@ -4,6 +4,8 @@ data/maps/landsw/landsw.ipl
 data/main.scm
 data/gta3.dat
 data/CULLZONE.dat
+data/gta3.zon
+data/map.zon
 data/waterpro.dat
 CLEO/ul*
 CLEO/CLEO_TEXT/ul*

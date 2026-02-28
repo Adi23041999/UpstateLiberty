@@ -22,13 +22,13 @@ objs
 3796, ulp_tactorwreck, ulp_farmstuff, 1, 100, 0
 3797, ulp_pickupwreck, ulp_farmstuff, 1, 100, 0
 3798, ulp_windmill, ulp_farmstuff, 1, 250, 4
-3799, ulp_woodfence02, ulp_farmstuff, 1, 110, 0
-3800, ulp_woodfence01, ulp_farmstuff, 1, 110, 0
+3799, ulp_woodfence02, ulp_farmstuff, 2, 110, 100, 0
+3800, ulp_woodfence01, ulp_farmstuff, 2, 110, 100, 0
 3815, ulp_sunstool, ulp_sunbed, 1, 80, 0
 3816, ulp_sunbed, ulp_sunbed, 1, 100, 4
-3817, ulp_condolight, ulp_lights, 1, 100, 0
+3817, ulp_condolight, ulp_lights, 2, 100, 90, 0
 3907, ulp_golfball, lcc_golf, 1, 40, 0
-3908, ulp_golfflag, lcc_golf, 1, 50, 0
+3908, ulp_golfflag, lcc_golf, 2, 50, 40, 0
 5240, ulp_pylon, pylon, 2, 299, 600, 4
 end
 tobj
@@ -39,4 +39,5 @@ end
 3570, 3.84869, -1.10996, 5.16779, 105, 243, 255, 200, 0, "coronastar", "shad_exp", 100, 18, 1, 8, 40, 1, 0, 0, 3
 3570, -0.121918, -0.896, 5.16779, 105, 243, 255, 200, 0, "coronastar", "shad_exp", 100, 18, 1, 8, 40, 1, 0, 0, 3
 3570, -4.01785, -1.07385, 5.16779, 105, 243, 255, 200, 0, "coronastar", "shad_exp", 100, 18, 1, 8, 40, 1, 0, 0, 3
+3817, -7.62939e-06, -4.76837e-07, 0.473075, 105, 255, 200, 200, 0, "coronastar", "shad_exp", 100, 18, 1, 8, 40, 1, 0, 0, 0
 end
