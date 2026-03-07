@@ -7,6 +7,7 @@ data/CULLZONE.dat
 data/gta3.zon
 data/map.zon
 data/waterpro.dat
+data/object.dat
 data/modelTraits.dat
 CLEO/ul*
 CLEO/CLEO_TEXT/ul*
