@@ -1,4 +1,9 @@
 objs
+3517, gtw_glasswang, generic, 1, 150, 0
+3518, gtw_glassblimp, generic, 1, 150, 0
+3519, gtw_@glassSml, generic, 1, 150, 0
+3520, gtw_@glassMid, generic, 1, 150, 0
+3521, gtw_@glassBig, generic, 1, 150, 0
 3666, gtw_carcersign, ul_details, 1, 299, 4
 3667, LOD_warehouse02, gtw_LOD, 1, 700, 0
 3668, LOD_warehouse01, gtw_LOD, 1, 700, 0

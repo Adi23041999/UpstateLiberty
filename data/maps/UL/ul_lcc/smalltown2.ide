@@ -1,4 +1,5 @@
 objs
+3524, lcc_t2_spraydoor, lcc_smalltownnew, 1, 100, 0
 3591, lcc_t2_tags, ul_details, 1, 290, 68
 4081, lcc_t2_rd_grg, gt_generic, 1, 299, 0
 4082, lcc_t2_rd_faca, gt_generic, 1, 299, 0
@@ -9,7 +10,7 @@ objs
 4087, lcc_t2_intblimp, ulint_fastfood, 1, 100, 0
 4088, lcc_t2_ground02, lcc_smalltownnew, 1, 200, 0
 4089, lcc_t2_ground01, lcc_smalltownnew, 1, 200, 0
-4524, lcc_t2_intspray, joeys, 1, 100, 0
+4524, lcc_t2_intspray, ulint_spray, 1, 100, 0
 4525, lcc_t2_housegr12, lcc_countryhouses, 1, 200, 0
 4526, lcc_t2_housegr11, lcc_countryhouses, 1, 200, 0
 4527, lcc_t2_housegr10, lcc_countryhouses, 1, 200, 0

@@ -5,6 +5,9 @@
 !/_dev/*
 !/_dev/**/*
 _dev/script/gta3sc/
+_dev/code/**/*
+!_dev/code/*
+!_dev/code/source/*
 
 gta3img
 texgta3
@@ -35,7 +38,9 @@ dff
 !waterpro.dat
 !gta3.zon
 !map.zon
+!modelTraits.dat
 
 !/scripts/
 !III.OpenLimitAdjuster.asi
 !III.VC.SA.LimitAdjuster.ini
+!III.Upstate.asi
