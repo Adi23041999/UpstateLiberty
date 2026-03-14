@@ -1,20 +1,24 @@
 objs
+3504, ulp_tallpost, docklight, 1, 150, 0
+3505, ulp_blimp3dhalf, ulp_happyblimp, 1, 200, 4
+3506, ulp_blimpbin, ulp_happyblimp, 1, 50, 4
+3507, ulp_blimp3d, ulp_happyblimp, 1, 299, 4
 3570, ulp_billsmall, billboard, 1, 250, 0
 3710, ulp_camera02, ulp_camera, 1, 80, 0
 3711, ulp_camera01, ulp_camera, 1, 80, 0
-3731, ulp_minetrash03, ulp_mineshaft, 1, 60, 0
-3732, ulp_minetrash02, ulp_mineshaft, 1, 60, 0
-3733, ulp_minetrash, ulp_mineshaft, 1, 60, 0
-3734, ulp_minepassmid, ulp_mineshaft, 1, 100, 0
-3735, ulp_minepassend, ulp_mineshaft, 1, 100, 0
-3736, ulp_dynamite03, ulp_mineshaft, 1, 50, 0
-3737, ulp_dynamite02, ulp_mineshaft, 1, 50, 0
-3738, ulp_dynamite01, ulp_mineshaft, 1, 50, 0
-3739, ulp_minebarrel02, ulp_mineshaft, 1, 60, 0
-3740, ulp_minebarrel01, ulp_mineshaft, 1, 60, 0
-3741, ulp_minecart03, ulp_mineshaft, 1, 80, 0
-3742, ulp_minecart02, ulp_mineshaft, 1, 80, 0
-3743, ulp_minecart01, ulp_mineshaft, 1, 80, 0
+3731, ulp_minetrash03, ulp_mineshaft, 1, 60, 32
+3732, ulp_minetrash02, ulp_mineshaft, 1, 60, 32
+3733, ulp_minetrash, ulp_mineshaft, 1, 60, 32
+3734, ulp_minepassmid, ulp_mineshaft, 1, 100, 32
+3735, ulp_minepassend, ulp_mineshaft, 1, 100, 32
+3736, ulp_dynamite03, ulp_mineshaft, 1, 50, 32
+3737, ulp_dynamite02, ulp_mineshaft, 1, 50, 32
+3738, ulp_dynamite01, ulp_mineshaft, 1, 50, 32
+3739, ulp_minebarrel02, ulp_mineshaft, 1, 60, 32
+3740, ulp_minebarrel01, ulp_mineshaft, 1, 60, 32
+3741, ulp_minecart03, ulp_mineshaft, 1, 80, 32
+3742, ulp_minecart02, ulp_mineshaft, 1, 80, 32
+3743, ulp_minecart01, ulp_mineshaft, 1, 80, 32
 3748, ulp_combinewheel, ulp_farmstuff, 1, 100, 0
 3749, ulp_tactorwheel, ulp_farmstuff, 1, 80, 0
 3794, ulp_watertower, ulp_farmstuff, 1, 299, 0
@@ -36,6 +40,7 @@ end
 path
 end
 2dfx
+3507, 3.30389, 0.00330329, 4.81899, 255, 0, 0, 200, 0, "coronastar", "shad_exp", 150, 0, 1, 8, 40, 7, 0, 0, 0
 3570, 3.84869, -1.10996, 5.16779, 105, 243, 255, 200, 0, "coronastar", "shad_exp", 100, 18, 1, 8, 40, 1, 0, 0, 3
 3570, -0.121918, -0.896, 5.16779, 105, 243, 255, 200, 0, "coronastar", "shad_exp", 100, 18, 1, 8, 40, 1, 0, 0, 3
 3570, -4.01785, -1.07385, 5.16779, 105, 243, 255, 200, 0, "coronastar", "shad_exp", 100, 18, 1, 8, 40, 1, 0, 0, 3
