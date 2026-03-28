@@ -2,6 +2,7 @@ data/maps/UL/*
 data/maps/landne/landne.ipl
 data/maps/landsw/landsw.ipl
 data/main.scm
+data/main_d.scm
 data/gta3.dat
 data/CULLZONE.dat
 data/gta3.zon

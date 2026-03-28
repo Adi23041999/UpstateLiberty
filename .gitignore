@@ -8,6 +8,7 @@ _dev/script/gta3sc/
 _dev/code/**/*
 !_dev/code/*
 !_dev/code/source/*
+_dev/script/main.sc
 
 gta3img
 texgta3
@@ -33,6 +34,7 @@ dff
 !/data/maps/landsw/landsw.ipl
 
 !main.scm
+!main_d.scm
 !gta3.dat
 !CULLZONE.dat
 !waterpro.dat
