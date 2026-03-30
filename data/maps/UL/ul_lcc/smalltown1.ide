@@ -15,7 +15,7 @@ objs
 4073, lcc_t1_warehouse, lcc_smalltownnew, 1, 250, 0
 4074, lcc_t1_trailergrn, lcc_smalltownnew, 1, 250, 0
 4075, lcc_t1_intpizza, ulint_fastfood, 1, 100, 0
-4076, lcc_t1_intammo, ulint_gunshop, 1, 100, 4
+4076, lcc_t1_intammo, ulint_gunshop, 1, 100, 0
 4077, lcc_t1_housegr09, lcc_countryhouses, 1, 250, 0
 4078, lcc_t1_housegr08, lcc_countryhouses, 1, 250, 0
 4079, lcc_t1_housegr07, lcc_countryhouses, 1, 250, 0

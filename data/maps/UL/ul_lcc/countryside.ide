@@ -1,5 +1,10 @@
 objs
-3503, lcc_damjump, lcc_damjump, 1, 200, 0
+3491, lcc_cm_water, lcc_coalmine, 1, 100, 4
+3495, lcc_resortsign, lcc_touriststuff, 1, 200, 0
+3500, lcc_obssign, lcc_touriststuff, 1, 200, 0
+3501, LOD_golfboard, lcc_LOD, 1, 900, 4
+3502, lcc_golfboard, lcc_golf, 1, 200, 4
+3503, lcc_damjump, lcc_damjump, 1, 250, 0
 3513, lcc_coalseamfix, lcc_coalmine, 1, 200, 48
 3514, lcc_dambed, lcc_generic, 1, 299, 0
 3568, lcc_junX2B, lcc_generic, 1, 200, 0
@@ -3911,6 +3916,8 @@ car, 4344, lcc_ehway_b01A
 	0, -1, 0, 0, 0, 0, 0, 1, 1
 end
 2dfx
+3502, -3.54626, 1.17078, 2.43117, 210, 251, 255, 200, 0, "coronastar", "shad_exp", 100, 0, 1, 0, 40, 1, 0, 0, 0
+3502, 3.95398, 1.17084, 2.43117, 210, 251, 255, 200, 0, "coronastar", "shad_exp", 100, 0, 1, 0, 40, 1, 0, 0, 0
 3720, 1.45752, 10.6497, 0.78735, 153, 209, 210, 150, 0, "coronastar", "shad_exp", 50, 0, 2.5, 0, 40, 0, 0, 0, 0
 3720, -2.45898, 10.6497, 0.78735, 153, 209, 210, 150, 0, "coronastar", "shad_exp", 50, 0, 2.5, 0, 40, 0, 0, 0, 0
 3720, 1.45752, 6.65076, 0.78735, 153, 209, 210, 150, 0, "coronastar", "shad_exp", 50, 0, 2.5, 0, 40, 0, 0, 0, 0

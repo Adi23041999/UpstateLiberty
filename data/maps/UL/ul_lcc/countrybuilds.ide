@@ -1,4 +1,7 @@
 objs
+3496, lcc_radiostatA, lcc_radiostation, 1, 170, 4
+3497, lcc_intobservA, ulint_observatory, 1, 100, 4
+3498, lcc_observatoryA, lcc_radiostation, 1, 250, 4
 3571, ulint_tortureA, ulint_torture, 1, 100, 36
 3785, LOD_hikinghut, lcc_LOD, 1, 1000, 0
 3786, LOD_mnthoteGr, lcc_LOD, 1, 1500, 0
@@ -56,7 +59,7 @@ objs
 3984, lcc_trailer02, lcc_smalltown, 1, 100, 0
 3985, lcc_trailer01, lcc_smalltown, 1, 100, 0
 4105, lcc_mountplat, lcc_radiostation, 1, 290, 0
-4106, lcc_intobserv, ulint_observatory, 1, 100, 4
+4106, lcc_intobserv, ulint_observatory, 1, 100, 0
 4107, lcc_coveredbridge, lcc_bridges, 1, 290, 0
 4108, lcc_bridgearch, lcc_bridges, 1, 290, 0
 4256, lcc_frmbuild07, lcc_farms, 1, 170, 0
