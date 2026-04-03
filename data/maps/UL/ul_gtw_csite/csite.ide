@@ -26,7 +26,7 @@ objs
 4054, gtw_cs_inwalls, gt_csite, 1, 100, 0
 4055, gtw_cs_doorway, gt_csite, 1, 65, 0
 4056, gtw_cs_gird, gt_csite, 1, 65, 0
-4057, LOD_cs_gird, gt_csite, 1, 301, 0
+4057, LOD_cs_gird, gtw_LOD, 1, 301, 0
 4058, LOD_cs_crane02, gtw_LOD, 1, 2000, 0
 4059, LOD_cs_crane01, gtw_LOD, 1, 2000, 0
 4060, gtw_cs_lodscaff, gt_csite, 1, 250, 0

@@ -3,7 +3,6 @@
 #
 
 CDIMAGE DATA\MAPS\UL\ul.IMG
-#CDIMAGE DATA\MAPS\test\test.IMG
 
 # everything is loaded on a per directory basis and in alphabetical order 
 # to improve the speed of loading
@@ -30,7 +29,6 @@ IDE DATA\MAPS\LANDne\LANDne.ide
 IDE DATA\MAPS\LANDsw\LANDsw.ide
 IDE DATA\MAPS\SUBROADS\SUBROADS.ide
 
-#IDE DATA\MAPS\test\test.IDE
 IDE DATA\MAPS\UL\ul_generic\ul_generic.IDE
 IDE DATA\MAPS\UL\ul_lcc\countryside.IDE
 IDE DATA\MAPS\UL\ul_lcc\countrybuilds.IDE
@@ -96,7 +94,6 @@ IPL DATA\MAPS\LANDsw\LANDsw.IPL
 IPL DATA\MAPS\overview.IPL
 IPL DATA\MAPS\props.IPL
 
-#IPL DATA\MAPS\test\test.IPL
 IPL DATA\MAPS\cull.IPL
 IPL DATA\MAPS\UL\ul_lcc\countryside.IPL
 IPL DATA\MAPS\UL\ul_lcc\smalltown1.IPL
