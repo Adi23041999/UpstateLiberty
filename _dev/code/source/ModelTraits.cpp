@@ -27,7 +27,6 @@ void ModelTraits::DoPatches()
 
 	injector::MakeJMP(0x428D90, Patch_IsModelIndexADoor);
 	injector::MakeJMP(0x427510, Patch_SetGarageDoorToRotate);
-	// TODO: check RefreshDoorPointers
 
 	injector::MakeInline<0x41B730>([](injector::reg_pack& regs) // CCarCtrl::WeaveForObject
 		{

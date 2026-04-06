@@ -38,14 +38,14 @@ tobj
 3688, LOD_buildlights05, ul_LOD, 1, 1200, 14, 19, 5
 3689, LOD_buildlights02, ul_LOD, 1, 1200, 14, 19, 5
 3690, LOD_buildlights01, ul_LOD, 1, 1200, 14, 19, 5
-3691, gtw_buildlights08, ul_details, 1, 290, 14, 19, 5
-3692, gtw_buildlights07, ul_details, 1, 290, 14, 19, 5
-3693, gtw_buildlights06, ul_details, 1, 290, 14, 19, 5
-3694, gtw_buildlights05, ul_details, 1, 290, 14, 19, 5
-3695, gtw_buildlights04, ul_details, 1, 290, 14, 19, 5
-3696, gtw_buildlights03, ul_details, 1, 290, 14, 19, 5
-3697, gtw_buildlights02, ul_details, 1, 290, 14, 19, 5
-3698, gtw_buildlights01, ul_details, 1, 290, 14, 19, 5
+3691, gtw_buildlights08, ul_details, 1, 200, 14, 19, 5
+3692, gtw_buildlights07, ul_details, 1, 200, 14, 19, 5
+3693, gtw_buildlights06, ul_details, 1, 200, 14, 19, 5
+3694, gtw_buildlights05, ul_details, 1, 200, 14, 19, 5
+3695, gtw_buildlights04, ul_details, 1, 200, 14, 19, 5
+3696, gtw_buildlights03, ul_details, 1, 200, 14, 19, 5
+3697, gtw_buildlights02, ul_details, 1, 200, 14, 19, 5
+3698, gtw_buildlights01, ul_details, 1, 200, 14, 19, 5
 end
 path
 end

@@ -7,8 +7,8 @@ objs
 3503, lcc_damjump, lcc_damjump, 1, 250, 0
 3513, lcc_coalseamfix, lcc_coalmine, 1, 200, 48
 3514, lcc_dambed, lcc_generic, 1, 299, 0
-3568, lcc_junX2B, lcc_generic, 1, 200, 0
-3569, lcc_junT2B, lcc_generic, 1, 200, 0
+3568, lcc_junX2B, lcc_generic, 1, 250, 0
+3569, lcc_junT2B, lcc_generic, 1, 250, 0
 3574, lcc_substationA, lcc_electric, 1, 140, 4
 3720, ulint_weedfarm, ulint_weedfarm, 1, 80, 36
 3721, LOD_fldep_tanks, lcc_LOD, 1, 1500, 0
@@ -60,7 +60,7 @@ objs
 3782, lcc_mntPath03, lcc_generic, 1, 150, 0
 3783, lcc_mntPath02, lcc_generic, 1, 150, 0
 3784, lcc_mntPath01, lcc_generic, 1, 150, 0
-3856, lcc_junT2, lcc_generic, 1, 200, 0
+3856, lcc_junT2, lcc_generic, 1, 250, 0
 3909, lcc_golffnc04, lcc_golf, 1, 290, 4
 3910, lcc_golffnc03, lcc_golf, 1, 290, 4
 3911, lcc_golfhelipad, helipad, 1, 200, 4
@@ -154,7 +154,7 @@ objs
 4190, lcc_wmanRd03, lcc_generic, 1, 200, 0
 4191, lcc_wmanRd02, lcc_generic, 1, 200, 0
 4192, lcc_wmanRd01, lcc_generic, 1, 200, 0
-4193, lcc_jun_T_man, lcc_generic, 1, 200, 0
+4193, lcc_jun_T_man, lcc_generic, 1, 250, 0
 4194, lcc_whway_im04, lcc_generic, 1, 200, 0
 4195, lcc_whway_im03, lcc_generic, 1, 200, 0
 4196, lcc_whway_im02, lcc_generic, 1, 200, 0
@@ -216,7 +216,7 @@ objs
 4252, lcc_tRd02, lcc_generic, 1, 200, 0
 4253, lcc_tRd01, lcc_generic, 1, 200, 0
 4254, lcc_tRd_tun, lcc_tunnels, 1, 250, 0
-4255, lcc_junX2, lcc_generic, 1, 200, 0
+4255, lcc_junX2, lcc_generic, 1, 250, 0
 4257, lcc_sRd18, lcc_generic, 1, 200, 0
 4258, lcc_sRd17, lcc_generic, 1, 200, 0
 4259, lcc_sRd16, lcc_generic, 1, 200, 0

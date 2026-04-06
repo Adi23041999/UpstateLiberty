@@ -27,7 +27,7 @@ VAR_INT ul_car_gt_ugpark11, ul_car_gt_ugpark12, ul_car_gt_ugpark13, ul_car_gt_ug
 VAR_INT ul_car_gt_ugpark21, ul_car_gt_ugpark22
 
 VAR_INT ul_car_gt_air1, ul_car_gt_air2, ul_car_gt_air3, ul_car_gt_air4, ul_car_gt_air5, ul_car_gt_air6, ul_car_gt_air7, ul_car_gt_air8, ul_car_gt_air9, ul_car_gt_air10
-VAR_INT ul_car_gt_air11, ul_car_gt_air12, ul_car_gt_air13, ul_car_gt_air14
+VAR_INT ul_car_gt_air11, ul_car_gt_air12, ul_car_gt_air13, ul_car_gt_air14, ul_car_gt_air15, ul_car_gt_air16, ul_car_gt_air17
 
 VAR_INT ul_car_lcc1, ul_car_lcc2, ul_car_lcc3, ul_car_lcc4, ul_car_lcc5, ul_car_lcc6, ul_car_lcc7, ul_car_lcc8, ul_car_lcc9, ul_car_lcc10
 VAR_INT ul_car_lcc11, ul_car_lcc12, ul_car_lcc13, ul_car_lcc14, ul_car_lcc15, ul_car_lcc16, ul_car_lcc17, ul_car_lcc18, ul_car_lcc19, ul_car_lcc20
@@ -192,6 +192,9 @@ CREATE_CAR_GENERATOR 1753.90 1614.66 126.75 360.0 CAR_CABBIE -1 -1 0 0 0 0 10000
 CREATE_CAR_GENERATOR 1650.42 1545.14 126.90 270.0 CAR_COACH -1 -1 0 100 0 0 10000 ul_car_gt_air12 //At bus Depot 
 CREATE_CAR_GENERATOR 1650.42 1566.59 126.90 90.0 CAR_COACH -1 -1 0 100 0 0 10000 ul_car_gt_air13 //At bus Depot
 CREATE_CAR_GENERATOR 1734.5106 1840.9015 141.5537 180.0 CAR_FIRETRUCK -1 -1 0 0 0 0 10000 ul_car_gt_air14 //At airport
+CREATE_CAR_GENERATOR 1744.752 1667.4712 126.8137 90.0 CAR_STALLION -1 -1 0 0 0 0 10000 ul_car_gt_air15 //Parking on the side
+CREATE_CAR_GENERATOR 1761.6678 1682.9579 126.8138 270.0 CAR_KURUMA -1 -1 0 0 0 0 10000 ul_car_gt_air16 //Parking on the side
+CREATE_CAR_GENERATOR 1744.7571 1698.4371 126.8138 270.0 CAR_BLISTA -1 -1 0 0 0 0 10000 ul_car_gt_air17 //Parking on the side
 
 
 // *************************************COUNTRYSIDE************************************************ 

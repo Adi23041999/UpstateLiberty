@@ -12,7 +12,7 @@ objs
 3791, lcc_mnthoteGr, lcc_touriststuff, 1, 290, 0
 3792, lcc_mnthotel, lcc_touriststuff, 1, 280, 0
 3793, lcc_touristhouse, lcc_touriststuff, 1, 200, 0
-3940, lcc_oldmanfnc, lcc_oldmansion, 1, 200, 0
+3940, lcc_oldmanfnc, lcc_oldmansion, 1, 200, 4
 3941, lcc_oldmanbrg, lcc_oldmansion, 1, 200, 0
 3942, lcc_wmansion05, lcc_mansions, 1, 199, 0
 3943, lcc_wmansion04, lcc_mansions, 1, 199, 0
@@ -61,7 +61,7 @@ objs
 4105, lcc_mountplat, lcc_radiostation, 1, 290, 0
 4106, lcc_intobserv, ulint_observatory, 1, 100, 0
 4107, lcc_coveredbridge, lcc_bridges, 1, 290, 0
-4108, lcc_bridgearch, lcc_bridges, 1, 290, 0
+4108, lcc_bridgearch, lcc_bridges, 1, 290, 4
 4256, lcc_frmbuild07, lcc_farms, 1, 170, 0
 4477, lcc_frmbuild06, lcc_farms, 1, 200, 0
 4597, LOD_trailer09, lcc_LOD, 1, 750, 0
