@@ -221,8 +221,6 @@ GOSUB_FILE ul_objects ul_objects.sc
 
 SET_MAX_WANTED_LEVEL 4
 
-GOSUB_FILE ul_garages ul_garages.sc
-
 // **************************************Industrial Garages*********************************
 
 VAR_INT save_cars1, bombshop1, sprayshop1, collect_all_cars1, special_garage1, hours minutes
@@ -297,6 +295,8 @@ SET_GARAGE -824.7 -165.5 32.8 -843.5 -171.7 37.0 GARAGE_KEEPS_OPENING_FOR_SPECIF
 
 SET_GARAGE -1049.17 -77.47 37.8 -1037.21 -69.17 42.8 GARAGE_FOR_SCRIPT_TO_OPEN_AND_CLOSE escort_garage //LOVE 5 - ESCORT SERVICE (WAREHOUSE)
 SET_ROTATING_GARAGE_DOOR escort_garage
+
+GOSUB_FILE ul_garages ul_garages.sc
 
 // ************************************Industrial Crane Positions***************************
 
@@ -1768,6 +1768,7 @@ IF IS_PLAYER_PLAYING player
 	SWAP_NEAREST_BUILDING_MODEL	702.764 -919.963 38.736	20.0 lodridgerda lodgbbridgerda	
 	
 	GOSUB_FILE switch_car_generator switch.sc
+	GOSUB_FILE ul_switch_car_generator ul_switch.sc
 
 	START_NEW_SCRIPT ind_save_loop
 	START_NEW_SCRIPT sub_save_loop

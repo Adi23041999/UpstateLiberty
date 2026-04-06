@@ -1,3 +1,7 @@
+// *************************************UPSTATE LIBERTY GATES***************************
+// Authors:
+// Adi
+
 MISSION_START
 
 VAR_FLOAT ul_objectx, ul_objecty, ul_objectz // Checks for the sliding doors to tell them to close if an object is in the way

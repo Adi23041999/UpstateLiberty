@@ -1,3 +1,7 @@
+// *************************************UPSTATE LIBERTY OBJECTS***************************
+// Authors:
+// Adi
+
 ul_objects:
 
 VAR_INT ul_gt_police_door

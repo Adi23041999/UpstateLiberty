@@ -1,3 +1,7 @@
+// *************************************UPSTATE LIBERTY GARAGES***************************
+// Authors:
+// Adi
+
 ul_garages:
 
 VAR_INT ul_t2_spray ul_t3_bomb ul_gt_spray ul_gt_bomb

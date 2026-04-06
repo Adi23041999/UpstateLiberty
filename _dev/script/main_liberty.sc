@@ -215,6 +215,8 @@ DONT_REMOVE_OBJECT airportdoor1
 CREATE_OBJECT_NO_OFFSET airportdoor2 -770.414 -601.369 11.846 airportdoor2
 DONT_REMOVE_OBJECT airportdoor2
 
+GOSUB_FILE ul_objects ul_objects.sc
+
 // ******************************************Police Levels**********************************
 
 SET_MAX_WANTED_LEVEL 4
@@ -294,6 +296,8 @@ SET_GARAGE -824.7 -165.5 32.8 -843.5 -171.7 37.0 GARAGE_KEEPS_OPENING_FOR_SPECIF
 SET_GARAGE -1049.17 -77.47 37.8 -1037.21 -69.17 42.8 GARAGE_FOR_SCRIPT_TO_OPEN_AND_CLOSE escort_garage //LOVE 5 - ESCORT SERVICE (WAREHOUSE)
 SET_ROTATING_GARAGE_DOOR escort_garage
 
+GOSUB_FILE ul_garages ul_garages.sc
+
 // ************************************Industrial Crane Positions***************************
 
 ACTIVATE_MILITARY_CRANE 1570.3 -675.4 1565.7 -686.5 1576.8 -706.6 1639.9 -696.7 26.0 0.0 //Docks crane for the Police cars onto boat height for area 10.8
@@ -303,6 +307,8 @@ ACTIVATE_CRUSHER_CRANE 1119.8 51.8 1135.8 56.1 1149.8 46.3 1143.0 59.9 5.0 180.0
 // ****************************************Restart Zones************************************
 
 // **************************************GLOBAL ZONES*****************************************
+
+	GOSUB_FILE ul_zones ul_zones.sc
 
  	SETUP_ZONE_PED_INFO CITYZON DAY   (12) 0 0 0 0 0 0 0 20   
     SETUP_ZONE_PED_INFO CITYZON NIGHT ( 8) 0 0 0 0 0 0 0 10 
@@ -748,6 +754,7 @@ SWITCH_ROADS_OFF -1194.1 98.6 50.0 -1234.0 119.2 80.0  //
 // **************************************CAR GENERATORS**********************************************
 
 GOSUB_FILE car_generators car_gen.sc
+GOSUB_FILE ul_cargen ul_cargen.sc
 
 //SPECIAL CAR GENERATORS****************************************************************************
 CREATE_CAR_GENERATOR 930.93 -267.63 -100.0 340.0 CAR_BFINJECT -1 -1 0 100 0 0 10000 joeys_buggy //Joeys Buggy
@@ -759,6 +766,7 @@ SWITCH_CAR_GENERATOR swank_taxi 0
 // *****************************************PICK_UPS**************************************************
 
 GOSUB_FILE main_pickups pickups.sc
+GOSUB_FILE ul_pickups ul_pickups.sc
 
 //AMMU NATION*****************************************************************************************
 VAR_INT ammu_shop_bloke1
@@ -1650,6 +1658,8 @@ LAUNCH_MISSION usj.sc
 
 LAUNCH_MISSION genstuf.sc
 
+LAUNCH_MISSION ul_genstuf.sc
+
 LAUNCH_MISSION rampage.sc
 
 LAUNCH_MISSION import.sc
@@ -1657,6 +1667,8 @@ LAUNCH_MISSION import.sc
 LAUNCH_MISSION camera.sc
 
 LAUNCH_MISSION gates.sc
+
+LAUNCH_MISSION ul_gates.sc
 
 WAIT 0
 
@@ -2667,6 +2679,7 @@ AND flag_eightball_mission_passed = 0
 ENDIF
 
 	IF flag_eightball_mission_passed = 1
+		GOSUB_FILE ul_switch_car_generator ul_switch.sc
 		TERMINATE_THIS_SCRIPT
 	ENDIF
 
@@ -7014,6 +7027,7 @@ sub_restart_inner:
 			IF flag_commercial_passed = 1 
 				ADD_HOSPITAL_RESTART -1253.0 -138.2 57.8 90.0
 				ADD_POLICE_RESTART -1259.5 -44.5 57.8 90.0
+				GOSUB_FILE ul_restarts ul_restarts.sc
 				SET_MAX_WANTED_LEVEL 6
 				TERMINATE_THIS_SCRIPT
 			ENDIF

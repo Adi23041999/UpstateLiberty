@@ -1,3 +1,7 @@
+// *************************************UPSTATE LIBERTY GENSTUFF***************************
+// Authors:
+// Adi
+
 MISSION_START
 
 VAR_INT	ul_camera_ammu1 ul_camera_ammu2 ul_ammu_sample 
