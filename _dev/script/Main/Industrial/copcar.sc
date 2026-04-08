@@ -32,6 +32,12 @@ flag_player_on_mission 		= 1
 flag_player_on_cop_mission 	= 1
 vigilante_bonus_kills = 5
 
+// SCFIX: START
+IF flag_asuka_mission1_passed = 1
+	SET_GANG_WEAPONS GANG_MAFIA WEAPONTYPE_PISTOL WEAPONTYPE_UZI //The Mafia
+ENDIF
+// SCFIX: END
+
 SCRIPT_NAME copcar
 
 total_criminals_killed = 0
@@ -823,7 +829,11 @@ GOTO next_cop_car
 /////////////////////////////////////////////////////////////
 cop_car_failed://////////////////////////////////////////////
 /////////////////////////////////////////////////////////////
-
+// SCFIX: START
+IF flag_asuka_mission1_passed = 1
+	SET_GANG_WEAPONS GANG_MAFIA WEAPONTYPE_PISTOL WEAPONTYPE_SHOTGUN //The Mafia
+ENDIF
+// SCFIX: END
 PRINT_BIG C_FAIL 5000 5
 PRINT_WITH_NUMBER_BIG C_KILLS total_criminals_killed 6000 6
 CLEAR_ONSCREEN_TIMER cop_time_limit

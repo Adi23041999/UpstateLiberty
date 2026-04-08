@@ -197,6 +197,8 @@ flag_played_cop_radio_km1 = 0
 
 {
 
+REQUEST_MODEL police_celhole // SCFIX
+
 IF flag_need_wall_change_km1 = 1
 	SWAP_NEAREST_BUILDING_MODEL 328.026 -1090.262 26.941 2.0 police_celhole police_cell_wall
 	flag_need_wall_change_km1 = 0
@@ -244,6 +246,7 @@ OR NOT HAS_MODEL_LOADED PED_GANG_YAKUZA_A
 OR NOT HAS_MODEL_LOADED cut_obj1
 OR NOT HAS_MODEL_LOADED cut_obj2
 OR NOT HAS_MODEL_LOADED casino_garden
+OR NOT HAS_MODEL_LOADED police_celhole // SCFIX
 	 
 	WAIT 0
 
@@ -937,6 +940,7 @@ REMOVE_SOUND cell_beating
 MARK_MODEL_AS_NO_LONGER_NEEDED PED_GANG_YAKUZA_A
 MARK_MODEL_AS_NO_LONGER_NEEDED rubble01
 MARK_MODEL_AS_NO_LONGER_NEEDED rubble02 
+MARK_MODEL_AS_NO_LONGER_NEEDED police_celhole // SCFIX
 REMOVE_BLIP radar_blip_coord1_km1
 REMOVE_BLIP radar_blip_coord2_km1
 REMOVE_BLIP radar_blip_coord3_km1

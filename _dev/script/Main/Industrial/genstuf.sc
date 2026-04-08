@@ -506,7 +506,7 @@ tramp_tunnel_inner:
 //CREATES TRAMPS IN ABANDONED TUNNEL
 		IF IS_PLAYER_IN_ZONE Player LITTLEI
 
-			IF IS_PLAYER_IN_AREA_3D Player 1325.0 -512.0 14.0 1315.0 -165.8 17.0 FALSE	
+			IF IS_PLAYER_IN_AREA_3D Player 1325.0 -512.0 14.0 1315.0 -165.8 27.0 FALSE	// SCFIX: changed high Z from 17.0 to 27.0
 				IF has_player_been_in_tramp_tunnel_before = 0
 
 					REQUEST_MODEL PED_SCUM_MAN

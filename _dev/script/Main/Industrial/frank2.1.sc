@@ -131,7 +131,7 @@ START_CUTSCENE
 
 GET_CUTSCENE_TIME cs_time
 
-/*
+// SCFIX: uncomment start
 WHILE cs_time < 27
 	WAIT 0
 	GET_CUTSCENE_TIME cs_time
@@ -145,7 +145,7 @@ WHILE cs_time < 1972
 ENDWHILE
 
 PRINT_NOW ( FM3_B ) 10000 1 //"but while we're at war with the Triads we just ain't strong enough"
-*/
+// SCFIX: uncomment end
 
 WHILE cs_time < 5136
 	WAIT 0

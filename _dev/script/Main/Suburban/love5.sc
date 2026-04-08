@@ -383,6 +383,7 @@ WHILE NOT escort_truck_flag = 11
 		IF LOCATE_CAR_2D escort_truck -975.1670 -74.5367 10.0 10.0 0 //before junction at warehouse
 			GOSUB call_off_the_attackers
 			CAR_GOTO_COORDINATES_ACCURATE escort_truck -1044.0 -73.4361 37.8615 // inside garage
+			SET_CAR_MISSION escort_truck MISSION_GOTOCOORDS_STRAIGHT_ACCURATE // SCFIX
 			SET_CAR_CRUISE_SPEED escort_truck 12.0
 			escort_truck_flag =	8
 		ENDIF

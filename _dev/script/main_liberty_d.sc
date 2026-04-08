@@ -1873,6 +1873,7 @@ IF IS_PLAYER_PLAYING player
 	AND flag_player_on_mission = 0
 	AND heal_info_trip = 1
 		IF HAS_PICKUP_BEEN_COLLECTED heal_info
+			flag_player_on_mission = 1 // SCFIX
 			SET_PLAYER_CONTROL player off
 			WHILE GET_FADING_STATUS
 				WAIT 0
@@ -1895,6 +1896,7 @@ IF IS_PLAYER_PLAYING player
 	AND flag_player_on_mission = 0
 	AND wanted_info_trip = 1
 		IF HAS_PICKUP_BEEN_COLLECTED wanted_info
+			flag_player_on_mission = 1 // SCFIX
 			SET_PLAYER_CONTROL player off
 			WHILE GET_FADING_STATUS
 				WAIT 0
@@ -1919,12 +1921,14 @@ rc_loop:
 		IF IS_PLAYER_IN_MODEL player CAR_TOYZ
 			IF flag_player_on_mission = 0
 				IF LOCATE_PLAYER_ANY_MEANS_3D player 1014.0 -120.0 5.0 5.0 5.0 5.0 false
+					flag_player_on_mission = 1 // SCFIX
 					PRINT_BIG ( RC1 ) 15000 2
 					WAIT 0
 					LOAD_AND_LAUNCH_MISSION rc1.sc	//	this doesn't have a fade - maybe should always be loaded?
 				ENDIF
 				IF IS_PLAYER_PLAYING player
 					IF LOCATE_PLAYER_ANY_MEANS_3D player 1158.0 -309.0 23.0 5.0 5.0 5.0 false
+						flag_player_on_mission = 1 // SCFIX
 						PRINT_BIG ( RC2 ) 15000 2
 						WAIT 0
 						LOAD_AND_LAUNCH_MISSION rc2.sc	//	this doesn't have a fade - maybe should always be loaded?
@@ -1932,6 +1936,7 @@ rc_loop:
 				ENDIF
 				IF IS_PLAYER_PLAYING player
 					IF LOCATE_PLAYER_ANY_MEANS_3D player -636.0 65.0 19.0 5.0 5.0 5.0 false
+						flag_player_on_mission = 1 // SCFIX
 						PRINT_BIG ( RC4 ) 15000 2
 						WAIT 0
 						LOAD_AND_LAUNCH_MISSION rc3.sc	//	this doesn't have a fade - maybe should always be loaded?
@@ -1939,6 +1944,7 @@ rc_loop:
 				ENDIF
 				IF IS_PLAYER_PLAYING player
 					IF LOCATE_PLAYER_ANY_MEANS_3D player 366.0 -1312.0 26.0 5.0 5.0 5.0 false
+						flag_player_on_mission = 1 // SCFIX
 						PRINT_BIG ( RC3 ) 15000 2
 						WAIT 0
 						LOAD_AND_LAUNCH_MISSION rc4.sc	//	this doesn't have a fade - maybe should always be loaded?
@@ -1979,6 +1985,7 @@ IF IS_PLAYER_PLAYING player
 		 
 		IF IS_PLAYER_IN_MODEL player CAR_PATRIOT
 		AND flag_4x4one_trigger = 0
+			flag_player_on_mission = 1 // SCFIX
 			PRINT_BIG (T4X4_1) 15000 2
 			WAIT 0
 			LOAD_AND_LAUNCH_MISSION 4x4_1.sc	//	ask James about the fades in this one?
@@ -2017,6 +2024,7 @@ IF IS_PLAYER_PLAYING player
 		 
 		IF IS_PLAYER_IN_MODEL player CAR_LANDSTALKER
 		AND flag_4x4two_trigger = 0
+			flag_player_on_mission = 1 // SCFIX
 			PRINT_BIG ( T4X4_2 ) 15000 2
 			WAIT 0
 			LOAD_AND_LAUNCH_MISSION 4x4_2.sc	//	ask James about the fades in this one?
@@ -2054,6 +2062,7 @@ IF IS_PLAYER_PLAYING player
 		 
 		IF IS_PLAYER_IN_MODEL player CAR_PATRIOT
 		AND flag_4x4three_trigger = 0
+			flag_player_on_mission = 1 // SCFIX
 			PRINT_BIG (T4X4_3) 15000 2
 			WAIT 0
 			LOAD_AND_LAUNCH_MISSION 4x4_3.sc	//	ask James about the fades in this one?
@@ -2086,12 +2095,13 @@ IF IS_PLAYER_PLAYING player
 	AND IS_PLAYER_IN_ZONE player COM_EAS
 
 		IF IS_PLAYER_IN_MODEL player CAR_STALLION
-		AND NOT IS_PLAYER_IN_AREA_2D player 238.0 -612.0 267.0 -469.0 false
+		AND NOT LOCATE_PLAYER_IN_CAR_3D player 283.21 -566.47 25.9 3.0 3.0 2.0 FALSE // SCFIX: was AND NOT IS_PLAYER_IN_AREA_2D player 238.0 -612.0 267.0 -469.0 false
 			flag_mayhem_trigger = 1
 		ENDIF
 
 		IF IS_PLAYER_IN_MODEL player CAR_STALLION
 		AND flag_mayhem_trigger = 0
+			flag_player_on_mission = 1 // SCFIX
 			PRINT_BIG ( MM_1 ) 15000 2
 			WAIT 0
 			LOAD_AND_LAUNCH_MISSION mayhem1.sc	//	ask James about the fades in this one?
@@ -2139,11 +2149,17 @@ ambulance_mission_loop:
 					IF IS_BUTTON_PRESSED PAD1 RIGHTSHOCK
 						WHILE IS_BUTTON_PRESSED PAD1 RIGHTSHOCK
 							WAIT 0
+							// SCFIX: START
+							IF flag_player_on_mission = 1
+								GOTO ambulance_mission_loop
+							ENDIF
+							// SCFIX: END
 							IF NOT IS_PLAYER_PLAYING player
 								GOTO ambulance_mission_loop
 							ENDIF
 						ENDWHILE
 
+						flag_player_on_mission = 1 // SCFIX
 						PRINT_BIG ( AMBUL_M ) 4000 5
 						WAIT 0
 						LOAD_AND_LAUNCH_MISSION ambulance.sc	//	this doesn't have a fade - maybe should always be loaded?
@@ -2153,11 +2169,17 @@ ambulance_mission_loop:
 					IF IS_BUTTON_PRESSED PAD1 SQUARE
 						WHILE IS_BUTTON_PRESSED PAD1 SQUARE
 							WAIT 0
+							// SCFIX: START
+							IF flag_player_on_mission = 1
+								GOTO ambulance_mission_loop
+							ENDIF
+							// SCFIX: END
 							IF NOT IS_PLAYER_PLAYING player
 								GOTO ambulance_mission_loop
 							ENDIF
 						ENDWHILE
 
+						flag_player_on_mission = 1 // SCFIX
 						PRINT_BIG ( AMBUL_M ) 4000 5
 						WAIT 0
 						LOAD_AND_LAUNCH_MISSION ambulance.sc	//	this doesn't have a fade - maybe should always be loaded?
@@ -2205,11 +2227,17 @@ fire_truck_mission_loop:
 					IF IS_BUTTON_PRESSED PAD1 RIGHTSHOCK
 						WHILE IS_BUTTON_PRESSED PAD1 RIGHTSHOCK
 							WAIT 0
+							// SCFIX: START
+							IF flag_player_on_mission = 1
+								GOTO fire_truck_mission_loop
+							ENDIF
+							// SCFIX: END
 							IF NOT IS_PLAYER_PLAYING player
 								GOTO fire_truck_mission_loop
 							ENDIF
 						ENDWHILE
 
+						flag_player_on_mission = 1 // SCFIX
 						PRINT_BIG ( FIRE_M ) 4000 5
 						WAIT 0
 						LOAD_AND_LAUNCH_MISSION firetruck.sc	//	this doesn't have a fade - maybe should always be loaded?
@@ -2219,11 +2247,17 @@ fire_truck_mission_loop:
 					IF IS_BUTTON_PRESSED PAD1 SQUARE
 						WHILE IS_BUTTON_PRESSED PAD1 SQUARE
 							WAIT 0
+							// SCFIX: START
+							IF flag_player_on_mission = 1
+								GOTO fire_truck_mission_loop
+							ENDIF
+							// SCFIX: END
 							IF NOT IS_PLAYER_PLAYING player
 								GOTO fire_truck_mission_loop
 							ENDIF
 						ENDWHILE
 
+						flag_player_on_mission = 1 // SCFIX
 						PRINT_BIG ( FIRE_M ) 4000 5
 						WAIT 0
 						LOAD_AND_LAUNCH_MISSION firetruck.sc	//	this doesn't have a fade - maybe should always be loaded?
@@ -2276,11 +2310,17 @@ cop_mission_loop:
 					IF IS_BUTTON_PRESSED PAD1 RIGHTSHOCK
 						WHILE IS_BUTTON_PRESSED PAD1 RIGHTSHOCK
 							WAIT 0
+							// SCFIX: START
+							IF flag_player_on_mission = 1
+								GOTO cop_mission_loop
+							ENDIF
+							// SCFIX: END
 							IF NOT IS_PLAYER_PLAYING player
 								GOTO cop_mission_loop
 							ENDIF
 						ENDWHILE
 
+						flag_player_on_mission = 1 // SCFIX
 						PRINT_BIG ( COP_M ) 4000 5
 						WAIT 0
 						LOAD_AND_LAUNCH_MISSION copcar.sc	//	this doesn't have a fade - maybe should always be loaded?
@@ -2290,11 +2330,17 @@ cop_mission_loop:
 					IF IS_BUTTON_PRESSED PAD1 SQUARE
 						WHILE IS_BUTTON_PRESSED PAD1 SQUARE
 							WAIT 0
+							// SCFIX: START
+							IF flag_player_on_mission = 1
+								GOTO cop_mission_loop
+							ENDIF
+							// SCFIX: END
 							IF NOT IS_PLAYER_PLAYING player
 								GOTO cop_mission_loop
 							ENDIF
 						ENDWHILE
 
+						flag_player_on_mission = 1 // SCFIX
 						PRINT_BIG ( COP_M ) 4000 5
 						WAIT 0
 						LOAD_AND_LAUNCH_MISSION copcar.sc	//	this doesn't have a fade - maybe should always be loaded?
@@ -2346,11 +2392,19 @@ taxi_mission1_loop:
 					IF IS_BUTTON_PRESSED PAD1 RIGHTSHOCK
 						WHILE IS_BUTTON_PRESSED PAD1 RIGHTSHOCK
 							WAIT 0
+							// SCFIX: START
+							IF flag_player_on_mission = 1
+							OR flag_taxi1_mission_launched = 1
+								GOTO taxi_mission1_loop
+							ENDIF
+							// SCFIX: END
 							IF NOT IS_PLAYER_PLAYING player
+							OR NOT IS_PLAYER_IN_TAXI player // SCFIX
 								GOTO taxi_mission1_loop
 							ENDIF
 						ENDWHILE
 
+						flag_player_on_mission = 1 // SCFIX
 						PRINT_BIG ( TAXI_M ) 4000 5
 						WAIT 0
 						LOAD_AND_LAUNCH_MISSION taxi1.sc	//	this doesn't have a fade - maybe should always be loaded?
@@ -2360,11 +2414,19 @@ taxi_mission1_loop:
 					IF IS_BUTTON_PRESSED PAD1 SQUARE
 						WHILE IS_BUTTON_PRESSED PAD1 SQUARE
 							WAIT 0
+							// SCFIX: START
+							IF flag_player_on_mission = 1
+							OR flag_taxi1_mission_launched = 1
+								GOTO taxi_mission1_loop
+							ENDIF
+							// SCFIX: END
 							IF NOT IS_PLAYER_PLAYING player
+							OR NOT IS_PLAYER_IN_TAXI player // SCFIX
 								GOTO taxi_mission1_loop
 							ENDIF
 						ENDWHILE
 
+						flag_player_on_mission = 1 // SCFIX
 						PRINT_BIG ( TAXI_M ) 4000 5
 						WAIT 0
 						LOAD_AND_LAUNCH_MISSION taxi1.sc	//	this doesn't have a fade - maybe should always be loaded?
@@ -2422,6 +2484,7 @@ WAIT mission_trigger_wait_time
 					GET_TIME_OF_DAY hours minutes
 					IF hours >= 9
 					AND hours < 19
+						flag_player_on_mission = 1 // SCFIX
 
 						MAKE_PLAYER_SAFE_FOR_CUTSCENE Player
 
@@ -2439,6 +2502,7 @@ WAIT mission_trigger_wait_time
 					ENDIF
 				ENDIF
 
+				/* SCFIX: fix mission not starting if you jump onto the marker
 				IF NOT IS_PLAYER_PLAYING player
 					GOTO meat_mission1_loop
 				ENDIF
@@ -2449,6 +2513,7 @@ WAIT mission_trigger_wait_time
 							GOTO meat_mission1_loop
 						ENDIF
 				ENDWHILE
+				*/
 			ENDIF
 		ENDIF
 	ENDIF
@@ -2491,6 +2556,7 @@ WAIT mission_trigger_wait_time
 					GET_TIME_OF_DAY hours minutes
 					IF hours >= 9
 					AND hours < 19
+						flag_player_on_mission = 1 // SCFIX
 
 						MAKE_PLAYER_SAFE_FOR_CUTSCENE Player
 
@@ -2508,6 +2574,7 @@ WAIT mission_trigger_wait_time
 					ENDIF
 				ENDIF
 
+				/* SCFIX: fix mission not starting if you jump onto the marker
 				IF NOT IS_PLAYER_PLAYING player
 					GOTO meat_mission2_loop
 				ENDIF
@@ -2518,6 +2585,7 @@ WAIT mission_trigger_wait_time
 							GOTO meat_mission2_loop
 						ENDIF
 				ENDWHILE
+				*/
 			ENDIF
 		ENDIF
 	ENDIF
@@ -2560,6 +2628,7 @@ WAIT mission_trigger_wait_time
 					GET_TIME_OF_DAY hours minutes
 					IF hours >= 9
 					AND hours < 19
+						flag_player_on_mission = 1 // SCFIX
 
 						MAKE_PLAYER_SAFE_FOR_CUTSCENE Player
 
@@ -2577,6 +2646,7 @@ WAIT mission_trigger_wait_time
 					ENDIF
 				ENDIF
 
+				/* SCFIX: fix mission not starting if you jump onto the marker
 				IF NOT IS_PLAYER_PLAYING player
 					GOTO meat_mission3_loop
 				ENDIF
@@ -2587,6 +2657,7 @@ WAIT mission_trigger_wait_time
 							GOTO meat_mission3_loop
 						ENDIF
 				ENDWHILE
+				*/
 			ENDIF
 		ENDIF
 	ENDIF
@@ -2629,6 +2700,7 @@ WAIT mission_trigger_wait_time
 					GET_TIME_OF_DAY hours minutes
 					IF hours >= 9
 					AND hours < 19
+						flag_player_on_mission = 1 // SCFIX
 
 						MAKE_PLAYER_SAFE_FOR_CUTSCENE Player
 
@@ -2646,6 +2718,7 @@ WAIT mission_trigger_wait_time
 					ENDIF
 				ENDIF
 
+				/* SCFIX: fix mission not starting if you jump onto the marker
 				IF NOT IS_PLAYER_PLAYING player
 					GOTO meat_mission4_loop
 				ENDIF
@@ -2656,6 +2729,7 @@ WAIT mission_trigger_wait_time
 							GOTO meat_mission4_loop
 						ENDIF
 				ENDWHILE
+				*/
 			ENDIF
 		ENDIF
 	ENDIF
@@ -2691,19 +2765,21 @@ ENDIF
 	AND flag_eightball_mission_launched = 0
 	AND flag_player_on_mission = 0
 		IF flag_reached_hideout = 0								    
-			IF LOCATE_PLAYER_ON_FOOT_2D player 811.90 -939.95 3.5 3.5 FALSE
+			//IF LOCATE_PLAYER_ON_FOOT_2D player 811.90 -939.95 3.5 3.5 FALSE // SCFIX: commented
 				IF CAN_PLAYER_START_MISSION Player
+					flag_player_on_mission = 1 // SCFIX
 					LOAD_AND_LAUNCH_MISSION 8ball.sc	//	Don't know what to do about fades with this one
 					flag_eightball_mission_launched = 1
 				ENDIF
-			ENDIF
+			//ENDIF // SCFIX: commented
 		ELSE
-			IF LOCATE_PLAYER_ON_FOOT_2D player 883.5 -308.2 3.5 3.5 FALSE 
+			//IF LOCATE_PLAYER_ON_FOOT_2D player 883.5 -308.2 3.5 3.5 FALSE  // SCFIX: commented
 				IF CAN_PLAYER_START_MISSION Player
+					flag_player_on_mission = 1 // SCFIX
 					LOAD_AND_LAUNCH_MISSION 8ball.sc	//	Don't know what to do about fades with this one
 					flag_eightball_mission_launched = 1
 				ENDIF
-			ENDIF
+			//ENDIF // SCFIX: commented
 		ENDIF 
 	ENDIF
    
@@ -2735,6 +2811,7 @@ ENDIF
 		IF LOCATE_PLAYER_ON_FOOT_3D Player 892.8 -425.8 13.9 1.5 2.0 2.0 FALSE
 			IF flag_player_on_mission = 0
 				IF CAN_PLAYER_START_MISSION Player
+					flag_player_on_mission = 1 // SCFIX
 
 					MAKE_PLAYER_SAFE_FOR_CUTSCENE player
 
@@ -2753,6 +2830,7 @@ ENDIF
 					LOAD_AND_LAUNCH_MISSION luigi2.sc
 				ENDIF
 
+				/* SCFIX: fix mission not starting if you jump onto the marker
 				IF NOT IS_PLAYER_PLAYING player
 					GOTO luigi_mission2_loop
 				ENDIF
@@ -2763,6 +2841,7 @@ ENDIF
 						GOTO luigi_mission2_loop
 					ENDIF
 				ENDWHILE
+				*/
 			ENDIF
 		ENDIF
 	ENDIF
@@ -2795,6 +2874,7 @@ ENDIF
 		IF LOCATE_PLAYER_ON_FOOT_3D Player 892.8 -425.8 13.9 1.5 2.0 2.0 FALSE
 			IF flag_player_on_mission = 0
 				IF CAN_PLAYER_START_MISSION Player
+					flag_player_on_mission = 1 // SCFIX
 
 					MAKE_PLAYER_SAFE_FOR_CUTSCENE player
 
@@ -2813,6 +2893,7 @@ ENDIF
 					LOAD_AND_LAUNCH_MISSION luigi3.sc
 				ENDIF
 
+				/* SCFIX: fix mission not starting if you jump onto the marker
 				IF NOT IS_PLAYER_PLAYING player
 					GOTO luigi_mission3_loop
 				ENDIF
@@ -2823,6 +2904,7 @@ ENDIF
 						GOTO luigi_mission3_loop
 					ENDIF
 				ENDWHILE
+				*/
 			ENDIF
 		ENDIF
 	ENDIF
@@ -2858,6 +2940,7 @@ ENDIF
 		IF LOCATE_PLAYER_ON_FOOT_3D Player 892.8 -425.8 13.9 1.5 2.0 2.0 FALSE
 			IF flag_player_on_mission = 0
 				IF CAN_PLAYER_START_MISSION Player
+					flag_player_on_mission = 1 // SCFIX
 
 					MAKE_PLAYER_SAFE_FOR_CUTSCENE player
 
@@ -2876,6 +2959,7 @@ ENDIF
 					LOAD_AND_LAUNCH_MISSION luigi4.sc
 				ENDIF
 
+				/* SCFIX: fix mission not starting if you jump onto the marker
 				IF NOT IS_PLAYER_PLAYING player
 					GOTO luigi_mission4_loop
 				ENDIF
@@ -2886,6 +2970,7 @@ ENDIF
 						GOTO luigi_mission4_loop
 					ENDIF
 				ENDWHILE
+				*/
 			ENDIF
 		ENDIF
 	ENDIF
@@ -2924,6 +3009,7 @@ ENDIF
 		IF LOCATE_PLAYER_ON_FOOT_3D Player 892.8 -425.8 13.9 1.5 2.0 2.0 FALSE
 			IF flag_player_on_mission = 0
 				IF CAN_PLAYER_START_MISSION Player
+					flag_player_on_mission = 1 // SCFIX
 
 					MAKE_PLAYER_SAFE_FOR_CUTSCENE player
 
@@ -2942,6 +3028,7 @@ ENDIF
 					LOAD_AND_LAUNCH_MISSION luigi5.sc
 				ENDIF
 
+				/* SCFIX: fix mission not starting if you jump onto the marker
 				IF NOT IS_PLAYER_PLAYING player
 					GOTO luigi_mission5_loop
 				ENDIF
@@ -2952,6 +3039,7 @@ ENDIF
 						GOTO luigi_mission5_loop
 					ENDIF
 				ENDWHILE
+				*/
 			ENDIF
 		ENDIF
 	ENDIF
@@ -2987,6 +3075,7 @@ ENDIF
 				IF hours >= 5
 				AND hours < 21
 					IF CAN_PLAYER_START_MISSION Player
+						flag_player_on_mission = 1 // SCFIX
 
 						MAKE_PLAYER_SAFE_FOR_CUTSCENE Player
 
@@ -3004,6 +3093,7 @@ ENDIF
 						LOAD_AND_LAUNCH_MISSION joey1.sc
 					ENDIF
 
+					/* SCFIX: fix mission not starting if you jump onto the marker
 					IF NOT IS_PLAYER_PLAYING player
 						GOTO joey_mission1_loop
 					ENDIF
@@ -3014,6 +3104,7 @@ ENDIF
 							GOTO joey_mission1_loop
 						ENDIF
 					ENDWHILE
+					*/
 				ELSE
 					PRINT_NOW ( WRONGT1 ) 5000 1 //" Wrong Time!"
 					WHILE LOCATE_PLAYER_ON_FOOT_3D Player 1191.7 -870.0 15.0 1.0 1.0 2.0 FALSE
@@ -3058,6 +3149,7 @@ ENDIF
 		IF LOCATE_PLAYER_ON_FOOT_3D Player 1191.7 -870.0 15.0 1.0 1.0 2.0 FALSE
 			IF flag_player_on_mission = 0
 				IF CAN_PLAYER_START_MISSION Player
+					flag_player_on_mission = 1 // SCFIX
 
 					MAKE_PLAYER_SAFE_FOR_CUTSCENE Player
 
@@ -3076,6 +3168,7 @@ ENDIF
 					LOAD_AND_LAUNCH_MISSION joey2.sc
 				ENDIF
 
+				/* SCFIX: fix mission not starting if you jump onto the marker
 				IF NOT IS_PLAYER_PLAYING player
 					GOTO joey_mission2_loop
 				ENDIF
@@ -3086,6 +3179,7 @@ ENDIF
 						GOTO joey_mission2_loop
 					ENDIF
 				ENDWHILE
+				*/
 			ENDIF
 		ENDIF
 	ENDIF
@@ -3116,6 +3210,7 @@ ENDIF
 		IF LOCATE_PLAYER_ON_FOOT_3D Player 1191.7 -870.0 15.0 1.0 1.0 2.0 FALSE
 			IF flag_player_on_mission = 0
 				IF CAN_PLAYER_START_MISSION Player
+					flag_player_on_mission = 1 // SCFIX
 
 					MAKE_PLAYER_SAFE_FOR_CUTSCENE Player
 
@@ -3134,6 +3229,7 @@ ENDIF
 					LOAD_AND_LAUNCH_MISSION joey3.sc
 				ENDIF
 
+				/* SCFIX: fix mission not starting if you jump onto the marker
 				IF NOT IS_PLAYER_PLAYING player
 					GOTO joey_mission3_loop
 				ENDIF
@@ -3144,6 +3240,7 @@ ENDIF
 						GOTO joey_mission3_loop
 					ENDIF
 				ENDWHILE
+				*/
 			ENDIF
 		ENDIF
 	ENDIF
@@ -3174,6 +3271,7 @@ ENDIF
 		IF LOCATE_PLAYER_ON_FOOT_3D Player 1191.7 -870.0 15.0 1.0 1.0 2.0 FALSE
 			IF flag_player_on_mission = 0
 				IF CAN_PLAYER_START_MISSION Player
+					flag_player_on_mission = 1 // SCFIX
 
 					MAKE_PLAYER_SAFE_FOR_CUTSCENE Player
 
@@ -3192,6 +3290,7 @@ ENDIF
 					LOAD_AND_LAUNCH_MISSION joey4.sc
 				ENDIF
 
+				/* SCFIX: fix mission not starting if you jump onto the marker
 				IF NOT IS_PLAYER_PLAYING player
 					GOTO joey_mission4_loop
 				ENDIF
@@ -3202,6 +3301,7 @@ ENDIF
 						GOTO joey_mission4_loop
 					ENDIF
 				ENDWHILE
+				*/
 			ENDIF
 		ENDIF
 	ENDIF
@@ -3237,6 +3337,7 @@ ENDIF
 		IF LOCATE_PLAYER_ON_FOOT_3D Player 1191.7 -870.0 15.0 1.0 1.0 2.0 FALSE
 			IF flag_player_on_mission = 0
 				IF CAN_PLAYER_START_MISSION Player
+					flag_player_on_mission = 1 // SCFIX
 
 					MAKE_PLAYER_SAFE_FOR_CUTSCENE Player
 
@@ -3255,6 +3356,7 @@ ENDIF
 					LOAD_AND_LAUNCH_MISSION joey5.sc
 				ENDIF
 
+				/* SCFIX: fix mission not starting if you jump onto the marker
 				IF NOT IS_PLAYER_PLAYING player
 					GOTO joey_mission5_loop
 				ENDIF
@@ -3265,6 +3367,7 @@ ENDIF
 						GOTO joey_mission5_loop
 					ENDIF
 				ENDWHILE
+				*/
 			ENDIF
 		ENDIF
 	ENDIF
@@ -3303,6 +3406,7 @@ ENDIF
 				IF hours >= 6
 				AND hours < 14
 					IF CAN_PLAYER_START_MISSION Player
+						flag_player_on_mission = 1 // SCFIX
 
 						MAKE_PLAYER_SAFE_FOR_CUTSCENE Player
 
@@ -3321,6 +3425,7 @@ ENDIF
 						LOAD_AND_LAUNCH_MISSION joey6.sc
 					ENDIF
 
+					/* SCFIX: fix mission not starting if you jump onto the marker
 					IF NOT IS_PLAYER_PLAYING player
 						GOTO joey_mission6_loop
 					ENDIF
@@ -3331,6 +3436,7 @@ ENDIF
 							GOTO joey_mission6_loop
 						ENDIF
 					ENDWHILE				
+					*/
 				ELSE
 					PRINT_NOW ( WRONGT2 ) 5000 1 //" Wrong Time!"
 					WHILE LOCATE_PLAYER_ON_FOOT_3D Player 1191.7 -870.0 15.0 1.0 1.0 2.0 FALSE
@@ -3377,6 +3483,7 @@ ENDIF
 		IF LOCATE_PLAYER_ON_FOOT_3D Player 1219.8 -319.7 27.4 1.0 2.0 2.0 FALSE
 			IF flag_player_on_mission = 0
 				IF CAN_PLAYER_START_MISSION Player
+					flag_player_on_mission = 1 // SCFIX
 
 					MAKE_PLAYER_SAFE_FOR_CUTSCENE Player
 
@@ -3395,6 +3502,7 @@ ENDIF
 					LOAD_AND_LAUNCH_MISSION toni1.sc
 				ENDIF
 
+				/* SCFIX: fix mission not starting if you jump onto the marker
 				IF NOT IS_PLAYER_PLAYING player
 					GOTO toni_mission1_loop
 				ENDIF
@@ -3405,6 +3513,7 @@ ENDIF
 						GOTO toni_mission1_loop
 					ENDIF
 				ENDWHILE
+				*/
 			ENDIF
 		ENDIF
 	ENDIF
@@ -3434,6 +3543,7 @@ ENDIF
 		IF LOCATE_PLAYER_ON_FOOT_3D Player 1219.8 -319.7 27.4 1.0 2.0 2.0 FALSE
 			IF flag_player_on_mission = 0
 				IF CAN_PLAYER_START_MISSION Player
+					flag_player_on_mission = 1 // SCFIX
 
 					MAKE_PLAYER_SAFE_FOR_CUTSCENE Player
 
@@ -3452,6 +3562,7 @@ ENDIF
 					LOAD_AND_LAUNCH_MISSION toni2.sc
 				ENDIF
 
+				/* SCFIX: fix mission not starting if you jump onto the marker
 				IF NOT IS_PLAYER_PLAYING player
 					GOTO toni_mission2_loop
 				ENDIF
@@ -3462,6 +3573,7 @@ ENDIF
 						GOTO toni_mission2_loop
 					ENDIF
 				ENDWHILE
+				*/
 			ENDIF
 		ENDIF
 	ENDIF
@@ -3491,6 +3603,7 @@ ENDIF
 		IF LOCATE_PLAYER_ON_FOOT_3D Player 1219.8 -319.7 27.4 1.0 2.0 2.0 FALSE
 			IF flag_player_on_mission = 0
 				IF CAN_PLAYER_START_MISSION Player
+					flag_player_on_mission = 1 // SCFIX
 
 					MAKE_PLAYER_SAFE_FOR_CUTSCENE Player
 
@@ -3509,6 +3622,7 @@ ENDIF
 					LOAD_AND_LAUNCH_MISSION toni3.sc
 				ENDIF
 
+				/* SCFIX: fix mission not starting if you jump onto the marker
 				IF NOT IS_PLAYER_PLAYING player
 					GOTO toni_mission3_loop
 				ENDIF
@@ -3519,6 +3633,7 @@ ENDIF
 						GOTO toni_mission3_loop
 					ENDIF
 				ENDWHILE
+				*/
 			ENDIF
 		ENDIF
 	ENDIF
@@ -3549,6 +3664,7 @@ ENDIF
 		IF LOCATE_PLAYER_ON_FOOT_3D Player 1219.8 -319.7 27.4 1.0 2.0 2.0 FALSE
 			IF flag_player_on_mission = 0
 				IF CAN_PLAYER_START_MISSION Player
+					flag_player_on_mission = 1 // SCFIX
 
 					MAKE_PLAYER_SAFE_FOR_CUTSCENE Player
 
@@ -3567,6 +3683,7 @@ ENDIF
 					LOAD_AND_LAUNCH_MISSION toni4.sc
 				ENDIF
 
+				/* SCFIX: fix mission not starting if you jump onto the marker
 				IF NOT IS_PLAYER_PLAYING player
 					GOTO toni_mission4_loop
 				ENDIF
@@ -3577,6 +3694,7 @@ ENDIF
 						GOTO toni_mission4_loop
 					ENDIF
 				ENDWHILE
+				*/
 			ENDIF
 		ENDIF
 	ENDIF
@@ -3605,6 +3723,7 @@ ENDIF
 		IF LOCATE_PLAYER_ON_FOOT_3D Player 1219.8 -319.7 27.4 1.0 2.0 2.0 FALSE
 			IF flag_player_on_mission = 0
 				IF CAN_PLAYER_START_MISSION Player
+					flag_player_on_mission = 1 // SCFIX
 
 					MAKE_PLAYER_SAFE_FOR_CUTSCENE Player
 
@@ -3623,6 +3742,7 @@ ENDIF
 					LOAD_AND_LAUNCH_MISSION toni5.sc
 				ENDIF
 
+				/* SCFIX: fix mission not starting if you jump onto the marker
 				IF NOT IS_PLAYER_PLAYING player
 					GOTO toni_mission5_loop
 				ENDIF
@@ -3633,6 +3753,7 @@ ENDIF
 						GOTO toni_mission5_loop
 					ENDIF
 				ENDWHILE
+				*/
 			ENDIF
 		ENDIF
 	ENDIF
@@ -3669,6 +3790,7 @@ ENDIF
 			IF flag_frankie_switched_off = 0
 			AND flag_player_on_mission = 0
 				IF CAN_PLAYER_START_MISSION Player
+					flag_player_on_mission = 1 // SCFIX
 
 					MAKE_PLAYER_SAFE_FOR_CUTSCENE player
 
@@ -3687,6 +3809,7 @@ ENDIF
 					LOAD_AND_LAUNCH_MISSION frank1.sc
 				ENDIF
 
+				/* SCFIX: fix mission not starting if you jump onto the marker
 				IF NOT IS_PLAYER_PLAYING player
 					GOTO frankie_mission1_loop
 				ENDIF
@@ -3697,6 +3820,7 @@ ENDIF
 						GOTO frankie_mission1_loop
 					ENDIF
 				ENDWHILE
+				*/
 			ENDIF
 		ENDIF
 	ENDIF
@@ -3729,6 +3853,7 @@ ENDIF
 			IF flag_frankie_switched_off = 0
 			AND flag_player_on_mission = 0
 				IF CAN_PLAYER_START_MISSION Player
+					flag_player_on_mission = 1 // SCFIX
 
 					MAKE_PLAYER_SAFE_FOR_CUTSCENE player
 
@@ -3747,6 +3872,7 @@ ENDIF
 					LOAD_AND_LAUNCH_MISSION frank2.sc
 				ENDIF
 
+				/* SCFIX: fix mission not starting if you jump onto the marker
 				IF NOT IS_PLAYER_PLAYING player
 					GOTO frankie_mission2_loop
 				ENDIF
@@ -3757,6 +3883,7 @@ ENDIF
 						GOTO frankie_mission2_loop
 					ENDIF
 				ENDWHILE
+				*/
 			ENDIF
 		ENDIF
 	ENDIF
@@ -3788,6 +3915,7 @@ ENDIF
 			IF flag_frankie_switched_off = 0
 				IF flag_player_on_mission = 0
 					IF CAN_PLAYER_START_MISSION Player
+						flag_player_on_mission = 1 // SCFIX
 
 						MAKE_PLAYER_SAFE_FOR_CUTSCENE player
 
@@ -3806,6 +3934,7 @@ ENDIF
 						LOAD_AND_LAUNCH_MISSION frank2.1.sc
 					ENDIF
 
+					/* SCFIX: fix mission not starting if you jump onto the marker
 					IF NOT IS_PLAYER_PLAYING player
 						GOTO frankie_mission2.1_loop
 					ENDIF
@@ -3816,6 +3945,7 @@ ENDIF
 							GOTO frankie_mission2.1_loop
 						ENDIF
 					ENDWHILE
+					*/
 				ENDIF
 			ELSE
 				PRINT_NOW ( FRANGO ) 5000 1 //"Frankie is not available at this time!"
@@ -3859,6 +3989,7 @@ ENDIF
 			IF flag_eightball_switched_off = 0
 			AND flag_player_on_mission = 0
 				IF CAN_PLAYER_START_MISSION Player
+					flag_player_on_mission = 1 // SCFIX
 
 					MAKE_PLAYER_SAFE_FOR_CUTSCENE player
 
@@ -3877,6 +4008,7 @@ ENDIF
 					LOAD_AND_LAUNCH_MISSION frank3.sc
 				ENDIF
 
+				/* SCFIX: fix mission not starting if you jump onto the marker
 				IF NOT IS_PLAYER_PLAYING player
 					GOTO frankie_mission3_loop
 				ENDIF
@@ -3887,6 +4019,7 @@ ENDIF
 						GOTO frankie_mission3_loop
 					ENDIF
 				ENDWHILE
+				*/
 			ENDIF
 		ENDIF
 	ENDIF
@@ -3918,6 +4051,7 @@ ENDIF
 			IF flag_frankie_switched_off = 0
 			AND flag_player_on_mission = 0
 				IF CAN_PLAYER_START_MISSION Player
+					flag_player_on_mission = 1 // SCFIX
 
 					MAKE_PLAYER_SAFE_FOR_CUTSCENE Player
 
@@ -3936,6 +4070,7 @@ ENDIF
 					LOAD_AND_LAUNCH_MISSION frank4.sc
 				ENDIF
 
+				/* SCFIX: fix mission not starting if you jump onto the marker
 				IF NOT IS_PLAYER_PLAYING player
 					GOTO frankie_mission4_loop
 				ENDIF
@@ -3946,6 +4081,7 @@ ENDIF
 						GOTO frankie_mission4_loop
 					ENDIF
 				ENDWHILE
+				*/
 			ENDIF
 		ENDIF
 	ENDIF
@@ -3980,6 +4116,7 @@ ENDIF
 		IF LOCATE_STOPPED_PLAYER_ON_FOOT_3D	player 938.4 -230.5 3.9 1.0 1.0 2.0 FALSE
 			IF flag_player_on_mission = 0
 				IF CAN_PLAYER_START_MISSION Player
+					flag_player_on_mission = 1 // SCFIX
 					TURN_PHONE_OFF diablo_phone
 
 					MAKE_PLAYER_SAFE_FOR_CUTSCENE Player
@@ -3997,6 +4134,7 @@ ENDIF
 					LOAD_AND_LAUNCH_MISSION diablo1.sc
 				ENDIF
 
+				/* SCFIX: fix mission not starting if you jump onto the marker
 				IF NOT IS_PLAYER_PLAYING player
 					GOTO diablo_mission1_loop
 				ENDIF
@@ -4007,6 +4145,7 @@ ENDIF
 							GOTO diablo_mission1_loop
 						ENDIF
 				ENDWHILE
+				*/
 			ENDIF
 		ENDIF
 	ENDIF
@@ -4038,6 +4177,7 @@ WAIT mission_trigger_wait_time
 		IF LOCATE_STOPPED_PLAYER_ON_FOOT_3D	player 938.4 -230.5 3.9 1.0 1.0 2.0 FALSE
 			IF flag_player_on_mission = 0
 				IF CAN_PLAYER_START_MISSION Player
+					flag_player_on_mission = 1 // SCFIX
 					TURN_PHONE_OFF diablo_phone
 
 					MAKE_PLAYER_SAFE_FOR_CUTSCENE Player
@@ -4055,6 +4195,7 @@ WAIT mission_trigger_wait_time
 					LOAD_AND_LAUNCH_MISSION diablo2.sc
 				ENDIF
 
+				/* SCFIX: fix mission not starting if you jump onto the marker
 				IF NOT IS_PLAYER_PLAYING player
 					GOTO diablo_mission2_loop
 				ENDIF
@@ -4065,6 +4206,7 @@ WAIT mission_trigger_wait_time
 							GOTO diablo_mission2_loop
 						ENDIF
 				ENDWHILE
+				*/
 			ENDIF
 		ENDIF
 	ENDIF
@@ -4097,6 +4239,7 @@ WAIT mission_trigger_wait_time
 		IF LOCATE_STOPPED_PLAYER_ON_FOOT_3D	player 938.4 -230.5 3.9 1.0 1.0 2.0 FALSE
 			IF flag_player_on_mission = 0
 				IF CAN_PLAYER_START_MISSION Player
+					flag_player_on_mission = 1 // SCFIX
 					TURN_PHONE_OFF diablo_phone
 
 					MAKE_PLAYER_SAFE_FOR_CUTSCENE Player
@@ -4114,6 +4257,7 @@ WAIT mission_trigger_wait_time
 					LOAD_AND_LAUNCH_MISSION diablo3.sc
 				ENDIF
 
+				/* SCFIX: fix mission not starting if you jump onto the marker
 				IF NOT IS_PLAYER_PLAYING player
 					GOTO diablo_mission3_loop
 				ENDIF
@@ -4124,6 +4268,7 @@ WAIT mission_trigger_wait_time
 							GOTO diablo_mission3_loop
 						ENDIF
 				ENDWHILE
+				*/
 			ENDIF
 		ENDIF
 	ENDIF	
@@ -4155,6 +4300,7 @@ WAIT mission_trigger_wait_time
 		IF LOCATE_STOPPED_PLAYER_ON_FOOT_3D	player 938.4 -230.5 3.9 1.0 1.0 2.0 FALSE
 			IF flag_player_on_mission = 0
 				IF CAN_PLAYER_START_MISSION Player
+					flag_player_on_mission = 1 // SCFIX
 					TURN_PHONE_OFF diablo_phone
 
 					MAKE_PLAYER_SAFE_FOR_CUTSCENE Player
@@ -4172,6 +4318,7 @@ WAIT mission_trigger_wait_time
 					LOAD_AND_LAUNCH_MISSION diablo4.sc
 				ENDIF
 
+				/* SCFIX: fix mission not starting if you jump onto the marker
 				IF NOT IS_PLAYER_PLAYING player
 					GOTO diablo_mission4_loop
 				ENDIF
@@ -4182,6 +4329,7 @@ WAIT mission_trigger_wait_time
 							GOTO diablo_mission4_loop
 						ENDIF
 				ENDWHILE
+				*/
 			ENDIF
 		ENDIF
 	ENDIF	
@@ -4211,6 +4359,7 @@ WAIT mission_trigger_wait_time
 		IF LOCATE_PLAYER_ON_FOOT_3D Player 523.7 -639.0 16.1 1.0 4.5 2.0 FALSE
 			IF flag_player_on_mission = 0
 				IF CAN_PLAYER_START_MISSION Player
+					flag_player_on_mission = 1 // SCFIX
 
 					MAKE_PLAYER_SAFE_FOR_CUTSCENE player
 
@@ -4229,6 +4378,7 @@ WAIT mission_trigger_wait_time
 					LOAD_AND_LAUNCH_MISSION asuka1.sc
 				ENDIF
 
+				/* SCFIX: fix mission not starting if you jump onto the marker
 				IF NOT IS_PLAYER_PLAYING player
 					GOTO asuka_mission1_loop
 				ENDIF
@@ -4239,6 +4389,7 @@ WAIT mission_trigger_wait_time
 						GOTO asuka_mission1_loop
 					ENDIF
 				ENDWHILE
+				*/
 			ENDIF
 		ENDIF
 	ENDIF
@@ -4263,6 +4414,7 @@ WAIT mission_trigger_wait_time
 		IF LOCATE_PLAYER_ON_FOOT_3D Player 523.7 -639.0 16.1 1.0 4.5 2.0 FALSE
 			IF flag_player_on_mission = 0
 				IF CAN_PLAYER_START_MISSION Player
+					flag_player_on_mission = 1 // SCFIX
 
 					MAKE_PLAYER_SAFE_FOR_CUTSCENE Player
 
@@ -4281,6 +4433,7 @@ WAIT mission_trigger_wait_time
 					LOAD_AND_LAUNCH_MISSION asuka2.sc
 				ENDIF
 
+				/* SCFIX: fix mission not starting if you jump onto the marker
 				IF NOT IS_PLAYER_PLAYING player
 					GOTO asuka_mission2_loop
 				ENDIF
@@ -4291,6 +4444,7 @@ WAIT mission_trigger_wait_time
 						GOTO asuka_mission2_loop
 					ENDIF
 				ENDWHILE
+				*/
 			ENDIF
 		ENDIF
 	ENDIF
@@ -4315,6 +4469,7 @@ WAIT mission_trigger_wait_time
 		IF LOCATE_PLAYER_ON_FOOT_3D Player 523.7 -639.0 16.1 1.0 4.5 2.0 FALSE
 			IF flag_player_on_mission = 0
 				IF CAN_PLAYER_START_MISSION Player
+					flag_player_on_mission = 1 // SCFIX
 
 					MAKE_PLAYER_SAFE_FOR_CUTSCENE Player
 
@@ -4333,6 +4488,7 @@ WAIT mission_trigger_wait_time
 					LOAD_AND_LAUNCH_MISSION asuka3.sc
 				ENDIF
 
+				/* SCFIX: fix mission not starting if you jump onto the marker
 				IF NOT IS_PLAYER_PLAYING player
 					GOTO asuka_mission3_loop
 				ENDIF
@@ -4343,6 +4499,7 @@ WAIT mission_trigger_wait_time
 						GOTO asuka_mission3_loop
 					ENDIF
 				ENDWHILE
+				*/
 			ENDIF
 		ENDIF
 	ENDIF
@@ -4369,6 +4526,7 @@ WAIT mission_trigger_wait_time
 		IF LOCATE_PLAYER_ON_FOOT_3D Player 523.7 -639.0 16.1 1.0 4.5 2.0 FALSE
 			IF flag_player_on_mission = 0
 				IF CAN_PLAYER_START_MISSION Player
+					flag_player_on_mission = 1 // SCFIX
 
 					MAKE_PLAYER_SAFE_FOR_CUTSCENE Player
 
@@ -4387,6 +4545,7 @@ WAIT mission_trigger_wait_time
 					LOAD_AND_LAUNCH_MISSION asuka4.sc
 				ENDIF
 
+				/* SCFIX: fix mission not starting if you jump onto the marker
 				IF NOT IS_PLAYER_PLAYING player
 					GOTO asuka_mission4_loop
 				ENDIF
@@ -4397,6 +4556,7 @@ WAIT mission_trigger_wait_time
 						GOTO asuka_mission4_loop
 					ENDIF
 				ENDWHILE
+				*/
 			ENDIF
 		ENDIF
 	ENDIF
@@ -4426,6 +4586,7 @@ ENDIF
 		IF LOCATE_PLAYER_ON_FOOT_3D Player 523.7 -639.0 16.1 1.0 4.5 2.0 FALSE
 			IF flag_player_on_mission = 0
 				IF CAN_PLAYER_START_MISSION Player
+					flag_player_on_mission = 1 // SCFIX
 
 					MAKE_PLAYER_SAFE_FOR_CUTSCENE Player
 
@@ -4444,6 +4605,7 @@ ENDIF
 					LOAD_AND_LAUNCH_MISSION asuka5.sc
 				ENDIF
 
+				/* SCFIX: fix mission not starting if you jump onto the marker
 				IF NOT IS_PLAYER_PLAYING player
 					GOTO asuka_mission5_loop
 				ENDIF
@@ -4454,6 +4616,7 @@ ENDIF
 						GOTO asuka_mission5_loop
 					ENDIF
 				ENDWHILE
+				*/
 			ENDIF
 		ENDIF
 	ENDIF
@@ -4480,6 +4643,7 @@ WAIT mission_trigger_wait_time
 		IF LOCATE_PLAYER_ON_FOOT_3D Player 459.1 -1413.0 26.1 1.5 1.5 2.0 FALSE
 			IF flag_player_on_mission = 0
 				IF CAN_PLAYER_START_MISSION Player
+					flag_player_on_mission = 1 // SCFIX
 
 					MAKE_PLAYER_SAFE_FOR_CUTSCENE player
 
@@ -4498,6 +4662,7 @@ WAIT mission_trigger_wait_time
 					LOAD_AND_LAUNCH_MISSION kenji1.sc
 				ENDIF
 
+				/* SCFIX: fix mission not starting if you jump onto the marker
 				IF NOT IS_PLAYER_PLAYING player
 					GOTO kenji_mission1_loop
 				ENDIF
@@ -4508,6 +4673,7 @@ WAIT mission_trigger_wait_time
 						GOTO kenji_mission1_loop
 					ENDIF
 				ENDWHILE
+				*/
 			ENDIF
 		ENDIF
 	ENDIF
@@ -4533,6 +4699,7 @@ WAIT mission_trigger_wait_time
 		IF LOCATE_PLAYER_ON_FOOT_3D Player 459.1 -1413.0 26.1 1.5 1.5 2.0 FALSE
 			IF flag_player_on_mission = 0
 				IF CAN_PLAYER_START_MISSION Player
+					flag_player_on_mission = 1 // SCFIX
 
 					MAKE_PLAYER_SAFE_FOR_CUTSCENE player
 
@@ -4551,6 +4718,7 @@ WAIT mission_trigger_wait_time
 					LOAD_AND_LAUNCH_MISSION kenji2.sc
 				ENDIF
 
+				/* SCFIX: fix mission not starting if you jump onto the marker
 				IF NOT IS_PLAYER_PLAYING player
 					GOTO kenji_mission2_loop
 				ENDIF
@@ -4561,6 +4729,7 @@ WAIT mission_trigger_wait_time
 						GOTO kenji_mission2_loop
 					ENDIF
 				ENDWHILE
+				*/
 			ENDIF
 		ENDIF
 	ENDIF
@@ -4585,6 +4754,7 @@ WAIT mission_trigger_wait_time
 		IF LOCATE_PLAYER_ON_FOOT_3D Player 459.1 -1413.0 26.1 1.5 1.5 2.0 FALSE
 			IF flag_player_on_mission = 0
 				IF CAN_PLAYER_START_MISSION Player
+					flag_player_on_mission = 1 // SCFIX
 
 					MAKE_PLAYER_SAFE_FOR_CUTSCENE player
 
@@ -4603,6 +4773,7 @@ WAIT mission_trigger_wait_time
 					LOAD_AND_LAUNCH_MISSION kenji3.sc
 				ENDIF
 
+				/* SCFIX: fix mission not starting if you jump onto the marker
 				IF NOT IS_PLAYER_PLAYING player
 					GOTO kenji_mission3_loop
 				ENDIF
@@ -4613,6 +4784,7 @@ WAIT mission_trigger_wait_time
 						GOTO kenji_mission3_loop
 					ENDIF
 				ENDWHILE
+				*/
 			ENDIF
 		ENDIF
 	ENDIF
@@ -4640,6 +4812,7 @@ WAIT mission_trigger_wait_time
 		IF LOCATE_PLAYER_ON_FOOT_3D Player 459.1 -1413.0 26.1 1.5 1.5 2.0 FALSE
 			IF flag_player_on_mission = 0
 				IF CAN_PLAYER_START_MISSION Player
+					flag_player_on_mission = 1 // SCFIX
 
 					MAKE_PLAYER_SAFE_FOR_CUTSCENE player
 
@@ -4658,6 +4831,7 @@ WAIT mission_trigger_wait_time
 					LOAD_AND_LAUNCH_MISSION kenji4.sc
 				ENDIF
 
+				/* SCFIX: fix mission not starting if you jump onto the marker
 				IF NOT IS_PLAYER_PLAYING player
 					GOTO kenji_mission4_loop
 				ENDIF
@@ -4668,6 +4842,7 @@ WAIT mission_trigger_wait_time
 						GOTO kenji_mission4_loop
 					ENDIF
 				ENDWHILE
+				*/
 			ENDIF
 		ENDIF
 	ENDIF
@@ -4694,6 +4869,7 @@ WAIT mission_trigger_wait_time
 		IF LOCATE_PLAYER_ON_FOOT_3D Player 459.1 -1413.0 26.1 1.5 1.5 2.0 FALSE
 			IF flag_player_on_mission = 0
 				IF CAN_PLAYER_START_MISSION Player
+					flag_player_on_mission = 1 // SCFIX
 
 					MAKE_PLAYER_SAFE_FOR_CUTSCENE player
 
@@ -4712,6 +4888,7 @@ WAIT mission_trigger_wait_time
 					LOAD_AND_LAUNCH_MISSION kenji5.sc
 				ENDIF
 
+				/* SCFIX: fix mission not starting if you jump onto the marker
 				IF NOT IS_PLAYER_PLAYING player
 					GOTO kenji_mission5_loop
 				ENDIF
@@ -4722,6 +4899,7 @@ WAIT mission_trigger_wait_time
 						GOTO kenji_mission5_loop
 					ENDIF
 				ENDWHILE
+				*/
 			ENDIF
 		ENDIF
 	ENDIF
@@ -4753,6 +4931,7 @@ WAIT 0
 		IF LOCATE_PLAYER_ON_FOOT_3D Player 38.8 -725.4 22.8 1.2 1.2 2.0 FALSE
 			IF flag_player_on_mission = 0
 				IF CAN_PLAYER_START_MISSION Player
+					flag_player_on_mission = 1 // SCFIX
 
 					rays_cutscene_flag = 1
 					MAKE_PLAYER_SAFE_FOR_CUTSCENE player
@@ -4772,6 +4951,7 @@ WAIT 0
 					LOAD_AND_LAUNCH_MISSION ray1.sc
 				ENDIF
 
+				/* SCFIX: fix mission not starting if you jump onto the marker
 				IF NOT IS_PLAYER_PLAYING player
 					GOTO ray_mission1_loop
 				ENDIF
@@ -4782,6 +4962,7 @@ WAIT 0
 						GOTO ray_mission1_loop
 					ENDIF
 				ENDWHILE
+				*/
 			ENDIF
 		ENDIF
 	ENDIF
@@ -4807,6 +4988,7 @@ WAIT 0
 		IF LOCATE_PLAYER_ON_FOOT_3D Player 38.8 -725.4 22.8 1.2 1.2 2.0 FALSE
 			IF flag_player_on_mission = 0
 				IF CAN_PLAYER_START_MISSION Player
+					flag_player_on_mission = 1 // SCFIX
 
 					rays_cutscene_flag = 1
 					MAKE_PLAYER_SAFE_FOR_CUTSCENE Player
@@ -4826,6 +5008,7 @@ WAIT 0
 					LOAD_AND_LAUNCH_MISSION ray2.sc
 				ENDIF
 
+				/* SCFIX: fix mission not starting if you jump onto the marker
 				IF NOT IS_PLAYER_PLAYING player
 					GOTO ray_mission2_loop
 				ENDIF
@@ -4836,6 +5019,7 @@ WAIT 0
 						GOTO ray_mission2_loop
 					ENDIF
 				ENDWHILE
+				*/
 			ENDIF
 		ENDIF
 	ENDIF
@@ -4860,6 +5044,7 @@ WAIT 0
 		IF LOCATE_PLAYER_ON_FOOT_3D Player 38.8 -725.4 22.8 1.2 1.2 2.0 FALSE
 			IF flag_player_on_mission = 0
 				IF CAN_PLAYER_START_MISSION Player
+					flag_player_on_mission = 1 // SCFIX
 
 					rays_cutscene_flag = 1
 					MAKE_PLAYER_SAFE_FOR_CUTSCENE player
@@ -4879,6 +5064,7 @@ WAIT 0
 					LOAD_AND_LAUNCH_MISSION ray3.sc
 				ENDIF
 
+				/* SCFIX: fix mission not starting if you jump onto the marker
 				IF NOT IS_PLAYER_PLAYING player
 					GOTO ray_mission3_loop
 				ENDIF
@@ -4889,6 +5075,7 @@ WAIT 0
 						GOTO ray_mission3_loop
 					ENDIF
 				ENDWHILE
+				*/
 			ENDIF
 		ENDIF
 	ENDIF
@@ -4917,6 +5104,7 @@ WAIT 0
 		IF LOCATE_PLAYER_ON_FOOT_3D Player 38.8 -725.4 22.8 1.2 1.2 2.0 FALSE
 			IF flag_player_on_mission = 0
 				IF CAN_PLAYER_START_MISSION Player
+					flag_player_on_mission = 1 // SCFIX
 
 					rays_cutscene_flag = 1
 					MAKE_PLAYER_SAFE_FOR_CUTSCENE player
@@ -4936,6 +5124,7 @@ WAIT 0
 					LOAD_AND_LAUNCH_MISSION ray4.sc
 				ENDIF
 
+				/* SCFIX: fix mission not starting if you jump onto the marker
 				IF NOT IS_PLAYER_PLAYING player
 					GOTO ray_mission4_loop
 				ENDIF
@@ -4946,6 +5135,7 @@ WAIT 0
 						GOTO ray_mission4_loop
 					ENDIF
 				ENDWHILE
+				*/
 			ENDIF
 		ENDIF
 	ENDIF
@@ -4972,6 +5162,7 @@ WAIT 0
 		IF LOCATE_PLAYER_ON_FOOT_3D Player 38.8 -725.4 22.8 1.2 1.2 2.0 FALSE
 			IF flag_player_on_mission = 0
 				IF CAN_PLAYER_START_MISSION Player
+					flag_player_on_mission = 1 // SCFIX
 
 					rays_cutscene_flag = 1
 					MAKE_PLAYER_SAFE_FOR_CUTSCENE Player
@@ -4991,6 +5182,7 @@ WAIT 0
 					LOAD_AND_LAUNCH_MISSION ray5.sc
 				ENDIF
 
+				/* SCFIX: fix mission not starting if you jump onto the marker
 				IF NOT IS_PLAYER_PLAYING player
 					GOTO ray_mission5_loop
 				ENDIF
@@ -5001,6 +5193,7 @@ WAIT 0
 						GOTO ray_mission5_loop
 					ENDIF
 				ENDWHILE
+				*/
 			ENDIF
 		ENDIF
 	ENDIF
@@ -5024,6 +5217,7 @@ WAIT 0
 		IF LOCATE_PLAYER_ON_FOOT_3D Player 38.8 -725.4 22.8 1.2 1.2 2.0 FALSE
 			IF flag_player_on_mission = 0
 				IF CAN_PLAYER_START_MISSION Player
+					flag_player_on_mission = 1 // SCFIX
 
 					MAKE_PLAYER_SAFE_FOR_CUTSCENE player
 
@@ -5042,6 +5236,7 @@ WAIT 0
 					LOAD_AND_LAUNCH_MISSION ray6.sc
 				ENDIF
 
+				/* SCFIX: fix mission not starting if you jump onto the marker
 				IF NOT IS_PLAYER_PLAYING player
 					GOTO ray_mission6_loop
 				ENDIF
@@ -5052,6 +5247,7 @@ WAIT 0
 						GOTO ray_mission6_loop
 					ENDIF
 				ENDWHILE
+				*/
 			ENDIF
 		ENDIF
 	ENDIF
@@ -5080,6 +5276,7 @@ WAIT mission_trigger_wait_time
 		IF LOCATE_PLAYER_ON_FOOT_3D Player 87.3 -1548.6 28.3 2.0 1.0 2.0 FALSE
 			IF flag_player_on_mission = 0
 				IF CAN_PLAYER_START_MISSION Player
+					flag_player_on_mission = 1 // SCFIX
 
 					MAKE_PLAYER_SAFE_FOR_CUTSCENE player
 
@@ -5098,6 +5295,7 @@ WAIT mission_trigger_wait_time
 					LOAD_AND_LAUNCH_MISSION love1.sc
 				ENDIF
 
+				/* SCFIX: fix mission not starting if you jump onto the marker
 				IF NOT IS_PLAYER_PLAYING player
 					GOTO love_mission1_loop
 				ENDIF
@@ -5108,6 +5306,7 @@ WAIT mission_trigger_wait_time
 						GOTO love_mission1_loop
 					ENDIF
 				ENDWHILE
+				*/
 			ENDIF
 		ENDIF
 	ENDIF
@@ -5132,6 +5331,7 @@ WAIT mission_trigger_wait_time
 		IF LOCATE_PLAYER_ON_FOOT_3D Player 87.3 -1548.6 28.3 2.0 1.0 2.0 FALSE
 			IF flag_player_on_mission = 0
 				IF CAN_PLAYER_START_MISSION Player
+					flag_player_on_mission = 1 // SCFIX
 
 					MAKE_PLAYER_SAFE_FOR_CUTSCENE Player
 
@@ -5150,6 +5350,7 @@ WAIT mission_trigger_wait_time
 					LOAD_AND_LAUNCH_MISSION love2.sc
 				ENDIF
 
+				/* SCFIX: fix mission not starting if you jump onto the marker
 				IF NOT IS_PLAYER_PLAYING player
 					GOTO love_mission2_loop
 				ENDIF
@@ -5160,6 +5361,7 @@ WAIT mission_trigger_wait_time
 						GOTO love_mission2_loop
 					ENDIF
 				ENDWHILE
+				*/
 			ENDIF
 		ENDIF
 	ENDIF
@@ -5184,6 +5386,7 @@ WAIT mission_trigger_wait_time
 		IF LOCATE_PLAYER_ON_FOOT_3D Player 87.3 -1548.6 28.3 2.0 1.0 2.0 FALSE
 			IF flag_player_on_mission = 0
 				IF CAN_PLAYER_START_MISSION Player
+					flag_player_on_mission = 1 // SCFIX
 
 					MAKE_PLAYER_SAFE_FOR_CUTSCENE player
 
@@ -5202,6 +5405,7 @@ WAIT mission_trigger_wait_time
 					LOAD_AND_LAUNCH_MISSION love3.sc
 				ENDIF
 
+				/* SCFIX: fix mission not starting if you jump onto the marker
 				IF NOT IS_PLAYER_PLAYING player
 					GOTO love_mission3_loop
 				ENDIF
@@ -5212,6 +5416,7 @@ WAIT mission_trigger_wait_time
 						GOTO love_mission3_loop
 					ENDIF
 				ENDWHILE
+				*/
 			ENDIF
 		ENDIF
 	ENDIF
@@ -5248,6 +5453,7 @@ WAIT mission_trigger_wait_time
 		IF LOCATE_STOPPED_PLAYER_ON_FOOT_3D	player 120.7 -272.1 16.1 1.0 1.0 2.0 FALSE
 			IF flag_player_on_mission = 0
 				IF CAN_PLAYER_START_MISSION Player
+					flag_player_on_mission = 1 // SCFIX
 					TURN_PHONE_OFF yardie_phone
 
 					MAKE_PLAYER_SAFE_FOR_CUTSCENE Player
@@ -5265,6 +5471,7 @@ WAIT mission_trigger_wait_time
 					LOAD_AND_LAUNCH_MISSION yard1.sc
 				ENDIF
 
+				/* SCFIX: fix mission not starting if you jump onto the marker
 				IF NOT IS_PLAYER_PLAYING player
 					GOTO yardie_mission1_loop
 				ENDIF
@@ -5275,6 +5482,7 @@ WAIT mission_trigger_wait_time
 							GOTO yardie_mission1_loop
 						ENDIF
 				ENDWHILE
+				*/
 			ENDIF
 		ENDIF
 	ENDIF
@@ -5306,6 +5514,7 @@ WAIT mission_trigger_wait_time
 		IF LOCATE_STOPPED_PLAYER_ON_FOOT_3D	player 120.7 -272.1 16.1 1.0 1.0 2.0 FALSE
 			IF flag_player_on_mission = 0
 				IF CAN_PLAYER_START_MISSION Player
+					flag_player_on_mission = 1 // SCFIX
 					TURN_PHONE_OFF yardie_phone
 
 					MAKE_PLAYER_SAFE_FOR_CUTSCENE Player
@@ -5323,6 +5532,7 @@ WAIT mission_trigger_wait_time
 					LOAD_AND_LAUNCH_MISSION yard2.sc
 				ENDIF
 
+				/* SCFIX: fix mission not starting if you jump onto the marker
 				IF NOT IS_PLAYER_PLAYING player
 					GOTO yardie_mission2_loop
 				ENDIF
@@ -5333,6 +5543,7 @@ WAIT mission_trigger_wait_time
 							GOTO yardie_mission2_loop
 						ENDIF
 				ENDWHILE
+				*/
 			ENDIF
 		ENDIF
 	ENDIF
@@ -5364,6 +5575,7 @@ WAIT mission_trigger_wait_time
 		IF LOCATE_STOPPED_PLAYER_ON_FOOT_3D	player 120.7 -272.1 16.1 1.0 1.0 2.0 FALSE
 			IF flag_player_on_mission = 0
 				IF CAN_PLAYER_START_MISSION Player
+					flag_player_on_mission = 1 // SCFIX
 					TURN_PHONE_OFF yardie_phone
 
 					MAKE_PLAYER_SAFE_FOR_CUTSCENE Player
@@ -5381,6 +5593,7 @@ WAIT mission_trigger_wait_time
 					LOAD_AND_LAUNCH_MISSION yard3.sc
 				ENDIF
 
+				/* SCFIX: fix mission not starting if you jump onto the marker
 				IF NOT IS_PLAYER_PLAYING player
 					GOTO yardie_mission3_loop
 				ENDIF
@@ -5391,6 +5604,7 @@ WAIT mission_trigger_wait_time
 							GOTO yardie_mission3_loop
 						ENDIF
 				ENDWHILE
+				*/
 			ENDIF
 		ENDIF
 	ENDIF
@@ -5422,6 +5636,7 @@ WAIT mission_trigger_wait_time
 		IF LOCATE_STOPPED_PLAYER_ON_FOOT_3D	player 120.7 -272.1 16.1 1.0 1.0 2.0 FALSE
 			IF flag_player_on_mission = 0
 				IF CAN_PLAYER_START_MISSION Player
+					flag_player_on_mission = 1 // SCFIX
 					TURN_PHONE_OFF yardie_phone
 
 					MAKE_PLAYER_SAFE_FOR_CUTSCENE Player
@@ -5439,6 +5654,7 @@ WAIT mission_trigger_wait_time
 					LOAD_AND_LAUNCH_MISSION yard4.sc
 				ENDIF
 
+				/* SCFIX: fix mission not starting if you jump onto the marker
 				IF NOT IS_PLAYER_PLAYING player
 					GOTO yardie_mission4_loop
 				ENDIF
@@ -5449,6 +5665,7 @@ WAIT mission_trigger_wait_time
 							GOTO yardie_mission4_loop
 						ENDIF
 				ENDWHILE
+				*/
 			ENDIF
 		ENDIF
 	ENDIF
@@ -5477,6 +5694,7 @@ WAIT mission_trigger_wait_time
 		IF LOCATE_PLAYER_ON_FOOT_3D Player 87.3 -1548.6 28.3 2.0 1.0 2.0 FALSE
 			IF flag_player_on_mission = 0
 				IF CAN_PLAYER_START_MISSION Player
+					flag_player_on_mission = 1 // SCFIX
 
 					MAKE_PLAYER_SAFE_FOR_CUTSCENE player
 
@@ -5495,6 +5713,7 @@ WAIT mission_trigger_wait_time
 					LOAD_AND_LAUNCH_MISSION love4.sc
 				ENDIF
 
+				/* SCFIX: fix mission not starting if you jump onto the marker
 				IF NOT IS_PLAYER_PLAYING player
 					GOTO love_mission4_loop
 				ENDIF
@@ -5505,6 +5724,7 @@ WAIT mission_trigger_wait_time
 						GOTO love_mission4_loop
 					ENDIF
 				ENDWHILE
+				*/
 			ENDIF
 		ENDIF
 	ENDIF
@@ -5530,6 +5750,7 @@ WAIT mission_trigger_wait_time
 		IF LOCATE_PLAYER_ON_FOOT_3D Player 87.3 -1548.6 28.3 2.0 1.0 2.0 FALSE
 			IF flag_player_on_mission = 0
 				IF CAN_PLAYER_START_MISSION Player
+					flag_player_on_mission = 1 // SCFIX
 
 					MAKE_PLAYER_SAFE_FOR_CUTSCENE player
 
@@ -5548,6 +5769,7 @@ WAIT mission_trigger_wait_time
 					LOAD_AND_LAUNCH_MISSION love5.sc
 				ENDIF
 
+				/* SCFIX: fix mission not starting if you jump onto the marker
 				IF NOT IS_PLAYER_PLAYING player
 					GOTO love_mission5_loop
 				ENDIF
@@ -5558,6 +5780,7 @@ WAIT mission_trigger_wait_time
 						GOTO love_mission5_loop
 					ENDIF
 				ENDWHILE
+				*/
 			ENDIF
 		ENDIF
 	ENDIF
@@ -5581,6 +5804,7 @@ WAIT mission_trigger_wait_time
 		IF LOCATE_PLAYER_ON_FOOT_3D Player 87.3 -1548.6 28.3 2.0 1.0 2.0 FALSE
 			IF flag_player_on_mission = 0
 				IF CAN_PLAYER_START_MISSION Player
+					flag_player_on_mission = 1 // SCFIX
 
 					MAKE_PLAYER_SAFE_FOR_CUTSCENE player
 
@@ -5599,6 +5823,7 @@ WAIT mission_trigger_wait_time
 					LOAD_AND_LAUNCH_MISSION love6.sc
 				ENDIF
 
+				/* SCFIX: fix mission not starting if you jump onto the marker
 				IF NOT IS_PLAYER_PLAYING player
 					GOTO love_mission6_loop
 				ENDIF
@@ -5609,6 +5834,7 @@ WAIT mission_trigger_wait_time
 						GOTO love_mission6_loop
 					ENDIF
 				ENDWHILE
+				*/
 			ENDIF
 		ENDIF
 	ENDIF
@@ -5632,6 +5858,7 @@ WAIT mission_trigger_wait_time
 		IF LOCATE_PLAYER_ON_FOOT_3D Player 87.3 -1548.6 28.3 2.0 1.0 2.0 FALSE
 			IF flag_player_on_mission = 0	
 				IF CAN_PLAYER_START_MISSION Player
+					flag_player_on_mission = 1 // SCFIX
 
 					MAKE_PLAYER_SAFE_FOR_CUTSCENE player
 
@@ -5650,6 +5877,7 @@ WAIT mission_trigger_wait_time
 					LOAD_AND_LAUNCH_MISSION love7.sc
 				ENDIF
 
+				/* SCFIX: fix mission not starting if you jump onto the marker
 				IF NOT IS_PLAYER_PLAYING player
 					GOTO love_mission7_loop
 				ENDIF
@@ -5660,6 +5888,7 @@ WAIT mission_trigger_wait_time
 						GOTO love_mission7_loop
 					ENDIF
 				ENDWHILE
+				*/
 			ENDIF
 		ENDIF
 	ENDIF
@@ -5686,6 +5915,7 @@ WAIT mission_trigger_wait_time
 		IF LOCATE_PLAYER_ON_FOOT_3D player 367.3 -328.1 19.5 1.0 1.0 2.0 FALSE
 			IF flag_player_on_mission = 0
 				IF CAN_PLAYER_START_MISSION Player
+					flag_player_on_mission = 1 // SCFIX
 
 					MAKE_PLAYER_SAFE_FOR_CUTSCENE Player
 
@@ -5704,6 +5934,7 @@ WAIT mission_trigger_wait_time
 					LOAD_AND_LAUNCH_MISSION asusb1.sc
 				ENDIF
 
+				/* SCFIX: fix mission not starting if you jump onto the marker
 				IF NOT IS_PLAYER_PLAYING player
 					GOTO asuka_suburban_mission1_loop
 				ENDIF
@@ -5714,6 +5945,7 @@ WAIT mission_trigger_wait_time
 						GOTO asuka_suburban_mission1_loop
 					ENDIF
 				ENDWHILE
+				*/
 			ENDIF
 		ENDIF
 	ENDIF
@@ -5737,6 +5969,7 @@ WAIT mission_trigger_wait_time
 		IF LOCATE_PLAYER_ON_FOOT_3D player 367.3 -328.1 19.5 1.0 1.0 2.0 FALSE
 			IF flag_player_on_mission = 0
 				IF CAN_PLAYER_START_MISSION Player
+					flag_player_on_mission = 1 // SCFIX
 
 					MAKE_PLAYER_SAFE_FOR_CUTSCENE Player
 
@@ -5755,6 +5988,7 @@ WAIT mission_trigger_wait_time
 					LOAD_AND_LAUNCH_MISSION asusb2.sc
 				ENDIF
 
+				/* SCFIX: fix mission not starting if you jump onto the marker
 				IF NOT IS_PLAYER_PLAYING player
 					GOTO asuka_suburban_mission2_loop
 				ENDIF
@@ -5765,6 +5999,7 @@ WAIT mission_trigger_wait_time
 						GOTO asuka_suburban_mission2_loop
 					ENDIF
 				ENDWHILE
+				*/
 			ENDIF
 		ENDIF
 	ENDIF
@@ -5789,6 +6024,7 @@ WAIT mission_trigger_wait_time
 		IF LOCATE_PLAYER_ON_FOOT_3D player 367.3 -328.1 19.5 1.0 1.0 2.0 FALSE
 			IF flag_player_on_mission = 0
 				IF CAN_PLAYER_START_MISSION Player
+					flag_player_on_mission = 1 // SCFIX
 
 					MAKE_PLAYER_SAFE_FOR_CUTSCENE Player
 
@@ -5807,6 +6043,7 @@ WAIT mission_trigger_wait_time
 					LOAD_AND_LAUNCH_MISSION asusb3.sc
 				ENDIF
 
+				/* SCFIX: fix mission not starting if you jump onto the marker
 				IF NOT IS_PLAYER_PLAYING player
 					GOTO asuka_suburban_mission3_loop
 				ENDIF
@@ -5817,6 +6054,7 @@ WAIT mission_trigger_wait_time
 						GOTO asuka_suburban_mission3_loop
 					ENDIF
 				ENDWHILE
+				*/
 			ENDIF
 		ENDIF
 	ENDIF
@@ -5902,6 +6140,7 @@ WAIT mission_trigger_wait_time
 		IF LOCATE_STOPPED_PLAYER_ON_FOOT_3D	player -443.5 -6.1 3.8 1.0 1.0 2.0 FALSE
 			IF flag_player_on_mission = 0
 				IF CAN_PLAYER_START_MISSION Player
+					flag_player_on_mission = 1 // SCFIX
 					TURN_PHONE_OFF hood_phone
 
 					MAKE_PLAYER_SAFE_FOR_CUTSCENE Player
@@ -5919,6 +6158,7 @@ WAIT mission_trigger_wait_time
 					LOAD_AND_LAUNCH_MISSION hood1.sc
 				ENDIF
 
+				/* SCFIX: fix mission not starting if you jump onto the marker
 				IF NOT IS_PLAYER_PLAYING player
 					GOTO hood_mission1_loop
 				ENDIF
@@ -5929,6 +6169,7 @@ WAIT mission_trigger_wait_time
 							GOTO hood_mission1_loop
 						ENDIF
 				ENDWHILE
+				*/
 			ENDIF
 		ENDIF
 	ENDIF
@@ -5961,6 +6202,7 @@ WAIT mission_trigger_wait_time
 		IF LOCATE_STOPPED_PLAYER_ON_FOOT_3D	player -443.5 -6.1 3.8 1.0 1.0 2.0 FALSE
 			IF flag_player_on_mission = 0
 				IF CAN_PLAYER_START_MISSION Player
+					flag_player_on_mission = 1 // SCFIX
 					TURN_PHONE_OFF hood_phone
 
 					MAKE_PLAYER_SAFE_FOR_CUTSCENE Player
@@ -5978,6 +6220,7 @@ WAIT mission_trigger_wait_time
 					LOAD_AND_LAUNCH_MISSION hood2.sc
 				ENDIF
 
+				/* SCFIX: fix mission not starting if you jump onto the marker
 				IF NOT IS_PLAYER_PLAYING player
 					GOTO hood_mission2_loop
 				ENDIF
@@ -5988,6 +6231,7 @@ WAIT mission_trigger_wait_time
 							GOTO hood_mission2_loop
 						ENDIF
 				ENDWHILE
+				*/
 			ENDIF
 		ENDIF
 	ENDIF
@@ -6023,6 +6267,7 @@ WAIT mission_trigger_wait_time
 		IF LOCATE_STOPPED_PLAYER_ON_FOOT_3D	player -443.5 -6.1 3.8 1.0 1.0 2.0 FALSE
 			IF flag_player_on_mission = 0
 				IF CAN_PLAYER_START_MISSION Player
+					flag_player_on_mission = 1 // SCFIX
 					TURN_PHONE_OFF hood_phone
 
 					MAKE_PLAYER_SAFE_FOR_CUTSCENE Player
@@ -6040,6 +6285,7 @@ WAIT mission_trigger_wait_time
 					LOAD_AND_LAUNCH_MISSION hood3.sc
 				ENDIF
 
+				/* SCFIX: fix mission not starting if you jump onto the marker
 				IF NOT IS_PLAYER_PLAYING player
 					GOTO hood_mission3_loop
 				ENDIF
@@ -6050,6 +6296,7 @@ WAIT mission_trigger_wait_time
 							GOTO hood_mission3_loop
 						ENDIF
 				ENDWHILE
+				*/
 			ENDIF
 		ENDIF
 	ENDIF
@@ -6081,6 +6328,7 @@ WAIT mission_trigger_wait_time
 		IF LOCATE_STOPPED_PLAYER_ON_FOOT_3D	player -443.5 -6.1 3.8 1.0 1.0 2.0 FALSE
 			IF flag_player_on_mission = 0
 				IF CAN_PLAYER_START_MISSION Player
+					flag_player_on_mission = 1 // SCFIX
 					TURN_PHONE_OFF hood_phone
 
 					MAKE_PLAYER_SAFE_FOR_CUTSCENE Player
@@ -6098,6 +6346,7 @@ WAIT mission_trigger_wait_time
 					LOAD_AND_LAUNCH_MISSION hood4.sc
 				ENDIF
 
+				/* SCFIX: fix mission not starting if you jump onto the marker
 				IF NOT IS_PLAYER_PLAYING player
 					GOTO hood_mission4_loop
 				ENDIF
@@ -6108,6 +6357,7 @@ WAIT mission_trigger_wait_time
 							GOTO hood_mission4_loop
 						ENDIF
 				ENDWHILE
+				*/
 			ENDIF
 		ENDIF
 	ENDIF
@@ -6139,6 +6389,7 @@ WAIT mission_trigger_wait_time
 		IF LOCATE_STOPPED_PLAYER_ON_FOOT_3D	player -443.5 -6.1 3.8 1.0 1.0 2.0 FALSE
 			IF flag_player_on_mission = 0
 				IF CAN_PLAYER_START_MISSION Player
+					flag_player_on_mission = 1 // SCFIX
 					TURN_PHONE_OFF hood_phone
 
 					MAKE_PLAYER_SAFE_FOR_CUTSCENE Player
@@ -6156,6 +6407,7 @@ WAIT mission_trigger_wait_time
 					LOAD_AND_LAUNCH_MISSION hood5.sc
 				ENDIF
 
+				/* SCFIX: fix mission not starting if you jump onto the marker
 				IF NOT IS_PLAYER_PLAYING player
 					GOTO hood_mission5_loop
 				ENDIF
@@ -6166,6 +6418,7 @@ WAIT mission_trigger_wait_time
 							GOTO hood_mission5_loop
 						ENDIF
 				ENDWHILE
+				*/
 			ENDIF
 		ENDIF
 	ENDIF
@@ -6196,6 +6449,7 @@ WAIT mission_trigger_wait_time
 				IF IS_SCORE_GREATER Player 499999
 					payed_before:
 						IF CAN_PLAYER_START_MISSION Player
+							flag_player_on_mission = 1 // SCFIX
 
 							MAKE_PLAYER_SAFE_FOR_CUTSCENE Player
 
@@ -6214,6 +6468,7 @@ WAIT mission_trigger_wait_time
 							LOAD_AND_LAUNCH_MISSION cat1.sc
 						ENDIF
 
+						/* SCFIX: fix mission not starting if you jump onto the marker
 						IF NOT IS_PLAYER_PLAYING player
 							GOTO cat_mission1_loop
 						ENDIF
@@ -6224,6 +6479,7 @@ WAIT mission_trigger_wait_time
 								GOTO cat_mission1_loop
 							ENDIF
 						ENDWHILE
+						*/
 
 				ELSE 
 					PRINT_NOW ( CAT_MON ) 5000 1 //"You don't have enough money"
@@ -6287,6 +6543,7 @@ ind_save_loop_inner:
 					IF CAN_PLAYER_START_MISSION Player // allowing the player to jump around inside
 						IF flag_player_on_mission = 0
 							IF IS_PLAYER_IN_AREA_ON_FOOT_3D player 891.2 -309.7 7.7 899.3 -303.3 12.7 FALSE //REAL ONE!!!!!!!
+								flag_player_on_mission = 1 // SCFIX
 								SET_PLAYER_CONTROL Player Off
 								SET_FIXED_CAMERA_POSITION 884.56 -305.35 13.53 0.0 0.0 0.0
 								POINT_CAMERA_AT_POINT 885.25 -305.85 13.0 JUMP_CUT
@@ -6349,6 +6606,7 @@ ind_save_loop_inner:
 
 								IF IS_PLAYER_PLAYING Player
 									SET_PLAYER_CONTROL Player on
+									flag_player_on_mission = 0 // SCFIX
 								ENDIF
 									
 							ENDIF
@@ -6435,6 +6693,12 @@ diablo_blip_loop_inner:
 
 	IF IS_PLAYER_PLAYING Player
 		IF IS_COLLISION_IN_MEMORY LEVEL_INDUSTRIAL
+
+			// SCFIX: START
+			IF flag_diablo_mission4_passed = 1
+				TERMINATE_THIS_SCRIPT
+			ENDIF
+			// SCFIX: END
 
 			IF blip_diablo_created_before = 0
 				REMOVE_BLIP diablo_contact_blip
@@ -6676,6 +6940,7 @@ com_save_loop_inner:
 					IF CAN_PLAYER_START_MISSION Player
 						IF flag_player_on_mission = 0
 							IF IS_PLAYER_IN_AREA_ON_FOOT_3D player 105.7 -486.0 15.0 100.8 -483.4 18.0 FALSE
+								flag_player_on_mission = 1 // SCFIX
 								SET_PLAYER_CONTROL Player Off
 								SET_FIXED_CAMERA_POSITION 98.53 -472.06 19.84 0.0 0.0 0.0
 								POINT_CAMERA_AT_POINT 98.94 -472.90 19.47 JUMP_CUT
@@ -6740,6 +7005,7 @@ com_save_loop_inner:
 
 								IF IS_PLAYER_PLAYING Player
 									SET_PLAYER_CONTROL Player on
+									flag_player_on_mission = 0 // SCFIX
 								ENDIF
 										
 							ENDIF
@@ -6931,6 +7197,7 @@ sub_save_loop_inner:
 					IF CAN_PLAYER_START_MISSION Player
 						IF flag_player_on_mission = 0	
 							IF IS_PLAYER_IN_AREA_ON_FOOT_3D player -670.5 3.9 18.0 -660.0 12.7 22.0 FALSE
+									flag_player_on_mission = 1 // SCFIX
 									SET_PLAYER_CONTROL Player Off
 									SET_FIXED_CAMERA_POSITION -678.15 -6.46 24.49 0.0 0.0 0.0
 									POINT_CAMERA_AT_POINT -677.39 -5.92 24.11 JUMP_CUT
@@ -6994,6 +7261,7 @@ sub_save_loop_inner:
 									
 								IF IS_PLAYER_PLAYING Player
 									SET_PLAYER_CONTROL Player on
+									flag_player_on_mission = 0 // SCFIX
 								ENDIF
 										
 							ENDIF

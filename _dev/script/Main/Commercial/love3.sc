@@ -214,9 +214,9 @@ PRINT_NOW LOVE3_1 5000 1
 
 START_DRUG_DROP_OFF
 
-IF flag_player_on_mission = 0  						   // IMPOSSIBLE IF STATEMENT
+GOTO love3_fool_compiler  							   // IMPOSSIBLE IF STATEMENT // SCFIX: remove flag_player_on_mission = 0 check because this IF statement is not so impossible
 	ADD_BLIP_FOR_COORD PlaneX PlaneY PlaneZ plane_blip // JUST SO I CAN REMOVE THE 
-ENDIF												   // BLIP BEFORE ADDING IT
+love3_fool_compiler:								   // BLIP BEFORE ADDING IT // SCFIX: remove flag_player_on_mission = 0
 
 WAIT 1000
 

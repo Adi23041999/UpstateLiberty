@@ -246,7 +246,7 @@ IF flag_takeoff_hj = 1
 	REGISTER_JUMP_SPINS total_rotation_int
 ENDIF
 
-IF height_float_hj > 4.0	   	//4 METERS HIGH
+IF height_int_hj > 4	   	//4 METERS HIGH  // SCFIX: was height_float_hj > 4.0
 	++ stunt_flags_hj
 ENDIF
 

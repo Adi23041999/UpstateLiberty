@@ -251,7 +251,7 @@ counter_joint_placing = 0
 ADD_BLIP_FOR_COORD start_x start_y -100.0 blip_start_yd1
 
 flag_leader = 0
-flag_random_yd1 = 0
+//flag_random_yd1 = 0  // SCFIX: initialized later in GENERATE ROUTE FLAG
 
 REQUEST_MODEL PED_MALE2
 REQUEST_MODEL CAR_PATRIOT
@@ -418,6 +418,8 @@ SET_PED_DENSITY_MULTIPLIER 1.0
 
 //----------------GENERATE ROUTE FLAG--------------------------------------------
 
+// SCFIX: START
+/*
 GENERATE_RANDOM_INT random_yd1
 
 IF random_yd1 > 21845
@@ -428,6 +430,11 @@ ENDIF
 IF random_yd1 > 43690
 	flag_random_yd1 = 2
 ENDIF
+*/
+
+GENERATE_RANDOM_INT_IN_RANGE 0 3 flag_random_yd1
+
+// SCFIX: END
 
 //-----------TURN OFF TUNNEL NODES-------------------------
 

@@ -16,6 +16,7 @@ SCRIPT_NAME eight
 GOSUB mission_start_eightball
 
 IF HAS_DEATHARREST_BEEN_EXECUTED
+	flag_player_on_mission = 1 // SCFIX: engine already set it to 0 during deatharrest but the script still has to wait until player respawns, so set this back to 1
 	GOSUB mission_eightball_failed
 ENDIF
 
@@ -2138,13 +2139,13 @@ SET_PLAYER_COORDINATES player 896.6 -426.2 13.9
 
 SET_PLAYER_HEADING player 270.0
 
-TIMERA = 0
+/*TIMERA = 0 // SCFIX: remove pointless timer
 
 WHILE TIMERA < 3500
 
 	WAIT 0
 
-ENDWHILE
+ENDWHILE*/
 
 DO_FADE 1500 FADE_IN
 
@@ -2807,8 +2808,6 @@ mission_eightball_failed:
 
 PRINT_BIG ( M_FAIL ) 5000 1 //"Mission Failed!"
 
-flag_eightball_mission_launched = 0
-
 IF flag_reached_hideout = 0
 	RESTART_CRITICAL_MISSION 811.90 -939.95 35.8 180.0 // New bridge restart	
 ELSE
@@ -2817,11 +2816,19 @@ ENDIF
 
 MISSION_HAS_FINISHED	//	marks models as no longer needed so that they can be deleted before the player is teleported
 
+SET_PLAYER_CONTROL player OFF // SCFIX
+
+SET_DEATHARREST_STATE OFF // SCFIX: this is mostly paranoid because of WAIT
+
 WHILE NOT IS_PLAYER_PLAYING player
 
 	WAIT 0
     		
 ENDWHILE
+
+SET_DEATHARREST_STATE ON // SCFIX: this is mostly paranoid because of WAIT
+
+flag_eightball_mission_launched = 0 // SCFIX: moved after WHILE, although this thing is probably useless anyway
 
 RETURN
 

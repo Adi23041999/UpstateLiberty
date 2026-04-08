@@ -5,6 +5,7 @@
 !/_dev/*
 !/_dev/**/*
 _dev/script/gta3sc/
+!_dev/script/gta3sc/config/gta3/commands
 _dev/code/**/*
 !_dev/code/*
 !_dev/code/source/*
@@ -23,6 +24,10 @@ UL.7z
 !/data/maps/UL
 !/data/maps/UL/*
 !/data/maps/UL/**/*
+
+!/models/
+!/models/txd.img
+!/models/txd.dir
 
 txd
 col

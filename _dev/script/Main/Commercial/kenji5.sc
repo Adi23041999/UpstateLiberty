@@ -1609,6 +1609,7 @@ ELSE
 	reward_kills = dead_peds - minimum_kills
 	reward_kills = reward_kills * 1000
 	PRINT_WITH_2_NUMBERS_NOW KM5_5 dead_peds reward_kills 3000 1 // "Congratulations you killed ~1~ Yardies."
+	ADD_SCORE Player reward_kills // SCFIX
 ENDIF	
 CLEAR_WANTED_LEVEL player
 REGISTER_MISSION_PASSED	KM5

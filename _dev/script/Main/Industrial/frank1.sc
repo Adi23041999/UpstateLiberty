@@ -847,10 +847,10 @@ WHILE NOT IS_CHAR_IN_CAR maria frankies_limo
 
 ENDWHILE
 
-IF flag_player_on_mission = 0
+GOTO frank1_fool_compiler // SCFIX: remove flag_player_on_mission = 0
 	ADD_BLIP_FOR_CAR frankies_limo fm1_blip
 	ADD_BLIP_FOR_CHAR maria maria_blip
-ENDIF
+frank1_fool_compiler: // SCFIX: remove flag_player_on_mission = 0
 
 SET_PLAYER_CONTROL player ON
 SET_EVERYONE_IGNORE_PLAYER player FALSE
@@ -2509,7 +2509,7 @@ ENDIF
 IF flag_luigi_mission5_terminated = 1
 	START_NEW_SCRIPT luigi_mission5_loop
 	REMOVE_BLIP	luigi_contact_blip
-	ADD_SPRITE_BLIP_FOR_CONTACT_POINT 886.2 -417.1 -100.0 RADAR_SPRITE_LUIGI luigi_contact_blip
+	ADD_SPRITE_BLIP_FOR_CONTACT_POINT 892.8 -425.8 13.9 RADAR_SPRITE_LUIGI luigi_contact_blip // SCFIX: fix coordinates
 ENDIF
 IF flag_joey_mission5_terminated = 1
 	START_NEW_SCRIPT joey_mission5_loop

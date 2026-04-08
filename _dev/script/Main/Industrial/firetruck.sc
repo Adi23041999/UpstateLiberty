@@ -36,6 +36,12 @@ mission_start_fire:
 flag_player_on_mission = 1
 flag_player_on_fire_mission = 1
 
+// SCFIX: START
+IF flag_asuka_mission1_passed = 1
+	SET_GANG_WEAPONS GANG_MAFIA WEAPONTYPE_PISTOL WEAPONTYPE_UZI //The Mafia
+ENDIF
+// SCFIX: END
+
 SCRIPT_NAME firetru
 
 WAIT 0
@@ -598,6 +604,11 @@ GOTO next_fire
 /////////////////////////////////////////////////
 failed://////////////////////////////////////////
 /////////////////////////////////////////////////
+// SCFIX: START
+IF flag_asuka_mission1_passed = 1
+	SET_GANG_WEAPONS GANG_MAFIA WEAPONTYPE_PISTOL WEAPONTYPE_SHOTGUN //The Mafia
+ENDIF
+// SCFIX: END
 
 CLEAR_ONSCREEN_TIMER fire_time_limit
 CLEAR_ONSCREEN_COUNTER fires_extinguished

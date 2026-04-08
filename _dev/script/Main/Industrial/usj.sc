@@ -61,6 +61,12 @@ ENDIF
 IF NOT IS_PLAYER_IN_ANY_CAR player
 	GOTO mission_start_usj
 ENDIF
+
+// SCFIX: START
+IF IS_PLAYER_IN_MODEL player PLANE_DODO
+	GOTO mission_start_usj
+ENDIF
+// SCFIX: END
 	
 STORE_CAR_PLAYER_IS_IN_NO_SAVE player players_car_usj
 

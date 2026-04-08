@@ -253,7 +253,7 @@ OR NOT IS_ICECREAM_JINGLE_ON icecreamvan_any
 		
 		IF IS_PLAYER_IN_CAR player icecreamvan_any
 			IF flag_car_blip_displayed_dm2 = TRUE
-				ADD_BLIP_FOR_COORD 1219.7 -1137.2 -100.0 blip2_diablo2
+				ADD_BLIP_FOR_COORD 1213.15 -1126.0 -100.0 blip2_diablo2 // SCFIX: was 1219.7 -1137.2
 				blob_flag = 1
 				REMOVE_BLIP blip1_icecream1
 				flag_car_blip_displayed_dm2 = FALSE

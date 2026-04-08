@@ -43,6 +43,7 @@ VAR_FLOAT ped_coord_x ped_coord_y	ped_coord_z	sound_x sound_y sound_z
 VAR_FLOAT difference_x_float_a difference_y_float_a	sum_difference_a_xy	
 VAR_FLOAT players_distance_from_ped peds_distance_from_hospital ped_time_limit_float random_ped_heading	time_chunk_divider
 
+VAR_INT hospital_sphere hospital_sphere_flag // SCFIX
 
 // ****************************************Mission Start************************************
 
@@ -52,6 +53,12 @@ flag_player_on_mission = 1
 flag_player_on_ambulance_mission = 1
 
 WAIT 0
+
+// SCFIX: START
+IF flag_asuka_mission1_passed = 1
+	SET_GANG_WEAPONS GANG_MAFIA WEAPONTYPE_PISTOL WEAPONTYPE_UZI //The Mafia
+ENDIF
+// SCFIX: END
 
 SCRIPT_NAME ambulan
 
@@ -96,6 +103,7 @@ mission_end_button_ambulance = 0
 car_full_flag = 0
 saved_peds_this_go = 0
 paramedic_location = 0
+hospital_sphere_flag = 0 // SCFIX
 
 PRINT_NOW ATUTOR2 3000 1 // Take the injured people to the Hospital
 
@@ -154,9 +162,10 @@ time_chunk /= 2
 
 DISPLAY_ONSCREEN_TIMER ped_time_limit
 
-IF flag_player_on_mission = 0
+GOTO ambulance_fool_compiler // SCFIX: remove flag_player_on_mission = 0 check
 	ADD_BLIP_FOR_COORD hospital_x hospital_y hospital_z hospital_blip
-ENDIF
+	ADD_SPHERE hospital_x hospital_y hospital_z 6.0 hospital_sphere
+ambulance_fool_compiler: // SCFIX: remove flag_player_on_mission = 0 check
 
 GOTO ambulance_loop
 
@@ -589,6 +598,36 @@ AND ped_coord_y	< -558.2 //MAX_Y
 	GOTO generate_random_coord
 ENDIF
 
+// SCFIX: START
+IF ped_coord_x 	> 372.4  //MIN_X // COVERED AREA IN STAUTON 1
+AND ped_coord_x	< 426.9  //MAX_X
+AND ped_coord_y	> -140.8 //MIN_Y
+AND ped_coord_y	< -113.5 //MAX_Y
+	GOTO generate_random_coord
+ENDIF
+
+IF ped_coord_x 	> 403.1  //MIN_X // COVERED AREA IN STAUTON 2
+AND ped_coord_x	< 441.4  //MAX_X
+AND ped_coord_y	> -151.0 //MIN_Y
+AND ped_coord_y	< -136.6 //MAX_Y
+	GOTO generate_random_coord
+ENDIF
+
+IF ped_coord_x 	> 441.7  //MIN_X // COVERED AREA IN STAUTON 3
+AND ped_coord_x	< 446.4  //MAX_X
+AND ped_coord_y	> -178.0 //MIN_Y
+AND ped_coord_y	< -137.0 //MAX_Y
+	GOTO generate_random_coord
+ENDIF
+
+IF ped_coord_x 	> 441.8  //MIN_X // COVERED AREA IN STAUTON 4
+AND ped_coord_x	< 446.3  //MAX_X
+AND ped_coord_y	> -360.0 //MIN_Y
+AND ped_coord_y	< -208.7 //MAX_Y
+	GOTO generate_random_coord
+ENDIF
+// SCFIX: END
+
 IF paramedic_location = 1
 	IF NOT ped_coord_x 	> 778.0 //MIN_X // INDUSTRIAL
 	OR NOT ped_coord_x	< 1540.0 //MAX_X
@@ -871,6 +910,7 @@ IF injured_ped_1_flag > 0
 
 	IF injured_ped_1_flag = 1
 		IF LOCATE_PLAYER_IN_CAR_CHAR_3D player injured_ped_1 10.0 10.0 2.0 0
+		AND IS_CAR_STOPPED players_ambulance // SCFIX
 			GOSUB chunk2_ambulance
 			IF car_full_flag = 0
 				SET_CHAR_OBJ_ENTER_CAR_AS_PASSENGER injured_ped_1 players_ambulance
@@ -894,7 +934,7 @@ IF injured_ped_1_flag > 0
 	ENDIF
 
 	IF injured_ped_1_flag = 3
-		IF LOCATE_STOPPED_PLAYER_IN_CAR_3D player hospital_x hospital_y hospital_z 6.0 6.0 2.0 1
+		IF LOCATE_STOPPED_PLAYER_IN_CAR_3D player hospital_x hospital_y hospital_z 6.0 6.0 2.0 0 // SCFIX: last arg was 1
 			SET_CHAR_OBJ_LEAVE_CAR injured_ped_1 players_ambulance
 			injured_ped_1_flag = 4
 		ENDIF	
@@ -937,6 +977,7 @@ IF injured_ped_2_flag > 0
 
 	IF injured_ped_2_flag = 1
 		IF LOCATE_PLAYER_IN_CAR_CHAR_3D player injured_ped_2 10.0 10.0 2.0 0
+		AND IS_CAR_STOPPED players_ambulance // SCFIX
 			GOSUB chunk2_ambulance
 			IF car_full_flag = 0
 				SET_CHAR_OBJ_ENTER_CAR_AS_PASSENGER injured_ped_2 players_ambulance
@@ -960,7 +1001,7 @@ IF injured_ped_2_flag > 0
 	ENDIF
 
 	IF injured_ped_2_flag = 3
-		IF LOCATE_STOPPED_PLAYER_IN_CAR_3D player hospital_x hospital_y hospital_z 6.0 6.0 2.0 1
+		IF LOCATE_STOPPED_PLAYER_IN_CAR_3D player hospital_x hospital_y hospital_z 6.0 6.0 2.0 0 // SCFIX: last arg was 1
 			SET_CHAR_OBJ_LEAVE_CAR injured_ped_2 players_ambulance
 			injured_ped_2_flag = 4
 		ENDIF	
@@ -1003,6 +1044,7 @@ IF injured_ped_3_flag > 0
 
 	IF injured_ped_3_flag = 1
 		IF LOCATE_PLAYER_IN_CAR_CHAR_3D player injured_ped_3 10.0 10.0 2.0 0
+		AND IS_CAR_STOPPED players_ambulance // SCFIX
 			GOSUB chunk2_ambulance
 			IF car_full_flag = 0
 				SET_CHAR_OBJ_ENTER_CAR_AS_PASSENGER injured_ped_3 players_ambulance
@@ -1026,7 +1068,7 @@ IF injured_ped_3_flag > 0
 	ENDIF
 
 	IF injured_ped_3_flag = 3
-		IF LOCATE_STOPPED_PLAYER_IN_CAR_3D player hospital_x hospital_y hospital_z 6.0 6.0 2.0 1
+		IF LOCATE_STOPPED_PLAYER_IN_CAR_3D player hospital_x hospital_y hospital_z 6.0 6.0 2.0 0 // SCFIX: last arg was 1
 			SET_CHAR_OBJ_LEAVE_CAR injured_ped_3 players_ambulance
 			injured_ped_3_flag = 4
 		ENDIF	
@@ -1069,6 +1111,7 @@ IF injured_ped_4_flag > 0
 
 	IF injured_ped_4_flag = 1
 		IF LOCATE_PLAYER_IN_CAR_CHAR_3D player injured_ped_4 10.0 10.0 2.0 0
+		AND IS_CAR_STOPPED players_ambulance // SCFIX
 			GOSUB chunk2_ambulance
 			IF car_full_flag = 0
 				SET_CHAR_OBJ_ENTER_CAR_AS_PASSENGER injured_ped_4 players_ambulance
@@ -1092,7 +1135,7 @@ IF injured_ped_4_flag > 0
 	ENDIF
 
 	IF injured_ped_4_flag = 3
-		IF LOCATE_STOPPED_PLAYER_IN_CAR_3D player hospital_x hospital_y hospital_z 6.0 6.0 2.0 1
+		IF LOCATE_STOPPED_PLAYER_IN_CAR_3D player hospital_x hospital_y hospital_z 6.0 6.0 2.0 0 // SCFIX: last arg was 1
 			SET_CHAR_OBJ_LEAVE_CAR injured_ped_4 players_ambulance
 			injured_ped_4_flag = 4
 		ENDIF	
@@ -1135,6 +1178,7 @@ IF injured_ped_5_flag > 0
 
 	IF injured_ped_5_flag = 1
 		IF LOCATE_PLAYER_IN_CAR_CHAR_3D player injured_ped_5 10.0 10.0 2.0 0
+		AND IS_CAR_STOPPED players_ambulance // SCFIX
 			GOSUB chunk2_ambulance
 			IF car_full_flag = 0
 				SET_CHAR_OBJ_ENTER_CAR_AS_PASSENGER injured_ped_5 players_ambulance
@@ -1158,7 +1202,7 @@ IF injured_ped_5_flag > 0
 	ENDIF
 
 	IF injured_ped_5_flag = 3
-		IF LOCATE_STOPPED_PLAYER_IN_CAR_3D player hospital_x hospital_y hospital_z 6.0 6.0 2.0 1
+		IF LOCATE_STOPPED_PLAYER_IN_CAR_3D player hospital_x hospital_y hospital_z 6.0 6.0 2.0 0 // SCFIX: last arg was 1
 			SET_CHAR_OBJ_LEAVE_CAR injured_ped_5 players_ambulance
 			injured_ped_5_flag = 4
 		ENDIF	
@@ -1201,6 +1245,7 @@ IF injured_ped_6_flag > 0
 
 	IF injured_ped_6_flag = 1
 		IF LOCATE_PLAYER_IN_CAR_CHAR_3D player injured_ped_6 10.0 10.0 2.0 0
+		AND IS_CAR_STOPPED players_ambulance // SCFIX
 			GOSUB chunk2_ambulance
 			IF car_full_flag = 0
 				SET_CHAR_OBJ_ENTER_CAR_AS_PASSENGER injured_ped_6 players_ambulance
@@ -1224,7 +1269,7 @@ IF injured_ped_6_flag > 0
 	ENDIF
 
 	IF injured_ped_6_flag = 3
-		IF LOCATE_STOPPED_PLAYER_IN_CAR_3D player hospital_x hospital_y hospital_z 6.0 6.0 2.0 1
+		IF LOCATE_STOPPED_PLAYER_IN_CAR_3D player hospital_x hospital_y hospital_z 6.0 6.0 2.0 0 // SCFIX: last arg was 1
 			SET_CHAR_OBJ_LEAVE_CAR injured_ped_6 players_ambulance
 			injured_ped_6_flag = 4
 		ENDIF	
@@ -1267,6 +1312,7 @@ IF injured_ped_7_flag > 0
 
 	IF injured_ped_7_flag = 1
 		IF LOCATE_PLAYER_IN_CAR_CHAR_3D player injured_ped_7 10.0 10.0 2.0 0
+		AND IS_CAR_STOPPED players_ambulance // SCFIX
 			GOSUB chunk2_ambulance
 			IF car_full_flag = 0
 				SET_CHAR_OBJ_ENTER_CAR_AS_PASSENGER injured_ped_7 players_ambulance
@@ -1290,7 +1336,7 @@ IF injured_ped_7_flag > 0
 	ENDIF
 
 	IF injured_ped_7_flag = 3
-		IF LOCATE_STOPPED_PLAYER_IN_CAR_3D player hospital_x hospital_y hospital_z 6.0 6.0 2.0 1
+		IF LOCATE_STOPPED_PLAYER_IN_CAR_3D player hospital_x hospital_y hospital_z 6.0 6.0 2.0 0 // SCFIX: last arg was 1
 			SET_CHAR_OBJ_LEAVE_CAR injured_ped_7 players_ambulance
 			injured_ped_7_flag = 4
 		ENDIF	
@@ -1333,6 +1379,7 @@ IF injured_ped_8_flag > 0
 
 	IF injured_ped_8_flag = 1
 		IF LOCATE_PLAYER_IN_CAR_CHAR_3D player injured_ped_8 10.0 10.0 2.0 0
+		AND IS_CAR_STOPPED players_ambulance // SCFIX
 			GOSUB chunk2_ambulance
 			IF car_full_flag = 0
 				SET_CHAR_OBJ_ENTER_CAR_AS_PASSENGER injured_ped_8 players_ambulance
@@ -1356,7 +1403,7 @@ IF injured_ped_8_flag > 0
 	ENDIF
 
 	IF injured_ped_8_flag = 3
-		IF LOCATE_STOPPED_PLAYER_IN_CAR_3D player hospital_x hospital_y hospital_z 6.0 6.0 2.0 1
+		IF LOCATE_STOPPED_PLAYER_IN_CAR_3D player hospital_x hospital_y hospital_z 6.0 6.0 2.0 0 // SCFIX: last arg was 1
 			SET_CHAR_OBJ_LEAVE_CAR injured_ped_8 players_ambulance
 			injured_ped_8_flag = 4
 		ENDIF	
@@ -1399,6 +1446,7 @@ IF injured_ped_9_flag > 0
 
 	IF injured_ped_9_flag = 1
 		IF LOCATE_PLAYER_IN_CAR_CHAR_3D player injured_ped_9 10.0 10.0 2.0 0
+		AND IS_CAR_STOPPED players_ambulance // SCFIX
 			GOSUB chunk2_ambulance
 			IF car_full_flag = 0
 				SET_CHAR_OBJ_ENTER_CAR_AS_PASSENGER injured_ped_9 players_ambulance
@@ -1422,7 +1470,7 @@ IF injured_ped_9_flag > 0
 	ENDIF
 
 	IF injured_ped_9_flag = 3
-		IF LOCATE_STOPPED_PLAYER_IN_CAR_3D player hospital_x hospital_y hospital_z 6.0 6.0 2.0 1
+		IF LOCATE_STOPPED_PLAYER_IN_CAR_3D player hospital_x hospital_y hospital_z 6.0 6.0 2.0 0 // SCFIX: last arg was 1
 			SET_CHAR_OBJ_LEAVE_CAR injured_ped_9 players_ambulance
 			injured_ped_9_flag = 4
 		ENDIF	
@@ -1465,6 +1513,7 @@ IF injured_ped_10_flag > 0
 
 	IF injured_ped_10_flag = 1
 		IF LOCATE_PLAYER_IN_CAR_CHAR_3D player injured_ped_10 10.0 10.0 2.0 0
+		AND IS_CAR_STOPPED players_ambulance // SCFIX
 			GOSUB chunk2_ambulance
 			IF car_full_flag = 0
 				SET_CHAR_OBJ_ENTER_CAR_AS_PASSENGER injured_ped_10 players_ambulance
@@ -1488,7 +1537,7 @@ IF injured_ped_10_flag > 0
 	ENDIF
 
 	IF injured_ped_10_flag = 3
-		IF LOCATE_STOPPED_PLAYER_IN_CAR_3D player hospital_x hospital_y hospital_z 6.0 6.0 2.0 1
+		IF LOCATE_STOPPED_PLAYER_IN_CAR_3D player hospital_x hospital_y hospital_z 6.0 6.0 2.0 0 // SCFIX: last arg was 1
 			SET_CHAR_OBJ_LEAVE_CAR injured_ped_10 players_ambulance
 			injured_ped_10_flag = 4
 		ENDIF	
@@ -1531,6 +1580,7 @@ IF injured_ped_11_flag > 0
 
 	IF injured_ped_11_flag = 1
 		IF LOCATE_PLAYER_IN_CAR_CHAR_3D player injured_ped_11 10.0 10.0 2.0 0
+		AND IS_CAR_STOPPED players_ambulance // SCFIX
 			GOSUB chunk2_ambulance
 			IF car_full_flag = 0
 				SET_CHAR_OBJ_ENTER_CAR_AS_PASSENGER injured_ped_11 players_ambulance
@@ -1554,7 +1604,7 @@ IF injured_ped_11_flag > 0
 	ENDIF
 
 	IF injured_ped_11_flag = 3
-		IF LOCATE_STOPPED_PLAYER_IN_CAR_3D player hospital_x hospital_y hospital_z 6.0 6.0 2.0 1
+		IF LOCATE_STOPPED_PLAYER_IN_CAR_3D player hospital_x hospital_y hospital_z 6.0 6.0 2.0 0 // SCFIX: last arg was 1
 			SET_CHAR_OBJ_LEAVE_CAR injured_ped_11 players_ambulance
 			injured_ped_11_flag = 4
 		ENDIF	
@@ -1597,6 +1647,7 @@ IF injured_ped_12_flag > 0
 
 	IF injured_ped_12_flag = 1
 		IF LOCATE_PLAYER_IN_CAR_CHAR_3D player injured_ped_12 10.0 10.0 2.0 0
+		AND IS_CAR_STOPPED players_ambulance // SCFIX
 			GOSUB chunk2_ambulance
 			IF car_full_flag = 0
 				SET_CHAR_OBJ_ENTER_CAR_AS_PASSENGER injured_ped_12 players_ambulance
@@ -1620,7 +1671,7 @@ IF injured_ped_12_flag > 0
 	ENDIF
 
 	IF injured_ped_12_flag = 3
-		IF LOCATE_STOPPED_PLAYER_IN_CAR_3D player hospital_x hospital_y hospital_z 6.0 6.0 2.0 1
+		IF LOCATE_STOPPED_PLAYER_IN_CAR_3D player hospital_x hospital_y hospital_z 6.0 6.0 2.0 0 // SCFIX: last arg was 1
 			SET_CHAR_OBJ_LEAVE_CAR injured_ped_12 players_ambulance
 			injured_ped_12_flag = 4
 		ENDIF	
@@ -1663,6 +1714,7 @@ ENDIF
 //
 //	IF injured_ped_13_flag = 1
 //		IF LOCATE_PLAYER_IN_CAR_CHAR_3D player injured_ped_13 10.0 10.0 2.0 0
+//		AND IS_CAR_STOPPED players_ambulance // SCFIX
 //			GOSUB chunk2_ambulance
 //			IF car_full_flag = 0
 //				SET_CHAR_OBJ_ENTER_CAR_AS_PASSENGER injured_ped_13 players_ambulance
@@ -1686,7 +1738,7 @@ ENDIF
 //	ENDIF
 //
 //	IF injured_ped_13_flag = 3
-//		IF LOCATE_STOPPED_PLAYER_IN_CAR_3D player hospital_x hospital_y hospital_z 6.0 6.0 2.0 1
+//		IF LOCATE_STOPPED_PLAYER_IN_CAR_3D player hospital_x hospital_y hospital_z 6.0 6.0 2.0 0 // SCFIX: last arg was 1
 //			SET_CHAR_OBJ_LEAVE_CAR injured_ped_13 players_ambulance
 //			injured_ped_13_flag = 4
 //		ENDIF	
@@ -1729,6 +1781,7 @@ ENDIF
 //
 //	IF injured_ped_14_flag = 1
 //		IF LOCATE_PLAYER_IN_CAR_CHAR_3D player injured_ped_14 10.0 10.0 2.0 0
+//		AND IS_CAR_STOPPED players_ambulance // SCFIX
 //			GOSUB chunk2_ambulance
 //			IF car_full_flag = 0
 //				SET_CHAR_OBJ_ENTER_CAR_AS_PASSENGER injured_ped_14 players_ambulance
@@ -1752,7 +1805,7 @@ ENDIF
 //	ENDIF
 //
 //	IF injured_ped_14_flag = 3
-//		IF LOCATE_STOPPED_PLAYER_IN_CAR_3D player hospital_x hospital_y hospital_z 6.0 6.0 2.0 1
+//		IF LOCATE_STOPPED_PLAYER_IN_CAR_3D player hospital_x hospital_y hospital_z 6.0 6.0 2.0 0 // SCFIX: last arg was 1
 //			SET_CHAR_OBJ_LEAVE_CAR injured_ped_14 players_ambulance
 //			injured_ped_14_flag = 4
 //		ENDIF	
@@ -1795,6 +1848,7 @@ ENDIF
 //
 //	IF injured_ped_15_flag = 1
 //		IF LOCATE_PLAYER_IN_CAR_CHAR_3D player injured_ped_15 10.0 10.0 2.0 0
+//		AND IS_CAR_STOPPED players_ambulance // SCFIX
 //			GOSUB chunk2_ambulance
 //			IF car_full_flag = 0
 //				SET_CHAR_OBJ_ENTER_CAR_AS_PASSENGER injured_ped_15 players_ambulance
@@ -1818,7 +1872,7 @@ ENDIF
 //	ENDIF
 //
 //	IF injured_ped_15_flag = 3
-//		IF LOCATE_STOPPED_PLAYER_IN_CAR_3D player hospital_x hospital_y hospital_z 6.0 6.0 2.0 1
+//		IF LOCATE_STOPPED_PLAYER_IN_CAR_3D player hospital_x hospital_y hospital_z 6.0 6.0 2.0 0 // SCFIX: last arg was 1
 //			SET_CHAR_OBJ_LEAVE_CAR injured_ped_15 players_ambulance
 //			injured_ped_15_flag = 4
 //		ENDIF	
@@ -1860,6 +1914,12 @@ IF saved_peds = number_of_injured_peds
 	saved_peds = 0
 	ped_counter = 0
 	ADD_SCORE player score_am
+	// SCFIX: START
+	IF hospital_sphere_flag = 1
+		REMOVE_SPHERE hospital_sphere
+	ENDIF
+	hospital_sphere_flag = 0
+	// SCFIX: END
 	hospital_blip_flag = 0
 	REMOVE_BLIP hospital_blip
 	REMOVE_BLIP injured_ped_1_blip
@@ -1895,12 +1955,24 @@ GOTO ambulance_loop
 
 
 ambulance_failed:
-
+// SCFIX: START
+IF flag_asuka_mission1_passed = 1
+	SET_GANG_WEAPONS GANG_MAFIA WEAPONTYPE_PISTOL WEAPONTYPE_SHOTGUN //The Mafia
+ENDIF
+// SCFIX: END
 CLEAR_ONSCREEN_TIMER ped_time_limit
 CLEAR_HELP
+IF ambulance_level < 13 // SCFIX
 PRINT_BIG A_FAIL1 5000 5
+ENDIF // SCFIX
 PRINT_WITH_NUMBER_BIG A_SAVES saved_peds_this_go 6000 6//PEOPLE SAVED: ~1~
 
+// SCFIX: START
+IF hospital_sphere_flag = 1
+	REMOVE_SPHERE hospital_sphere
+ENDIF
+hospital_sphere_flag = 0
+// SCFIX: END
 hospital_blip_flag = 0
 REMOVE_BLIP hospital_blip
 REMOVE_BLIP injured_ped_1_blip
@@ -1986,6 +2058,12 @@ IF hospital_blip_flag = 0
 	ADD_BLIP_FOR_COORD hospital_x hospital_y hospital_z hospital_blip
 	hospital_blip_flag = 1
 ENDIF
+// SCFIX: START
+IF hospital_sphere_flag = 0
+	ADD_SPHERE hospital_x hospital_y hospital_z 6.0 hospital_sphere
+	hospital_sphere_flag = 1
+ENDIF
+// SCFIX: END
 time_chunk_in_secs = time_chunk / 1000
 PRINT_WITH_NUMBER_BIG A_TIME time_chunk_in_secs 6000 6	//+~1~ Seconds
 ped_time_limit += time_chunk
@@ -1998,10 +2076,19 @@ RETURN
 chunk4_ambulance:
 
 PRINT_BIG A_PASS 3000 5
+STORE_CAR_PLAYER_IS_IN player players_ambulance // SCFIX: moved up
+// SCFIX: START
+GET_NUMBER_OF_PASSENGERS players_ambulance peds_in_car
+IF peds_in_car = 0
+	REMOVE_SPHERE hospital_sphere
+	hospital_sphere_flag = 0
+	REMOVE_BLIP hospital_blip
+	hospital_blip_flag = 0
+ENDIF
+// SCFIX: END
 IF bonus_time_flag = 1
 	time_chunk_in_secs = time_chunk / 1000
 	PRINT_WITH_NUMBER_BIG A_TIME time_chunk_in_secs 6000 6	//+~1~ Seconds
-	STORE_CAR_PLAYER_IS_IN player players_ambulance
 	GET_CAR_HEALTH players_ambulance players_ambulance_health
 	players_ambulance_health += 110
 	SET_CAR_HEALTH players_ambulance players_ambulance_health

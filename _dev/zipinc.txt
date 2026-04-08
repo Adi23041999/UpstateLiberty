@@ -10,6 +10,8 @@ data/map.zon
 data/waterpro.dat
 data/object.dat
 data/modelTraits.dat
+models/txd.img
+models/txd.dir
 CLEO/ul*
 CLEO/CLEO_TEXT/ul*
 scripts/III.OpenLimitAdjuster.asi

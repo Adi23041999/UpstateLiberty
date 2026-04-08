@@ -307,6 +307,7 @@ SET_CAR_DRIVING_STYLE ambulance_rc5 0
 SET_CAR_ONLY_DAMAGED_BY_PLAYER ambulance_rc5 true
 //SWITCH_CAR_SIREN ambulance_rc5 ON
 GET_CAR_HEALTH ambulance_rc5 ambulance_health
+/* SCFIX: remove this
 GENERATE_RANDOM_INT random_ray5
 
 IF random_ray5 < 21846
@@ -323,6 +324,20 @@ IF random_ray5 > 43690
 	CAR_GOTO_COORDINATES ambulance_rc5 -13.2 -804.7 26.5
 	flag_random_ray5 = 2
 ENDIF
+*/
+
+// SCFIX: START - use ranged random so that the third path would be reachable
+GENERATE_RANDOM_INT_IN_RANGE 0 3 flag_random_ray5
+IF flag_random_ray5 = 0
+	CAR_GOTO_COORDINATES ambulance_rc5 -148.93 18.04 26.5
+ELSE
+	IF flag_random_ray5 = 1
+		CAR_GOTO_COORDINATES ambulance_rc5 402.88 -404.88 26.5
+	ELSE
+		CAR_GOTO_COORDINATES ambulance_rc5 -13.2 -804.7 26.5
+	ENDIF
+ENDIF
+// SCFIX: END
 
 
 //-----ambulance travels to one of three way points

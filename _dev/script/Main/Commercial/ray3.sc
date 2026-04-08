@@ -294,9 +294,9 @@ CAR_WANDER_RANDOMLY ia_car_rm3
 ADD_BLIP_FOR_CAR ia_car_rm3 prosecution_car_blip
 LOCK_CAR_DOORS ia_car_rm3 CARLOCK_LOCKED
 
-IF flag_player_on_mission = 0
+GOTO ray3_fool_compiler // SCFIX: remove flag_player_on_mission = 0
 	ADD_BLIP_FOR_CHAR ia_car_driver_1 rays_evidence_blip
-ENDIF
+ray3_fool_compiler: // SCFIX: remove flag_player_on_mission = 0
 
 GET_CAR_COORDINATES ia_car_rm3 car_stuck_x car_stuck_y car_stuck_z
 GET_CAR_COORDINATES ia_car_rm3 ia_car_x ia_car_y ia_car_z

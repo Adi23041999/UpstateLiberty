@@ -1,0 +1,5 @@
+put gta3sc files in gta3sc folder then use compile.bat/compileK.bat to compile scm
+both main and debug ones are compiled and copied to data folder
+note that one command has been modified slighly to fix a compiling bug (SET_GARAGE)
+
+gta3sc: https://github.com/thelink2012/gta3sc

@@ -133,6 +133,17 @@ WAIT 500
 
 IF rampage_01_flag = 0
 	IF HAS_PICKUP_BEEN_COLLECTED rampage_01
+		// SCFIX: START - recreate the pickup if we're already on mission
+		IF flag_player_on_mission = 1
+			IF rampage_01_failed = 0
+				CREATE_PICKUP killfrenzy PICKUP_ONCE 958.0 -431.0 14.5 rampage_01  //OPPOSITE LUIGI'S IN AN ALLEYWAY
+			ELSE
+				CREATE_PICKUP killfrenzy PICKUP_ONCE 987.6 -907.3 15.3 rampage_01  //NEXT TO FUZZBALL
+			ENDIF
+			GOTO rampage_pickup_loop
+		ENDIF
+		// SCFIX: END
+
 		flag_player_on_mission = 1
 		START_KILL_FRENZY PAGE_00 WEAPONTYPE_M16 120000 rampage_01_kills PED_GANG_DIABLO_A PED_GANG_DIABLO_B -1 -1 FALSE // "Murder 20 Diablos in 120 seconds!"
 		REQUEST_MODEL PED_GANG_DIABLO_A
@@ -172,6 +183,17 @@ ENDIF
 
 IF rampage_02_flag = 0
 	IF HAS_PICKUP_BEEN_COLLECTED rampage_02
+		// SCFIX: START - recreate the pickup if we're already on mission
+		IF flag_player_on_mission = 1
+			IF rampage_02_failed = 0
+				CREATE_PICKUP killfrenzy PICKUP_ONCE 1076.9 -859.9 15.2 rampage_02  //BOTTOM OF CALAHAN BRIDGE
+			ELSE
+				CREATE_PICKUP killfrenzy PICKUP_ONCE 982.4 -1009.4 14.9 rampage_02  //EAST OF GREASY JOES
+			ENDIF
+			GOTO rampage_pickup_loop
+		ENDIF
+		// SCFIX: END
+
 		flag_player_on_mission = 1
 		START_KILL_FRENZY PAGE_00 WEAPONTYPE_ROCKET 120000 rampage_02_kills -2 -1 -1 -1 FALSE // "Destroy 20 vehicles in 120 seconds!"
 		PRINT_BIG RAMPAGE 5000 5
@@ -205,6 +227,17 @@ ENDIF
 
 IF rampage_03_flag = 0
 	IF HAS_PICKUP_BEEN_COLLECTED rampage_03
+		// SCFIX: START - recreate the pickup if we're already on mission
+		IF flag_player_on_mission = 1
+			IF rampage_03_failed = 0
+				CREATE_PICKUP killfrenzy PICKUP_ONCE 1312.3 -315.7 42.6 rampage_03  //ST MARKS BEHIND TONI'S		
+			ELSE
+				CREATE_PICKUP killfrenzy PICKUP_ONCE 1209.5 -380.1 25.5 rampage_03  //JUST SOUTH OF TONI'S BEHIND WALL
+			ENDIF
+			GOTO rampage_pickup_loop
+		ENDIF
+		// SCFIX: END
+
 		flag_player_on_mission = 1
 		START_KILL_FRENZY PAGE_00 WEAPONTYPE_CHAINGUN 120000 rampage_03_kills PED_GANG_MAFIA_A PED_GANG_MAFIA_B -1 -1 FALSE // "Kill 20 Mafia in 120 seconds!"
 		REQUEST_MODEL PED_GANG_MAFIA_A
@@ -243,6 +276,17 @@ ENDIF
 
 IF rampage_04_flag = 0
 	IF HAS_PICKUP_BEEN_COLLECTED rampage_04
+		// SCFIX: START - recreate the pickup if we're already on mission
+		IF flag_player_on_mission = 1
+			IF rampage_04_failed = 0
+				CREATE_PICKUP killfrenzy PICKUP_ONCE  883.3 -806.2 15.0 rampage_04  //BEHIND BUILDING CHINATOWN NEAR BRIDGE
+			ELSE
+				CREATE_PICKUP killfrenzy PICKUP_ONCE 1253.9 -572.9 12.5 rampage_04  //SUPASAVE
+			ENDIF
+			GOTO rampage_pickup_loop
+		ENDIF
+		// SCFIX: END
+
 		flag_player_on_mission = 1
 		START_KILL_FRENZY PAGE_00 WEAPONTYPE_UZI 120000 rampage_04_kills PED_GANG_TRIAD_A PED_GANG_TRIAD_B -1 -1 FALSE // "Kill 20 Triads in 120 seconds!"
 		REQUEST_MODEL PED_GANG_TRIAD_A
@@ -281,6 +325,17 @@ ENDIF
 
 IF rampage_05_flag = 0
 	IF HAS_PICKUP_BEEN_COLLECTED rampage_05
+		// SCFIX: START - recreate the pickup if we're already on mission
+		IF flag_player_on_mission = 1
+			IF rampage_05_failed = 0
+				CREATE_PICKUP killfrenzy PICKUP_ONCE 1274.7 -742.7 15.0 rampage_05  //IN ALLEY NEAR DOG FOOD FACTORY
+			ELSE
+				CREATE_PICKUP killfrenzy PICKUP_ONCE 1179.2 -566.0 27.3 rampage_05  //ON TOP OF HOSPITAL ROOF
+			ENDIF
+			GOTO rampage_pickup_loop
+		ENDIF
+		// SCFIX: END
+
 		flag_player_on_mission = 1
 		START_KILL_FRENZY PAGE_00 WEAPONTYPE_SHOTGUN 120000 rampage_05_kills PED_GANG_TRIAD_A PED_GANG_TRIAD_B -1 -1 FALSE // "Kill 20 Triads in 120 seconds!"
 		REQUEST_MODEL PED_GANG_TRIAD_A
@@ -319,6 +374,17 @@ ENDIF
 
 IF rampage_06_flag = 0
 	IF HAS_PICKUP_BEEN_COLLECTED rampage_06
+		// SCFIX: START - recreate the pickup if we're already on mission
+		IF flag_player_on_mission = 1
+			IF rampage_06_failed = 0
+				CREATE_PICKUP killfrenzy PICKUP_ONCE 1195.3 -497.9 39.3 rampage_06  //ON TOP TRAIN TRACKS BY HOSPITAL
+			ELSE
+				CREATE_PICKUP killfrenzy PICKUP_ONCE 1124.6 -816.8 26.5 rampage_06  //ON TOP OF TRAIN TRACKS NEAR FUZZ BALL
+			ENDIF
+			GOTO rampage_pickup_loop
+		ENDIF
+		// SCFIX: END
+
 		flag_player_on_mission = 1
 		START_KILL_FRENZY PAGE_00 WEAPONTYPE_GRENADE 120000 rampage_06_kills -2 -1 -1 -1 FALSE // "Destroy 20 vehicles in 120 seconds!"
 		PRINT_BIG RAMPAGE 5000 5
@@ -351,6 +417,17 @@ ENDIF
 
 IF rampage_07_flag = 0
 	IF HAS_PICKUP_BEEN_COLLECTED rampage_07
+		// SCFIX: START - recreate the pickup if we're already on mission
+		IF flag_player_on_mission = 1
+			IF rampage_07_failed = 0
+				CREATE_PICKUP killfrenzy PICKUP_ONCE  204.1 -1237.4 45.1 rampage_07  //ON ROOF ON AMCO BUILDING COMMERCIAL
+			ELSE
+				CREATE_PICKUP killfrenzy PICKUP_ONCE  440.3 -1391.2 44.2 rampage_07  //ON TOP OF CASINO
+			ENDIF
+			GOTO rampage_pickup_loop
+		ENDIF
+		// SCFIX: END
+
 		flag_player_on_mission = 1
 		START_KILL_FRENZY_HEADSHOT PAGE_00 WEAPONTYPE_SNIPERRIFLE 120000 rampage_07_kills PED_GANG_YARDIE_A PED_GANG_YARDIE_B -1 -1 FALSE // "Pop 20 Yardie heads in 120 seconds!"
 		REQUEST_MODEL PED_GANG_YARDIE_A
@@ -389,6 +466,17 @@ ENDIF
 
 IF rampage_08_flag = 0
 	IF HAS_PICKUP_BEEN_COLLECTED rampage_08
+		// SCFIX: START - recreate the pickup if we're already on mission
+		IF flag_player_on_mission = 1
+			IF rampage_08_failed = 0
+				CREATE_PICKUP killfrenzy PICKUP_ONCE  -22.1 -1526.9 26.1 rampage_08  //CARPARK AREA OPPOSITE LOVES BUILDING
+			ELSE
+				CREATE_PICKUP killfrenzy PICKUP_ONCE  -22.7 -1116.7 26.1 rampage_08  //SOUTH END OF CATHEDRAL
+			ENDIF
+			GOTO rampage_pickup_loop
+		ENDIF
+		// SCFIX: END
+
 		flag_player_on_mission = 1
 		START_KILL_FRENZY PAGE_00 WEAPONTYPE_FLAMETHROWER 120000 rampage_08_kills PED_GANG_YAKUZA_A PED_GANG_YAKUZA_B -1 -1 FALSE // "Burn 20 Yakuza in 120 seconds!"
 		REQUEST_MODEL PED_GANG_YAKUZA_A
@@ -427,6 +515,17 @@ ENDIF
 
 IF rampage_09_flag = 0
 	IF HAS_PICKUP_BEEN_COLLECTED rampage_09
+		// SCFIX: START - recreate the pickup if we're already on mission
+		IF flag_player_on_mission = 1
+			IF rampage_09_failed = 0
+				CREATE_PICKUP killfrenzy PICKUP_ONCE   8.0  -910.0 26.5 rampage_09  //SOUTH WEST CORNER OF PARK
+			ELSE
+				CREATE_PICKUP killfrenzy PICKUP_ONCE 134.2 -552.8 26.0 rampage_09  //NORTH EAST CORNER OF PARK
+			ENDIF
+			GOTO rampage_pickup_loop
+		ENDIF
+		// SCFIX: END
+
 		flag_player_on_mission = 1
 		START_KILL_FRENZY PAGE_00 WEAPONTYPE_SHOTGUN 120000 rampage_09_kills -2 -1 -1 -1 FALSE // "Destroy 20 vehicles in 120 seconds!"
 		PRINT_BIG RAMPAGE 5000 5
@@ -459,6 +558,17 @@ ENDIF
 
 IF rampage_10_flag = 0
 	IF HAS_PICKUP_BEEN_COLLECTED rampage_10
+		// SCFIX: START - recreate the pickup if we're already on mission
+		IF flag_player_on_mission = 1
+			IF rampage_10_failed = 0
+				CREATE_PICKUP killfrenzy PICKUP_ONCE   181.1  -338.2 16.5 rampage_10  //BEHIND UNIVERSITY	SOUTH
+			ELSE
+				CREATE_PICKUP killfrenzy PICKUP_ONCE  434.3 -147.8 20.9 rampage_10  //IN CONTRUCTION YARD NE
+			ENDIF
+			GOTO rampage_pickup_loop
+		ENDIF
+		// SCFIX: END
+
 		flag_player_on_mission = 1
 		START_KILL_FRENZY PAGE_00 WEAPONTYPE_M16 120000 rampage_10_kills -2 -1 -1 -1 FALSE // "Destroy 20 vehicles in 120 seconds!"
 		PRINT_BIG RAMPAGE 5000 5
@@ -491,6 +601,17 @@ ENDIF
 
 IF rampage_11_flag = 0
 	IF HAS_PICKUP_BEEN_COLLECTED rampage_11
+		// SCFIX: START - recreate the pickup if we're already on mission
+		IF flag_player_on_mission = 1
+			IF rampage_11_failed = 0
+				CREATE_PICKUP killfrenzy PICKUP_ONCE   -57.5 -1070.8 26.3 rampage_11  //IN GRAVEYARD BY CATHEDRAL
+			ELSE
+				CREATE_PICKUP killfrenzy PICKUP_ONCE  -101.4 -1386.8 26.3 rampage_11  //BY LIBERTY TREE BUILDING
+			ENDIF
+			GOTO rampage_pickup_loop
+		ENDIF
+		// SCFIX: END
+
 		flag_player_on_mission = 1
 		START_KILL_FRENZY PAGE_00 WEAPONTYPE_ROCKET 120000 rampage_11_kills PED_GANG_YARDIE_A PED_GANG_YARDIE_B -1 -1 FALSE // "Annihialate 20 Yardies in 120 seconds!"
 		REQUEST_MODEL PED_GANG_YARDIE_A
@@ -529,6 +650,17 @@ ENDIF
 
 IF rampage_12_flag = 0
 	IF HAS_PICKUP_BEEN_COLLECTED rampage_12
+		// SCFIX: START - recreate the pickup if we're already on mission
+		IF flag_player_on_mission = 1
+			IF rampage_12_failed = 0
+				CREATE_PICKUP killfrenzy PICKUP_ONCE  392.9  -795.4 31.3 rampage_12  //BETWEEN OVERPASS LANES NEAR ASUKA'S KENDO
+			ELSE
+				CREATE_PICKUP killfrenzy PICKUP_ONCE  374.4  -609.4 26.7 rampage_12  //BEHIND MULTISTOREY
+			ENDIF
+			GOTO rampage_pickup_loop
+		ENDIF
+		// SCFIX: END
+
 		flag_player_on_mission = 1
 		START_KILL_FRENZY PAGE_00 WEAPONTYPE_MOLOTOV 120000 rampage_12_kills PED_GANG_YAKUZA_A PED_GANG_YAKUZA_B -1 -1 FALSE // "Torch 20 Yakuza in 120 seconds!"
 		REQUEST_MODEL PED_GANG_YAKUZA_A
@@ -567,6 +699,17 @@ ENDIF
 
 IF rampage_13_flag = 0
 	IF HAS_PICKUP_BEEN_COLLECTED rampage_13
+		// SCFIX: START - recreate the pickup if we're already on mission
+		IF flag_player_on_mission = 1
+			IF rampage_13_failed = 0
+				CREATE_PICKUP killfrenzy PICKUP_ONCE   -41.6  -451.8 16.6 rampage_13  //BEHIND FIRESTATION
+			ELSE
+				CREATE_PICKUP killfrenzy PICKUP_ONCE  176.8  -360.1 16.2 rampage_13  //ALLEYWAY BETWEEN STADIUM AND PARK
+			ENDIF
+			GOTO rampage_pickup_loop
+		ENDIF
+		// SCFIX: END
+
 		flag_player_on_mission = 1
 		START_KILL_FRENZY PAGE_00 WEAPONTYPE_GRENADE 120000 rampage_13_kills PED_GANG_YARDIE_A PED_GANG_YARDIE_B -1 -1 FALSE // "Explode 20 Yardies in 120 seconds!"
 		REQUEST_MODEL PED_GANG_YARDIE_A
@@ -605,6 +748,17 @@ ENDIF
 
 IF rampage_14_flag = 0
 	IF HAS_PICKUP_BEEN_COLLECTED rampage_14
+		// SCFIX: START - recreate the pickup if we're already on mission
+		IF flag_player_on_mission = 1
+			IF rampage_14_failed = 0
+				CREATE_PICKUP killfrenzy PICKUP_ONCE  -585.4  284.7 64.0 rampage_14  //BEHIND A GARAGE IN THE MANSION AREA SUBURBIA
+			ELSE
+				CREATE_PICKUP killfrenzy PICKUP_ONCE  -1149.2 160.5 58.9 rampage_14  //NORTH PIKE CREEK IN WAREHOUSE COURTYARD
+			ENDIF
+			GOTO rampage_pickup_loop
+		ENDIF
+		// SCFIX: END
+
 		flag_player_on_mission = 1
 		START_KILL_FRENZY PAGE_00 WEAPONTYPE_FLAMETHROWER 120000 rampage_14_kills PED_GANG_COLOMBIAN_A PED_GANG_COLOMBIAN_B -1 -1 FALSE // "Fry 20 Colombians in 120 seconds!"
 		REQUEST_MODEL PED_GANG_COLOMBIAN_A
@@ -643,6 +797,17 @@ ENDIF
 
 IF rampage_15_flag = 0
 	IF HAS_PICKUP_BEEN_COLLECTED rampage_15
+		// SCFIX: START - recreate the pickup if we're already on mission
+		IF flag_player_on_mission = 1
+			IF rampage_15_failed = 0
+				CREATE_PICKUP killfrenzy PICKUP_ONCE  -560.3  -23.6  9.3 rampage_15  //ONTOP OF A GARAGE IN THE PROJECTS AREA UNDER OVERPASS
+			ELSE
+				CREATE_PICKUP killfrenzy PICKUP_ONCE  -632.1 -413.8 18.0 rampage_15  //BEHIND BILLBOARD NEAR AIRPORT
+			ENDIF
+			GOTO rampage_pickup_loop
+		ENDIF
+		// SCFIX: END
+
 		flag_player_on_mission = 1
 		START_KILL_FRENZY PAGE_00 WEAPONTYPE_SHOTGUN 120000 rampage_15_kills PED_GANG_HOOD_A PED_GANG_HOOD_B -1 -1 FALSE // "Splatter 20 Hoods in 120 seconds!"
 		REQUEST_MODEL PED_GANG_HOOD_A
@@ -681,6 +846,17 @@ ENDIF
 
 IF rampage_16_flag = 0
 	IF HAS_PICKUP_BEEN_COLLECTED rampage_16
+		// SCFIX: START - recreate the pickup if we're already on mission
+		IF flag_player_on_mission = 1
+			IF rampage_16_failed = 0
+				CREATE_PICKUP killfrenzy PICKUP_ONCE  -867.0 -145.4 49.8 rampage_16  //ONTOP OF WAREHOUSE PIKE CREEK AIRPORT END
+			ELSE
+				CREATE_PICKUP killfrenzy PICKUP_ONCE  -939.0 -303.3 33.6 rampage_16  //BEHIND BILLBOARD BETWEEN AIRPORT & PIKE CREEK
+			ENDIF
+			GOTO rampage_pickup_loop
+		ENDIF
+		// SCFIX: END
+
 		flag_player_on_mission = 1
 		START_KILL_FRENZY PAGE_00 WEAPONTYPE_ROCKET 120000 rampage_16_kills -2 -1 -1 -1 FALSE // "Destroy 20 vehicles in 120 seconds!"
 		PRINT_BIG RAMPAGE 5000 5
@@ -713,6 +889,17 @@ ENDIF
 
 IF rampage_17_flag = 0
 	IF HAS_PICKUP_BEEN_COLLECTED rampage_17
+		// SCFIX: START - recreate the pickup if we're already on mission
+		IF flag_player_on_mission = 1
+			IF rampage_17_failed = 0
+				CREATE_PICKUP killfrenzy PICKUP_ONCE  -705.9 -617.5 16.4 rampage_17  //BEHIND BILLBOARD AT AIRPORT
+			ELSE
+				CREATE_PICKUP killfrenzy PICKUP_ONCE  -1181.9 -264.8 46.0 rampage_17  //IN GRASSY HILLY AREA NORTH OF AIRPORT
+			ENDIF
+			GOTO rampage_pickup_loop
+		ENDIF
+		// SCFIX: END
+
 		flag_player_on_mission = 1
 		START_KILL_FRENZY PAGE_00 WEAPONTYPE_RUNOVERBYCAR 120000 rampage_17_kills PED_GANG_COLOMBIAN_A PED_GANG_COLOMBIAN_B -1 -1 FALSE // "Splatter 20 Colombians with a car in 120 seconds!"
 		REQUEST_MODEL PED_GANG_COLOMBIAN_A
@@ -751,6 +938,17 @@ ENDIF
 
 IF rampage_18_flag = 0
 	IF HAS_PICKUP_BEEN_COLLECTED rampage_18
+		// SCFIX: START - recreate the pickup if we're already on mission
+		IF flag_player_on_mission = 1
+			IF rampage_18_failed = 0
+				CREATE_PICKUP killfrenzy PICKUP_ONCE  -987.7 -206.1 33.6 rampage_18  //BEHIND A GUARD BOX SOUTH PIKE CREEK
+			ELSE
+				CREATE_PICKUP killfrenzy PICKUP_ONCE  -1080.2 208.4 3.7 rampage_18  //BEHIND ROCK AT BOTTOM OF DAM
+			ENDIF
+			GOTO rampage_pickup_loop
+		ENDIF
+		// SCFIX: END
+
 		flag_player_on_mission = 1
 		START_KILL_FRENZY PAGE_00 WEAPONTYPE_UZI_DRIVEBY 120000 rampage_18_kills -2 -1 -1 -1 FALSE // "Driveby and Destroy 20 vehicles in 120 seconds!"
 		PRINT_BIG RAMPAGE 5000 5
@@ -803,6 +1001,17 @@ ENDIF
 
 IF rampage_19_flag = 0
 	IF HAS_PICKUP_BEEN_COLLECTED rampage_19
+		// SCFIX: START - recreate the pickup if we're already on mission
+		IF flag_player_on_mission = 1
+			IF rampage_19_failed = 0
+				CREATE_PICKUP killfrenzy PICKUP_ONCE  -1186.3  41.0 68.8 rampage_19  //BEHIND BOX IN THE BAIT WAREHOUSE
+			ELSE
+				CREATE_PICKUP killfrenzy PICKUP_ONCE  -1170.2 -42.2 59.2 rampage_19  //ONTOP OF ROOF SOUTH OF BAIT WAREHOUSE
+			ENDIF
+			GOTO rampage_pickup_loop
+		ENDIF
+		// SCFIX: END
+
 		flag_player_on_mission = 1
 		START_KILL_FRENZY_HEADSHOT PAGE_00 WEAPONTYPE_SNIPERRIFLE 120000 rampage_19_kills PED_GANG_COLOMBIAN_A PED_GANG_COLOMBIAN_B -1 -1 FALSE // "Remove 20 Colombian heads in 120 seconds!"
 		REQUEST_MODEL PED_GANG_COLOMBIAN_A
@@ -841,6 +1050,17 @@ ENDIF
 
 IF rampage_20_flag = 0
 	IF HAS_PICKUP_BEEN_COLLECTED rampage_20
+		// SCFIX: START - recreate the pickup if we're already on mission
+		IF flag_player_on_mission = 1
+			IF rampage_20_failed = 0
+				CREATE_PICKUP killfrenzy PICKUP_ONCE  -431.6  110.9 15.6 rampage_20  //BEHIND BILLBOARD NORTH PROJECTS
+			ELSE
+				CREATE_PICKUP killfrenzy PICKUP_ONCE  -798.4 126.0 29.0 rampage_20  //BEHIND BILLBOARD NW PROJECTS
+			ENDIF
+			GOTO rampage_pickup_loop
+		ENDIF
+		// SCFIX: END
+
 		flag_player_on_mission = 1
 		START_KILL_FRENZY_HEADSHOT PAGE_00 WEAPONTYPE_M16 120000 rampage_20_kills PED_GANG_HOOD_A PED_GANG_HOOD_B -1 -1 FALSE // "Behead 20 Hoods in 120 seconds!"
 		REQUEST_MODEL PED_GANG_HOOD_A
