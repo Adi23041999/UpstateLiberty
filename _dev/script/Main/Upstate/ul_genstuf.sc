@@ -16,6 +16,8 @@ VAR_INT bolt_time_difference, bolt_current_time, last_bolt_burger_type, bolt_tim
 bolt_burger_bloke_respawn_time = 60000
 // bolt_burger_bloke_respawn_time = 3000
 
+VAR_INT ul_blip_ammu, ul_blip_spray, ul_blip_bomb, ul_blip_added_ammu, ul_blip_added_spray, ul_blip_added_bomb, ul_last_blip_collection_type, ul_blip_collection
+
 SCRIPT_NAME	ul_gens
 
 SET_DEATHARREST_STATE OFF
@@ -26,6 +28,7 @@ mission_start_ul_genstuf:
     START_NEW_SCRIPT t1_ammu
 	START_NEW_SCRIPT ul_ammu
 	START_NEW_SCRIPT ul_burg
+	START_NEW_SCRIPT ul_blip
 
 	MISSION_END
 }
@@ -62,7 +65,7 @@ t1_ammu_inner:
 					time_difference = current_time - time_since_murdering_shopkeeper1
 
 					IF time_difference > ul_ammu_bloke_respawn_time 
-						CREATE_CHAR PEDTYPE_SPECIAL PED_SPECIAL4 -1369.658 1530.674 71.24 ammu_shop_bloke1
+						CREATE_CHAR PEDTYPE_SPECIAL PED_SPECIAL4 -1369.658 1532.324 71.24 ammu_shop_bloke1
 						SET_CHAR_PERSONALITY ammu_shop_bloke1 PEDSTAT_TOUGH_GUY 
 						SET_CHAR_HEADING ammu_shop_bloke1 90.0
 						SET_CHAR_STAY_IN_SAME_PLACE ammu_shop_bloke1 TRUE
@@ -479,4 +482,79 @@ ul_burg_inner:
 	ENDIF
 
 	GOTO ul_burg_inner
+}
+
+ul_blip:
+{
+//	Should be called in mission_start_ul_genstuf
+	SCRIPT_NAME UL_BLIP
+
+ul_blip_inner:
+	
+	WAIT 70
+
+	ul_last_blip_collection_type = ul_blip_collection
+	ul_blip_collection = 0
+	IF IS_PLAYER_PLAYING Player
+		IF IS_PLAYER_IN_ZONE player BAXTER
+			ul_blip_collection = 1
+		ENDIF
+		IF IS_PLAYER_IN_ZONE player WARSAW
+			ul_blip_collection = 2
+		ENDIF
+		IF IS_PLAYER_IN_ZONE player CARRIN
+			ul_blip_collection = 3
+		ENDIF
+		IF IS_PLAYER_IN_ZONE player GT_ZON0
+			ul_blip_collection = 4
+		ENDIF
+	ENDIF
+
+	IF NOT ul_blip_collection = ul_last_blip_collection_type
+		GOSUB ul_blip_remove_all
+		ul_last_blip_collection_type = 0
+	ENDIF
+
+	IF ul_blip_collection > 0
+	AND ul_last_blip_collection_type = 0
+		IF ul_blip_collection = 1
+			ADD_SPRITE_BLIP_FOR_COORD -1372.924 1530.521 70.535 RADAR_SPRITE_WEAPON ul_blip_ammu
+			ul_blip_added_ammu = 1
+		ENDIF
+		IF ul_blip_collection = 2
+			ADD_SPRITE_BLIP_FOR_COORD -104.904 1361.479 111.322 RADAR_SPRITE_SPRAY ul_blip_spray
+			ul_blip_added_spray = 1
+		ENDIF
+		IF ul_blip_collection = 3
+			ADD_SPRITE_BLIP_FOR_COORD 557.74 1324.965 130.745 RADAR_SPRITE_WEAPON ul_blip_ammu
+			ul_blip_added_ammu = 1
+			ADD_SPRITE_BLIP_FOR_COORD 540.522 1194.666 130.728 RADAR_SPRITE_BOMB ul_blip_bomb
+			ul_blip_added_bomb = 1
+		ENDIF
+		IF ul_blip_collection = 4
+			ADD_SPRITE_BLIP_FOR_COORD 1583.056 1368.148 133.773 RADAR_SPRITE_WEAPON ul_blip_ammu
+			ul_blip_added_ammu = 1
+			ADD_SPRITE_BLIP_FOR_COORD 1167.599 1219.736 121.738 RADAR_SPRITE_SPRAY ul_blip_spray
+			ul_blip_added_spray = 1
+			ADD_SPRITE_BLIP_FOR_COORD 1789.449 1519.81 127.631 RADAR_SPRITE_BOMB ul_blip_bomb
+			ul_blip_added_bomb = 1
+		ENDIF
+	ENDIF
+
+	GOTO ul_blip_inner
+
+ul_blip_remove_all:
+	IF ul_blip_added_ammu > 0
+		REMOVE_BLIP ul_blip_ammu
+		ul_blip_added_ammu = 0
+	ENDIF
+	IF ul_blip_added_spray > 0
+		REMOVE_BLIP ul_blip_spray
+		ul_blip_added_spray = 0
+	ENDIF
+	IF ul_blip_added_bomb > 0
+		REMOVE_BLIP ul_blip_bomb
+		ul_blip_added_bomb = 0
+	ENDIF
+	RETURN
 }
