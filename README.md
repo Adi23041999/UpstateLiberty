@@ -13,6 +13,10 @@
 - alternatively rename main_d.scm to main.scm
 - press numpad keys in game to teleport to various places in Upstate
 
+## Additional repositories
+- Limit Adjuster (https://github.com/Adi23041999/III.VC.SA.LimitAdjuster/tree/upstate)
+- CLEO (https://github.com/Adi23041999/III.VC.CLEO)
+
 ## Authors
 
 ### Project Lead
