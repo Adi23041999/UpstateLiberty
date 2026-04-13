@@ -118,9 +118,9 @@ OR NOT HAS_SPECIAL_CHARACTER_LOADED 4
 ENDWHILE
 
 LOAD_CUTSCENE bet
-LOAD_SCENE -559.65 1030.56 40.0
+LOAD_SCENE 1490.153 1310.493 129.797
 
-SET_CUTSCENE_OFFSET -537.42 1051.204 36.884
+SET_CUTSCENE_OFFSET 1512.383 1431.137 125.7
 
 CREATE_CUTSCENE_OBJECT PED_SPECIAL4 cs_player
 SET_CUTSCENE_ANIM cs_player playerx
@@ -187,13 +187,13 @@ IF NOT HAS_CUTSCENE_FINISHED
 	SET_FADING_COLOUR 255 255 255 //FLASH SCREEN FOR PLAYER SHOOTING CAMERA
 	DO_FADE 100 FADE_OUT
 	
-	particle_x = -537.42 + 1.759
-	particle_y = 1051.204 - 0.416
-	particle_z = 36.884	+ 1.9891
+	particle_x = 1512.383 + 1.759
+	particle_y = 1431.137 - 0.416
+	particle_z = 125.7	+ 1.9891
 
-	particle_target_x =	-537.42	+ 2.08
-	particle_target_y =	1051.204 - 0.9842
-	particle_target_z =	36.884 + 2.6714
+	particle_target_x =	1512.383	+ 2.08
+	particle_target_y =	1431.137 - 0.9842
+	particle_target_z =	125.7 + 2.6714
 
 	temp_var = particle_target_x
 	particle_target_x =	particle_x - temp_var
@@ -278,13 +278,13 @@ WHILE cs_time < 27000
 	GET_CUTSCENE_TIME cs_time
 ENDWHILE
 
-particle_x = -537.42 - 1.3329
-particle_y = 1051.204 + 25.8224
-particle_z = 36.884	+ 1.367
+particle_x = 1512.383 - 1.3329
+particle_y = 1431.137 + 25.8224
+particle_z = 125.7	+ 1.367
 
-particle_target_x =	-537.42	- 0.393
-particle_target_y =	1051.204 + 25.8211
-particle_target_z =	36.884 + 1.4532
+particle_target_x =	1512.383	- 0.393
+particle_target_y =	1431.137 + 25.8211
+particle_target_z =	125.7 + 1.4532
 
 temp_var = particle_target_x
 particle_target_x =	particle_x - temp_var
@@ -306,13 +306,13 @@ WHILE cs_time < 27030
 	GET_CUTSCENE_TIME cs_time
 ENDWHILE
 
-particle_x = -537.42 - 1.813
-particle_y = 1051.204 + 26.0638
-particle_z = 36.884	+ 1.369
+particle_x = 1512.383 - 1.813
+particle_y = 1431.137 + 26.0638
+particle_z = 125.7	+ 1.369
 
-particle_target_x =	-537.42	- 0.4432
-particle_target_y =	1051.204 + 25.9765
-particle_target_z =	36.884 + 1.4258
+particle_target_x =	1512.383	- 0.4432
+particle_target_y =	1431.137 + 25.9765
+particle_target_z =	125.7 + 1.4258
 
 temp_var = particle_target_x
 particle_target_x =	particle_x - temp_var

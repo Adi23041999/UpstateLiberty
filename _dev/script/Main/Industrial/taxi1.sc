@@ -139,8 +139,16 @@ IF IS_COLLISION_IN_MEMORY LEVEL_COMMERCIAL
 	GET_RANDOM_CHAR_IN_ZONE COM_ZON taxi_ped1
 ENDIF
 
-IF IS_COLLISION_IN_MEMORY LEVEL_SUBURBAN 
-	GET_RANDOM_CHAR_IN_ZONE SUB_ZON taxi_ped1
+IF IS_COLLISION_IN_MEMORY LEVEL_SUBURBAN
+	IF IS_PLAYER_IN_ZONE player UL_ZON0
+		IF IS_PLAYER_IN_ZONE player GT_ZON0
+			GET_RANDOM_CHAR_IN_ZONE GT_ZON0 taxi_ped1
+		ELSE
+			GET_RANDOM_CHAR_IN_ZONE UL_ZON0 taxi_ped1
+		ENDIF
+	ELSE
+		GET_RANDOM_CHAR_IN_ZONE SUB_ZON taxi_ped1
+	ENDIF
 ENDIF
 //IF IS_PLAYER_IN_ZONE player SUB_ZON 
 //	GET_RANDOM_CHAR_IN_ZONE IND_ZON taxi_ped1
@@ -152,6 +160,7 @@ IF taxi_ped1 = -1
 // SCFIX: START
 ELSE
 	IF IS_CHAR_MODEL taxi_ped1 PED_TAXI_DRIVER
+	OR IS_CHAR_IN_AREA_3D taxi_ped1 1556.105 1265.095 129.16 1691.82 1505.38 185.571 FALSE // raised up area
 		MARK_CHAR_AS_NO_LONGER_NEEDED taxi_ped1
 		taxi_ped1 = -1
 		WAIT 0
@@ -244,7 +253,15 @@ IF NOT IS_CAR_HEALTH_GREATER taxi_car1 500
 			ADD_SPRITE_BLIP_FOR_COORD 379.0 -493.8 -100.0 RADAR_SPRITE_SPRAY spray_taxi
 		ENDIF
 		IF IS_COLLISION_IN_MEMORY LEVEL_SUBURBAN
-			ADD_SPRITE_BLIP_FOR_COORD -1128.0 32.5.8 -100.0 RADAR_SPRITE_SPRAY spray_taxi
+			IF IS_PLAYER_IN_ZONE player UL_ZON0
+				IF IS_PLAYER_IN_ZONE player GT_ZON0
+					ADD_SPRITE_BLIP_FOR_COORD 1167.599 1219.736 -100.0 RADAR_SPRITE_SPRAY spray_taxi // Gostburg
+				ELSE
+					ADD_SPRITE_BLIP_FOR_COORD -104.904 1361.479 -100.0 RADAR_SPRITE_SPRAY spray_taxi // Warsaw
+				ENDIF
+			ELSE
+				ADD_SPRITE_BLIP_FOR_COORD -1128.0 32.5 -100.0 RADAR_SPRITE_SPRAY spray_taxi
+			ENDIF
 		ENDIF
 		spray_blip_onscreen = 1
 		taxi_fucked_flag = 1
@@ -647,6 +664,7 @@ WAIT 0
 
 
 	IF IS_COLLISION_IN_MEMORY LEVEL_SUBURBAN //SUBURBIA*******************************************
+	AND NOT IS_PLAYER_IN_ZONE player UL_ZON0
 
 		GENERATE_RANDOM_INT_IN_RANGE 21 27  been_in_taxi1_before
 
@@ -749,6 +767,594 @@ WAIT 0
 
 	ENDIF
 	 
+	
+	IF IS_COLLISION_IN_MEMORY LEVEL_SUBURBAN //UPSTATE COUNTRYSIDE*******************************************
+	AND IS_PLAYER_IN_ZONE player UL_ZON0
+	AND NOT IS_PLAYER_IN_ZONE player GT_ZON0
+
+		GENERATE_RANDOM_INT_IN_RANGE 27 43  been_in_taxi1_before
+
+		IF NOT IS_PLAYER_PLAYING player
+			GOTO mission_taxi1_failed
+		ENDIF
+
+		IF been_in_taxi1_before = 27
+				IF IS_PLAYER_IN_ZONE player CARRIN
+					GOTO passenger_destination
+				ENDIF	
+			PRINT_NOW ( ULFAR1 ) 5000 1 //Carrington ammunation
+
+			taxi_destx1 = 578.941	   
+			taxi_desty1 = 1315.218
+			taxi_destz1 = 130.123
+
+			taxi_destx2 = 588.941 
+			taxi_desty2 = 1325.218 
+			taxi_destz2 = 137.123
+		ENDIF
+
+		IF been_in_taxi1_before = 28
+				IF IS_PLAYER_IN_ZONE player WARSAW
+					GOTO passenger_destination
+				ENDIF	
+			PRINT_NOW ( ULFAR2 ) 5000 1 //Warsaw bank
+
+			taxi_destx1 = -201.032	   
+			taxi_desty1 = 1282.817
+			taxi_destz1 = 110.336
+
+			taxi_destx2 = -191.032 
+			taxi_desty2 = 1292.817
+			taxi_destz2 = 117.336
+		ENDIF
+		
+		IF been_in_taxi1_before = 29
+				IF LOCATE_PLAYER_ANY_MEANS_2D player -1285.552 1350.269 100.0 100.0 FALSE
+					GOTO passenger_destination
+				ENDIF	
+			PRINT_NOW ( ULFAR3 ) 5000 1 //Baxter fuel station
+
+			taxi_destx1 = -1285.552	   
+			taxi_desty1 = 1350.269
+			taxi_destz1 = 70.157
+
+			taxi_destx2 = -1275.552
+			taxi_desty2 = 1360.269
+			taxi_destz2 = 77.157
+		ENDIF
+
+		IF been_in_taxi1_before = 30
+				IF LOCATE_PLAYER_ANY_MEANS_2D player 414.353 1635.806 100.0 100.0 FALSE
+					GOTO passenger_destination
+				ENDIF	
+			PRINT_NOW ( ULFAR4 ) 5000 1 //Fuel depot
+
+			taxi_destx1 = 414.353   
+			taxi_desty1 = 1635.806
+			taxi_destz1 = 149.332
+
+			taxi_destx2 = 424.353
+			taxi_desty2 = 1645.806
+			taxi_destz2 = 156.332
+		ENDIF
+
+		IF been_in_taxi1_before = 31
+				IF IS_PLAYER_IN_ZONE player LOVEEI1
+				OR IS_PLAYER_IN_ZONE player LOVEEI2
+				OR IS_PLAYER_IN_ZONE player LOVEEI3
+					GOTO passenger_destination
+				ENDIF	
+			PRINT_NOW ( ULFAR5 ) 5000 1 //Country club
+
+			taxi_destx1 = -1543.215
+			taxi_desty1 = 976.501
+			taxi_destz1 = 113.991
+
+			taxi_destx2 = -1533.215
+			taxi_desty2 = 986.501
+			taxi_destz2 = 120.991
+		ENDIF
+
+		IF been_in_taxi1_before = 32
+				IF IS_PLAYER_IN_ZONE player BAXTER
+					GOTO passenger_destination
+				ENDIF	
+			PRINT_NOW ( ULFAR6 ) 5000 1 //Baxter motel
+
+			taxi_destx1 = -1302.752	   
+			taxi_desty1 = 1509.563
+			taxi_destz1 = 70.24
+
+			taxi_destx2 = -1292.752 
+			taxi_desty2 = 1519.563
+			taxi_destz2 = 77.24
+		ENDIF
+
+		IF been_in_taxi1_before = 33
+				IF IS_PLAYER_IN_ZONE player BAXTER
+					GOTO passenger_destination
+				ENDIF	
+			PRINT_NOW ( ULFAR7 ) 5000 1 //Baxter happy blimp
+
+			taxi_destx1 = -1344.588
+			taxi_desty1 = 1575.803
+			taxi_destz1 = 70.24
+
+			taxi_destx2 = -1334.588 
+			taxi_desty2 = 1585.803
+			taxi_destz2 = 77.24
+		ENDIF
+
+		IF been_in_taxi1_before = 34
+				IF LOCATE_PLAYER_ANY_MEANS_2D player 389.159 1084.544 150.0 150.0 FALSE
+					GOTO passenger_destination
+				ENDIF	
+			PRINT_NOW ( ULFAR8 ) 5000 1 //Jack's Hut
+
+			taxi_destx1 = 389.159   
+			taxi_desty1 = 1084.544
+			taxi_destz1 = 130.587
+
+			taxi_destx2 = 399.159
+			taxi_desty2 = 1094.544
+			taxi_destz2 = 137.587
+		ENDIF
+
+		IF been_in_taxi1_before = 35
+				IF IS_PLAYER_IN_ZONE player RIDGE
+					GOTO passenger_destination
+				ENDIF	
+			PRINT_NOW ( ULFAR9 ) 5000 1 //Cedar Ridge
+
+			taxi_destx1 = -373.259
+			taxi_desty1 = 999.721
+			taxi_destz1 = 191.821
+
+			taxi_destx2 = -363.259 
+			taxi_desty2 = 1009.721
+			taxi_destz2 = 198.821
+		ENDIF
+
+		IF been_in_taxi1_before = 36
+				IF IS_PLAYER_IN_ZONE player CARRIN
+					GOTO passenger_destination
+				ENDIF	
+			PRINT_NOW ( ULFAR10 ) 5000 1 //Carrington fish house
+
+			taxi_destx1 = 496.807
+			taxi_desty1 = 1245.718
+			taxi_destz1 = 129.728
+
+			taxi_destx2 = 506.807 
+			taxi_desty2 = 1255.718
+			taxi_destz2 = 136.728
+		ENDIF
+
+		IF been_in_taxi1_before = 37
+				IF IS_PLAYER_IN_ZONE player WARSAW
+					GOTO passenger_destination
+				ENDIF	
+			PRINT_NOW ( ULFAR11 ) 5000 1 //Warsaw NuChem
+
+			taxi_destx1 = -182.876
+			taxi_desty1 = 1375.122
+			taxi_destz1 = 110.214
+
+			taxi_destx2 = -172.876 
+			taxi_desty2 = 1385.122
+			taxi_destz2 = 117.214
+		ENDIF
+
+		IF been_in_taxi1_before = 38
+				IF IS_PLAYER_IN_ZONE player RIDGE
+					GOTO passenger_destination
+				ENDIF	
+			PRINT_NOW ( ULFAR12 ) 5000 1 //Resort
+
+			taxi_destx1 = -700.844
+			taxi_desty1 = 844.9
+			taxi_destz1 = 143.506
+
+			taxi_destx2 = -690.844
+			taxi_desty2 = 854.9
+			taxi_destz2 = 150.506
+		ENDIF
+
+		IF been_in_taxi1_before = 39
+				IF IS_PLAYER_IN_ZONE player CARRIN
+					GOTO passenger_destination
+				ENDIF	
+			PRINT_NOW ( ULFAR13 ) 5000 1 //Riviera hotel
+
+			taxi_destx1 = 450.591
+			taxi_desty1 = 1197.428
+			taxi_destz1 = 129.728
+
+			taxi_destx2 = 460.591 
+			taxi_desty2 = 1207.428
+			taxi_destz2 = 136.728
+		ENDIF
+
+		IF been_in_taxi1_before = 40
+				IF IS_PLAYER_IN_ZONE player WARSAW
+					GOTO passenger_destination
+				ENDIF	
+			PRINT_NOW ( ULFAR14 ) 5000 1 //Warsaw trailer park
+
+			taxi_destx1 = -188.707
+			taxi_desty1 = 1484.415
+			taxi_destz1 = 110.336
+
+			taxi_destx2 = -178.707 
+			taxi_desty2 = 1494.415
+			taxi_destz2 = 117.336
+		ENDIF
+
+		IF been_in_taxi1_before = 41
+				IF LOCATE_PLAYER_ANY_MEANS_2D player 184.378 859.326 200.0 200.0 FALSE
+					GOTO passenger_destination
+				ENDIF	
+			PRINT_NOW ( ULFAR15 ) 5000 1 //Vantage point
+
+			taxi_destx1 = 184.378   
+			taxi_desty1 = 859.326
+			taxi_destz1 = 125.088
+
+			taxi_destx2 = 194.378
+			taxi_desty2 = 869.326
+			taxi_destz2 = 132.088
+		ENDIF
+
+		IF been_in_taxi1_before = 42
+				IF IS_PLAYER_IN_ZONE player WARSAW
+					GOTO passenger_destination
+				ENDIF	
+			PRINT_NOW ( ULFAR16 ) 5000 1 //Warsaw ottos
+
+			taxi_destx1 = -120.731
+			taxi_desty1 = 1312.75
+			taxi_destz1 = 110.336
+
+			taxi_destx2 = -110.731 
+			taxi_desty2 = 1322.75
+			taxi_destz2 = 117.336
+		ENDIF
+
+
+	ENDIF
+
+
+	IF IS_COLLISION_IN_MEMORY LEVEL_SUBURBAN //UPSTATE GOSTBURG*******************************************
+	AND IS_PLAYER_IN_ZONE player GT_ZON0
+
+		GENERATE_RANDOM_INT_IN_RANGE 43 64  been_in_taxi1_before
+
+		IF NOT IS_PLAYER_PLAYING player
+			GOTO mission_taxi1_failed
+		ENDIF
+
+		IF been_in_taxi1_before = 43
+				IF IS_PLAYER_IN_ZONE player SUMMER
+					GOTO passenger_destination
+				ENDIF	
+			PRINT_NOW ( ULFAR17 ) 5000 1 //Cinema
+
+			taxi_destx1 = 1700.745	   
+			taxi_desty1 = 1408.641
+			taxi_destz1 = 124.793
+
+			taxi_destx2 = 1710.745
+			taxi_desty2 = 1418.641
+			taxi_destz2 = 131.793
+		ENDIF
+
+		IF been_in_taxi1_before = 44
+				IF IS_PLAYER_IN_ZONE player GTWAIR
+					GOTO passenger_destination
+				ENDIF	
+			PRINT_NOW ( ULFAR18 ) 5000 1 //Airport
+
+			taxi_destx1 = 1743.282	   
+			taxi_desty1 = 1629.86
+			taxi_destz1 = 124.623
+
+			taxi_destx2 = 1753.282
+			taxi_desty2 = 1639.86
+			taxi_destz2 = 131.623
+		ENDIF
+
+		IF been_in_taxi1_before = 45
+				IF IS_PLAYER_IN_ZONE player INDPARK
+					GOTO passenger_destination
+				ENDIF	
+			PRINT_NOW ( ULFAR19 ) 5000 1 //Carcer Chem
+
+			taxi_destx1 = 985.835	   
+			taxi_desty1 = 1489.111
+			taxi_destz1 = 124.773
+
+			taxi_destx2 = 995.835
+			taxi_desty2 = 1499.111
+			taxi_destz2 = 131.773
+		ENDIF
+
+		IF been_in_taxi1_before = 46
+				IF IS_PLAYER_IN_ZONE player LILCHIN
+					GOTO passenger_destination
+				ENDIF	
+			PRINT_NOW ( ULFAR20 ) 5000 1 //Little Shanghai
+
+			taxi_destx1 = 1574.994	   
+			taxi_desty1 = 1586.538
+			taxi_destz1 = 124.773
+
+			taxi_destx2 = 1584.994
+			taxi_desty2 = 1596.538
+			taxi_destz2 = 131.773
+		ENDIF
+
+		IF been_in_taxi1_before = 47
+				IF IS_PLAYER_IN_ZONE player GTCONST
+					GOTO passenger_destination
+				ENDIF	
+			PRINT_NOW ( ULFAR21 ) 5000 1 //Construction site
+
+			taxi_destx1 = 1221.77	   
+			taxi_desty1 = 1586.058
+			taxi_destz1 = 124.773
+
+			taxi_destx2 = 1231.77
+			taxi_desty2 = 1596.058
+			taxi_destz2 = 131.773
+		ENDIF
+
+		IF been_in_taxi1_before = 48
+				IF IS_PLAYER_IN_ZONE player CEDARW
+					GOTO passenger_destination
+				ENDIF	
+			PRINT_NOW ( ULFAR22 ) 5000 1 //Dirt track
+
+			taxi_destx1 = 1104.202	   
+			taxi_desty1 = 902.222
+			taxi_destz1 = 116.846
+
+			taxi_destx2 = 1114.202
+			taxi_desty2 = 912.222
+			taxi_destz2 = 123.846
+		ENDIF
+
+		IF been_in_taxi1_before = 49
+				IF IS_PLAYER_IN_ZONE player GTWCENT
+					GOTO passenger_destination
+				ENDIF	
+			PRINT_NOW ( ULFAR23 ) 5000 1 //LC Bank
+
+			taxi_destx1 = 1480.494	   
+			taxi_desty1 = 1400.181
+			taxi_destz1 = 124.773
+
+			taxi_destx2 = 1490.494
+			taxi_desty2 = 1410.181
+			taxi_destz2 = 131.773
+		ENDIF
+
+		IF been_in_taxi1_before = 50
+				IF IS_PLAYER_IN_ZONE player GTMALL
+					GOTO passenger_destination
+				ENDIF	
+			PRINT_NOW ( ULFAR24 ) 5000 1 //Mall
+
+			taxi_destx1 = 1589.36	   
+			taxi_desty1 = 1303.821
+			taxi_destz1 = 124.8
+
+			taxi_destx2 = 1599.36
+			taxi_desty2 = 1313.821
+			taxi_destz2 = 131.8
+		ENDIF
+
+		IF been_in_taxi1_before = 51
+				IF IS_PLAYER_IN_ZONE player GTWCENT
+					GOTO passenger_destination
+				ENDIF	
+			PRINT_NOW ( ULFAR25 ) 5000 1 //Monumental hotel
+
+			taxi_destx1 = 1417.805	   
+			taxi_desty1 = 1541.331
+			taxi_destz1 = 126.273
+
+			taxi_destx2 = 1427.805
+			taxi_desty2 = 1551.331
+			taxi_destz2 = 133.273
+		ENDIF
+
+		IF been_in_taxi1_before = 52
+				IF IS_PLAYER_IN_ZONE player SUMMER
+					GOTO passenger_destination
+				ENDIF	
+			PRINT_NOW ( ULFAR26 ) 5000 1 //Morningstar
+
+			taxi_destx1 = 1803.305	   
+			taxi_desty1 = 1377.169
+			taxi_destz1 = 119.678
+
+			taxi_destx2 = 1813.305
+			taxi_desty2 = 1387.169
+			taxi_destz2 = 126.678
+		ENDIF
+
+		IF been_in_taxi1_before = 53
+				IF IS_PLAYER_IN_ZONE player OLDTOWN
+					GOTO passenger_destination
+				ENDIF	
+			PRINT_NOW ( ULFAR27 ) 5000 1 //Old Town
+
+			taxi_destx1 = 1414.97	   
+			taxi_desty1 = 1073.136
+			taxi_destz1 = 120.737
+
+			taxi_destx2 = 1424.97
+			taxi_desty2 = 1083.136
+			taxi_destz2 = 127.737
+		ENDIF
+
+		IF been_in_taxi1_before = 54
+				IF IS_PLAYER_IN_ZONE player LEONARD
+					GOTO passenger_destination
+				ENDIF	
+			PRINT_NOW ( ULFAR28 ) 5000 1 //Ol' Reliable motel
+
+			taxi_destx1 = 1118.79	   
+			taxi_desty1 = 1225.484
+			taxi_destz1 = 121.8
+
+			taxi_destx2 = 1128.79
+			taxi_desty2 = 1235.484
+			taxi_destz2 = 128.8
+		ENDIF
+
+		IF been_in_taxi1_before = 55
+				IF IS_PLAYER_IN_ZONE player CEDARW
+				OR IS_PLAYER_IN_ZONE player OLDTOWN
+					GOTO passenger_destination
+				ENDIF	
+			PRINT_NOW ( ULFAR29 ) 5000 1 //Skatepark
+
+			taxi_destx1 = 1256.921	   
+			taxi_desty1 = 948.22
+			taxi_destz1 = 116.839
+
+			taxi_destx2 = 1266.921
+			taxi_desty2 = 958.22
+			taxi_destz2 = 123.839
+		ENDIF
+
+		IF been_in_taxi1_before = 56
+				IF IS_PLAYER_IN_ZONE player CEDARW
+					GOTO passenger_destination
+				ENDIF	
+			PRINT_NOW ( ULFAR30 ) 5000 1 //Suburbs
+
+			taxi_destx1 = 1594.873	   
+			taxi_desty1 = 966.249
+			taxi_destz1 = 119.631
+
+			taxi_destx2 = 1604.873
+			taxi_desty2 = 976.249
+			taxi_destz2 = 126.631
+		ENDIF
+
+		IF been_in_taxi1_before = 57
+				IF IS_PLAYER_IN_ZONE player INDPARK
+					GOTO passenger_destination
+				ENDIF	
+			PRINT_NOW ( ULFAR31 ) 5000 1 //Sumo factory
+
+			taxi_destx1 = 1032.367	   
+			taxi_desty1 = 1329.792
+			taxi_destz1 = 124.773
+
+			taxi_destx2 = 1042.367
+			taxi_desty2 = 1339.792
+			taxi_destz2 = 131.773
+		ENDIF
+
+
+		IF been_in_taxi1_before = 58
+				IF IS_PLAYER_IN_ZONE player GTSUPAS
+					GOTO passenger_destination
+				ENDIF	
+			PRINT_NOW ( ULFAR32 ) 5000 1 //Supa Save
+
+			taxi_destx1 = 1193.845	   
+			taxi_desty1 = 1345.996
+			taxi_destz1 = 124.8
+
+			taxi_destx2 = 1203.845
+			taxi_desty2 = 1355.996
+			taxi_destz2 = 131.8
+		ENDIF
+
+
+		IF been_in_taxi1_before = 59
+				IF IS_PLAYER_IN_ZONE player GTWCENT
+					GOTO passenger_destination
+				ENDIF	
+			PRINT_NOW ( ULFAR33 ) 5000 1 //Town hall
+
+			taxi_destx1 = 1368.502	   
+			taxi_desty1 = 1597.036
+			taxi_destz1 = 124.773
+
+			taxi_destx2 = 1378.502
+			taxi_desty2 = 1607.036
+			taxi_destz2 = 131.773
+		ENDIF
+
+
+		IF been_in_taxi1_before = 60
+				IF IS_PLAYER_IN_ZONE player GTWCENT
+					GOTO passenger_destination
+				ENDIF	
+			PRINT_NOW ( ULFAR34 ) 5000 1 //Town square
+
+			taxi_destx1 = 1320.162	   
+			taxi_desty1 = 1359.41
+			taxi_destz1 = 124.773
+
+			taxi_destx2 = 1330.162
+			taxi_desty2 = 1369.41
+			taxi_destz2 = 131.773
+		ENDIF
+
+		IF been_in_taxi1_before = 61
+				IF IS_PLAYER_IN_ZONE player SUMMER
+					GOTO passenger_destination
+				ENDIF	
+			PRINT_NOW ( ULFAR35 ) 5000 1 //Toy Corner
+
+			taxi_destx1 = 1734.994	   
+			taxi_desty1 = 1225.177
+			taxi_destz1 = 121.833
+
+			taxi_destx2 = 1744.994
+			taxi_desty2 = 1235.177
+			taxi_destz2 = 128.833
+		ENDIF
+
+		IF been_in_taxi1_before = 62
+				IF IS_PLAYER_IN_ZONE player SUMMER
+					GOTO passenger_destination
+				ENDIF	
+			PRINT_NOW ( ULFAR36 ) 5000 1 //Twat
+
+			taxi_destx1 = 1653.916	   
+			taxi_desty1 = 1504.325
+			taxi_destz1 = 124.773
+
+			taxi_destx2 = 1663.916
+			taxi_desty2 = 1514.325
+			taxi_destz2 = 131.773
+		ENDIF
+
+		IF been_in_taxi1_before = 63
+				IF IS_PLAYER_IN_ZONE player GTWCENT
+					GOTO passenger_destination
+				ENDIF	
+			PRINT_NOW ( ULFAR37 ) 5000 1 //Wang Cars
+
+			taxi_destx1 = 1358.021	   
+			taxi_desty1 = 1652.722
+			taxi_destz1 = 124.773
+
+			taxi_destx2 = 1368.021
+			taxi_desty2 = 1662.722
+			taxi_destz2 = 131.773
+		ENDIF
+
+
+	ENDIF
+
 
 	taxi_blipx = taxi_destx1 + taxi_destx2
 	taxi_blipx /= 2.0
@@ -790,7 +1396,11 @@ ENDIF
 
 IF IS_COLLISION_IN_MEMORY LEVEL_SUBURBAN
 	IF taxi_passed_this_shot = 0
-		taxi_distance_int = taxi_distance_int * 115
+		IF IS_PLAYER_IN_ZONE player GT_ZON0
+			taxi_distance_int = taxi_distance_int * 95
+		ELSE
+			taxi_distance_int = taxi_distance_int * 115
+		ENDIF
 	ENDIF
 ENDIF
 
@@ -848,6 +1458,7 @@ ENDIF
 
 
 IF IS_COLLISION_IN_MEMORY LEVEL_SUBURBAN //SUBURBIA*******************************************
+AND NOT IS_PLAYER_IN_ZONE player GT_ZON0
 	IF taxi_passed_this_shot = 0
 		taxi_countdown = taxi_countdown + 15000
 	ENDIF
@@ -899,7 +1510,15 @@ WHILE NOT IS_CAR_STOPPED_IN_AREA_3D taxi_car1 taxi_destx1 taxi_desty1 taxi_destz
 					ADD_SPRITE_BLIP_FOR_COORD 379.0 -493.8 -100.0 RADAR_SPRITE_SPRAY spray_taxi
 				ENDIF
 				IF IS_COLLISION_IN_MEMORY LEVEL_SUBURBAN
-					ADD_SPRITE_BLIP_FOR_COORD -1128.0 32.5.8 -100.0 RADAR_SPRITE_SPRAY spray_taxi
+					IF IS_PLAYER_IN_ZONE player UL_ZON0
+						IF IS_PLAYER_IN_ZONE player GT_ZON0
+							ADD_SPRITE_BLIP_FOR_COORD 1167.599 1219.736 -100.0 RADAR_SPRITE_SPRAY spray_taxi // Gostburg
+						ELSE
+							ADD_SPRITE_BLIP_FOR_COORD -104.904 1361.479 -100.0 RADAR_SPRITE_SPRAY spray_taxi // Warsaw
+						ENDIF
+					ELSE
+						ADD_SPRITE_BLIP_FOR_COORD -1128.0 32.5 -100.0 RADAR_SPRITE_SPRAY spray_taxi
+					ENDIF
 				ENDIF
 				spray_blip_onscreen = 1
 				GOSUB taxi_fucked
@@ -927,6 +1546,7 @@ ENDWHILE
 score: 
 
 IF IS_COLLISION_IN_MEMORY LEVEL_SUBURBAN //SUBURBIA*******************************************
+AND NOT IS_PLAYER_IN_ZONE player GT_ZON0
 							  
 	IF TIMERB > speedbonus
 		score_for_this_fare = taxi_distance_int_old 

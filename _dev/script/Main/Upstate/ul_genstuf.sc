@@ -496,6 +496,7 @@ ul_blip_inner:
 	ul_last_blip_collection_type = ul_blip_collection
 	ul_blip_collection = 0
 	IF IS_PLAYER_PLAYING Player
+	AND flag_player_on_mission = 0
 		IF IS_PLAYER_IN_ZONE player BAXTER
 			ul_blip_collection = 1
 		ENDIF

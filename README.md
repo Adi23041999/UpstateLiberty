@@ -1,4 +1,5 @@
-# Upstate Liberty ###
+# Upstate Liberty
+https://github.com/Adi23041999/UpstateLiberty
 
 ## Installation
 - install Ultimate ASI Loader (https://github.com/ThirteenAG/Ultimate-ASI-Loader)
@@ -7,15 +8,19 @@
 - optionally install QOL mods (SilentPatch, Widescreen Fix, SkyGFX)
 
 ## Freeroam setup
+- rename main_d.scm to main.scm
+
+Or
 - install debug menu (https://github.com/aap/debugmenu)
 - install gtadebug (rename iii_debug.dll to iii_debug.asi) (https://github.com/aap/gtadebug)
 - hold 'D' while the game is loading to launch the game in freeroam mode
-- alternatively rename main_d.scm to main.scm
-- press numpad keys in game to teleport to various places in Upstate
+
+Press numpad keys in game to teleport to various places in Upstate
 
 ## Additional repositories
 - Limit Adjuster (https://github.com/Adi23041999/III.VC.SA.LimitAdjuster/tree/upstate)
 - CLEO (https://github.com/Adi23041999/III.VC.CLEO)
+- gta_studio_max (https://github.com/Adi23041999/gta_studio_max)
 
 ## Authors
 
@@ -35,9 +40,13 @@
 - Jago
 - The Truth
 - UnitedMel
+- Yucark
 
 ### Special Thanks
 - Luigi's Club
+- re3 Team
+- aap
+- DimZet
 - Sergeanur
 - thelink2012
 - github.com/GTAmodding

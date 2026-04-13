@@ -126,15 +126,14 @@ void ModelTraits::CollectModels()
 	char modelName[24];
 	int32 modelId = -1;
 
-	CFileMgr::ChangeDir("\\DATA\\");
-	int32 fd = CFileMgr::OpenFile("modelTraits.dat", "r");
+	CFileMgr::ChangeDir("\\");
+	int32 fd = CFileMgr::OpenFile("data\\modelTraits.dat", "r");
 	if (!fd)
 	{
 		assert(false && "No modelTraits.dat found!");
 		return;
 	}
 
-	CFileMgr::ChangeDir("\\");
 	for (line = CFileLoader::LoadLine(fd); line; line = CFileLoader::LoadLine(fd)) {
 		if (*line == '\0' || *line == '#')
 			continue;

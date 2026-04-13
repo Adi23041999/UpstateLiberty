@@ -432,6 +432,7 @@ IF IS_COLLISION_IN_MEMORY LEVEL_COMMERCIAL
 ENDIF
 
 IF IS_COLLISION_IN_MEMORY LEVEL_SUBURBAN
+AND NOT IS_PLAYER_IN_ZONE player UL_ZON0
 	GENERATE_RANDOM_FLOAT_IN_RANGE -1300.0 -414.0 random_x   
 	GENERATE_RANDOM_FLOAT_IN_RANGE -608.8 380.0 random_y   
 	hospital_x = -1255.5 										  
@@ -442,6 +443,57 @@ IF IS_COLLISION_IN_MEMORY LEVEL_SUBURBAN
 	flag_got_range_message = 0							  
 	player_in_range_flag = 1
 	paramedic_location = 3							  
+ENDIF
+
+IF IS_COLLISION_IN_MEMORY LEVEL_SUBURBAN
+	IF IS_PLAYER_IN_ZONE player BAXTER
+		GENERATE_RANDOM_FLOAT_IN_RANGE -1595.528 -1151.892 random_x   
+		GENERATE_RANDOM_FLOAT_IN_RANGE 1413.141 1816.59 random_y   
+		hospital_x = -1269.589 										  
+		hospital_y = 1577.064
+		hospital_z = 71.24										  
+		hospital_door_x = -1269.589 									  
+		hospital_door_y = 1565.986									  
+		flag_got_range_message = 0							  
+		player_in_range_flag = 1
+		paramedic_location = 4	
+	ENDIF
+	IF IS_PLAYER_IN_ZONE player WARSAW
+		GENERATE_RANDOM_FLOAT_IN_RANGE -620.959 -77.012 random_x   
+		GENERATE_RANDOM_FLOAT_IN_RANGE 1180.529 1583.979 random_y   
+		hospital_x = -267.862 										  
+		hospital_y = 1356.49
+		hospital_z = 111.336										  
+		hospital_door_x = -280.368 									  
+		hospital_door_y = 1340.972									  
+		flag_got_range_message = 0							  
+		player_in_range_flag = 1
+		paramedic_location = 5
+	ENDIF
+	IF IS_PLAYER_IN_ZONE player CARRIN
+		GENERATE_RANDOM_FLOAT_IN_RANGE 209.768 788.972 random_x   
+		GENERATE_RANDOM_FLOAT_IN_RANGE 934.002 1467.724 random_y   
+		hospital_x = 536.52 										  
+		hospital_y = 1234.775
+		hospital_z = 130.728										  
+		hospital_door_x = 539.995 									  
+		hospital_door_y = 1246.148									  
+		flag_got_range_message = 0							  
+		player_in_range_flag = 1
+		paramedic_location = 6
+	ENDIF
+	IF IS_PLAYER_IN_ZONE player GT_ZON0
+		GENERATE_RANDOM_FLOAT_IN_RANGE 912.647 1865.222 random_x   
+		GENERATE_RANDOM_FLOAT_IN_RANGE 780.918 1782.927 random_y   
+		hospital_x = 1341.948 										  
+		hospital_y = 1469.859
+		hospital_z = 125.773										  
+		hospital_door_x = 1361.591 									  
+		hospital_door_y = 1469.859									  
+		flag_got_range_message = 0							  
+		player_in_range_flag = 1
+		paramedic_location = 7
+	ENDIF
 ENDIF
 
 IF player_in_range_flag = 0
@@ -628,6 +680,28 @@ AND ped_coord_y	< -208.7 //MAX_Y
 ENDIF
 // SCFIX: END
 
+IF ped_coord_x 	> 1479.684  //MIN_X // GT Airport + China
+AND ped_coord_x	< 1822.309  //MAX_X
+AND ped_coord_y	> 1612.072 //MIN_Y
+AND ped_coord_y	< 1782.927 //MAX_Y
+	GOTO generate_random_coord
+ENDIF
+
+IF ped_coord_x 	> 1556.105  //MIN_X // GT Raised up area
+AND ped_coord_x	< 1691.82  //MAX_X
+AND ped_coord_y	> 1265.095 //MIN_Y
+AND ped_coord_y	< 1505.38 //MAX_Y
+	GOTO generate_random_coord
+ENDIF
+
+IF ped_coord_x 	> 1228.808  //MIN_X // GT construction` covers
+AND ped_coord_x	< 1235.847  //MAX_X
+AND ped_coord_y	> 1503.502 //MIN_Y
+AND ped_coord_y	< 1576.829 //MAX_Y
+	GOTO generate_random_coord
+ENDIF
+
+
 IF paramedic_location = 1
 	IF NOT ped_coord_x 	> 778.0 //MIN_X // INDUSTRIAL
 	OR NOT ped_coord_x	< 1540.0 //MAX_X
@@ -654,6 +728,43 @@ IF paramedic_location = 3
 		GOTO generate_random_coord
 	ENDIF
 ENDIF
+
+IF paramedic_location = 4
+	IF NOT ped_coord_x 	> -1595.528 //MIN_X // BAXTER
+	OR NOT ped_coord_x	< -1151.892 //MAX_X
+	OR NOT ped_coord_y	> 1413.141 //MIN_Y
+	OR NOT ped_coord_y	< 1816.59 //MAX_Y
+		GOTO generate_random_coord
+	ENDIF
+ENDIF
+
+IF paramedic_location = 5
+	IF NOT ped_coord_x 	> -620.959 //MIN_X // WARSAW
+	OR NOT ped_coord_x	< -77.012 //MAX_X
+	OR NOT ped_coord_y	> 1180.529 //MIN_Y
+	OR NOT ped_coord_y	< 1583.979 //MAX_Y
+		GOTO generate_random_coord
+	ENDIF
+ENDIF
+
+IF paramedic_location = 6
+	IF NOT ped_coord_x 	> 209.768 //MIN_X // CARRINGTON
+	OR NOT ped_coord_x	< 934.002 //MAX_X
+	OR NOT ped_coord_y	> 788.972 //MIN_Y
+	OR NOT ped_coord_y	< 1467.724 //MAX_Y
+		GOTO generate_random_coord
+	ENDIF
+ENDIF
+
+IF paramedic_location = 7
+	IF NOT ped_coord_x 	> 912.647 //MIN_X // GOSTBURG
+	OR NOT ped_coord_x	< 1865.222 //MAX_X
+	OR NOT ped_coord_y	> 780.918 //MIN_Y
+	OR NOT ped_coord_y	< 1782.927 //MAX_Y
+		GOTO generate_random_coord
+	ENDIF
+ENDIF
+
 
 IF ped_coord_z < -1.0
 	GOTO generate_random_coord
