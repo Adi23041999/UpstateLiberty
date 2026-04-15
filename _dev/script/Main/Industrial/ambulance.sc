@@ -2,7 +2,7 @@ MISSION_START
 // *****************************************************************************************
 // *****************************************************************************************
 // *****************************************************************************************
-// *********************************** Ambulance missions ********************************** 
+// *********************************** Ambulance missions **********************************
 // *****************************************************************************************
 // *****************************************************************************************
 // *****************************************************************************************
@@ -14,7 +14,7 @@ GOSUB mission_start_ambulance
 GOSUB ambulance_failed
 
 MISSION_END
- 
+
 // Variables for mission
 
 VAR_INT	ped_time_limit players_ambulance flag_got_range_message	ped_time_limit_temp	ped_counter	number_of_injured_peds brackets_var
@@ -40,7 +40,7 @@ VAR_INT injured_ped_12 injured_ped_12_blip injured_ped_12_flag
 VAR_FLOAT random_x random_y	hospital_x hospital_y hospital_z
 VAR_FLOAT player1_a_x	player1_a_y player1_a_z	hospital_door_x	hospital_door_y
 VAR_FLOAT ped_coord_x ped_coord_y	ped_coord_z	sound_x sound_y sound_z
-VAR_FLOAT difference_x_float_a difference_y_float_a	sum_difference_a_xy	
+VAR_FLOAT difference_x_float_a difference_y_float_a	sum_difference_a_xy
 VAR_FLOAT players_distance_from_ped peds_distance_from_hospital ped_time_limit_float random_ped_heading	time_chunk_divider
 
 VAR_INT hospital_sphere hospital_sphere_flag // SCFIX
@@ -93,7 +93,7 @@ first_rescue_flag		= 0
 first_chunk_flag		= 0
 time_chunk_divider		= 11.0
 ambulance_level			= 1
-time_chunk				= 0 
+time_chunk				= 0
 time_chunk_in_secs 		= 0
 score_am				= 0
 bonus_time_flag			= 0
@@ -408,7 +408,7 @@ GET_PLAYER_COORDINATES player player1_a_x player1_a_y player1_a_z
 IF IS_COLLISION_IN_MEMORY LEVEL_INDUSTRIAL
 	GENERATE_RANDOM_FLOAT_IN_RANGE 778.0 1540.0 random_x
 	GENERATE_RANDOM_FLOAT_IN_RANGE -1110.0 0.0 random_y
-	hospital_x = 1141.5 
+	hospital_x = 1141.5
 	hospital_y = -595.2402
 	hospital_z = 13.9
 	hospital_door_x = 1149.1873
@@ -419,7 +419,7 @@ IF IS_COLLISION_IN_MEMORY LEVEL_INDUSTRIAL
 ENDIF
 
 IF IS_COLLISION_IN_MEMORY LEVEL_COMMERCIAL
-	GENERATE_RANDOM_FLOAT_IN_RANGE -192.0 545.0 random_x  
+	GENERATE_RANDOM_FLOAT_IN_RANGE -192.0 545.0 random_x
 	GENERATE_RANDOM_FLOAT_IN_RANGE -1626.0 98.0 random_y
 	hospital_x = 178.5
 	hospital_y = -23.6
@@ -433,64 +433,64 @@ ENDIF
 
 IF IS_COLLISION_IN_MEMORY LEVEL_SUBURBAN
 AND NOT IS_PLAYER_IN_ZONE player UL_ZON0
-	GENERATE_RANDOM_FLOAT_IN_RANGE -1300.0 -414.0 random_x   
-	GENERATE_RANDOM_FLOAT_IN_RANGE -608.8 380.0 random_y   
-	hospital_x = -1255.5 										  
+	GENERATE_RANDOM_FLOAT_IN_RANGE -1300.0 -414.0 random_x
+	GENERATE_RANDOM_FLOAT_IN_RANGE -608.8 380.0 random_y
+	hospital_x = -1255.5
 	hospital_y = -144.4254
-	hospital_z = 57.8										  
-	hospital_door_x = -1246.7969 									  
-	hospital_door_y = -139.1016									  
-	flag_got_range_message = 0							  
+	hospital_z = 57.8
+	hospital_door_x = -1246.7969
+	hospital_door_y = -139.1016
+	flag_got_range_message = 0
 	player_in_range_flag = 1
-	paramedic_location = 3							  
+	paramedic_location = 3
 ENDIF
 
 IF IS_COLLISION_IN_MEMORY LEVEL_SUBURBAN
 	IF IS_PLAYER_IN_ZONE player BAXTER
-		GENERATE_RANDOM_FLOAT_IN_RANGE -1595.528 -1151.892 random_x   
-		GENERATE_RANDOM_FLOAT_IN_RANGE 1413.141 1816.59 random_y   
-		hospital_x = -1269.589 										  
+		GENERATE_RANDOM_FLOAT_IN_RANGE -1595.528 -1151.892 random_x
+		GENERATE_RANDOM_FLOAT_IN_RANGE 1413.141 1816.59 random_y
+		hospital_x = -1269.589
 		hospital_y = 1577.064
-		hospital_z = 71.24										  
-		hospital_door_x = -1269.589 									  
-		hospital_door_y = 1565.986									  
-		flag_got_range_message = 0							  
+		hospital_z = 71.24
+		hospital_door_x = -1269.589
+		hospital_door_y = 1565.986
+		flag_got_range_message = 0
 		player_in_range_flag = 1
-		paramedic_location = 4	
+		paramedic_location = 4
 	ENDIF
 	IF IS_PLAYER_IN_ZONE player WARSAW
-		GENERATE_RANDOM_FLOAT_IN_RANGE -620.959 -77.012 random_x   
-		GENERATE_RANDOM_FLOAT_IN_RANGE 1180.529 1583.979 random_y   
-		hospital_x = -267.862 										  
+		GENERATE_RANDOM_FLOAT_IN_RANGE -620.959 -77.012 random_x
+		GENERATE_RANDOM_FLOAT_IN_RANGE 1180.529 1583.979 random_y
+		hospital_x = -267.862
 		hospital_y = 1356.49
-		hospital_z = 111.336										  
-		hospital_door_x = -280.368 									  
-		hospital_door_y = 1340.972									  
-		flag_got_range_message = 0							  
+		hospital_z = 111.336
+		hospital_door_x = -280.368
+		hospital_door_y = 1340.972
+		flag_got_range_message = 0
 		player_in_range_flag = 1
 		paramedic_location = 5
 	ENDIF
 	IF IS_PLAYER_IN_ZONE player CARRIN
-		GENERATE_RANDOM_FLOAT_IN_RANGE 209.768 788.972 random_x   
-		GENERATE_RANDOM_FLOAT_IN_RANGE 934.002 1467.724 random_y   
-		hospital_x = 536.52 										  
+		GENERATE_RANDOM_FLOAT_IN_RANGE 209.768 788.972 random_x
+		GENERATE_RANDOM_FLOAT_IN_RANGE 934.002 1467.724 random_y
+		hospital_x = 536.52
 		hospital_y = 1234.775
-		hospital_z = 130.728										  
-		hospital_door_x = 539.995 									  
-		hospital_door_y = 1246.148									  
-		flag_got_range_message = 0							  
+		hospital_z = 130.728
+		hospital_door_x = 539.995
+		hospital_door_y = 1246.148
+		flag_got_range_message = 0
 		player_in_range_flag = 1
 		paramedic_location = 6
 	ENDIF
 	IF IS_PLAYER_IN_ZONE player GT_ZON0
-		GENERATE_RANDOM_FLOAT_IN_RANGE 912.647 1865.222 random_x   
-		GENERATE_RANDOM_FLOAT_IN_RANGE 780.918 1782.927 random_y   
-		hospital_x = 1341.948 										  
+		GENERATE_RANDOM_FLOAT_IN_RANGE 912.647 1865.222 random_x
+		GENERATE_RANDOM_FLOAT_IN_RANGE 780.918 1782.927 random_y
+		hospital_x = 1341.948
 		hospital_y = 1469.859
-		hospital_z = 125.773										  
-		hospital_door_x = 1361.591 									  
-		hospital_door_y = 1469.859									  
-		flag_got_range_message = 0							  
+		hospital_z = 125.773
+		hospital_door_x = 1361.591
+		hospital_door_y = 1469.859
+		flag_got_range_message = 0
 		player_in_range_flag = 1
 		paramedic_location = 7
 	ENDIF
@@ -503,7 +503,7 @@ AND flag_got_range_message = 0
 		flag_got_range_message = 1
 	ENDIF
 	GOTO ambulance_failed
-ENDIF													  
+ENDIF
 
 GET_CONTROLLER_MODE controlmode
 
@@ -1001,7 +1001,7 @@ IF injured_ped_1_flag > 0
 		PRINT_NOW A_FAIL3 3000 1//The patient is dead
 		GOTO ambulance_failed
 	ENDIF
-		
+
 	IF ped_time_limit = 0
 		EXPLODE_CHAR_HEAD injured_ped_1
 		REMOVE_CHAR_ELEGANTLY injured_ped_1
@@ -1034,10 +1034,10 @@ IF injured_ped_1_flag > 0
 		IF NOT LOCATE_PLAYER_IN_CAR_CHAR_2D player injured_ped_1 25.0 25.0 0
 			injured_ped_1_flag = 1
 		ENDIF
-	ENDIF	
+	ENDIF
 
 	IF injured_ped_1_flag = 2
-		IF IS_CHAR_IN_ANY_CAR injured_ped_1 
+		IF IS_CHAR_IN_ANY_CAR injured_ped_1
 			REMOVE_BLIP injured_ped_1_blip
 			GOSUB chunk3_ambulance
 			injured_ped_1_flag = 3
@@ -1048,11 +1048,11 @@ IF injured_ped_1_flag > 0
 		IF LOCATE_STOPPED_PLAYER_IN_CAR_3D player hospital_x hospital_y hospital_z 6.0 6.0 2.0 0 // SCFIX: last arg was 1
 			SET_CHAR_OBJ_LEAVE_CAR injured_ped_1 players_ambulance
 			injured_ped_1_flag = 4
-		ENDIF	
+		ENDIF
 	ENDIF
 
 	IF injured_ped_1_flag = 4
-		IF NOT IS_CHAR_IN_ANY_CAR injured_ped_1	
+		IF NOT IS_CHAR_IN_ANY_CAR injured_ped_1
 			SET_CHAR_OBJ_GOTO_COORD_ON_FOOT injured_ped_1 hospital_door_x hospital_door_y
 			MARK_CHAR_AS_NO_LONGER_NEEDED injured_ped_1
 			GOSUB chunk4_ambulance
@@ -1068,7 +1068,7 @@ IF injured_ped_2_flag > 0
 		PRINT_NOW A_FAIL3 3000 1
 		GOTO ambulance_failed
 	ENDIF
-		
+
 	IF ped_time_limit = 0
 		EXPLODE_CHAR_HEAD injured_ped_2
 		REMOVE_CHAR_ELEGANTLY injured_ped_2
@@ -1101,10 +1101,10 @@ IF injured_ped_2_flag > 0
 		IF NOT LOCATE_PLAYER_IN_CAR_CHAR_2D player injured_ped_2 25.0 25.0 0
 			injured_ped_2_flag = 1
 		ENDIF
-	ENDIF	
+	ENDIF
 
 	IF injured_ped_2_flag = 2
-		IF IS_CHAR_IN_ANY_CAR injured_ped_2 
+		IF IS_CHAR_IN_ANY_CAR injured_ped_2
 			REMOVE_BLIP injured_ped_2_blip
 			GOSUB chunk3_ambulance
 			injured_ped_2_flag = 3
@@ -1115,11 +1115,11 @@ IF injured_ped_2_flag > 0
 		IF LOCATE_STOPPED_PLAYER_IN_CAR_3D player hospital_x hospital_y hospital_z 6.0 6.0 2.0 0 // SCFIX: last arg was 1
 			SET_CHAR_OBJ_LEAVE_CAR injured_ped_2 players_ambulance
 			injured_ped_2_flag = 4
-		ENDIF	
+		ENDIF
 	ENDIF
 
 	IF injured_ped_2_flag = 4
-		IF NOT IS_CHAR_IN_ANY_CAR injured_ped_2	
+		IF NOT IS_CHAR_IN_ANY_CAR injured_ped_2
 			SET_CHAR_OBJ_GOTO_COORD_ON_FOOT injured_ped_2 hospital_door_x hospital_door_y
 			MARK_CHAR_AS_NO_LONGER_NEEDED injured_ped_2
 			GOSUB chunk4_ambulance
@@ -1135,7 +1135,7 @@ IF injured_ped_3_flag > 0
 		PRINT_NOW A_FAIL3 3000 1
 		GOTO ambulance_failed
 	ENDIF
-		
+
 	IF ped_time_limit = 0
 		EXPLODE_CHAR_HEAD injured_ped_3
 		REMOVE_CHAR_ELEGANTLY injured_ped_3
@@ -1168,10 +1168,10 @@ IF injured_ped_3_flag > 0
 		IF NOT LOCATE_PLAYER_IN_CAR_CHAR_2D player injured_ped_3 25.0 25.0 0
 			injured_ped_3_flag = 1
 		ENDIF
-	ENDIF	
+	ENDIF
 
 	IF injured_ped_3_flag = 2
-		IF IS_CHAR_IN_ANY_CAR injured_ped_3 
+		IF IS_CHAR_IN_ANY_CAR injured_ped_3
 			REMOVE_BLIP injured_ped_3_blip
 			GOSUB chunk3_ambulance
 			injured_ped_3_flag = 3
@@ -1182,11 +1182,11 @@ IF injured_ped_3_flag > 0
 		IF LOCATE_STOPPED_PLAYER_IN_CAR_3D player hospital_x hospital_y hospital_z 6.0 6.0 2.0 0 // SCFIX: last arg was 1
 			SET_CHAR_OBJ_LEAVE_CAR injured_ped_3 players_ambulance
 			injured_ped_3_flag = 4
-		ENDIF	
+		ENDIF
 	ENDIF
 
 	IF injured_ped_3_flag = 4
-		IF NOT IS_CHAR_IN_ANY_CAR injured_ped_3	
+		IF NOT IS_CHAR_IN_ANY_CAR injured_ped_3
 			SET_CHAR_OBJ_GOTO_COORD_ON_FOOT injured_ped_3 hospital_door_x hospital_door_y
 			MARK_CHAR_AS_NO_LONGER_NEEDED injured_ped_3
 			GOSUB chunk4_ambulance
@@ -1202,7 +1202,7 @@ IF injured_ped_4_flag > 0
 		PRINT_NOW A_FAIL3 3000 1
 		GOTO ambulance_failed
 	ENDIF
-		
+
 	IF ped_time_limit = 0
 		EXPLODE_CHAR_HEAD injured_ped_4
 		REMOVE_CHAR_ELEGANTLY injured_ped_4
@@ -1235,10 +1235,10 @@ IF injured_ped_4_flag > 0
 		IF NOT LOCATE_PLAYER_IN_CAR_CHAR_2D player injured_ped_4 25.0 25.0 0
 			injured_ped_4_flag = 1
 		ENDIF
-	ENDIF	
+	ENDIF
 
 	IF injured_ped_4_flag = 2
-		IF IS_CHAR_IN_ANY_CAR injured_ped_4 
+		IF IS_CHAR_IN_ANY_CAR injured_ped_4
 			REMOVE_BLIP injured_ped_4_blip
 			GOSUB chunk3_ambulance
 			injured_ped_4_flag = 3
@@ -1249,11 +1249,11 @@ IF injured_ped_4_flag > 0
 		IF LOCATE_STOPPED_PLAYER_IN_CAR_3D player hospital_x hospital_y hospital_z 6.0 6.0 2.0 0 // SCFIX: last arg was 1
 			SET_CHAR_OBJ_LEAVE_CAR injured_ped_4 players_ambulance
 			injured_ped_4_flag = 4
-		ENDIF	
+		ENDIF
 	ENDIF
 
 	IF injured_ped_4_flag = 4
-		IF NOT IS_CHAR_IN_ANY_CAR injured_ped_4	
+		IF NOT IS_CHAR_IN_ANY_CAR injured_ped_4
 			SET_CHAR_OBJ_GOTO_COORD_ON_FOOT injured_ped_4 hospital_door_x hospital_door_y
 			MARK_CHAR_AS_NO_LONGER_NEEDED injured_ped_4
 			GOSUB chunk4_ambulance
@@ -1269,7 +1269,7 @@ IF injured_ped_5_flag > 0
 		PRINT_NOW A_FAIL3 3000 1
 		GOTO ambulance_failed
 	ENDIF
-		
+
 	IF ped_time_limit = 0
 		EXPLODE_CHAR_HEAD injured_ped_5
 		REMOVE_CHAR_ELEGANTLY injured_ped_5
@@ -1302,10 +1302,10 @@ IF injured_ped_5_flag > 0
 		IF NOT LOCATE_PLAYER_IN_CAR_CHAR_2D player injured_ped_5 25.0 25.0 0
 			injured_ped_5_flag = 1
 		ENDIF
-	ENDIF	
+	ENDIF
 
 	IF injured_ped_5_flag = 2
-		IF IS_CHAR_IN_ANY_CAR injured_ped_5 
+		IF IS_CHAR_IN_ANY_CAR injured_ped_5
 			REMOVE_BLIP injured_ped_5_blip
 			GOSUB chunk3_ambulance
 			injured_ped_5_flag = 3
@@ -1316,11 +1316,11 @@ IF injured_ped_5_flag > 0
 		IF LOCATE_STOPPED_PLAYER_IN_CAR_3D player hospital_x hospital_y hospital_z 6.0 6.0 2.0 0 // SCFIX: last arg was 1
 			SET_CHAR_OBJ_LEAVE_CAR injured_ped_5 players_ambulance
 			injured_ped_5_flag = 4
-		ENDIF	
+		ENDIF
 	ENDIF
 
 	IF injured_ped_5_flag = 4
-		IF NOT IS_CHAR_IN_ANY_CAR injured_ped_5	
+		IF NOT IS_CHAR_IN_ANY_CAR injured_ped_5
 			SET_CHAR_OBJ_GOTO_COORD_ON_FOOT injured_ped_5 hospital_door_x hospital_door_y
 			MARK_CHAR_AS_NO_LONGER_NEEDED injured_ped_5
 			GOSUB chunk4_ambulance
@@ -1336,7 +1336,7 @@ IF injured_ped_6_flag > 0
 		PRINT_NOW A_FAIL3 3000 1
 		GOTO ambulance_failed
 	ENDIF
-		
+
 	IF ped_time_limit = 0
 		EXPLODE_CHAR_HEAD injured_ped_6
 		REMOVE_CHAR_ELEGANTLY injured_ped_6
@@ -1369,10 +1369,10 @@ IF injured_ped_6_flag > 0
 		IF NOT LOCATE_PLAYER_IN_CAR_CHAR_2D player injured_ped_6 25.0 25.0 0
 			injured_ped_6_flag = 1
 		ENDIF
-	ENDIF	
+	ENDIF
 
 	IF injured_ped_6_flag = 2
-		IF IS_CHAR_IN_ANY_CAR injured_ped_6 
+		IF IS_CHAR_IN_ANY_CAR injured_ped_6
 			REMOVE_BLIP injured_ped_6_blip
 			GOSUB chunk3_ambulance
 			injured_ped_6_flag = 3
@@ -1383,11 +1383,11 @@ IF injured_ped_6_flag > 0
 		IF LOCATE_STOPPED_PLAYER_IN_CAR_3D player hospital_x hospital_y hospital_z 6.0 6.0 2.0 0 // SCFIX: last arg was 1
 			SET_CHAR_OBJ_LEAVE_CAR injured_ped_6 players_ambulance
 			injured_ped_6_flag = 4
-		ENDIF	
+		ENDIF
 	ENDIF
 
 	IF injured_ped_6_flag = 4
-		IF NOT IS_CHAR_IN_ANY_CAR injured_ped_6	
+		IF NOT IS_CHAR_IN_ANY_CAR injured_ped_6
 			SET_CHAR_OBJ_GOTO_COORD_ON_FOOT injured_ped_6 hospital_door_x hospital_door_y
 			MARK_CHAR_AS_NO_LONGER_NEEDED injured_ped_6
 			GOSUB chunk4_ambulance
@@ -1403,7 +1403,7 @@ IF injured_ped_7_flag > 0
 		PRINT_NOW A_FAIL3 3000 1
 		GOTO ambulance_failed
 	ENDIF
-		
+
 	IF ped_time_limit = 0
 		EXPLODE_CHAR_HEAD injured_ped_7
 		REMOVE_CHAR_ELEGANTLY injured_ped_7
@@ -1436,10 +1436,10 @@ IF injured_ped_7_flag > 0
 		IF NOT LOCATE_PLAYER_IN_CAR_CHAR_2D player injured_ped_7 25.0 25.0 0
 			injured_ped_7_flag = 1
 		ENDIF
-	ENDIF	
+	ENDIF
 
 	IF injured_ped_7_flag = 2
-		IF IS_CHAR_IN_ANY_CAR injured_ped_7 
+		IF IS_CHAR_IN_ANY_CAR injured_ped_7
 			REMOVE_BLIP injured_ped_7_blip
 			GOSUB chunk3_ambulance
 			injured_ped_7_flag = 3
@@ -1450,11 +1450,11 @@ IF injured_ped_7_flag > 0
 		IF LOCATE_STOPPED_PLAYER_IN_CAR_3D player hospital_x hospital_y hospital_z 6.0 6.0 2.0 0 // SCFIX: last arg was 1
 			SET_CHAR_OBJ_LEAVE_CAR injured_ped_7 players_ambulance
 			injured_ped_7_flag = 4
-		ENDIF	
+		ENDIF
 	ENDIF
 
 	IF injured_ped_7_flag = 4
-		IF NOT IS_CHAR_IN_ANY_CAR injured_ped_7	
+		IF NOT IS_CHAR_IN_ANY_CAR injured_ped_7
 			SET_CHAR_OBJ_GOTO_COORD_ON_FOOT injured_ped_7 hospital_door_x hospital_door_y
 			MARK_CHAR_AS_NO_LONGER_NEEDED injured_ped_7
 			GOSUB chunk4_ambulance
@@ -1470,7 +1470,7 @@ IF injured_ped_8_flag > 0
 		PRINT_NOW A_FAIL3 3000 1
 		GOTO ambulance_failed
 	ENDIF
-		
+
 	IF ped_time_limit = 0
 		EXPLODE_CHAR_HEAD injured_ped_8
 		REMOVE_CHAR_ELEGANTLY injured_ped_8
@@ -1503,10 +1503,10 @@ IF injured_ped_8_flag > 0
 		IF NOT LOCATE_PLAYER_IN_CAR_CHAR_2D player injured_ped_8 25.0 25.0 0
 			injured_ped_8_flag = 1
 		ENDIF
-	ENDIF	
+	ENDIF
 
 	IF injured_ped_8_flag = 2
-		IF IS_CHAR_IN_ANY_CAR injured_ped_8 
+		IF IS_CHAR_IN_ANY_CAR injured_ped_8
 			REMOVE_BLIP injured_ped_8_blip
 			GOSUB chunk3_ambulance
 			injured_ped_8_flag = 3
@@ -1517,11 +1517,11 @@ IF injured_ped_8_flag > 0
 		IF LOCATE_STOPPED_PLAYER_IN_CAR_3D player hospital_x hospital_y hospital_z 6.0 6.0 2.0 0 // SCFIX: last arg was 1
 			SET_CHAR_OBJ_LEAVE_CAR injured_ped_8 players_ambulance
 			injured_ped_8_flag = 4
-		ENDIF	
+		ENDIF
 	ENDIF
 
 	IF injured_ped_8_flag = 4
-		IF NOT IS_CHAR_IN_ANY_CAR injured_ped_8	
+		IF NOT IS_CHAR_IN_ANY_CAR injured_ped_8
 			SET_CHAR_OBJ_GOTO_COORD_ON_FOOT injured_ped_8 hospital_door_x hospital_door_y
 			MARK_CHAR_AS_NO_LONGER_NEEDED injured_ped_8
 			GOSUB chunk4_ambulance
@@ -1537,7 +1537,7 @@ IF injured_ped_9_flag > 0
 		PRINT_NOW A_FAIL3 3000 1
 		GOTO ambulance_failed
 	ENDIF
-		
+
 	IF ped_time_limit = 0
 		EXPLODE_CHAR_HEAD injured_ped_9
 		REMOVE_CHAR_ELEGANTLY injured_ped_9
@@ -1570,10 +1570,10 @@ IF injured_ped_9_flag > 0
 		IF NOT LOCATE_PLAYER_IN_CAR_CHAR_2D player injured_ped_9 25.0 25.0 0
 			injured_ped_9_flag = 1
 		ENDIF
-	ENDIF	
+	ENDIF
 
 	IF injured_ped_9_flag = 2
-		IF IS_CHAR_IN_ANY_CAR injured_ped_9 
+		IF IS_CHAR_IN_ANY_CAR injured_ped_9
 			REMOVE_BLIP injured_ped_9_blip
 			GOSUB chunk3_ambulance
 			injured_ped_9_flag = 3
@@ -1584,11 +1584,11 @@ IF injured_ped_9_flag > 0
 		IF LOCATE_STOPPED_PLAYER_IN_CAR_3D player hospital_x hospital_y hospital_z 6.0 6.0 2.0 0 // SCFIX: last arg was 1
 			SET_CHAR_OBJ_LEAVE_CAR injured_ped_9 players_ambulance
 			injured_ped_9_flag = 4
-		ENDIF	
+		ENDIF
 	ENDIF
 
 	IF injured_ped_9_flag = 4
-		IF NOT IS_CHAR_IN_ANY_CAR injured_ped_9	
+		IF NOT IS_CHAR_IN_ANY_CAR injured_ped_9
 			SET_CHAR_OBJ_GOTO_COORD_ON_FOOT injured_ped_9 hospital_door_x hospital_door_y
 			MARK_CHAR_AS_NO_LONGER_NEEDED injured_ped_9
 			GOSUB chunk4_ambulance
@@ -1604,7 +1604,7 @@ IF injured_ped_10_flag > 0
 		PRINT_NOW A_FAIL3 3000 1
 		GOTO ambulance_failed
 	ENDIF
-		
+
 	IF ped_time_limit = 0
 		EXPLODE_CHAR_HEAD injured_ped_10
 		REMOVE_CHAR_ELEGANTLY injured_ped_10
@@ -1637,10 +1637,10 @@ IF injured_ped_10_flag > 0
 		IF NOT LOCATE_PLAYER_IN_CAR_CHAR_2D player injured_ped_10 25.0 25.0 0
 			injured_ped_10_flag = 1
 		ENDIF
-	ENDIF	
+	ENDIF
 
 	IF injured_ped_10_flag = 2
-		IF IS_CHAR_IN_ANY_CAR injured_ped_10 
+		IF IS_CHAR_IN_ANY_CAR injured_ped_10
 			REMOVE_BLIP injured_ped_10_blip
 			GOSUB chunk3_ambulance
 			injured_ped_10_flag = 3
@@ -1651,11 +1651,11 @@ IF injured_ped_10_flag > 0
 		IF LOCATE_STOPPED_PLAYER_IN_CAR_3D player hospital_x hospital_y hospital_z 6.0 6.0 2.0 0 // SCFIX: last arg was 1
 			SET_CHAR_OBJ_LEAVE_CAR injured_ped_10 players_ambulance
 			injured_ped_10_flag = 4
-		ENDIF	
+		ENDIF
 	ENDIF
 
 	IF injured_ped_10_flag = 4
-		IF NOT IS_CHAR_IN_ANY_CAR injured_ped_10	
+		IF NOT IS_CHAR_IN_ANY_CAR injured_ped_10
 			SET_CHAR_OBJ_GOTO_COORD_ON_FOOT injured_ped_10 hospital_door_x hospital_door_y
 			MARK_CHAR_AS_NO_LONGER_NEEDED injured_ped_10
 			GOSUB chunk4_ambulance
@@ -1671,7 +1671,7 @@ IF injured_ped_11_flag > 0
 		PRINT_NOW A_FAIL3 3000 1
 		GOTO ambulance_failed
 	ENDIF
-		
+
 	IF ped_time_limit = 0
 		EXPLODE_CHAR_HEAD injured_ped_11
 		REMOVE_CHAR_ELEGANTLY injured_ped_11
@@ -1704,10 +1704,10 @@ IF injured_ped_11_flag > 0
 		IF NOT LOCATE_PLAYER_IN_CAR_CHAR_2D player injured_ped_11 25.0 25.0 0
 			injured_ped_11_flag = 1
 		ENDIF
-	ENDIF	
+	ENDIF
 
 	IF injured_ped_11_flag = 2
-		IF IS_CHAR_IN_ANY_CAR injured_ped_11 
+		IF IS_CHAR_IN_ANY_CAR injured_ped_11
 			REMOVE_BLIP injured_ped_11_blip
 			GOSUB chunk3_ambulance
 			injured_ped_11_flag = 3
@@ -1718,11 +1718,11 @@ IF injured_ped_11_flag > 0
 		IF LOCATE_STOPPED_PLAYER_IN_CAR_3D player hospital_x hospital_y hospital_z 6.0 6.0 2.0 0 // SCFIX: last arg was 1
 			SET_CHAR_OBJ_LEAVE_CAR injured_ped_11 players_ambulance
 			injured_ped_11_flag = 4
-		ENDIF	
+		ENDIF
 	ENDIF
 
 	IF injured_ped_11_flag = 4
-		IF NOT IS_CHAR_IN_ANY_CAR injured_ped_11	
+		IF NOT IS_CHAR_IN_ANY_CAR injured_ped_11
 			SET_CHAR_OBJ_GOTO_COORD_ON_FOOT injured_ped_11 hospital_door_x hospital_door_y
 			MARK_CHAR_AS_NO_LONGER_NEEDED injured_ped_11
 			GOSUB chunk4_ambulance
@@ -1738,7 +1738,7 @@ IF injured_ped_12_flag > 0
 		PRINT_NOW A_FAIL3 3000 1
 		GOTO ambulance_failed
 	ENDIF
-		
+
 	IF ped_time_limit = 0
 		EXPLODE_CHAR_HEAD injured_ped_12
 		REMOVE_CHAR_ELEGANTLY injured_ped_12
@@ -1771,10 +1771,10 @@ IF injured_ped_12_flag > 0
 		IF NOT LOCATE_PLAYER_IN_CAR_CHAR_2D player injured_ped_12 25.0 25.0 0
 			injured_ped_12_flag = 1
 		ENDIF
-	ENDIF	
+	ENDIF
 
 	IF injured_ped_12_flag = 2
-		IF IS_CHAR_IN_ANY_CAR injured_ped_12 
+		IF IS_CHAR_IN_ANY_CAR injured_ped_12
 			REMOVE_BLIP injured_ped_12_blip
 			GOSUB chunk3_ambulance
 			injured_ped_12_flag = 3
@@ -1785,11 +1785,11 @@ IF injured_ped_12_flag > 0
 		IF LOCATE_STOPPED_PLAYER_IN_CAR_3D player hospital_x hospital_y hospital_z 6.0 6.0 2.0 0 // SCFIX: last arg was 1
 			SET_CHAR_OBJ_LEAVE_CAR injured_ped_12 players_ambulance
 			injured_ped_12_flag = 4
-		ENDIF	
+		ENDIF
 	ENDIF
 
 	IF injured_ped_12_flag = 4
-		IF NOT IS_CHAR_IN_ANY_CAR injured_ped_12	
+		IF NOT IS_CHAR_IN_ANY_CAR injured_ped_12
 			SET_CHAR_OBJ_GOTO_COORD_ON_FOOT injured_ped_12 hospital_door_x hospital_door_y
 			MARK_CHAR_AS_NO_LONGER_NEEDED injured_ped_12
 			GOSUB chunk4_ambulance
@@ -1805,7 +1805,7 @@ ENDIF
 //		PRINT_NOW A_FAIL3 3000 1
 //		GOTO ambulance_failed
 //	ENDIF
-//		
+//
 //	IF ped_time_limit = 0
 //		EXPLODE_CHAR_HEAD injured_ped_13
 //		REMOVE_CHAR_ELEGANTLY injured_ped_13
@@ -1838,10 +1838,10 @@ ENDIF
 //		IF NOT LOCATE_PLAYER_IN_CAR_CHAR_2D player injured_ped_13 25.0 25.0 0
 //			injured_ped_13_flag = 1
 //		ENDIF
-//	ENDIF	
+//	ENDIF
 //
 //	IF injured_ped_13_flag = 2
-//		IF IS_CHAR_IN_ANY_CAR injured_ped_13 
+//		IF IS_CHAR_IN_ANY_CAR injured_ped_13
 //			REMOVE_BLIP injured_ped_13_blip
 //			GOSUB chunk3_ambulance
 //			injured_ped_13_flag = 3
@@ -1852,11 +1852,11 @@ ENDIF
 //		IF LOCATE_STOPPED_PLAYER_IN_CAR_3D player hospital_x hospital_y hospital_z 6.0 6.0 2.0 0 // SCFIX: last arg was 1
 //			SET_CHAR_OBJ_LEAVE_CAR injured_ped_13 players_ambulance
 //			injured_ped_13_flag = 4
-//		ENDIF	
+//		ENDIF
 //	ENDIF
 //
 //	IF injured_ped_13_flag = 4
-//		IF NOT IS_CHAR_IN_ANY_CAR injured_ped_13	
+//		IF NOT IS_CHAR_IN_ANY_CAR injured_ped_13
 //			SET_CHAR_OBJ_GOTO_COORD_ON_FOOT injured_ped_13 hospital_door_x hospital_door_y
 //			MARK_CHAR_AS_NO_LONGER_NEEDED injured_ped_13
 //			GOSUB chunk4_ambulance
@@ -1872,7 +1872,7 @@ ENDIF
 //		PRINT_NOW A_FAIL3 3000 1
 //		GOTO ambulance_failed
 //	ENDIF
-//		
+//
 //	IF ped_time_limit = 0
 //		EXPLODE_CHAR_HEAD injured_ped_14
 //		REMOVE_CHAR_ELEGANTLY injured_ped_14
@@ -1905,10 +1905,10 @@ ENDIF
 //		IF NOT LOCATE_PLAYER_IN_CAR_CHAR_2D player injured_ped_14 25.0 25.0 0
 //			injured_ped_14_flag = 1
 //		ENDIF
-//	ENDIF	
+//	ENDIF
 //
 //	IF injured_ped_14_flag = 2
-//		IF IS_CHAR_IN_ANY_CAR injured_ped_14 
+//		IF IS_CHAR_IN_ANY_CAR injured_ped_14
 //			REMOVE_BLIP injured_ped_14_blip
 //			GOSUB chunk3_ambulance
 //			injured_ped_14_flag = 3
@@ -1919,11 +1919,11 @@ ENDIF
 //		IF LOCATE_STOPPED_PLAYER_IN_CAR_3D player hospital_x hospital_y hospital_z 6.0 6.0 2.0 0 // SCFIX: last arg was 1
 //			SET_CHAR_OBJ_LEAVE_CAR injured_ped_14 players_ambulance
 //			injured_ped_14_flag = 4
-//		ENDIF	
+//		ENDIF
 //	ENDIF
 //
 //	IF injured_ped_14_flag = 4
-//		IF NOT IS_CHAR_IN_ANY_CAR injured_ped_14	
+//		IF NOT IS_CHAR_IN_ANY_CAR injured_ped_14
 //			SET_CHAR_OBJ_GOTO_COORD_ON_FOOT injured_ped_14 hospital_door_x hospital_door_y
 //			MARK_CHAR_AS_NO_LONGER_NEEDED injured_ped_14
 //			GOSUB chunk4_ambulance
@@ -1939,7 +1939,7 @@ ENDIF
 //		PRINT_NOW A_FAIL3 3000 1
 //		GOTO ambulance_failed
 //	ENDIF
-//		
+//
 //	IF ped_time_limit = 0
 //		EXPLODE_CHAR_HEAD injured_ped_15
 //		REMOVE_CHAR_ELEGANTLY injured_ped_15
@@ -1972,10 +1972,10 @@ ENDIF
 //		IF NOT LOCATE_PLAYER_IN_CAR_CHAR_2D player injured_ped_15 25.0 25.0 0
 //			injured_ped_15_flag = 1
 //		ENDIF
-//	ENDIF	
+//	ENDIF
 //
 //	IF injured_ped_15_flag = 2
-//		IF IS_CHAR_IN_ANY_CAR injured_ped_15 
+//		IF IS_CHAR_IN_ANY_CAR injured_ped_15
 //			REMOVE_BLIP injured_ped_15_blip
 //			GOSUB chunk3_ambulance
 //			injured_ped_15_flag = 3
@@ -1986,11 +1986,11 @@ ENDIF
 //		IF LOCATE_STOPPED_PLAYER_IN_CAR_3D player hospital_x hospital_y hospital_z 6.0 6.0 2.0 0 // SCFIX: last arg was 1
 //			SET_CHAR_OBJ_LEAVE_CAR injured_ped_15 players_ambulance
 //			injured_ped_15_flag = 4
-//		ENDIF	
+//		ENDIF
 //	ENDIF
 //
 //	IF injured_ped_15_flag = 4
-//		IF NOT IS_CHAR_IN_ANY_CAR injured_ped_15	
+//		IF NOT IS_CHAR_IN_ANY_CAR injured_ped_15
 //			SET_CHAR_OBJ_GOTO_COORD_ON_FOOT injured_ped_15 hospital_door_x hospital_door_y
 //			MARK_CHAR_AS_NO_LONGER_NEEDED injured_ped_15
 //			GOSUB chunk4_ambulance
@@ -2113,7 +2113,7 @@ RETURN
 
 //////////////////////////////////////////////////////////////////////
 chunk1_ambulance:
-	   		
+
 GET_CAR_HEALTH players_ambulance ambulance_health_now
 IF ambulance_health_now < ambulance_health_last
 	time_drop = ambulance_health_last - ambulance_health_now
@@ -2135,7 +2135,7 @@ IF ambulance_health_now < ambulance_health_last
 	ENDIF
 	IF ped_time_limit < 0
 		ped_time_limit = 0
-	ENDIF		
+	ENDIF
 	ambulance_health_last = ambulance_health_now
 ENDIF
 
@@ -2164,7 +2164,7 @@ RETURN
 
 //////////////////////////////////////////////////////////////////////
 chunk3_ambulance:
-	   		
+
 IF hospital_blip_flag = 0
 	ADD_BLIP_FOR_COORD hospital_x hospital_y hospital_z hospital_blip
 	hospital_blip_flag = 1
@@ -2179,7 +2179,7 @@ time_chunk_in_secs = time_chunk / 1000
 PRINT_WITH_NUMBER_BIG A_TIME time_chunk_in_secs 6000 6	//+~1~ Seconds
 ped_time_limit += time_chunk
 
-RETURN	
+RETURN
 //////////////////////////////////////////////////////////////////////
 
 

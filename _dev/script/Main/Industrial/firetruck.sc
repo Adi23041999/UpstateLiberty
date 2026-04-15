@@ -2,7 +2,7 @@ MISSION_START
 // *****************************************************************************************
 // *****************************************************************************************
 // *****************************************************************************************
-// *************************************** Fire missions *********************************** 
+// *************************************** Fire missions ***********************************
 // *****************************************************************************************
 // *****************************************************************************************
 // *****************************************************************************************
@@ -14,13 +14,13 @@ GOSUB mission_start_fire
 GOSUB failed
 
 MISSION_END
- 
+
 // Variables for mission
 
 VAR_INT	fire_time_limit	fire_to_extinguish fire_to_extinguish_blip car_on_fire random_car_model	fires_extinguished
-VAR_INT car_on_fire_created	player_in_range_fire flag_got_range_mssg intermediate_int score_ft displayed_timer 
+VAR_INT car_on_fire_created	player_in_range_fire flag_got_range_mssg intermediate_int score_ft displayed_timer
 VAR_INT total_score displayed_counter first_fire_flag mission_end_button_ft	fire_location dummy_ped_for_zone
-VAR_INT players_firetruck players_firetruck_health car_on_fire_health 
+VAR_INT players_firetruck players_firetruck_health car_on_fire_health
 
 VAR_FLOAT random_fire_x random_fire_y time_divider time_divider_divider
 VAR_FLOAT player1_x	player1_y player1_z
@@ -116,7 +116,7 @@ ENDIF
 
 //IF IS_PLAYER_IN_AREA_2D player -192.0 -1626.0 545.0 98.0 0  //COMMERCIAL
 IF IS_COLLISION_IN_MEMORY LEVEL_COMMERCIAL
-	GENERATE_RANDOM_FLOAT_IN_RANGE -192.0 545.0 random_fire_x  
+	GENERATE_RANDOM_FLOAT_IN_RANGE -192.0 545.0 random_fire_x
 	GENERATE_RANDOM_FLOAT_IN_RANGE -1626.0 98.0 random_fire_y
 	flag_got_range_mssg = 0
 	player_in_range_fire = 1
@@ -126,12 +126,34 @@ ENDIF
 
 //IF IS_PLAYER_IN_AREA_2D player -1300.0 -608.8 -265.0 380.0 0  //SUBURBIA
 IF IS_COLLISION_IN_MEMORY LEVEL_SUBURBAN
-	GENERATE_RANDOM_FLOAT_IN_RANGE -1300.0 -414.0 random_fire_x
-	GENERATE_RANDOM_FLOAT_IN_RANGE -608.8 380.0 random_fire_y
-	flag_got_range_mssg = 0
-	player_in_range_fire = 1
-	fire_location = 3
-	time_divider = 11.0
+	
+ENDIF
+
+IF IS_COLLISION_IN_MEMORY LEVEL_SUBURBAN
+	IF IS_PLAYER_IN_ZONE player UL_ZON0
+		IF IS_PLAYER_IN_ZONE player GT_ZON0
+			GENERATE_RANDOM_FLOAT_IN_RANGE 912.647 1865.222 random_fire_x
+			GENERATE_RANDOM_FLOAT_IN_RANGE 780.918 1782.927 random_fire_y
+			flag_got_range_mssg = 0
+			player_in_range_fire = 1
+			fire_location = 5
+			time_divider = 14.0
+		ELSE
+			GENERATE_RANDOM_FLOAT_IN_RANGE -1881.029 895.193 random_fire_x
+			GENERATE_RANDOM_FLOAT_IN_RANGE 725.101 1875.871 random_fire_y
+			flag_got_range_mssg = 0
+			player_in_range_fire = 1
+			fire_location = 4
+			time_divider = 11.0
+		ENDIF
+	ELSE
+		GENERATE_RANDOM_FLOAT_IN_RANGE -1300.0 -414.0 random_fire_x
+		GENERATE_RANDOM_FLOAT_IN_RANGE -608.8 380.0 random_fire_y
+		flag_got_range_mssg = 0
+		player_in_range_fire = 1
+		fire_location = 3
+		time_divider = 11.0
+	ENDIF
 ENDIF
 
 IF player_in_range_fire = 0
@@ -141,7 +163,7 @@ AND flag_got_range_mssg = 0
 		flag_got_range_mssg = 1
 	ENDIF
 	GOTO failed
-ENDIF													  
+ENDIF
 
 GET_CLOSEST_CAR_NODE random_fire_x random_fire_y player1_z fire_coord_x fire_coord_y fire_coord_z
 
@@ -207,6 +229,24 @@ IF fire_location = 3
 	ENDIF
 ENDIF
 
+IF fire_location = 4
+	IF NOT fire_coord_x > -1881.029 //MIN_X // COUNTRYSIDE
+	OR NOT fire_coord_x	< 895.193 //MAX_X
+	OR NOT fire_coord_y	> 725.101 //MIN_Y
+	OR NOT fire_coord_y	< 1875.871 //MAX_Y
+		GOTO next_fire
+	ENDIF
+ENDIF
+
+IF fire_location = 5
+	IF NOT fire_coord_x > 912.647 //MIN_X // GOSTBURG
+	OR NOT fire_coord_x	< 1865.222 //MAX_X
+	OR NOT fire_coord_y	> 780.918 //MIN_Y
+	OR NOT fire_coord_y	< 1782.927 //MAX_Y
+		GOTO next_fire
+	ENDIF
+ENDIF
+
 IF fire_coord_z < -1.0
 	GOTO next_fire
 ENDIF
@@ -241,7 +281,7 @@ generate_model:
 
 GENERATE_RANDOM_INT_IN_RANGE 90 140 random_car_model //INC 90 NOT INC 140
 
-IF random_car_model > 113  // CAR_BUGGY CAR_CORPSE CAR_POLICE CAR_ENFORCER CAR_SECURICAR CAR_BANSHEE BOAT_PREDATOR CAR_BUS	
+IF random_car_model > 113  // CAR_BUGGY CAR_CORPSE CAR_POLICE CAR_ENFORCER CAR_SECURICAR CAR_BANSHEE BOAT_PREDATOR CAR_BUS
 AND random_car_model < 128 // CAR_RHINO CAR_BARRACKS TRAIN_SUBWAY HELI_POLICE PLANE_DODO CAR_COACH
 	GOTO generate_model
 ENDIF
@@ -272,12 +312,12 @@ ENDIF
 WHILE NOT HAS_MODEL_LOADED random_car_model
 OR NOT TIMERA > 3000
 	WAIT 0
-	
+
 	IF fire_time_limit < 1
 		PRINT_NOW F_FAIL2 5000 1
 		GOTO failed
 	ENDIF
-		
+
 	IF NOT IS_PLAYER_IN_MODEL player CAR_FIRETRUCK
 		PRINT_NOW F_CANC 3000 1//"Fire truck mission cancelled!"
 		GOTO failed
@@ -308,19 +348,19 @@ OR NOT TIMERA > 3000
 			ENDIF
 		ENDIF
 	ENDIF
-	
+
 ENDWHILE
 }
 GENERATE_RANDOM_FLOAT_IN_RANGE 0.0 359.9 random_car_heading
 
-IF car_on_fire_created = 0	
+IF car_on_fire_created = 0
 	CREATE_CAR random_car_model fire_coord_x fire_coord_y fire_coord_z car_on_fire
 	car_on_fire_created = 1
 ENDIF
 
 CREATE_CHAR_INSIDE_CAR car_on_fire PEDTYPE_CIVMALE PED_MALE1 dummy_ped_for_zone
 MARK_MODEL_AS_NO_LONGER_NEEDED random_car_model
-SET_CAR_HEADING car_on_fire random_car_heading  
+SET_CAR_HEADING car_on_fire random_car_heading
 START_CAR_FIRE car_on_fire fire_to_extinguish
 ADD_BLIP_FOR_CAR car_on_fire fire_to_extinguish_blip
 CAR_SET_IDLE car_on_fire
@@ -438,6 +478,74 @@ IF IS_CHAR_IN_ZONE dummy_ped_for_zone BIG_DAM
 	PRINT_STRING_IN_STRING_NOW F_START BIG_DAM 5000 1 // The dummy_ped_for_zone is proceeding south in Cochrane Dam
 ENDIF
 
+IF IS_CHAR_IN_ZONE dummy_ped_for_zone UL_ZON0
+AND NOT IS_CHAR_IN_ZONE dummy_ped_for_zone GT_ZON0
+	PRINT_STRING_IN_STRING_NOW F_START UL_ZON0 5000 1 // The dummy_ped_for_zone is proceeding south in Upstate Liberty
+
+	IF IS_CHAR_IN_ZONE dummy_ped_for_zone WARSAW
+		PRINT_STRING_IN_STRING_NOW F_START WARSAW 5000 1 // The dummy_ped_for_zone is proceeding south in Warsaw
+	ENDIF
+	
+	IF IS_CHAR_IN_ZONE dummy_ped_for_zone BAXTER
+		PRINT_STRING_IN_STRING_NOW F_START BAXTER 5000 1 // The dummy_ped_for_zone is proceeding south in Baxter
+	ENDIF
+
+	IF IS_CHAR_IN_ZONE dummy_ped_for_zone CARRIN
+		PRINT_STRING_IN_STRING_NOW F_START CARRIN 5000 1 // The dummy_ped_for_zone is proceeding south in Carrington
+	ENDIF
+
+	IF IS_CHAR_IN_ZONE dummy_ped_for_zone LOVEEI1
+	OR IS_CHAR_IN_ZONE dummy_ped_for_zone LOVEEI2
+	OR IS_CHAR_IN_ZONE dummy_ped_for_zone LOVEEI3
+		PRINT_STRING_IN_STRING_NOW F_START LOVEES 5000 1 // The dummy_ped_for_zone is proceeding south in Love Estates
+	ENDIF
+
+	IF IS_CHAR_IN_ZONE dummy_ped_for_zone RIDGE
+		PRINT_STRING_IN_STRING_NOW F_START RIDGE 5000 1 // The dummy_ped_for_zone is proceeding south in Cedar Ridge
+	ENDIF
+ENDIF
+
+IF IS_CHAR_IN_ZONE dummy_ped_for_zone UL_ZON0
+AND IS_CHAR_IN_ZONE dummy_ped_for_zone GT_ZON0
+	PRINT_STRING_IN_STRING_NOW F_START GT_ZON0 5000 1 // The dummy_ped_for_zone is proceeding south in Gostburg
+
+	IF IS_CHAR_IN_ZONE dummy_ped_for_zone GTWAIR
+		PRINT_STRING_IN_STRING_NOW F_START GTWAIR 5000 1 // The dummy_ped_for_zone is proceeding south in Gostburg Regional Airport
+	ENDIF
+
+	IF IS_CHAR_IN_ZONE dummy_ped_for_zone INDPARK
+		PRINT_STRING_IN_STRING_NOW F_START INDPARK 5000 1 // The dummy_ped_for_zone is proceeding south in Industrial Park
+	ENDIF
+
+	IF IS_CHAR_IN_ZONE dummy_ped_for_zone CEDARW
+		PRINT_STRING_IN_STRING_NOW F_START CEDARW 5000 1 // The dummy_ped_for_zone is proceeding south in Cedarwood Hills
+	ENDIF
+
+	IF IS_CHAR_IN_ZONE dummy_ped_for_zone OLDTOWN
+		PRINT_STRING_IN_STRING_NOW F_START OLDTOWN 5000 1 // The dummy_ped_for_zone is proceeding south in Old Town
+	ENDIF
+
+	IF IS_CHAR_IN_ZONE dummy_ped_for_zone LEONARD
+		PRINT_STRING_IN_STRING_NOW F_START LEONARD 5000 1 // The dummy_ped_for_zone is proceeding south in Leonard Heights
+	ENDIF
+
+	IF IS_CHAR_IN_ZONE dummy_ped_for_zone SUMMER
+		PRINT_STRING_IN_STRING_NOW F_START SUMMER 5000 1 // The dummy_ped_for_zone is proceeding south in Summerton
+	ENDIF
+
+	IF IS_CHAR_IN_ZONE dummy_ped_for_zone GTWCENT
+		PRINT_STRING_IN_STRING_NOW F_START GTWCENT 5000 1 // The dummy_ped_for_zone is proceeding south in Central Gostburg
+	ENDIF
+
+	IF IS_CHAR_IN_ZONE dummy_ped_for_zone LILCHIN
+		PRINT_STRING_IN_STRING_NOW F_START LILCHIN 5000 1 // The dummy_ped_for_zone is proceeding south in Little Shanghai
+	ENDIF
+
+	IF IS_CHAR_IN_ZONE dummy_ped_for_zone SUMMER
+		PRINT_STRING_IN_STRING_NOW F_START SUMMER 5000 1 // The dummy_ped_for_zone is proceeding south in Summerton
+	ENDIF
+ENDIF
+
 DELETE_CHAR dummy_ped_for_zone
 
 IF displayed_timer = 0
@@ -483,24 +591,24 @@ ENDIF
 
 WHILE NOT IS_SCRIPT_FIRE_EXTINGUISHED fire_to_extinguish
 	WAIT 0
-	
+
 	IF IS_CAR_DEAD car_on_fire
 		PRINT_NOW F_FAIL2 5000 1
 		GOTO failed
 	ENDIF
-	
+
 	IF fire_time_limit < 1
 		PRINT_NOW F_FAIL2 5000 1
 		GOTO failed
 	ENDIF
-	
+
 	IF NOT IS_PLAYER_IN_MODEL player CAR_FIRETRUCK
 		PRINT_NOW F_CANC 3000 1//"Fire truck mission cancelled!"
 		GOTO failed
 	ENDIF
 
 	GET_CAR_HEALTH car_on_fire car_on_fire_health
-	
+
 	IF car_on_fire_health < 900
 		EXPLODE_CAR car_on_fire
 	ENDIF
@@ -557,6 +665,14 @@ IF fire_location = 3
 	++ sub_fires_exting
 ENDIF
 
+IF fire_location = 4
+	++ lcc_fires_exting
+ENDIF
+
+IF fire_location = 5
+	++ gtw_fires_exting
+ENDIF
+
 IF earned_free_flamethrower = 0
 	IF ind_fires_exting > 19
 	AND com_fires_exting > 19
@@ -564,6 +680,15 @@ IF earned_free_flamethrower = 0
 		ADD_PAGER_MESSAGE PAGEB11 140 100 1	//"Flamethrower delivered to hideout"
 		PLAYER_MADE_PROGRESS 1
 		earned_free_flamethrower = 1
+	ENDIF
+ENDIF
+
+IF earned_free_immunity_fire = 0
+	IF lcc_fires_exting > 1
+	AND gtw_fires_exting > 1
+		ADD_PAGER_MESSAGE ULPAG1 140 100 1	//"You are now fireproof!"
+		PLAYER_MADE_PROGRESS 1
+		earned_free_immunity_fire = 1
 	ENDIF
 ENDIF
 
@@ -634,8 +759,8 @@ flag_player_on_fire_mission	= 0
 MISSION_HAS_FINISHED
 RETURN
 
-	   		
-	
-		
+
+
+
 
 

@@ -2,7 +2,7 @@ MISSION_START
 // *****************************************************************************************
 // *****************************************************************************************
 // *****************************************************************************************
-// *********************************** Cop Car Mission ************************************* 
+// *********************************** Cop Car Mission *************************************
 // *****************************************************************************************
 // *****************************************************************************************
 // *****************************************************************************************
@@ -14,14 +14,14 @@ GOSUB mission_start_cop_car
 GOSUB cop_car_failed
 
 MISSION_END
- 
+
 // Variables for mission
 
 VAR_INT	got_range_message	player_in_range	car_model criminal_car	range_int mission_end_button total_criminals_killed players_cop_car_health
 VAR_INT criminal_created_flag criminal criminal_blip random_gun	cop_time_limit got_car_crim_is_in timer_reset_flag vigilante_bonus_kills location got_cop_breif
 VAR_INT game_time_flag game_timer_start	copcar_timer game_time_present game_time_difference	timer_in_secs players_cop_car vigilante	vigilante_score copcar_cancelled_flag
 
-VAR_FLOAT player_c_x player_c_y	player_c_z random_crim_x random_crim_y criminal_coord_x criminal_coord_y criminal_coord_z 
+VAR_FLOAT player_c_x player_c_y	player_c_z random_crim_x random_crim_y criminal_coord_x criminal_coord_y criminal_coord_z
 VAR_FLOAT diff_x_float diff_y_float sum_of_diff_xy players_distance_from_criminal cop_time_limit_float criminal_heading	warp_heading_cop
 
 // ****************************************Mission Start************************************
@@ -63,19 +63,19 @@ mission_end_button	  = 0
 location			  = 0
 copcar_cancelled_flag = 0
 
-player_c_x 		 = 0.0 
-player_c_y 		 = 0.0	
-player_c_z 		 = 0.0 
-random_crim_x 	 = 0.0 
-random_crim_y 	 = 0.0 
-criminal_coord_x = 0.0 
-criminal_coord_y = 0.0 
+player_c_x 		 = 0.0
+player_c_y 		 = 0.0
+player_c_z 		 = 0.0
+random_crim_x 	 = 0.0
+random_crim_y 	 = 0.0
+criminal_coord_x = 0.0
+criminal_coord_y = 0.0
 criminal_coord_z = 0.0
-diff_x_float 	 = 0.0 
-diff_y_float 	 = 0.0 
-sum_of_diff_xy 	 = 0.0 
-players_distance_from_criminal = 0.0 
-cop_time_limit_float = 0.0 
+diff_x_float 	 = 0.0
+diff_y_float 	 = 0.0
+sum_of_diff_xy 	 = 0.0
+players_distance_from_criminal = 0.0
+cop_time_limit_float = 0.0
 criminal_heading 	 = 0.0
 
 GET_PLAYER_COORDINATES player player_c_x player_c_y player_c_z
@@ -102,7 +102,7 @@ IF IS_COLLISION_IN_MEMORY LEVEL_INDUSTRIAL
 ENDIF
 
 IF IS_COLLISION_IN_MEMORY LEVEL_COMMERCIAL
-	GENERATE_RANDOM_FLOAT_IN_RANGE -192.0 545.0 random_crim_x  
+	GENERATE_RANDOM_FLOAT_IN_RANGE -192.0 545.0 random_crim_x
 	GENERATE_RANDOM_FLOAT_IN_RANGE -1626.0 98.0 random_crim_y
 	got_range_message = 0
 	player_in_range = 1
@@ -110,11 +110,27 @@ IF IS_COLLISION_IN_MEMORY LEVEL_COMMERCIAL
 ENDIF
 
 IF IS_COLLISION_IN_MEMORY LEVEL_SUBURBAN
-	GENERATE_RANDOM_FLOAT_IN_RANGE -1300.0 -414.0 random_crim_x
-	GENERATE_RANDOM_FLOAT_IN_RANGE -608.8 380.0 random_crim_y
-	got_range_message = 0
-	player_in_range = 1
-	location = 3
+	IF IS_PLAYER_IN_ZONE player UL_ZON0
+		IF IS_PLAYER_IN_ZONE player GT_ZON0
+			GENERATE_RANDOM_FLOAT_IN_RANGE 912.647 1865.222 random_crim_x
+			GENERATE_RANDOM_FLOAT_IN_RANGE 780.918 1782.927 random_crim_y
+			got_range_message = 0
+			player_in_range = 1
+			location = 5
+		ELSE
+			GENERATE_RANDOM_FLOAT_IN_RANGE -1881.029 895.193 random_crim_x
+			GENERATE_RANDOM_FLOAT_IN_RANGE 725.101 1875.871 random_crim_y
+			got_range_message = 0
+			player_in_range = 1
+			location = 4
+		ENDIF
+	ELSE
+		GENERATE_RANDOM_FLOAT_IN_RANGE -1300.0 -414.0 random_crim_x
+		GENERATE_RANDOM_FLOAT_IN_RANGE -608.8 380.0 random_crim_y
+		got_range_message = 0
+		player_in_range = 1
+		location = 3
+	ENDIF
 ENDIF
 
 IF player_in_range = 0
@@ -123,7 +139,7 @@ IF player_in_range = 0
 		got_range_message = 1
 	ENDIF
 	GOTO cop_car_failed
-ENDIF													  
+ENDIF
 
 GOSUB copcar_cancelled_checks
 IF copcar_cancelled_flag = 1
@@ -264,6 +280,24 @@ IF location = 3
 	ENDIF
 ENDIF
 
+IF location = 4
+	IF NOT criminal_coord_x > -1881.029 //MIN_X // COUNTRYSIDE
+	OR NOT criminal_coord_x	< 895.193 //MAX_X
+	OR NOT criminal_coord_y	> 725.101 //MIN_Y
+	OR NOT criminal_coord_y	< 1875.871 //MAX_Y
+		GOTO criminal_in_car
+	ENDIF
+ENDIF
+
+IF location = 5
+	IF NOT criminal_coord_x > 912.647 //MIN_X // GOSTBURG
+	OR NOT criminal_coord_x	< 1865.222 //MAX_X
+	OR NOT criminal_coord_y	> 780.918 //MIN_Y
+	OR NOT criminal_coord_y	< 1782.927 //MAX_Y
+		GOTO criminal_in_car
+	ENDIF
+ENDIF
+
 IF criminal_coord_z < -1.0
 	GOTO criminal_in_car
 ENDIF
@@ -291,7 +325,7 @@ generate_car_model:
 
 GENERATE_RANDOM_INT_IN_RANGE 90 140 car_model
 
-IF car_model > 113  // CAR_BUGGY CAR_CORPSE CAR_POLICE CAR_ENFORCER CAR_SECURICAR CAR_BANSHEE BOAT_PREDATOR CAR_BUS	
+IF car_model > 113  // CAR_BUGGY CAR_CORPSE CAR_POLICE CAR_ENFORCER CAR_SECURICAR CAR_BANSHEE BOAT_PREDATOR CAR_BUS
 AND car_model < 128 // CAR_RHINO CAR_BARRACKS TRAIN_SUBWAY HELI_POLICE PLANE_DODO CAR_COACH
 	GOTO generate_car_model
 ENDIF
@@ -323,7 +357,7 @@ GENERATE_RANDOM_FLOAT_IN_RANGE 0.0 359.9 criminal_heading
 
 WHILE NOT TIMERB > 3000
 	WAIT 0
-	
+
 	GOSUB copcar_cancelled_checks
 	IF copcar_cancelled_flag = 1
 		GOTO cop_car_failed
@@ -355,25 +389,25 @@ SET_CHAR_THREAT_SEARCH criminal THREAT_PLAYER3
 SET_CHAR_THREAT_SEARCH criminal THREAT_PLAYER4
 SET_CHAR_THREAT_SEARCH criminal THREAT_CIVMALE
 SET_CHAR_THREAT_SEARCH criminal THREAT_CIVFEMALE
-SET_CHAR_THREAT_SEARCH criminal THREAT_COP	
-SET_CHAR_THREAT_SEARCH criminal THREAT_GANG_MAFIA	
-SET_CHAR_THREAT_SEARCH criminal THREAT_GANG_DIABLO	
-SET_CHAR_THREAT_SEARCH criminal THREAT_GANG_TRIAD	
-SET_CHAR_THREAT_SEARCH criminal THREAT_GANG_YARDIE	
-SET_CHAR_THREAT_SEARCH criminal THREAT_GANG_COLOMBIAN	
-SET_CHAR_THREAT_SEARCH criminal THREAT_GANG_HOOD	
-SET_CHAR_THREAT_SEARCH criminal THREAT_GANG_YAKUZA	
+SET_CHAR_THREAT_SEARCH criminal THREAT_COP
+SET_CHAR_THREAT_SEARCH criminal THREAT_GANG_MAFIA
+SET_CHAR_THREAT_SEARCH criminal THREAT_GANG_DIABLO
+SET_CHAR_THREAT_SEARCH criminal THREAT_GANG_TRIAD
+SET_CHAR_THREAT_SEARCH criminal THREAT_GANG_YARDIE
+SET_CHAR_THREAT_SEARCH criminal THREAT_GANG_COLOMBIAN
+SET_CHAR_THREAT_SEARCH criminal THREAT_GANG_HOOD
+SET_CHAR_THREAT_SEARCH criminal THREAT_GANG_YAKUZA
 SET_CHAR_THREAT_SEARCH criminal THREAT_EMERGENCY
 SET_CHAR_THREAT_SEARCH criminal THREAT_PROSTITUTE
 SET_CHAR_THREAT_SEARCH criminal THREAT_CRIMINAL
-SET_CHAR_THREAT_SEARCH criminal THREAT_GUN	
+SET_CHAR_THREAT_SEARCH criminal THREAT_GUN
 SET_CHAR_THREAT_SEARCH criminal THREAT_COP_CAR
 SET_CHAR_THREAT_SEARCH criminal THREAT_FAST_CAR
 SET_CHAR_THREAT_SEARCH criminal THREAT_FIREMAN
 
 SET_CHAR_HEED_THREATS criminal TRUE
 
-MARK_CAR_AS_NO_LONGER_NEEDED criminal_car  
+MARK_CAR_AS_NO_LONGER_NEEDED criminal_car
 
 IF flag_industrial_passed = 0
 	GENERATE_RANDOM_INT_IN_RANGE 0 5 random_gun
@@ -518,6 +552,75 @@ IF IS_CHAR_IN_ZONE criminal BIG_DAM
 	PRINT_STRING_IN_STRING_NOW C_BREIF BIG_DAM 5000 1 // The criminal is proceeding south in Cochrane Dam
 ENDIF
 
+IF IS_CHAR_IN_ZONE criminal UL_ZON0
+AND NOT IS_CHAR_IN_ZONE criminal GT_ZON0
+	PRINT_STRING_IN_STRING_NOW C_BREIF UL_ZON0 5000 1 // The criminal is proceeding south in Upstate Liberty
+
+	IF IS_CHAR_IN_ZONE criminal WARSAW
+		PRINT_STRING_IN_STRING_NOW C_BREIF WARSAW 5000 1 // The criminal is proceeding south in Warsaw
+	ENDIF
+	
+	IF IS_CHAR_IN_ZONE criminal BAXTER
+		PRINT_STRING_IN_STRING_NOW C_BREIF BAXTER 5000 1 // The criminal is proceeding south in Baxter
+	ENDIF
+
+	IF IS_CHAR_IN_ZONE criminal CARRIN
+		PRINT_STRING_IN_STRING_NOW C_BREIF CARRIN 5000 1 // The criminal is proceeding south in Carrington
+	ENDIF
+
+	IF IS_CHAR_IN_ZONE criminal LOVEEI1
+	OR IS_CHAR_IN_ZONE criminal LOVEEI2
+	OR IS_CHAR_IN_ZONE criminal LOVEEI3
+		PRINT_STRING_IN_STRING_NOW C_BREIF LOVEES 5000 1 // The criminal is proceeding south in Love Estates
+	ENDIF
+
+	IF IS_CHAR_IN_ZONE criminal RIDGE
+		PRINT_STRING_IN_STRING_NOW C_BREIF RIDGE 5000 1 // The criminal is proceeding south in Cedar Ridge
+	ENDIF
+ENDIF
+
+IF IS_CHAR_IN_ZONE criminal UL_ZON0
+AND IS_CHAR_IN_ZONE criminal GT_ZON0
+	PRINT_STRING_IN_STRING_NOW C_BREIF GT_ZON0 5000 1 // The criminal is proceeding south in Gostburg
+
+	IF IS_CHAR_IN_ZONE criminal GTWAIR
+		PRINT_STRING_IN_STRING_NOW C_BREIF GTWAIR 5000 1 // The criminal is proceeding south in Gostburg Regional Airport
+	ENDIF
+
+	IF IS_CHAR_IN_ZONE criminal INDPARK
+		PRINT_STRING_IN_STRING_NOW C_BREIF INDPARK 5000 1 // The criminal is proceeding south in Industrial Park
+	ENDIF
+
+	IF IS_CHAR_IN_ZONE criminal CEDARW
+		PRINT_STRING_IN_STRING_NOW C_BREIF CEDARW 5000 1 // The criminal is proceeding south in Cedarwood Hills
+	ENDIF
+
+	IF IS_CHAR_IN_ZONE criminal OLDTOWN
+		PRINT_STRING_IN_STRING_NOW C_BREIF OLDTOWN 5000 1 // The criminal is proceeding south in Old Town
+	ENDIF
+
+	IF IS_CHAR_IN_ZONE criminal LEONARD
+		PRINT_STRING_IN_STRING_NOW C_BREIF LEONARD 5000 1 // The criminal is proceeding south in Leonard Heights
+	ENDIF
+
+	IF IS_CHAR_IN_ZONE criminal SUMMER
+		PRINT_STRING_IN_STRING_NOW C_BREIF SUMMER 5000 1 // The criminal is proceeding south in Summerton
+	ENDIF
+
+	IF IS_CHAR_IN_ZONE criminal GTWCENT
+		PRINT_STRING_IN_STRING_NOW C_BREIF GTWCENT 5000 1 // The criminal is proceeding south in Central Gostburg
+	ENDIF
+
+	IF IS_CHAR_IN_ZONE criminal LILCHIN
+		PRINT_STRING_IN_STRING_NOW C_BREIF LILCHIN 5000 1 // The criminal is proceeding south in Little Shanghai
+	ENDIF
+
+	IF IS_CHAR_IN_ZONE criminal SUMMER
+		PRINT_STRING_IN_STRING_NOW C_BREIF SUMMER 5000 1 // The criminal is proceeding south in Summerton
+	ENDIF
+ENDIF
+
+
 GET_CHAR_COORDINATES criminal criminal_coord_x criminal_coord_y criminal_coord_z
 POLICE_RADIO_MESSAGE criminal_coord_x criminal_coord_y criminal_coord_z
 
@@ -549,7 +652,7 @@ WHILE NOT IS_CHAR_DEAD criminal
 			SET_CHAR_OBJ_STEAL_ANY_CAR criminal
 		ENDIF
 	ENDIF
-		
+
 	IF IS_CHAR_IN_ANY_CAR criminal
 	AND got_car_crim_is_in = 0
 		MARK_CAR_AS_NO_LONGER_NEEDED criminal_car
@@ -561,7 +664,7 @@ WHILE NOT IS_CHAR_DEAD criminal
 		SET_CAR_AVOID_LEVEL_TRANSITIONS criminal_car TRUE
 		got_car_crim_is_in = 1
 	ENDIF
-		
+
 	IF got_car_crim_is_in = 1
 		IF NOT IS_CHAR_IN_ANY_CAR criminal
 			GENERATE_RANDOM_INT_IN_RANGE 0 5 range_int
@@ -602,7 +705,7 @@ WHILE NOT IS_CHAR_DEAD criminal
 			got_car_crim_is_in = 0
 		ENDIF
 	ENDIF
-	
+
 	IF got_car_crim_is_in = 1
 
 		IF NOT IS_CAR_DEAD criminal_car
@@ -627,7 +730,7 @@ WHILE NOT IS_CHAR_DEAD criminal
 					ENDIF
 				ENDIF
 			ENDIF
-		
+
 			IF IS_CAR_STOPPED criminal_car
 				IF timer_reset_flag = 0
 					TIMERA = 0
@@ -652,7 +755,7 @@ WHILE NOT IS_CHAR_DEAD criminal
 					ENDIF
 				ENDIF
 			ENDIF
-					
+
 			IF IS_CAR_UPSIDEDOWN criminal_car
 			AND IS_CAR_STOPPED criminal_car
 				IF LOCATE_PLAYER_ANY_MEANS_CHAR_2D player criminal 90.0 90.0 0
@@ -673,7 +776,7 @@ WHILE NOT IS_CHAR_DEAD criminal
 			IF NOT IS_CAR_HEALTH_GREATER criminal_car 250
 				SET_CHAR_OBJ_LEAVE_CAR criminal criminal_car
 			ENDIF
-		
+
 		ENDIF
 
 	ENDIF
@@ -725,6 +828,14 @@ IF location = 3
 	++ sub_copcar_kills
 ENDIF
 
+IF location = 4
+	++ lcc_copcar_kills
+ENDIF
+
+IF location = 5
+	++ gtw_copcar_kills
+ENDIF
+
 IF play_pager_message1 = 0
 	IF ind_copcar_kills = 10
 		ADD_PAGER_MESSAGE PAGEB12 140 100 1	//"Police Bribe delivered to hideout"
@@ -773,17 +884,49 @@ IF play_pager_message3 = 1
 	ENDIF
 ENDIF
 
+IF play_pager_message4 = 0
+	IF lcc_copcar_kills = 10
+		ADD_PAGER_MESSAGE PAGEB12 140 100 1	//"Police Bribe delivered to hideout"
+		PLAYER_MADE_PROGRESS 1
+		play_pager_message4 = 1
+	ENDIF
+ENDIF
+
+IF play_pager_message4 = 1
+	IF lcc_copcar_kills = 20
+		ADD_PAGER_MESSAGE PAGEB12 140 100 1	//"Police Bribe delivered to hideout"
+		PLAYER_MADE_PROGRESS 1
+		play_pager_message4 = 2
+	ENDIF
+ENDIF
+
+IF play_pager_message5 = 0
+	IF gtw_copcar_kills = 10
+		ADD_PAGER_MESSAGE PAGEB12 140 100 1	//"Police Bribe delivered to hideout"
+		PLAYER_MADE_PROGRESS 1
+		play_pager_message5 = 1
+	ENDIF
+ENDIF
+
+IF play_pager_message5 = 1
+	IF gtw_copcar_kills = 20
+		ADD_PAGER_MESSAGE PAGEB12 140 100 1	//"Police Bribe delivered to hideout"
+		PLAYER_MADE_PROGRESS 1
+		play_pager_message5 = 2
+	ENDIF
+ENDIF
+
 WHILE NOT IS_PLAYER_IN_MODEL player CAR_POLICE
 AND NOT IS_PLAYER_IN_MODEL player CAR_ENFORCER
 AND NOT IS_PLAYER_IN_MODEL player CAR_RHINO
 AND NOT IS_PLAYER_IN_MODEL player CAR_FBI
 	IF game_time_flag = 0
 		GET_GAME_TIMER game_timer_start
-		IF cop_time_limit > 60000 
+		IF cop_time_limit > 60000
 			copcar_timer = 60000
 		ELSE
 			copcar_timer = cop_time_limit
-		ENDIF 
+		ENDIF
 		game_time_flag = 1
 	ENDIF
 	GET_GAME_TIMER game_time_present
@@ -792,7 +935,7 @@ AND NOT IS_PLAYER_IN_MODEL player CAR_FBI
 	game_timer_start = game_time_present
 	timer_in_secs = copcar_timer / 1000
 	PRINT_WITH_NUMBER_NOW COPCART timer_in_secs 200 1	//You have ~1~ seconds to return to the car before the mission ends.
-	IF timer_in_secs < 1 
+	IF timer_in_secs < 1
 		PRINT_NOW C_TIME 3000 1//"Your time as a law enforcer is over!"
 		GOTO cop_car_failed
 	ENDIF
@@ -853,8 +996,8 @@ flag_player_on_cop_mission = 0
 MISSION_HAS_FINISHED
 RETURN
 
-	   		
-	
+
+
 copcar_cancelled_checks:////////////////////////////////////////////////////////////////
 
 IF NOT IS_PLAYER_IN_MODEL player CAR_POLICE
@@ -863,11 +1006,11 @@ AND NOT IS_PLAYER_IN_MODEL player CAR_RHINO
 AND NOT IS_PLAYER_IN_MODEL player CAR_FBI
 	IF game_time_flag = 0
 		GET_GAME_TIMER game_timer_start
-		IF cop_time_limit > 60000 
+		IF cop_time_limit > 60000
 			copcar_timer = 60000
 		ELSE
 			copcar_timer = cop_time_limit
-		ENDIF 
+		ENDIF
 		game_time_flag = 1
 	ENDIF
 	GET_GAME_TIMER game_time_present
@@ -876,7 +1019,7 @@ AND NOT IS_PLAYER_IN_MODEL player CAR_FBI
 	game_timer_start = game_time_present
 	timer_in_secs = copcar_timer / 1000
 	PRINT_WITH_NUMBER_NOW COPCART timer_in_secs 200 1	//You have ~1~ seconds to return to a squad car before the mission ends.
-	IF timer_in_secs < 1 
+	IF timer_in_secs < 1
 		PRINT_NOW C_TIME 3000 1//"Your time as a law enforcer is over!"
 		copcar_cancelled_flag = 1
 		RETURN
@@ -919,6 +1062,6 @@ ENDIF
 
 RETURN///////////////////////////////////////////////////////////////////////////////////
 
-		
+
 
 

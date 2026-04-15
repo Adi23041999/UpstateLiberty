@@ -31,11 +31,12 @@ VAR_INT number_of_packages_collected bonus_weapons_created
 
 VAR_INT earned_free_pistol earned_free_uzi earned_free_armour earned_free_shotgun earned_free_grenades 
 VAR_INT earned_free_molotovs earned_free_ak47 earned_free_sniper earned_free_m16 earned_free_launcher earned_free_flamethrower
+VAR_INT earned_free_immunity_fire
 
 VAR_INT bonus_gun1 bonus_gun2 bonus_gun3 bonus_gun4 bonus_gun5 bonus_gun6 bonus_gun7 bonus_gun8 bonus_gun9 bonus_gun10 bonus_gunflame
 VAR_INT bonus_bribe1 bonus_bribe2 bonus_bribe3 bonus_bribe4 bonus_bribe5 bonus_bribe6 bonus_health bonus_adrenaline
-VAR_INT ind_copcar_kills com_copcar_kills sub_copcar_kills total_saved_peds ambulance_pager_flag play_pager_message1 play_pager_message2 play_pager_message3
-VAR_INT ind_fires_exting com_fires_exting sub_fires_exting
+VAR_INT ind_copcar_kills com_copcar_kills sub_copcar_kills lcc_copcar_kills gtw_copcar_kills total_saved_peds ambulance_pager_flag play_pager_message1 play_pager_message2 play_pager_message3 play_pager_message4 play_pager_message5
+VAR_INT ind_fires_exting com_fires_exting sub_fires_exting lcc_fires_exting gtw_fires_exting
 
 earned_free_pistol = 0
 earned_free_uzi = 0
@@ -48,17 +49,24 @@ earned_free_sniper = 0
 earned_free_m16 = 0
 earned_free_launcher = 0
 earned_free_flamethrower = 0
+earned_free_immunity_fire = 0
 ind_copcar_kills = 0
 com_copcar_kills = 0
 sub_copcar_kills = 0
+lcc_copcar_kills = 0
+gtw_copcar_kills = 0
 ind_fires_exting = 0
 com_fires_exting = 0
 sub_fires_exting = 0
+lcc_fires_exting = 0
+gtw_fires_exting = 0
 total_saved_peds = 0
 
 play_pager_message1 = 0
 play_pager_message2 = 0
 play_pager_message3	= 0
+play_pager_message4	= 0
+play_pager_message5	= 0
 ambulance_pager_flag = 0
 
 bonus_weapons_created = 0
