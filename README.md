@@ -1,6 +1,8 @@
 # Upstate Liberty
 https://github.com/Adi23041999/UpstateLiberty
 
+![image](https://i.imgur.com/YdvyCAK.png)
+
 ## Installation
 - install Ultimate ASI Loader (https://github.com/ThirteenAG/Ultimate-ASI-Loader)
 - copy the mod files into the game directory
@@ -32,6 +34,7 @@ Press numpad keys in game to teleport to various places in Upstate
 - 5d0
 - rww
 - Sergiu
+- Silent
 - universetwisters
 - DeadpoolMKD
 - dkluin
