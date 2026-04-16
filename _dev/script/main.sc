@@ -1046,7 +1046,11 @@ VAR_INT cs_colub1 cs_colub2 cs_colub3 cs_colub4
 
 // *****************************************CREATE PLAYER***************************************   
 
+#ifdef _DEBUG
+CREATE_PLAYER 0 -1176.188 1058.063 83.0 player // Upstate area
+#else
 CREATE_PLAYER 0 811.90 -939.95 35.8 player //8Ball mission
+#endif
 SET_PLAYER_HEADING player 180.0
 GET_PLAYER_CHAR player script_controlled_player
 	 
@@ -1730,18 +1734,27 @@ SET_FADING_COLOUR 0 0 0
 DO_FADE 0 FADE_OUT
 
 //DEBUG SETUP*************************************************************************************
-/*
+#ifdef _DEBUG
 SWITCH_WORLD_PROCESSING OFF //TEST!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 
 WAIT 1500 //TEST!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 SWITCH_WORLD_PROCESSING ON //TEST!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-LOAD_SCENE 916.3 -413.6 15.0  //START LUIGIS***************************************************************
+LOAD_COLLISION LEVEL_SUBURBAN
+LOAD_COLLISION_WITH_SCREEN LEVEL_SUBURBAN
+LOAD_SCENE -1176.188 1058.063 83.0  //START LUIGIS***************************************************************
 flag_eightball_mission_passed = 1 //TEST SO SAVE HOUSE WORKS
+flag_industrial_passed = 1
+flag_commercial_passed = 1
+flag_suburban_passed = 1
+INDUSTRIAL_PASSED
+COMMERCIAL_PASSED
+SUBURBAN_PASSED
 IF IS_PLAYER_PLAYING player
 	SET_INTRO_IS_PLAYING FALSE
 	SET_TIME_OF_DAY 9 00
-	SET_PLAYER_COORDINATES Player 916.3 -413.6 -100.0
-	SET_PLAYER_HEADING player 140.0
+
+	SET_PLAYER_COORDINATES Player -1176.188 1058.063 -100.0
+	SET_PLAYER_HEADING player -90.0
 	SET_CAMERA_BEHIND_PLAYER
 	LAUNCH_MISSION debug.sc
 	DO_FADE 1000 FADE_IN
@@ -1763,6 +1776,7 @@ IF IS_PLAYER_PLAYING player
 	SWAP_NEAREST_BUILDING_MODEL	702.764 -919.963 38.736	20.0 lodridgerda lodgbbridgerda	
 	
 	GOSUB_FILE switch_car_generator switch.sc
+	GOSUB_FILE ul_switch_car_generator ul_switch.sc
 
 	START_NEW_SCRIPT ind_save_loop
 	START_NEW_SCRIPT sub_save_loop
@@ -1777,7 +1791,7 @@ IF IS_PLAYER_PLAYING player
 
 	GOTO mission_start
 ENDIF
-*/
+#endif
 
 //FULL GAME LOAD***********************************************************************************************
 LOAD_AND_LAUNCH_MISSION intro.sc
@@ -2753,7 +2767,9 @@ AND flag_eightball_mission_passed = 0
 ENDIF
 
 	IF flag_eightball_mission_passed = 1
+#ifndef _DEBUG
 		GOSUB_FILE ul_switch_car_generator ul_switch.sc
+#endif
 		TERMINATE_THIS_SCRIPT
 	ENDIF
 

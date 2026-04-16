@@ -9,7 +9,6 @@ _dev/script/gta3sc/
 _dev/code/**/*
 !_dev/code/*
 !_dev/code/source/*
-_dev/script/main.sc
 
 gta3img
 texgta3
