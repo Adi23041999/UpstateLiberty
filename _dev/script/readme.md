@@ -32,6 +32,7 @@ Replace main.scm inside data directory, but read save files compatibility note b
 - Fixed multiple markers showing at the hospital in Paramedic
 - Restricted peds from spawning at covered areas of Staunton in Paramedic
 - Changed patients behavior to only run towards stopped ambulance instead of while it's still moving in Paramedic
+- Fixed dropped off patients in Paramedic walking away instead of running to the hospital
 - Finishing 12 levels of Paramedic now prints "Ambulance missions complete!" instead of "Paramedic mission ended." as originally designed
 - Removed 3.5 second wait before playing "Luigi's Girls" cutscene
 - Bridge model swap by the intro cutscene made seamless
