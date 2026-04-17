@@ -212,6 +212,7 @@ VAR_INT gtw_weapon11, gtw_weapon12, gtw_weapon13, gtw_weapon14, gtw_weapon15, gt
 VAR_INT gtw_pickup1, gtw_pickup2, gtw_pickup3, gtw_pickup4, gtw_pickup5, gtw_pickup6, gtw_pickup7, gtw_pickup8, gtw_pickup9, gtw_pickup10
 VAR_INT gtw_pickup11, gtw_pickup12, gtw_pickup13, gtw_pickup14, gtw_pickup15, gtw_pickup16, gtw_pickup17, gtw_pickup18, gtw_pickup19, gtw_pickup20
 VAR_INT gtw_pickup21
+VAR_INT info_pickup11a, info_pickup11b
 VAR_INT SHOP_UL_T1_UZI, SHOP_UL_T1_AK47, SHOP_UL_T1_MOLOTOV
 VAR_INT SHOP_UL_T3_UZI, SHOP_UL_T3_AK47, SHOP_UL_T3_SHOTGUN, SHOP_UL_T3_SNIPER, SHOP_UL_T3_GRENADE, SHOP_UL_T3_M16, SHOP_UL_T3_ARMOUR
 VAR_INT SHOP_UL_GT_UZI, SHOP_UL_GT_SHOTGUN, SHOP_UL_GT_ARMOUR, SHOP_UL_GT_SNIPER, SHOP_UL_GT_GRENADE, SHOP_UL_GT_AK47
