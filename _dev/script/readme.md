@@ -32,6 +32,7 @@ Replace main.scm inside data directory, but read save files compatibility note b
 - Fixed multiple markers showing at the hospital in Paramedic
 - Restricted peds from spawning at covered areas of Staunton in Paramedic
 - Changed patients behavior to only run towards stopped ambulance instead of while it's still moving in Paramedic
+- Fixed dropped off patients in Paramedic walking away instead of running to the hospital
 - Finishing 12 levels of Paramedic now prints "Ambulance missions complete!" instead of "Paramedic mission ended." as originally designed
 - Removed 3.5 second wait before playing "Luigi's Girls" cutscene
 - Bridge model swap by the intro cutscene made seamless
@@ -45,6 +46,7 @@ Replace main.scm inside data directory, but read save files compatibility note b
 - Fixed some models not being marked as no longer needed after being loaded by the jailbreak cutscene
 - Fixed On Mission flag (flag_player_on_mission) sets to prevent any abuse of this flag
 - Removed On Mission flag checks in some mission that were meant to bypass compiler errors
+- Re-enabled a Bobcat spawn in front of the Supa Save in Portland that was never switched on due to its script handle getting reused
 
 ## Save files compatibility
 

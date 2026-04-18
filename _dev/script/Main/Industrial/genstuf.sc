@@ -87,77 +87,20 @@ GOTO cobblers
 check_info_pickup:
 {
 
-LVAR_INT pickup message_num
+LVAR_INT pickup message_num end_when_industrial_passed
 
 start_pickup_script:
 
 WHILE NOT HAS_PICKUP_BEEN_COLLECTED pickup
 	WAIT 500
-ENDWHILE
-
-IF message_num = 1
-	PRINT_HELP ( SPRAY )
-ENDIF
-
-IF message_num = 2
-	PRINT_HELP ( BOMB )
-ENDIF
-
-IF message_num = 3
-	PRINT_HELP ( AMMU ) 
-ENDIF
-
-IF message_num = 4
-	PRINT_HELP ( SAVE2 ) 
-ENDIF
-
-IF message_num = 5
-	PRINT_HELP ( SAVE1 ) 
-ENDIF
-
-IF message_num = 6
-	PRINT_HELP ( CRUSH )
-ENDIF
-/*
-IF message_num = 7
-	PRINT_HELP ( BRIDGE1 )
-ENDIF
-
-IF message_num = 8
-	PRINT_HELP ( TUNNEL ) 
-ENDIF
-
-IF message_num = 9
-	PRINT_HELP ( TUBE )
-ENDIF
-
-IF message_num = 10
-	PRINT_HELP ( A_TRAIN )
-ENDIF
-
-WHILE HAS_PICKUP_BEEN_COLLECTED pickup
-	WAIT 500
-ENDWHILE
-*/
-GOTO start_pickup_script
-}
-
-
-
-check_info_pickup_2:
-{
-
-LVAR_INT pickup message_num
-
-start_pickup_script_2:
-
-WHILE NOT HAS_PICKUP_BEEN_COLLECTED pickup
-	WAIT 500
+	IF end_when_industrial_passed = 1
+	AND flag_industrial_passed = 1
+		TERMINATE_THIS_SCRIPT
+	ENDIF
 ENDWHILE
 
 GET_CONTROLLER_MODE controlmode
 
-/*
 IF message_num = 1
 	PRINT_HELP ( SPRAY )
 ENDIF
@@ -181,7 +124,7 @@ ENDIF
 IF message_num = 6
 	PRINT_HELP ( CRUSH )
 ENDIF
-*/
+
 IF message_num = 7
 	PRINT_HELP ( BRIDGE1 )
 ENDIF
@@ -219,12 +162,12 @@ IF message_num = 11
 	ENDIF
 ENDIF
 
-/*
-WHILE HAS_PICKUP_BEEN_COLLECTED pickup
-	WAIT 500
-ENDWHILE
-*/
-GOTO start_pickup_script_2
+// UPSTATE: Tunnel opening info pickups
+IF message_num = 12
+	PRINT_HELP ( ULTUNNL )
+ENDIF
+
+GOTO start_pickup_script
 }
 
 ind_ammu:
