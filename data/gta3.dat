@@ -4,6 +4,7 @@
 
 CDIMAGE DATA\MAPS\UL\ul.IMG
 
+
 # everything is loaded on a per directory basis and in alphabetical order 
 # to improve the speed of loading
 
@@ -105,3 +106,4 @@ IPL DATA\MAPS\UL\ul_props\countryside_props.IPL
 IPL DATA\MAPS\UL\ul_props\ghosttown_props.IPL
 IPL DATA\MAPS\UL\ul_props\shadows.IPL
 IPL DATA\MAPS\UL\ul_cull.IPL
+

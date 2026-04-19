@@ -1,4 +1,11 @@
 objs
+3467, gtw_subgdoor02, gt_subhouse, 1, 100, 0
+3468, gtw_subgdoor01, gt_subhouse, 1, 100, 0
+3469, gtw_subgrge08, gt_subhouse, 1, 260, 0
+3470, gtw_subgrge07, gt_subhouse, 1, 260, 0
+3471, gtw_subhdoor01, gt_subhouse, 1, 100, 0
+3472, LOD_subhouse09, ul_LOD, 1, 700, 0
+3473, gtw_subhouse09, gt_subhouse, 1, 170, 0
 3488, gtw_road1Bh2, gt_generic, 1, 250, 0
 3489, gtw_road1Bh1, gt_generic, 1, 250, 0
 3561, gtw_road1AB10, gt_generic, 1, 250, 0
