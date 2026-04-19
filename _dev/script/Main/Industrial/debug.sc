@@ -10,6 +10,7 @@ VAR_INT button_pressed_warp button_pressed_ind button_pressed_com button_pressed
 VAR_INT repeat_button_press slow_motion	text_button_pressed	players_car_debug
 VAR_INT debug_crap_on crap_press_flag no_cars repeat_butt_press
 VAR_INT weather_crap add_just_the_once_though invulnerability_on
+// VAR_INT debug_cutscene_cars_spawned, debug_cs_bank_car1 debug_cs_bank_car2 debug_cs_bank_car3 debug_cs_bank_car4
 
 // UPSTATE
 LVAR_INT upstate_teleport_no
@@ -24,6 +25,7 @@ cheat_mode_on_flag = 0
 cheat_mode_on = 0
 weather_crap = 0
 add_just_the_once_though = 0
+// debug_cutscene_cars_spawned = 0
 
 SCRIPT_NAME debug
 
@@ -53,6 +55,29 @@ IF IS_PLAYER_PLAYING player
 		ENDIF
 	ENDIF
 ENDIF
+
+// IF debug_cutscene_cars_spawned = 0
+// 	REQUEST_MODEL CAR_ESPERANTO
+// 	REQUEST_MODEL CAR_SECURICAR
+// 	REQUEST_MODEL CAR_MRWONGS
+// 	LOAD_ALL_MODELS_NOW
+// 	debug_cutscene_cars_spawned = 1
+// ENDIF
+// IF debug_cutscene_cars_spawned = 1
+// AND HAS_MODEL_LOADED CAR_ESPERANTO
+// AND HAS_MODEL_LOADED CAR_SECURICAR
+// AND HAS_MODEL_LOADED CAR_MRWONGS
+// 	CREATE_CAR CAR_ESPERANTO 1483.821 1377.729 125.471 debug_cs_bank_car1
+// 	SET_CAR_HEADING debug_cs_bank_car1 5.0
+// 	CHANGE_CAR_COLOUR debug_cs_bank_car1 52 1
+// 	CREATE_CAR CAR_SECURICAR 1483.716 1394.312 125.471 debug_cs_bank_car2
+// 	CREATE_CAR CAR_SECURICAR 1483.586 1403.408 125.471 debug_cs_bank_car3
+// 	SET_CAR_HEADING debug_cs_bank_car3 -5.0
+// 	CREATE_CAR CAR_MRWONGS 1483.613 1476.948 125.471 debug_cs_bank_car4
+// 	SET_CAR_HEADING debug_cs_bank_car4 180.0
+// 	CHANGE_CAR_COLOUR debug_cs_bank_car4 8 74
+// 	debug_cutscene_cars_spawned = 2	
+// ENDIF
 
 IF IS_BUTTON_PRESSED PAD2 SQUARE
 AND	IS_BUTTON_PRESSED PAD2 TRIANGLE

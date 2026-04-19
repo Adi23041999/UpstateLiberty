@@ -17,5 +17,4 @@ CLEO/CLEO_TEXT/ul*
 scripts/III.OpenLimitAdjuster.asi
 scripts/III.Upstate.asi
 scripts/III.VC.SA.LimitAdjuster.ini
-scripts/III.CLEO.asi
 README.MD

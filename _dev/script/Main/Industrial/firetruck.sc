@@ -684,8 +684,8 @@ IF earned_free_flamethrower = 0
 ENDIF
 
 IF earned_free_immunity_fire = 0
-	IF lcc_fires_exting > 1
-	AND gtw_fires_exting > 1
+	IF lcc_fires_exting > 19
+	AND gtw_fires_exting > 19
 		ADD_PAGER_MESSAGE ULPAG1 140 100 1	//"You are now fireproof!"
 		PLAYER_MADE_PROGRESS 1
 		earned_free_immunity_fire = 1

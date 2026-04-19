@@ -19,6 +19,7 @@ MISSION_END
 
 VAR_INT cs_cathead cs_robb robber cs_cs_ban cs_loot	cs_colt1 cs_colt2 cs_bankd csbexpos	skip_flag text_fading_flag
 VAR_INT cs_colombian1 cs_colombian2 cs_cop1 cs_cop2	damagea damageb	brbomb cs_colombian1head text_alpha
+VAR_INT cs_bank_car1 cs_bank_car2 cs_bank_car3 cs_bank_car4 cs_bank_car4_ped
 
 VAR_FLOAT particle_x particle_y particle_z particle_target_x particle_target_y particle_target_z temp_var
 
@@ -47,6 +48,7 @@ flag_intro_set1 = 0
 flag_intro_set2 = 0
 flag_intro_set3 = 0
 flag_eight_loaded = 0
+
 // SCFIX: END
 SCRIPT_NAME intro
 
@@ -79,6 +81,10 @@ LOAD_SPECIAL_MODEL cut_obj2 bankd
 LOAD_SPECIAL_MODEL cut_obj3	cs_loot
 LOAD_SPECIAL_MODEL cut_obj4	colt1
 LOAD_SPECIAL_MODEL cut_obj5	cath
+REQUEST_MODEL CAR_ESPERANTO
+REQUEST_MODEL CAR_SECURICAR
+REQUEST_MODEL CAR_MRWONGS
+REQUEST_MODEL PED_B_MAN1
 
 GET_PLAYER_CHAR	player script_controlled_player
 IF NOT IS_CHAR_DEAD script_controlled_player
@@ -98,8 +104,6 @@ SET_MOTION_BLUR 5
 FORCE_WEATHER_NOW WEATHER_FOGGY
 SET_TIME_OF_DAY 12 00
 
-SWITCH_WORLD_PROCESSING OFF
-
 LOAD_ALL_MODELS_NOW
 
 WHILE NOT HAS_SPECIAL_CHARACTER_LOADED 1
@@ -117,10 +121,17 @@ OR NOT HAS_SPECIAL_CHARACTER_LOADED 4
 	WAIT 0
 ENDWHILE
 
+WHILE NOT HAS_MODEL_LOADED CAR_ESPERANTO
+OR NOT HAS_MODEL_LOADED CAR_SECURICAR
+OR NOT HAS_MODEL_LOADED CAR_MRWONGS
+OR NOT HAS_MODEL_LOADED PED_B_MAN1
+	WAIT 0
+ENDWHILE
+
 LOAD_CUTSCENE bet
 LOAD_SCENE 1490.153 1310.493 129.797
 
-SET_CUTSCENE_OFFSET 1512.383 1431.137 125.7
+SET_CUTSCENE_OFFSET 1512.388 1431.135 125.78
 
 CREATE_CUTSCENE_OBJECT PED_SPECIAL4 cs_player
 SET_CUTSCENE_ANIM cs_player playerx
@@ -153,6 +164,20 @@ CREATE_CUTSCENE_OBJECT cut_obj4 cs_colt2
 SET_CUTSCENE_ANIM cs_colt2 colt2
 
 SET_OBJECT_DRAW_LAST cs_cs_ban TRUE
+
+CREATE_CAR CAR_ESPERANTO 1483.821 1377.729 125.471 cs_bank_car1
+CHANGE_CAR_COLOUR cs_bank_car1 52 1
+CREATE_CAR CAR_SECURICAR 1483.716 1394.312 125.521 cs_bank_car2
+CREATE_CAR CAR_SECURICAR 1483.586 1403.408 125.521 cs_bank_car3
+SET_CAR_HEADING cs_bank_car3 -5.0
+CREATE_CAR CAR_MRWONGS 1483.613 1476.948 125.471 cs_bank_car4
+SET_CAR_HEADING cs_bank_car4 180.0
+CHANGE_CAR_COLOUR cs_bank_car4 8 74
+CREATE_CHAR_INSIDE_CAR cs_bank_car4 PEDTYPE_DUMMY PED_B_MAN1 cs_bank_car4_ped
+
+WAIT 0
+
+SWITCH_WORLD_PROCESSING OFF
 
 SWITCH_STREAMING ON
 
@@ -470,6 +495,11 @@ MARK_MODEL_AS_NO_LONGER_NEEDED cut_obj2
 MARK_MODEL_AS_NO_LONGER_NEEDED cut_obj3
 MARK_MODEL_AS_NO_LONGER_NEEDED cut_obj4
 MARK_MODEL_AS_NO_LONGER_NEEDED cut_obj5
+DELETE_CHAR cs_bank_car4_ped
+DELETE_CAR cs_bank_car1
+DELETE_CAR cs_bank_car2
+DELETE_CAR cs_bank_car3
+DELETE_CAR cs_bank_car4
 
 // **********************************END OF BANK CUTSCENE******************************
 
