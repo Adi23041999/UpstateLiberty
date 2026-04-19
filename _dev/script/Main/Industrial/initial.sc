@@ -208,7 +208,7 @@ VAR_INT lcc_weapon1, lcc_weapon2, lcc_weapon3, lcc_weapon4, lcc_weapon5, lcc_wea
 VAR_INT lcc_pickup1, lcc_pickup2, lcc_pickup3, lcc_pickup4, lcc_pickup5, lcc_pickup6, lcc_pickup7, lcc_pickup8, lcc_pickup9, lcc_pickup10
 VAR_INT lcc_pickup11, lcc_pickup12, lcc_pickup13, lcc_pickup14, lcc_pickup15, lcc_pickup16, lcc_pickup17
 VAR_INT gtw_weapon1, gtw_weapon2, gtw_weapon3, gtw_weapon4, gtw_weapon5, gtw_weapon6, gtw_weapon7, gtw_weapon8, gtw_weapon9, gtw_weapon10
-VAR_INT gtw_weapon11, gtw_weapon12, gtw_weapon13, gtw_weapon14, gtw_weapon15, gtw_weapon16, gtw_weapon17, gtw_weapon18
+VAR_INT gtw_weapon11, gtw_weapon12, gtw_weapon13, gtw_weapon14, gtw_weapon15, gtw_weapon16, gtw_weapon17, gtw_weapon18, gtw_weapon19, gtw_weapon20, gtw_weapon21
 VAR_INT gtw_pickup1, gtw_pickup2, gtw_pickup3, gtw_pickup4, gtw_pickup5, gtw_pickup6, gtw_pickup7, gtw_pickup8, gtw_pickup9, gtw_pickup10
 VAR_INT gtw_pickup11, gtw_pickup12, gtw_pickup13, gtw_pickup14, gtw_pickup15, gtw_pickup16, gtw_pickup17, gtw_pickup18, gtw_pickup19, gtw_pickup20
 VAR_INT gtw_pickup21
@@ -344,6 +344,9 @@ CREATE_PICKUP_WITH_AMMO WEAPON_SNIPER PICKUP_ON_STREET_SLOW 25 1017.2897 1563.45
 CREATE_PICKUP_WITH_AMMO WEAPON_SHOTGUN PICKUP_ON_STREET_SLOW 35 1006.1495 1614.3621 135.0867 gtw_weapon16 //Shotgun - On top of a warehouse; need to jump down from the spot near above sniper pickup
 CREATE_PICKUP_WITH_AMMO WEAPON_SNIPER PICKUP_ON_STREET_SLOW 10 1170.4038 1344.5265 134.9139 gtw_weapon17 //Sniper - On top of the petrol station canopy
 CREATE_PICKUP_WITH_AMMO WEAPON_MOLOTOV PICKUP_ON_STREET_SLOW 10 1530.2551 1479.8263 126.8138 gtw_weapon18 //Molotov - Behind bank alleyway in a tight spot with staircases
+CREATE_PICKUP_WITH_AMMO WEAPON_M16 PICKUP_ON_STREET_SLOW 180 1550.7893 1663.2374 149.6314 gtw_weapon19 //M16 - china rooftop stunt
+CREATE_PICKUP_WITH_AMMO WEAPON_ROCKET PICKUP_ON_STREET_SLOW 10 1550.9087 1666.3451 149.6314 gtw_weapon20 //Rocket Launcher - china rooftop stunt
+CREATE_PICKUP_WITH_AMMO WEAPON_SHOTGUN PICKUP_ON_STREET_SLOW 35 1553.4435 1666.3472 149.6314 gtw_weapon21 //Shotgun - china rooftop stunt
 //Health
 CREATE_PICKUP health PICKUP_ON_STREET_SLOW 1524.6553 1441.4261 126.6207 gtw_pickup1 //In the iconic alley from GTA3 intro cutscene
 CREATE_PICKUP health PICKUP_ON_STREET_SLOW 1349.1710 1462.4180 127.0634 gtw_pickup2 //In front of the Ghostburg Hospital

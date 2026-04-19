@@ -1024,6 +1024,112 @@ CREATE_COLLECTABLE1 -1278.7 -776.0 11.1 //Airport under plane (furthest south)
 CREATE_COLLECTABLE1 -1494.7 -1097.3 3.4 //Airport Far south by shore
 CREATE_COLLECTABLE1 -837.8 -469.2 10.8 //Airport next to car park (firestation)
 
+//COUNTRYSIDE************************************************************************************
+
+CREATE_COLLECTABLE1 -984.1967 995.8265 111.4429 //Blue bridge to Love Estates
+CREATE_COLLECTABLE1 -1322.1042 872.8975 89.2758 //LE: lower area; inside pool close to the reservoir
+CREATE_COLLECTABLE1 -1421.1959 449.914 71.9268 //LE: on a stone formation on lower end of the golf course near SSV
+CREATE_COLLECTABLE1 -1714.4515 692.4185 116.7127 //LE: helipad near one of the mansions (across safehouse)
+CREATE_COLLECTABLE1 -1619.2469 1233.9989 112.2743 //LE: mansion roof on very north; have to jump from raised ground area
+CREATE_COLLECTABLE1 -1461.0105 994.1768 103.0688 //LE: behind Swanksville sign
+CREATE_COLLECTABLE1 -663.6049 617.8749 79.2602 //SSV-Upstate tunnel; maintenance door on a junction
+CREATE_COLLECTABLE1 -1823.1538 1661.7971 73.6407 //Collapsed tunnel west of Baxter; very end in a corner
+CREATE_COLLECTABLE1 -1844.4606 1643.6975 96.4448 //Behind the house on the hill above collapsed tunnel
+CREATE_COLLECTABLE1 -1370.3245 1561.7509 75.7803 //Baxter: on top of a very small grey building; use a taller car as platform
+CREATE_COLLECTABLE1 -1315.6852 1469.4203 81.2374 //Baxter: top of the Burke warehouse; use the ramp in trailer park to access
+CREATE_COLLECTABLE1 -1452.0773 1772.6322 74.0302 //Baxter: one of the houses on cul-de-sac
+CREATE_COLLECTABLE1 -814.7842 1220.6095 143.2172 //Dirt patch near Warsaw tunnel with Landstalker spawn
+CREATE_COLLECTABLE1 -648.1274 1338.1038 142.2534 //Top of a hill with big tree overlooking Warsaw
+CREATE_COLLECTABLE1 -790.0486 1416.9126 135.1071 //On a rock above Warsaw tunnel entrance
+CREATE_COLLECTABLE1 -489.2224 1672.2941 127.5821 // Grass patch between dirt roads leading to spooky mansion
+CREATE_COLLECTABLE1 -776.8629 1698.8739 154.7641 //Broken bridge above canion near spooky mansion
+CREATE_COLLECTABLE1 -733.785 1798.1489 146.482 //Inside spooky mansion
+CREATE_COLLECTABLE1 -48.5224 1816.24 144.2666 //Abandoned mines; cave with lake
+CREATE_COLLECTABLE1 -224.0818 1532.9598 115.2676 //Warsaw: on to of a trailer in the trailer park
+CREATE_COLLECTABLE1 -259.5926 1415.3809 112.1448 //Warsaw: small park across hospital; inside bush
+CREATE_COLLECTABLE1 -317.369 1359.9199 117.0852 //Warsaw: building by the hospital; have to jump onto the hospital itself to get there
+CREATE_COLLECTABLE1 -147.8377 1316.3749 112.3761 //Warsaw: behind police station
+CREATE_COLLECTABLE1 -524.9816 1319.2374 115.161 //Warsaw: house in south-west corner
+CREATE_COLLECTABLE1 -207.2879 1184.5625 135.1971 //Dirt patch overlooking Warsaw; near a big tree
+CREATE_COLLECTABLE1 -245.7505 859.3401 139.6454 //Top of the east upstate tunnel entrance; have to drop down or use a car as a ramp
+CREATE_COLLECTABLE1 -807.8904 940.0423 120.2887 //Behind Swiss resort sign in a bush
+CREATE_COLLECTABLE1 -763.4649 728.808 140.2962 //One of the houses in Swiss resort; lower center area
+CREATE_COLLECTABLE1 -699.9479 745.2029 167.9741 //Resort: lower walking area
+CREATE_COLLECTABLE1 -565.6089 830.5515 200.075 //Resort: top of the dirt path; below the obeservatory
+CREATE_COLLECTABLE1 -331.3403 1022.0624 193.7368 //Behind small house on the observatory road entrance
+CREATE_COLLECTABLE1 -302.3902 827.5853 167.881 //House with a farm on the obeservatory road
+CREATE_COLLECTABLE1 -508.6343 726.018 221.8302 //Under small bridge on the observatory road
+CREATE_COLLECTABLE1 -462.9906 830.2137 266.9172 //On top of the mountain
+CREATE_COLLECTABLE1 -465.2391 770.6656 255.6486 //Inside the observatory   
+CREATE_COLLECTABLE1 -49.7963 911.5861 147.1381 //Sawmill roof
+CREATE_COLLECTABLE1 -33.522 1165.2621 144.0483 //Long wooden bridge
+CREATE_COLLECTABLE1 125.6679 1111.6765 136.1289 //Inside the tunnel under the farm near the gas station
+CREATE_COLLECTABLE1 179.0066 823.6932 129.1176 //Vantage point behind the gas station
+CREATE_COLLECTABLE1 593.9702 1021.9779 131.1316 //Jack's Hut lake area; on the very east end inside bush
+CREATE_COLLECTABLE1 289.4641 1168.1151 141.8353 //Carrington: cementery
+CREATE_COLLECTABLE1 418.723 1179.6753 138.018 //Carrington: roof of The Riviera; church side
+CREATE_COLLECTABLE1 492.2172 1218.2355 144.0179 //Carrington: top of The Riviera roof; have to do parkour using the gutter
+CREATE_COLLECTABLE1 378.1557 1327.1277 131.8263 //Carrington: by the big tree with a dirt path between houes
+CREATE_COLLECTABLE1 553.5737 1330.7935 141.0181 //Carrington: roof of AmmuNation building
+CREATE_COLLECTABLE1 537.9938 1240.3104 138.268 //Carrington: on the hospital balcony; have to do stunts starting from the grass ramp by the hospital
+CREATE_COLLECTABLE1 639.244 1267.8563 135.6712 //Carrington: on top of a garage in an alleyway in suburb area
+CREATE_COLLECTABLE1 870.8492 1341.5366 130.6459 //Substation east of Carrington; between transformers
+CREATE_COLLECTABLE1 -37.8747 1481.7063 144.6745 //Farmlands: top of farm building close to Warsaw
+CREATE_COLLECTABLE1 235.5568 1402.3851 154.4415 //Farmlands: top of farm building between Warsaw and Carrington; closer to the second one
+CREATE_COLLECTABLE1 250.623 1545.9987 152.4243 //Farmlands: top of big farm building soutw-west of fuel depot
+CREATE_COLLECTABLE1 391.9099 1570.265 148.8208 //Farmlands: inside small drive-thru farm building south of fuel depot
+CREATE_COLLECTABLE1 582.9089 1516.8561 145.005 //Farmlands: inside barn with second floor; below scrapyard
+CREATE_COLLECTABLE1 753.2663 1462.1949 155.2693 //Farmlands: by a big tree on a farm field; closer to Gostburg
+CREATE_COLLECTABLE1 623.9663 1594.7351 154.9394 //On a pile of scrap in scrapyard
+CREATE_COLLECTABLE1 349.1287 1664.7379 168.9758 //Top of a fuel tank in fuel depot
+CREATE_COLLECTABLE1 388.7392 1678.113 158.3995 //Top of the canopy in fuel depot; have to jump down from a fuel tank
+
+//GOSTBURG************************************************************************************
+
+CREATE_COLLECTABLE1 703.7411 891.2822 126.8365 //Dirt track stands
+CREATE_COLLECTABLE1 914.8866 875.9498 96.112 //Top of the jump hill in the dirt track center
+CREATE_COLLECTABLE1 853.6412 943.6592 92.461 //In an obstacle hole on the dirt track
+CREATE_COLLECTABLE1 1347.4153 982.3499 122.5408 //Old Town: hole in the wall leading to the skatepark
+CREATE_COLLECTABLE1 1359.3994 1047.9858 125.0141 //Old Town: door steps on of the buildings in the alleway
+CREATE_COLLECTABLE1 1471.6254 1084.8708 121.0274 //Old Town: driveway on an inner area on the eastern side
+CREATE_COLLECTABLE1 1455.0316 804.8187 118.8211 //Suburbs: inside the gazebo on a table on the very south of the district
+CREATE_COLLECTABLE1 1545.417 1007.1116 122.4622 //Suburbs: in front of a garage door in the cluster of houses with one driveway
+CREATE_COLLECTABLE1 1593.2891 1181.424 122.6254 //Inside bush on the highway junction south of the mall
+CREATE_COLLECTABLE1 1026.0116 1164.1136 122.5279 //Blocks: inside area with many pink garages
+CREATE_COLLECTABLE1 1189.9972 1215.3723 122.5275 //Blocks: behind pay'n'spray
+CREATE_COLLECTABLE1 1317.4911 1196.0073 128.815 //Blocks: stairs behind FABRIC store
+CREATE_COLLECTABLE1 1194.9823 1361.3447 141.8131 //Ind: Supa Save roof; jump down from Equanox factory
+CREATE_COLLECTABLE1 1022.9996 1392.7975 143.8135 //Ind: roof of the part connecting two Sumo buildings
+CREATE_COLLECTABLE1 1175.5016 1466.9749 144.063 //Ind: roof of the Gren building
+CREATE_COLLECTABLE1 984.4753 1465.3405 146.3131 //Ind: roof of Carcer Chem; drop down from Klunt factory
+CREATE_COLLECTABLE1 1071.4993 1488.4062 146.3781 //Ind: pipes from big brick factory to Box Storage one
+CREATE_COLLECTABLE1 1020.1257 1673.9712 126.8114 //Ind: behind SamTechs building
+CREATE_COLLECTABLE1 1159.3838 1591.41 121.1491 //Csite: pipe under the dirt road
+CREATE_COLLECTABLE1 1251.6378 1513.0146 121.1491 //Csite: end of a pipe under the old ind district
+CREATE_COLLECTABLE1 1147.9128 1543.2456 135.234 //Csite: second floor; near stockpiles of wood beams; brick factory side
+CREATE_COLLECTABLE1 1201.9056 1567.1962 139.339 //Csite: between second and third floor on roof tiles by a thin wooden ramp
+CREATE_COLLECTABLE1 1178.9255 1584.967 142.1532 //Csite: inside the metal box held by a crane; jump into it from the last floor
+CREATE_COLLECTABLE1 1365.691 1790.0089 125.1787 //Very end of the Carcer tunnel
+CREATE_COLLECTABLE1 1352.6555 1606.377 127.0133 //Inside bush by the town hall
+CREATE_COLLECTABLE1 1553.4084 1663.1002 149.6314 //China: end of the roof stunt area
+CREATE_COLLECTABLE1 1488.9664 1634.249 144.3132 //China: roof of a building near the chinatown sign; visible from street
+CREATE_COLLECTABLE1 1591.3599 1665.1832 126.8133 //China: fish market center
+CREATE_COLLECTABLE1 1726.5562 1687.6536 130.9613 //Airport: stairs leading to the side parking
+CREATE_COLLECTABLE1 1659.4325 1751.7853 153.5235 //Airport: on top of the big plane
+CREATE_COLLECTABLE1 610.7187 1804.077 140.8012 //Airport: very end of the runway under the ramp
+CREATE_COLLECTABLE1 1342.4901 1412.7347 129.3136 //Bankarea: behind museum
+CREATE_COLLECTABLE1 1513.6219 1451.3843 126.5615 //Bankarea: in the intro alleyway
+CREATE_COLLECTABLE1 1492.106 1236.3715 123.7359 //Bankarea: alleyway between large resisdential buildings
+CREATE_COLLECTABLE1 1549.1244 1364.4619 109.4407 //Bankarea: sewer generator room
+CREATE_COLLECTABLE1 1504.5182 1366.4753 117.701 //Bankarea: in the bank vault interior; access from sewers
+CREATE_COLLECTABLE1 1551.3668 1454.6686 126.8138 //Bankarea: alleyway between bankarea and offices
+CREATE_COLLECTABLE1 1649.1371 1283.4987 157.7634 //Offices: inside bush on top of the Zaibatsu building
+CREATE_COLLECTABLE1 1671.2947 1398.9413 141.0821 //Offices: inside bush on top of the Bolt Burgers restaurant
+CREATE_COLLECTABLE1 1646.0105 1489.5535 127.0138 //Offices: inside tw@t cafe; lower floor
+CREATE_COLLECTABLE1 1812.271 1285.4592 123.8727 //Offices: car park behind Compreaux
+CREATE_COLLECTABLE1 1646.83 1207.6871 123.8732 //Offices: alleyway inside carcer shopping area
+CREATE_COLLECTABLE1 1286.8031 778.1923 30.3453 //Inside weed farm
+
 // ********************************************AUDIO*********************************************
 
 //INDUSTRIAL
