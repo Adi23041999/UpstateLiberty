@@ -126,7 +126,6 @@ void ModelTraits::CollectModels()
 	char modelName[24];
 	int32 modelId = -1;
 
-	CFileMgr::ChangeDir("\\");
 	int32 fd = CFileMgr::OpenFile("data\\modelTraits.dat", "r");
 	if (!fd)
 	{
@@ -153,31 +152,39 @@ void ModelTraits::CollectModels()
 		}
 		else switch (section) {
 		case DOOR: {
-			sscanf(line, "%s", modelName);
-			CBaseModelInfo* modelInfo = CModelInfo::GetModelInfo(modelName, &modelId);
-			if (modelInfo)
-				DoorModelIds.push_back(modelId);
+			if (sscanf(line, "%s", modelName) == 1)
+			{
+				CBaseModelInfo* modelInfo = CModelInfo::GetModelInfo(modelName, &modelId);
+				if (modelInfo)
+					DoorModelIds.push_back(modelId);
+			}
 			break;
 		}
 		case TREE: {
-			sscanf(line, "%s", modelName);
-			CBaseModelInfo* modelInfo = CModelInfo::GetModelInfo(modelName, &modelId);
-			if (modelInfo)
-				TreeModelIds.push_back(modelId);
+			if (sscanf(line, "%s", modelName) == 1)
+			{
+				CBaseModelInfo* modelInfo = CModelInfo::GetModelInfo(modelName, &modelId);
+				if (modelInfo)
+					TreeModelIds.push_back(modelId);
+			}
 			break;
 		}
 		case BANNER: {
-			sscanf(line, "%s", modelName);
-			CBaseModelInfo* modelInfo = CModelInfo::GetModelInfo(modelName, &modelId);
-			if (modelInfo)
-				BannerModelIds.push_back(modelId);
+			if (sscanf(line, "%s", modelName) == 1)
+			{
+				CBaseModelInfo* modelInfo = CModelInfo::GetModelInfo(modelName, &modelId);
+				if (modelInfo)
+					BannerModelIds.push_back(modelId);
+			}
 			break;
 		}
 		case GLASS: {
-			sscanf(line, "%s", modelName);
-			CBaseModelInfo* modelInfo = CModelInfo::GetModelInfo(modelName, &modelId);
-			if (modelInfo)
-				GlassModelIds.push_back(modelId);
+			if (sscanf(line, "%s", modelName) == 1)
+			{
+				CBaseModelInfo* modelInfo = CModelInfo::GetModelInfo(modelName, &modelId);
+				if (modelInfo)
+					GlassModelIds.push_back(modelId);
+			}
 			break;
 		}
 		}

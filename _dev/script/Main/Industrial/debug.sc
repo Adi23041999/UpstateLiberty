@@ -1,5 +1,7 @@
 MISSION_START
 
+{
+
 VAR_FLOAT x_float_m y_float_m z_float_m text_x text_y text_z text_h	player_heading_debug debug_car_heading
 VAR_INT magic_car button_press_flag car_colour car_colour2 intro_explosion_flag
 VAR_INT flag_create_car initial_create_car initial_car_selected
@@ -8,6 +10,9 @@ VAR_INT button_pressed_warp button_pressed_ind button_pressed_com button_pressed
 VAR_INT repeat_button_press slow_motion	text_button_pressed	players_car_debug
 VAR_INT debug_crap_on crap_press_flag no_cars repeat_butt_press
 VAR_INT weather_crap add_just_the_once_though invulnerability_on
+
+// UPSTATE
+LVAR_INT upstate_teleport_no
 
 initial_create_car = 0
 counter_create_car = 105 //CAR_CHEETAH
@@ -29,26 +34,23 @@ mission_start_debug:
 WAIT 0
 
 IF IS_PLAYER_PLAYING player
-	IF IS_KEY_PRESSED VK_NUMPAD1
-		SET_PLAYER_COORDINATES player -1329.5 1590.75 72.0 // town 1
-	ENDIF
-	IF IS_KEY_PRESSED VK_NUMPAD2
-		SET_PLAYER_COORDINATES player -131.0 1274.25 115.0 // town 2
-	ENDIF
-	IF IS_KEY_PRESSED VK_NUMPAD3
-		SET_PLAYER_COORDINATES player 376.8125 1323.438 132.0 // town 3
-	ENDIF
-	IF IS_KEY_PRESSED VK_NUMPAD4
-		SET_PLAYER_COORDINATES player -1176.188 1058.063 83.0 // initial spot
-	ENDIF
-	IF IS_KEY_PRESSED VK_NUMPAD5
-		SET_PLAYER_COORDINATES player -436.2219 727.04 248.7092 // observatory
-	ENDIF
-	IF IS_KEY_PRESSED VK_NUMPAD6
-		SET_PLAYER_COORDINATES player 1000.0 1300.0 127.0 // gt entrance
-	ENDIF
-	IF IS_KEY_PRESSED VK_NUMPAD7
-		SET_PLAYER_COORDINATES player 1463.8851 1405.0201 126.813 // gt bank
+	IF IS_BUTTON_PRESSED PAD1 SQUARE
+	AND	IS_BUTTON_PRESSED PAD1 TRIANGLE
+		IF IS_BUTTON_PRESSED PAD1 DPADLEFT
+			GOSUB upstate_debug_teleport
+			upstate_teleport_no--
+			if upstate_teleport_no < 0
+				upstate_teleport_no = 6
+			ENDIF
+		ENDIF
+		IF IS_BUTTON_PRESSED PAD1 DPADRIGHT
+			GOSUB upstate_debug_teleport
+			upstate_teleport_no++
+			if upstate_teleport_no > 6
+				upstate_teleport_no = 0
+			ENDIF
+			GOSUB upstate_debug_teleport
+		ENDIF
 	ENDIF
 ENDIF
 
@@ -1498,5 +1500,37 @@ start_mission_warp:
 ENDIF	//	IF IS_PLAYER_PLAYING player
 
 GOTO mission_start_debug
+
+upstate_debug_teleport:
+IF upstate_teleport_no = 0
+	SET_PLAYER_COORDINATES player -1329.5 1590.75 72.0 // town 1
+ENDIF
+IF upstate_teleport_no = 1
+	SET_PLAYER_COORDINATES player -131.0 1274.25 115.0 // town 2
+ENDIF
+IF upstate_teleport_no = 2
+	SET_PLAYER_COORDINATES player 376.8125 1323.438 132.0 // town 3
+ENDIF
+IF upstate_teleport_no = 3
+	SET_PLAYER_COORDINATES player -1176.188 1058.063 83.0 // initial spot
+ENDIF
+IF upstate_teleport_no = 4
+	SET_PLAYER_COORDINATES player -436.2219 727.04 248.7092 // observatory
+ENDIF
+IF upstate_teleport_no = 5
+	SET_PLAYER_COORDINATES player 1000.0 1300.0 127.0 // gt entrance
+ENDIF
+IF upstate_teleport_no = 6
+	SET_PLAYER_COORDINATES player 1463.8851 1405.0201 126.813 // gt bank
+ENDIF
+
+WHILE IS_BUTTON_PRESSED PAD1 DPADLEFT
+OR IS_BUTTON_PRESSED PAD1 DPADRIGHT
+	WAIT 0
+ENDWHILE
+
+RETURN
+
+}
 
 MISSION_END 

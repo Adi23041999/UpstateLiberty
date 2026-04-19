@@ -4,6 +4,5 @@
 class Misc
 {
 public:
-	static int32 DummyParkedCars;
 	static void Initialize();
 };
