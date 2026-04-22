@@ -11,10 +11,11 @@ https://github.com/Adi23041999/UpstateLiberty
 
 ## Compability notes
 - **SAVES ARE NOT COMPATIBLE!!!**
-- **SilentPatch.asi** crashes if it is not in the same folder as OpenLimitAdjuster.asi (to be fixed in SP update).
 - **Modloader** does not support .asi and .zon files correctly (to be fixed in ML update).
-- Outdated vesions of **gtadebug** cause a crash when starting a New Game in freeroam mode, and spawning vehicles is broken.
-  Both issues are fixed in gtadebug v1.4 (or newer).
+- If you are using Upstate Liberty together with any of the following mods, make sure they are up to date:
+  - Outdated versions of **SilentPatch** crash on the loading screen. Fixed in **SilentPatchIII Build 9.2** (or newer).
+  - Outdated vesions of **gtadebug** cause a crash when starting a New Game in freeroam mode, and spawning vehicles is broken.
+    Fixed in **gtadebug v1.4.1** (or newer).
 
 ## Freeroam setup
 - rename main_d.scm to main.scm
