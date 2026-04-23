@@ -13,7 +13,7 @@ VAR_INT weather_crap add_just_the_once_though invulnerability_on
 // VAR_INT debug_cutscene_cars_spawned, debug_cs_bank_car1 debug_cs_bank_car2 debug_cs_bank_car3 debug_cs_bank_car4
 
 // UPSTATE
-LVAR_INT ul_teleport_no
+LVAR_INT ul_cheat_mode_on ul_teleport_no
 
 initial_create_car = 0
 counter_create_car = 105 //CAR_CHEETAH
@@ -35,22 +35,45 @@ mission_start_debug:
 
 WAIT 0
 
-IF IS_PLAYER_PLAYING player
-	IF IS_BUTTON_PRESSED PAD1 SQUARE
-	AND	IS_BUTTON_PRESSED PAD1 TRIANGLE
-		IF IS_BUTTON_PRESSED PAD1 DPADLEFT
-			ul_teleport_no--
-			if ul_teleport_no < 0
-				ul_teleport_no = 6
-			ENDIF
-			GOSUB upstate_debug_teleport
+// Upstate debug
+IF IS_BUTTON_PRESSED PAD1 SELECT
+AND IS_BUTTON_PRESSED PAD1 RIGHTSHOCK
+	if ul_cheat_mode_on = 0
+		PRINT_NOW CHEATON 2000 1 //CHEAT MODE ON
+		ul_cheat_mode_on = 2
+	ELSE
+		IF ul_cheat_mode_on = 1
+			PRINT_NOW CHEATOF 2000 1 //CHEAT MODE OFF
+			ul_cheat_mode_on = 3
 		ENDIF
-		IF IS_BUTTON_PRESSED PAD1 DPADRIGHT
-			ul_teleport_no++
-			if ul_teleport_no > 6
-				ul_teleport_no = 0
+	ENDIF
+ELSE
+	IF ul_cheat_mode_on = 2
+		ul_cheat_mode_on = 1
+	ELSE
+		IF ul_cheat_mode_on = 3
+			ul_cheat_mode_on = 0
+		ENDIF
+	ENDIF
+ENDIF
+
+IF ul_cheat_mode_on = 1
+	IF IS_PLAYER_PLAYING player
+		IF IS_BUTTON_PRESSED PAD1 SQUARE
+			IF IS_BUTTON_PRESSED PAD1 DPADLEFT
+				ul_teleport_no--
+				if ul_teleport_no < 0
+					ul_teleport_no = 6
+				ENDIF
+				GOSUB upstate_debug_teleport
 			ENDIF
-			GOSUB upstate_debug_teleport
+			IF IS_BUTTON_PRESSED PAD1 DPADRIGHT
+				ul_teleport_no++
+				if ul_teleport_no > 6
+					ul_teleport_no = 0
+				ENDIF
+				GOSUB upstate_debug_teleport
+			ENDIF
 		ENDIF
 	ENDIF
 ENDIF
