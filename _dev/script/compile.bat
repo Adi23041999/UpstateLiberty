@@ -1,5 +1,6 @@
 @echo off
 set gta3sc=%cd%\gta3sc\gta3sc.exe
+set gta3dir=%cd%\..\..
 
 set sc_common=--config=gta3 --datadir="%gta3dir%\data" -O -fconst -fswitch --guesser
 
