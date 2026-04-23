@@ -17,5 +17,8 @@ void Misc::Initialize()
 		static float NewNumChunksLoaded;
 		NewNumChunksLoaded = 1.0f / (29.0f + (1.0f / *injector::ReadMemory<float*>(0x48D875 + 2)));
 		injector::WriteMemory<float*>(0x48D875 + 2, &NewNumChunksLoaded, true);
+
+		// Remove CTheScripts::Process clearing the CTheScripts::DbgFlag every frame
+		injector::MakeNOP(0x4393EA, 7, true);
 	};
 }
