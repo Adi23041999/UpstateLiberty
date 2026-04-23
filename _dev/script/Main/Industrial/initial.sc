@@ -1028,32 +1028,28 @@ SET_ZONE_GROUP GTHOSP NIGHT HOSPITAL_NIGHT_PEDGRP
 
 // Highway info zones
 
-VAR_INT hw_dens_day_ped, hw_dens_nit_ped, hw_dens_day_car, hw_dens_nit_car
-LVAR_INT hw_poli_day_ped, hw_poli_nit_ped, hw_poli_day_car, hw_poli_nit_car
-LVAR_INT hw_poor_day, hw_poor_nit, hw_rich_day, hw_rich_nit, hw_exec_day, hw_exec_nit, hw_work_day, hw_work_nit, hw_spec_day, hw_spec_nit, hw_big_day, hw_big_nit
+CONST_INT hw_dens_day_ped 30
+CONST_INT hw_dens_nit_ped 16
+CONST_INT hw_dens_day_car 16
+CONST_INT hw_dens_nit_car 10
 
-hw_dens_day_ped = 30
-hw_dens_nit_ped = 16
-hw_dens_day_car = 16
-hw_dens_nit_car = 10
+CONST_INT hw_poli_day_ped 20
+CONST_INT hw_poli_nit_ped 10
+CONST_INT hw_poli_day_car 30
+CONST_INT hw_poli_nit_car 20
 
-hw_poli_day_ped = 20
-hw_poli_nit_ped = 10
-hw_poli_day_car = 30
-hw_poli_nit_car = 20
-
-hw_poor_day = 200
-hw_rich_day = 200
-hw_exec_day = 100
-hw_work_day = 150
-hw_spec_day = 150
-hw_big_day = 150
-hw_poor_nit = 250
-hw_rich_nit = 250
-hw_exec_nit = 100
-hw_work_nit = 150
-hw_spec_nit = 100
-hw_big_nit = 100
+CONST_INT hw_poor_day 200
+CONST_INT hw_rich_day 200
+CONST_INT hw_exec_day 100
+CONST_INT hw_work_day 150
+CONST_INT hw_spec_day 150
+CONST_INT hw_big_day 150
+CONST_INT hw_poor_nit 250
+CONST_INT hw_rich_nit 250
+CONST_INT hw_exec_nit 100
+CONST_INT hw_work_nit 150
+CONST_INT hw_spec_nit 100
+CONST_INT hw_big_nit 100
 
 // West Highway
 

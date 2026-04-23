@@ -13,7 +13,7 @@ VAR_INT weather_crap add_just_the_once_though invulnerability_on
 // VAR_INT debug_cutscene_cars_spawned, debug_cs_bank_car1 debug_cs_bank_car2 debug_cs_bank_car3 debug_cs_bank_car4
 
 // UPSTATE
-LVAR_INT upstate_teleport_no
+LVAR_INT ul_teleport_no
 
 initial_create_car = 0
 counter_create_car = 105 //CAR_CHEETAH
@@ -39,17 +39,16 @@ IF IS_PLAYER_PLAYING player
 	IF IS_BUTTON_PRESSED PAD1 SQUARE
 	AND	IS_BUTTON_PRESSED PAD1 TRIANGLE
 		IF IS_BUTTON_PRESSED PAD1 DPADLEFT
-			GOSUB upstate_debug_teleport
-			upstate_teleport_no--
-			if upstate_teleport_no < 0
-				upstate_teleport_no = 6
+			ul_teleport_no--
+			if ul_teleport_no < 0
+				ul_teleport_no = 6
 			ENDIF
+			GOSUB upstate_debug_teleport
 		ENDIF
 		IF IS_BUTTON_PRESSED PAD1 DPADRIGHT
-			GOSUB upstate_debug_teleport
-			upstate_teleport_no++
-			if upstate_teleport_no > 6
-				upstate_teleport_no = 0
+			ul_teleport_no++
+			if ul_teleport_no > 6
+				ul_teleport_no = 0
 			ENDIF
 			GOSUB upstate_debug_teleport
 		ENDIF
@@ -1533,27 +1532,29 @@ ENDIF	//	IF IS_PLAYER_PLAYING player
 GOTO mission_start_debug
 
 upstate_debug_teleport:
-IF upstate_teleport_no = 0
-	SET_PLAYER_COORDINATES player -1329.5 1590.75 72.0 // town 1
-ENDIF
-IF upstate_teleport_no = 1
-	SET_PLAYER_COORDINATES player -131.0 1274.25 115.0 // town 2
-ENDIF
-IF upstate_teleport_no = 2
-	SET_PLAYER_COORDINATES player 376.8125 1323.438 132.0 // town 3
-ENDIF
-IF upstate_teleport_no = 3
-	SET_PLAYER_COORDINATES player -1176.188 1058.063 83.0 // initial spot
-ENDIF
-IF upstate_teleport_no = 4
-	SET_PLAYER_COORDINATES player -436.2219 727.04 248.7092 // observatory
-ENDIF
-IF upstate_teleport_no = 5
-	SET_PLAYER_COORDINATES player 1000.0 1300.0 127.0 // gt entrance
-ENDIF
-IF upstate_teleport_no = 6
-	SET_PLAYER_COORDINATES player 1463.8851 1405.0201 126.813 // gt bank
-ENDIF
+SWITCH ul_teleport_no
+	CASE 0
+		SET_PLAYER_COORDINATES player -1329.5 1590.75 72.0 // town 1
+		BREAK
+	CASE 1
+		SET_PLAYER_COORDINATES player -131.0 1274.25 115.0 // town 2
+		BREAK
+	CASE 2
+		SET_PLAYER_COORDINATES player 376.8125 1323.438 132.0 // town 3
+		BREAK
+	CASE 3
+		SET_PLAYER_COORDINATES player -1176.188 1058.063 83.0 // initial spot
+		BREAK
+	CASE 4
+		SET_PLAYER_COORDINATES player -436.2219 727.04 248.7092 // observatory
+		BREAK
+	CASE 5
+		SET_PLAYER_COORDINATES player 1000.0 1300.0 127.0 // gt entrance
+		BREAK
+	CASE 6
+		SET_PLAYER_COORDINATES player 1463.8851 1405.0201 126.813 // gt bank
+		BREAK
+ENDSWITCH
 
 WHILE IS_BUTTON_PRESSED PAD1 DPADLEFT
 OR IS_BUTTON_PRESSED PAD1 DPADRIGHT
