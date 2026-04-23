@@ -747,7 +747,7 @@ start_mission_warp:
 		IF IS_BUTTON_PRESSED PAD2 DPADRIGHT
 			IF IS_PLAYER_PLAYING player
 				IF IS_COLLISION_IN_MEMORY LEVEL_INDUSTRIAL
-					//flag_industrial_passed = 0
+					flag_industrial_passed = 0 // UPSTATE: Fix debug not working due to passed islands
 					button_pressed_ind ++
 					IF button_pressed_ind > 29
 						flag_meat_mission4_passed = 1
@@ -1082,8 +1082,10 @@ start_mission_warp:
 		IF IS_BUTTON_PRESSED PAD2 DPADRIGHT
 			IF IS_PLAYER_PLAYING player
 				IF IS_COLLISION_IN_MEMORY LEVEL_COMMERCIAL
-					//flag_industrial_passed = 1
-					//flag_commercial_passed = 0
+					// UPSTATE: Fix debug not working due to passed islands
+					flag_industrial_passed = 1
+					flag_commercial_passed = 0
+
 					button_pressed_com ++
 					IF button_pressed_com > 30
 						flag_yardie_mission4_passed = 1
@@ -1441,8 +1443,12 @@ start_mission_warp:
 		IF IS_BUTTON_PRESSED PAD2 DPADRIGHT
 			IF IS_PLAYER_PLAYING player
 				IF IS_COLLISION_IN_MEMORY LEVEL_SUBURBAN
-					//flag_commercial_passed = 1
-					//flag_suburban_passed = 0
+
+					// UPSTATE: Fix debug not working due to passed islands
+					flag_industrial_passed = 1
+					flag_commercial_passed = 1
+					flag_suburban_passed = 0
+
 					button_pressed_sub ++
 					IF button_pressed_sub > 6
 						flag_cat_mission1_passed = 1

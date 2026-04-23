@@ -2150,21 +2150,29 @@ ENDIF
 	AND flag_eightball_mission_launched = 0
 	AND flag_player_on_mission = 0
 		IF flag_reached_hideout = 0
-			//IF LOCATE_PLAYER_ON_FOOT_2D player 811.90 -939.95 3.5 3.5 FALSE // SCFIX: commented
+#ifdef _DEBUG
+			IF LOCATE_PLAYER_ON_FOOT_2D player 811.90 -939.95 3.5 3.5 FALSE // SCFIX: commented
+#endif
 				IF CAN_PLAYER_START_MISSION Player
 					flag_player_on_mission = 1 // SCFIX
 					LOAD_AND_LAUNCH_MISSION 8ball.sc	//	Don't know what to do about fades with this one
 					flag_eightball_mission_launched = 1
 				ENDIF
-			//ENDIF // SCFIX: commented
+#ifdef _DEBUG
+			ENDIF // SCFIX: commented
+#endif
 		ELSE
-			//IF LOCATE_PLAYER_ON_FOOT_2D player 883.5 -308.2 3.5 3.5 FALSE  // SCFIX: commented
+#ifdef _DEBUG
+			IF LOCATE_PLAYER_ON_FOOT_2D player 883.5 -308.2 3.5 3.5 FALSE  // SCFIX: commented
+#endif
 				IF CAN_PLAYER_START_MISSION Player
 					flag_player_on_mission = 1 // SCFIX
 					LOAD_AND_LAUNCH_MISSION 8ball.sc	//	Don't know what to do about fades with this one
 					flag_eightball_mission_launched = 1
 				ENDIF
-			//ENDIF // SCFIX: commented
+#ifdef _DEBUG
+			ENDIF // SCFIX: commented
+#endif
 		ENDIF
 	ENDIF
 
