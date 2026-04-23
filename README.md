@@ -25,7 +25,10 @@ Or
 - install gtadebug (rename iii_debug.dll to iii_debug.asi) (https://github.com/aap/gtadebug)
 - hold 'D' while the game is loading to launch the game in freeroam mode
 
-To teleport to various places in Upstate, use **Square** + **Triangle** + **DPad** (**Jump** + **Enter vehicle** + **Arrow keys** on the keyboard).
+To teleport to various places in Upstate:
+1. First, enable the Cheat Mode by pressing **Select** + **R3** (**Change camera** + **Look back**/**Start sidemission** on the keyboard).
+   Press it again to disable the Cheat Mode.
+2. Then, use **Square** + **DPad** (**Jump** + **Arrow keys** on the keyboard).
 
 ## Additional repositories
 - Limit Adjuster (https://github.com/Adi23041999/III.VC.SA.LimitAdjuster/tree/upstate)

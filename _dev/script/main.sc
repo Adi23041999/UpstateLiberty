@@ -74,7 +74,7 @@ VAR_INT fuzz_door1, fuzz_door2
 VAR_INT	joeys_garage_door2, joeys_garage_door3
 VAR_INT target1 target2 target3
 VAR_INT subway_gate_industrial tunnel_gate_industrial
-VAR_INT bridge_is_damaged
+VAR_INT unused_2 // UPSTATE: Up for grabs, stays there so player/scplayer don't shift
 VAR_INT subway_gate_suburban1, subway_gate_suburban2, tunnel_gate_suburban
 
 VAR_FLOAT joeydoor2_X joeydoor2_Y joeydoor2_Z joeydoor3_X joeydoor3_Y joeydoor3_Z
@@ -1139,20 +1139,19 @@ IF IS_PLAYER_PLAYING player
 	DO_FADE 1000 FADE_IN
 	ADD_SCORE player 1000000
 
-	//SWAP BRIDGE FROM FIXED TO DAMAGED
-	SWAP_NEAREST_BUILDING_MODEL	525.362 -927.066 71.841	20.0 nbbridgcabls01 nbbridgfk2
-	SWAP_NEAREST_BUILDING_MODEL	706.432 -935.82  67.071	20.0 nbbridgcabls01 nbbridgfk2
-	SWAP_NEAREST_BUILDING_MODEL	529.023 -920.098 43.504 20.0 nbbridgerdb damgbridgerdb
-	SWAP_NEAREST_BUILDING_MODEL	702.763 -939.963 38.736	20.0 nbbridgerdb damgbridgerdb
-	SWAP_NEAREST_BUILDING_MODEL	529.023 -942.94  43.504	20.0 nbbridgerda damgbbridgerda
-	SWAP_NEAREST_BUILDING_MODEL	702.764 -919.963 38.736	20.0 nbbridgerda damgbbridgerda
+	// Portland blockages
+	DELETE_OBJECT subway_gate_industrial
+	DELETE_OBJECT tunnel_gate_industrial
 
-	SWAP_NEAREST_BUILDING_MODEL	525.362 -927.066 71.841	20.0 lodridgcabls01 lodridgfk2
-	SWAP_NEAREST_BUILDING_MODEL	706.432 -935.82  67.071	20.0 lodridgcabls01 lodridgfk2
-	SWAP_NEAREST_BUILDING_MODEL	521.146 -922.94  43.504 20.0 lodridgerdb lodgbridgerdb
-	SWAP_NEAREST_BUILDING_MODEL	702.763 -939.963 38.736	20.0 lodridgerdb lodgbridgerdb
-	SWAP_NEAREST_BUILDING_MODEL	529.023 -940.098 43.504	20.0 lodridgerda lodgbbridgerda
-	SWAP_NEAREST_BUILDING_MODEL	702.764 -919.963 38.736	20.0 lodridgerda lodgbbridgerda
+	SWITCH_ROADS_ON 619.6 -911.5 45.0 834.3 -954.5 32.0 //Industrial to commercial Bridge
+	SWITCH_ROADS_ON 659.6 200.0 -20.0 945.8 147.5 5.0	//Tunnel
+	SWITCH_ROADS_ON 529.6 106.5 -30.0 581.4 65.7 0.0 //tunnel from commercial to intersection for sub and ind
+
+	// Staunton blockages
+	DELETE_OBJECT helix_barrier
+
+	SWITCH_ROADS_ON 496.7 75.5 -30.0 484.0 44.2 0.0 //tunnel to suburbia
+	SWITCH_ROADS_ON -46.8 -648.0 39.0 -69.1 -614.0 50.0 //Commercial to Suburbia Bridge
 
 	START_NEW_SCRIPT ind_save_loop
 	START_NEW_SCRIPT sub_save_loop
@@ -2150,21 +2149,29 @@ ENDIF
 	AND flag_eightball_mission_launched = 0
 	AND flag_player_on_mission = 0
 		IF flag_reached_hideout = 0
-			//IF LOCATE_PLAYER_ON_FOOT_2D player 811.90 -939.95 3.5 3.5 FALSE // SCFIX: commented
+#ifdef _DEBUG
+			IF LOCATE_PLAYER_ON_FOOT_2D player 811.90 -939.95 3.5 3.5 FALSE // SCFIX: commented
+#endif
 				IF CAN_PLAYER_START_MISSION Player
 					flag_player_on_mission = 1 // SCFIX
 					LOAD_AND_LAUNCH_MISSION 8ball.sc	//	Don't know what to do about fades with this one
 					flag_eightball_mission_launched = 1
 				ENDIF
-			//ENDIF // SCFIX: commented
+#ifdef _DEBUG
+			ENDIF // SCFIX: commented
+#endif
 		ELSE
-			//IF LOCATE_PLAYER_ON_FOOT_2D player 883.5 -308.2 3.5 3.5 FALSE  // SCFIX: commented
+#ifdef _DEBUG
+			IF LOCATE_PLAYER_ON_FOOT_2D player 883.5 -308.2 3.5 3.5 FALSE  // SCFIX: commented
+#endif
 				IF CAN_PLAYER_START_MISSION Player
 					flag_player_on_mission = 1 // SCFIX
 					LOAD_AND_LAUNCH_MISSION 8ball.sc	//	Don't know what to do about fades with this one
 					flag_eightball_mission_launched = 1
 				ENDIF
-			//ENDIF // SCFIX: commented
+#ifdef _DEBUG
+			ENDIF // SCFIX: commented
+#endif
 		ENDIF
 	ENDIF
 
