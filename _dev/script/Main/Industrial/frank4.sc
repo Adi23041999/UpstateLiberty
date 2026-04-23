@@ -862,7 +862,6 @@ flag_frankie_mission4_passed = 1
 flag_industrial_passed = 1
 PLAY_MISSION_PASSED_TUNE 1
 INDUSTRIAL_PASSED
-bridge_is_damaged = 1
 	//SWAP BRIDGE FROM DAMAGED TO FIXED
 	SWAP_NEAREST_BUILDING_MODEL	525.362 -927.066 71.841	20.0 nbbridgfk2	nbbridgcabls01
 	SWAP_NEAREST_BUILDING_MODEL	706.432 -935.82  67.071	20.0 nbbridgfk2	nbbridgcabls01
