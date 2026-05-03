@@ -2164,7 +2164,7 @@ ENDIF
 	AND flag_player_on_mission = 0
 		IF flag_reached_hideout = 0
 #ifdef _DEBUG
-			IF LOCATE_PLAYER_ON_FOOT_2D player 811.90 -939.95 3.5 3.5 FALSE // SCFIX: commented
+			IF LOCATE_PLAYER_ON_FOOT_2D player 811.90 -939.95 3.5 3.5 FALSE // SCFIX: commented out in main.sc, but debug.sc needs it
 #endif
 				IF CAN_PLAYER_START_MISSION Player
 					flag_player_on_mission = 1 // SCFIX
@@ -2172,11 +2172,11 @@ ENDIF
 					flag_eightball_mission_launched = 1
 				ENDIF
 #ifdef _DEBUG
-			ENDIF // SCFIX: commented
+			ENDIF // SCFIX: commented out in main.sc, but debug.sc needs it
 #endif
 		ELSE
 #ifdef _DEBUG
-			IF LOCATE_PLAYER_ON_FOOT_2D player 883.5 -308.2 3.5 3.5 FALSE  // SCFIX: commented
+			IF LOCATE_PLAYER_ON_FOOT_2D player 883.5 -308.2 3.5 3.5 FALSE  // SCFIX: commented out in main.sc, but debug.sc needs it
 #endif
 				IF CAN_PLAYER_START_MISSION Player
 					flag_player_on_mission = 1 // SCFIX
@@ -2184,7 +2184,7 @@ ENDIF
 					flag_eightball_mission_launched = 1
 				ENDIF
 #ifdef _DEBUG
-			ENDIF // SCFIX: commented
+			ENDIF // SCFIX: commented out in main.sc, but debug.sc needs it
 #endif
 		ENDIF
 	ENDIF

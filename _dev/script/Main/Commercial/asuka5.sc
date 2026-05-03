@@ -232,7 +232,7 @@ SET_CHAR_OBJ_RUN_TO_COORD tanner 435.7 -1388.8
 			ENDIF
 
 			IF TIMERB > 10000
-				IF NOT IS_CHAR_DEAD	lips
+				IF NOT IS_CHAR_DEAD	tanner // SCFIX: was 'lips'
 					SET_CHAR_COORDINATES tanner 435.7 -1388.8 -100.0
 				ENDIF
 			ENDIF
@@ -254,8 +254,8 @@ SET_CHAR_OBJ_RUN_TO_COORD tanner 423.5 -1388.8
 			ENDIF
 
 			IF TIMERB > 10000
-				IF NOT IS_CHAR_DEAD	lips
-					SET_CHAR_COORDINATES tanner 427.3 -1388.6 25.0
+				IF NOT IS_CHAR_DEAD	tanner // SCFIX: was 'lips'
+					SET_CHAR_COORDINATES tanner 423.5 -1388.8 25.0 // SCFIX: fixed coordinates
 				ENDIF
 			ENDIF
 
@@ -276,7 +276,7 @@ SET_CHAR_OBJ_RUN_TO_COORD tanner 423.6 -1393.1
 			ENDIF
 
 			IF TIMERB > 10000
-				IF NOT IS_CHAR_DEAD	lips
+				IF NOT IS_CHAR_DEAD	tanner // SCFIX: was 'lips'
 					SET_CHAR_COORDINATES tanner 423.6 -1393.1 25.0
 				ENDIF
 			ENDIF
