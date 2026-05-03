@@ -16,7 +16,7 @@ void PoliceZones::InitializePoliceRadioZones()
     char* line;
     ZoneSfx = injector::ReadMemory<tPoliceRadioZone*>(0x57EB59);
 
-    int fid = CFileMgr::OpenFile("policeZoneSfx.dat", "r");
+    int fid = CFileMgr::OpenFile("data\\policeZoneSfx.dat", "r");
     if (fid > 0)
     {
         int index = 0;
@@ -44,5 +44,4 @@ void PoliceZones::InitializePoliceRadioZones()
         }
         CFileMgr::CloseFile(fid);
     }
-    CFileMgr::SetDir("");
 }
