@@ -96,6 +96,7 @@ IPL DATA\MAPS\overview.IPL
 IPL DATA\MAPS\props.IPL
 
 IPL DATA\MAPS\cull.IPL
+IPL DATA\MAPS\UL\ul_cull.IPL
 IPL DATA\MAPS\UL\ul_lcc\countryside.IPL
 IPL DATA\MAPS\UL\ul_lcc\smalltown1.IPL
 IPL DATA\MAPS\UL\ul_lcc\smalltown2.IPL
@@ -105,5 +106,4 @@ IPL DATA\MAPS\UL\ul_gtw_csite\csite.IPL
 IPL DATA\MAPS\UL\ul_props\countryside_props.IPL
 IPL DATA\MAPS\UL\ul_props\ghosttown_props.IPL
 IPL DATA\MAPS\UL\ul_props\shadows.IPL
-IPL DATA\MAPS\UL\ul_cull.IPL
 
