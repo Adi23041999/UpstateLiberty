@@ -5,7 +5,7 @@ https://github.com/Adi23041999/UpstateLiberty
 
 ## Installation
 - install Ultimate ASI Loader (https://github.com/ThirteenAG/Ultimate-ASI-Loader)
-- copy the mod files into the game directory
+- either copy the mod files into the game directory or use latest modloader (https://github.com/thelink2012/modloader/releases)
 - supported exe versions: 1.0 only
 - optionally install QOL mods (SilentPatch, Widescreen Fix, SkyGFX)
 
