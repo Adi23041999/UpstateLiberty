@@ -92,7 +92,7 @@ saved_peds				= 0
 first_rescue_flag		= 0
 first_chunk_flag		= 0
 time_chunk_divider		= 11.0
-ambulance_level			= 1
+ambulance_level			= 0 // UPSTATE: Was 1
 time_chunk				= 0
 time_chunk_in_secs 		= 0
 score_am				= 0
@@ -104,6 +104,14 @@ car_full_flag = 0
 saved_peds_this_go = 0
 paramedic_location = 0
 hospital_sphere_flag = 0 // SCFIX
+
+// UPSTATE: START - Before starting the mission, check if we can generate patients where we are
+// IFNOT...GOTO is supported by SCM spec, but gta3sc doesn't support it, so we do it manually
+GOSUB generate_random_coord
+GOTO_IF_FALSE ambulance_failed
+
+ambulance_level = 1
+// UPSTATE: END
 
 PRINT_NOW ATUTOR2 3000 1 // Take the injured people to the Hospital
 
@@ -139,7 +147,11 @@ IF got_siren_help_before = 0
 ENDIF
 
 WHILE number_of_injured_peds > ped_counter
+	// UPSTATE: generate_random_coord now returns true if the coords generated correctly
+	// IFNOT...GOTO is supported by SCM spec, but gta3sc doesn't support it, so we do it manually
 	GOSUB generate_random_coord
+	GOTO_IF_FALSE ambulance_failed
+
 	GOSUB create_random_injured_ped
 	GOSUB generate_timelimit
 	++ ped_counter
@@ -502,12 +514,14 @@ AND flag_got_range_message = 0
 		PRINT_NOW A_RANGE 5000 1 //"The ambulance radio is out of range, get closer to a hospital."
 		flag_got_range_message = 1
 	ENDIF
-	GOTO ambulance_failed
+	RETURN_FALSE
+	RETURN
 ENDIF
 
 IF GOSUB process_r3_cancel
 	PRINT_NOW A_CANC 3000 1//"~r~Ambulance mission cancelled!"
-	GOTO ambulance_failed
+	RETURN_FALSE
+	RETURN
 ENDIF
 
 GET_CLOSEST_CHAR_NODE random_x random_y player1_a_z ped_coord_x ped_coord_y ped_coord_z
@@ -878,6 +892,7 @@ ENDIF
 //	ENDIF
 //ENDIF
 
+RETURN_TRUE
 RETURN
 
 ////////////////
@@ -2041,10 +2056,12 @@ ENDIF
 // SCFIX: END
 CLEAR_ONSCREEN_TIMER ped_time_limit
 CLEAR_HELP
-IF ambulance_level < 13 // SCFIX
-PRINT_BIG A_FAIL1 5000 5
-ENDIF // SCFIX
-PRINT_WITH_NUMBER_BIG A_SAVES saved_peds_this_go 6000 6//PEOPLE SAVED: ~1~
+IF ambulance_level > 0 // UPSTATE: Added for radio-out-of-range scenarios
+	IF ambulance_level < 13 // SCFIX
+		PRINT_BIG A_FAIL1 5000 5
+	ENDIF // SCFIX
+	PRINT_WITH_NUMBER_BIG A_SAVES saved_peds_this_go 6000 6//PEOPLE SAVED: ~1~
+ENDIF
 
 // SCFIX: START
 IF hospital_sphere_flag = 1
