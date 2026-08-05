@@ -110,6 +110,9 @@ ENDIF
 
 IF IS_COLLISION_IN_MEMORY LEVEL_SUBURBAN
 	IF IS_PLAYER_IN_ZONE player UL_ZON0
+	OR IS_PLAYER_IN_ZONE player LOVEEI1
+	OR IS_PLAYER_IN_ZONE player LOVEEI2
+	OR IS_PLAYER_IN_ZONE player LOVEEI3
 		IF IS_PLAYER_IN_ZONE player GT_ZON0
 			GENERATE_RANDOM_FLOAT_IN_RANGE 912.647 1865.222 random_fire_x
 			GENERATE_RANDOM_FLOAT_IN_RANGE 780.918 1782.927 random_fire_y
@@ -328,182 +331,222 @@ SET_CAR_ONLY_DAMAGED_BY_PLAYER car_on_fire TRUE
 
 //PRINT_NOW F_START 3000 1
 
+// UPSTATE: Added GOTO display_fire_location_end everywhere here, as Upstate zones overlap each other
+// so we want to go from the most to the least specific zone
 IF IS_CHAR_IN_ZONE dummy_ped_for_zone PORT_W
 	PRINT_STRING_IN_STRING_NOW F_START PORT_W 5000 1 // The suspect is in the Callahan Point area.
+	GOTO display_fire_location_end
 ENDIF
 
 IF IS_CHAR_IN_ZONE dummy_ped_for_zone PORT_S
 	PRINT_STRING_IN_STRING_NOW F_START PORT_S 5000 1 // The suspect is in the Atlantic Quays area.
+	GOTO display_fire_location_end
 ENDIF
 
 IF IS_CHAR_IN_ZONE dummy_ped_for_zone PORT_E
 	PRINT_STRING_IN_STRING_NOW F_START PORT_E 5000 1 // The suspect is in the Portland Harbour area.
+	GOTO display_fire_location_end
 ENDIF
 
 IF IS_CHAR_IN_ZONE dummy_ped_for_zone PORT_I
 	PRINT_STRING_IN_STRING_NOW F_START PORT_I 5000 1 // The suspect is in the Trenton area.
+	GOTO display_fire_location_end
 ENDIF
 
 IF IS_CHAR_IN_ZONE dummy_ped_for_zone S_VIEW
 	PRINT_STRING_IN_STRING_NOW F_START S_VIEW 5000 1 // The suspect is in the Portland View area.
+	GOTO display_fire_location_end
 ENDIF
 
 IF IS_CHAR_IN_ZONE dummy_ped_for_zone CHINA
 	PRINT_STRING_IN_STRING_NOW F_START CHINA 5000 1 // The dummy_ped_for_zone is proceeding south in Chinatown
+	GOTO display_fire_location_end
 ENDIF
 
 IF IS_CHAR_IN_ZONE dummy_ped_for_zone EASTBAY
 	PRINT_STRING_IN_STRING_NOW F_START EASTBAY 5000 1 // The dummy_ped_for_zone is proceeding south in Portland Beach
+	GOTO display_fire_location_end
 ENDIF
 
 IF IS_CHAR_IN_ZONE dummy_ped_for_zone LITTLEI
 	PRINT_STRING_IN_STRING_NOW F_START LITTLEI 5000 1 // The dummy_ped_for_zone is proceeding south in Saint Mark's
+	GOTO display_fire_location_end
 ENDIF
 
 IF IS_CHAR_IN_ZONE dummy_ped_for_zone REDLIGH
 	PRINT_STRING_IN_STRING_NOW F_START REDLIGH 5000 1 // The dummy_ped_for_zone is proceeding south in Red Light District
+	GOTO display_fire_location_end
 ENDIF
 
 IF IS_CHAR_IN_ZONE dummy_ped_for_zone TOWERS
 	PRINT_STRING_IN_STRING_NOW F_START TOWERS 5000 1 // The dummy_ped_for_zone is proceeding south in Hepburn Heights
+	GOTO display_fire_location_end
 ENDIF
 
 IF IS_CHAR_IN_ZONE dummy_ped_for_zone HARWOOD
 	PRINT_STRING_IN_STRING_NOW F_START HARWOOD 5000 1 // The dummy_ped_for_zone is proceeding south in Harwood
+	GOTO display_fire_location_end
 ENDIF
 
 IF IS_CHAR_IN_ZONE dummy_ped_for_zone ROADBR1
 	PRINT_STRING_IN_STRING_NOW F_START ROADBR1 5000 1 // The dummy_ped_for_zone is proceeding south in Callahan Bridge
+	GOTO display_fire_location_end
 ENDIF
 
 IF IS_CHAR_IN_ZONE dummy_ped_for_zone ROADBR2
 	PRINT_STRING_IN_STRING_NOW F_START ROADBR2 5000 1 // The dummy_ped_for_zone is proceeding south in Callahan Bridge
+	GOTO display_fire_location_end
 ENDIF
 
 //IF IS_CHAR_IN_ZONE dummy_ped_for_zone TUNNELP
 //	PRINT_STRING_IN_STRING_NOW F_START TUNNELP 5000 1 // The dummy_ped_for_zone is proceeding south in Porter Tunnel
+//	GOTO display_fire_location_end
 //ENDIF
 
 IF IS_CHAR_IN_ZONE dummy_ped_for_zone STADIUM
 	PRINT_STRING_IN_STRING_NOW F_START STADIUM 5000 1 // The dummy_ped_for_zone is proceeding south in Aspatria
+	GOTO display_fire_location_end
 ENDIF
 
 IF IS_CHAR_IN_ZONE dummy_ped_for_zone HOSPI_2
 	PRINT_STRING_IN_STRING_NOW F_START HOSPI_2 5000 1 // The dummy_ped_for_zone is proceeding south in Rockford
+	GOTO display_fire_location_end
 ENDIF
 
 IF IS_CHAR_IN_ZONE dummy_ped_for_zone UNIVERS
 	PRINT_STRING_IN_STRING_NOW F_START UNIVERS 5000 1 // The dummy_ped_for_zone is proceeding south in Liberty Campus
+	GOTO display_fire_location_end
 ENDIF
 
 IF IS_CHAR_IN_ZONE dummy_ped_for_zone CONSTRU
 	PRINT_STRING_IN_STRING_NOW F_START CONSTRU 5000 1 // The dummy_ped_for_zone is proceeding south in Fort Staunton
+	GOTO display_fire_location_end
 ENDIF
 
 IF IS_CHAR_IN_ZONE dummy_ped_for_zone PARK
 	PRINT_STRING_IN_STRING_NOW F_START PARK 5000 1 // The dummy_ped_for_zone is proceeding south in Belleville Park
+	GOTO display_fire_location_end
 ENDIF
 
 IF IS_CHAR_IN_ZONE dummy_ped_for_zone COM_EAS
 	PRINT_STRING_IN_STRING_NOW F_START COM_EAS 5000 1 // The dummy_ped_for_zone is proceeding south in Newport
+	GOTO display_fire_location_end
 ENDIF
 
 IF IS_CHAR_IN_ZONE dummy_ped_for_zone SHOPING
 	PRINT_STRING_IN_STRING_NOW F_START SHOPING 5000 1 // The dummy_ped_for_zone is proceeding south in Bedford Point
+	GOTO display_fire_location_end
 ENDIF
 
 IF IS_CHAR_IN_ZONE dummy_ped_for_zone YAKUSA
 	PRINT_STRING_IN_STRING_NOW F_START YAKUSA 5000 1 // The dummy_ped_for_zone is proceeding south in Torrington
+	GOTO display_fire_location_end
 ENDIF
 
 IF IS_CHAR_IN_ZONE dummy_ped_for_zone AIRPORT
 	PRINT_STRING_IN_STRING_NOW F_START AIRPORT 5000 1 // The dummy_ped_for_zone is proceeding south in Francis International Airport
+	GOTO display_fire_location_end
 ENDIF
 
 IF IS_CHAR_IN_ZONE dummy_ped_for_zone PROJECT
 	PRINT_STRING_IN_STRING_NOW F_START PROJECT 5000 1 // The dummy_ped_for_zone is proceeding south in Wichita Gardens
+	GOTO display_fire_location_end
 ENDIF
 
 IF IS_CHAR_IN_ZONE dummy_ped_for_zone SUB_IND
 	PRINT_STRING_IN_STRING_NOW F_START SUB_IND 5000 1 // The dummy_ped_for_zone is proceeding south in Pike Creek
+	GOTO display_fire_location_end
 ENDIF
 
 IF IS_CHAR_IN_ZONE dummy_ped_for_zone SWANKS
 	PRINT_STRING_IN_STRING_NOW F_START SWANKS 5000 1 // The dummy_ped_for_zone is proceeding south in Cedar Grove
+	GOTO display_fire_location_end
 ENDIF
 
 IF IS_CHAR_IN_ZONE dummy_ped_for_zone BIG_DAM
 	PRINT_STRING_IN_STRING_NOW F_START BIG_DAM 5000 1 // The dummy_ped_for_zone is proceeding south in Cochrane Dam
+	GOTO display_fire_location_end
 ENDIF
 
-IF IS_CHAR_IN_ZONE dummy_ped_for_zone UL_ZON0
-AND NOT IS_CHAR_IN_ZONE dummy_ped_for_zone GT_ZON0
-	PRINT_STRING_IN_STRING_NOW F_START UL_ZON0 5000 1 // The dummy_ped_for_zone is proceeding south in Upstate Liberty
-
-	IF IS_CHAR_IN_ZONE dummy_ped_for_zone WARSAW
-		PRINT_STRING_IN_STRING_NOW F_START WARSAW 5000 1 // The dummy_ped_for_zone is proceeding south in Warsaw
-	ENDIF
-	
-	IF IS_CHAR_IN_ZONE dummy_ped_for_zone BAXTER
-		PRINT_STRING_IN_STRING_NOW F_START BAXTER 5000 1 // The dummy_ped_for_zone is proceeding south in Baxter
-	ENDIF
-
-	IF IS_CHAR_IN_ZONE dummy_ped_for_zone CARRIN
-		PRINT_STRING_IN_STRING_NOW F_START CARRIN 5000 1 // The dummy_ped_for_zone is proceeding south in Carrington
-	ENDIF
-
-	IF IS_CHAR_IN_ZONE dummy_ped_for_zone LOVEEI1
-	OR IS_CHAR_IN_ZONE dummy_ped_for_zone LOVEEI2
-	OR IS_CHAR_IN_ZONE dummy_ped_for_zone LOVEEI3
-		PRINT_STRING_IN_STRING_NOW F_START LOVEES 5000 1 // The dummy_ped_for_zone is proceeding south in Love Estates
-	ENDIF
-
-	IF IS_CHAR_IN_ZONE dummy_ped_for_zone RIDGE
-		PRINT_STRING_IN_STRING_NOW F_START RIDGE 5000 1 // The dummy_ped_for_zone is proceeding south in Cedar Ridge
-	ENDIF
+// Upstate locations
+IF IS_CHAR_IN_ZONE dummy_ped_for_zone WARSAW
+	PRINT_STRING_IN_STRING_NOW F_START WARSAW 5000 1 // The dummy_ped_for_zone is proceeding south in Warsaw
+	GOTO display_fire_location_end
 ENDIF
 
-IF IS_CHAR_IN_ZONE dummy_ped_for_zone UL_ZON0
-AND IS_CHAR_IN_ZONE dummy_ped_for_zone GT_ZON0
+IF IS_CHAR_IN_ZONE dummy_ped_for_zone BAXTER
+	PRINT_STRING_IN_STRING_NOW F_START BAXTER 5000 1 // The dummy_ped_for_zone is proceeding south in Baxter
+	GOTO display_fire_location_end
+ENDIF
+
+IF IS_CHAR_IN_ZONE dummy_ped_for_zone CARRIN
+	PRINT_STRING_IN_STRING_NOW F_START CARRIN 5000 1 // The dummy_ped_for_zone is proceeding south in Carrington
+	GOTO display_fire_location_end
+ENDIF
+
+IF IS_CHAR_IN_ZONE dummy_ped_for_zone LOVEEI1
+OR IS_CHAR_IN_ZONE dummy_ped_for_zone LOVEEI2
+OR IS_CHAR_IN_ZONE dummy_ped_for_zone LOVEEI3
+	PRINT_STRING_IN_STRING_NOW F_START LOVEES 5000 1 // The dummy_ped_for_zone is proceeding south in Love Estates
+	GOTO display_fire_location_end
+ENDIF
+
+IF IS_CHAR_IN_ZONE dummy_ped_for_zone RIDGE
+	PRINT_STRING_IN_STRING_NOW F_START RIDGE 5000 1 // The dummy_ped_for_zone is proceeding south in Cedar Ridge
+	GOTO display_fire_location_end
+ENDIF
+
+IF IS_CHAR_IN_ZONE dummy_ped_for_zone GTWAIR
+	PRINT_STRING_IN_STRING_NOW F_START GTWAIR 5000 1 // The dummy_ped_for_zone is proceeding south in Gostburg Regional Airport
+	GOTO display_fire_location_end
+ENDIF
+
+IF IS_CHAR_IN_ZONE dummy_ped_for_zone INDPARK
+	PRINT_STRING_IN_STRING_NOW F_START INDPARK 5000 1 // The dummy_ped_for_zone is proceeding south in Industrial Park
+	GOTO display_fire_location_end
+ENDIF
+
+IF IS_CHAR_IN_ZONE dummy_ped_for_zone CEDARW
+	PRINT_STRING_IN_STRING_NOW F_START CEDARW 5000 1 // The dummy_ped_for_zone is proceeding south in Cedarwood Hills
+	GOTO display_fire_location_end
+ENDIF
+
+IF IS_CHAR_IN_ZONE dummy_ped_for_zone OLDTOWN
+	PRINT_STRING_IN_STRING_NOW F_START OLDTOWN 5000 1 // The dummy_ped_for_zone is proceeding south in Old Town
+	GOTO display_fire_location_end
+ENDIF
+
+IF IS_CHAR_IN_ZONE dummy_ped_for_zone LEONARD
+	PRINT_STRING_IN_STRING_NOW F_START LEONARD 5000 1 // The dummy_ped_for_zone is proceeding south in Leonard Heights
+	GOTO display_fire_location_end
+ENDIF
+
+IF IS_CHAR_IN_ZONE dummy_ped_for_zone SUMMER
+	PRINT_STRING_IN_STRING_NOW F_START SUMMER 5000 1 // The dummy_ped_for_zone is proceeding south in Summerton
+	GOTO display_fire_location_end
+ENDIF
+
+IF IS_CHAR_IN_ZONE dummy_ped_for_zone GTWCENT
+	PRINT_STRING_IN_STRING_NOW F_START GTWCENT 5000 1 // The dummy_ped_for_zone is proceeding south in Central Gostburg
+	GOTO display_fire_location_end
+ENDIF
+
+IF IS_CHAR_IN_ZONE dummy_ped_for_zone LILCHIN
+	PRINT_STRING_IN_STRING_NOW F_START LILCHIN 5000 1 // The dummy_ped_for_zone is proceeding south in Little Shanghai
+	GOTO display_fire_location_end
+ENDIF
+
+IF IS_CHAR_IN_ZONE dummy_ped_for_zone GT_ZON0
 	PRINT_STRING_IN_STRING_NOW F_START GT_ZON0 5000 1 // The dummy_ped_for_zone is proceeding south in Gostburg
-
-	IF IS_CHAR_IN_ZONE dummy_ped_for_zone GTWAIR
-		PRINT_STRING_IN_STRING_NOW F_START GTWAIR 5000 1 // The dummy_ped_for_zone is proceeding south in Gostburg Regional Airport
-	ENDIF
-
-	IF IS_CHAR_IN_ZONE dummy_ped_for_zone INDPARK
-		PRINT_STRING_IN_STRING_NOW F_START INDPARK 5000 1 // The dummy_ped_for_zone is proceeding south in Industrial Park
-	ENDIF
-
-	IF IS_CHAR_IN_ZONE dummy_ped_for_zone CEDARW
-		PRINT_STRING_IN_STRING_NOW F_START CEDARW 5000 1 // The dummy_ped_for_zone is proceeding south in Cedarwood Hills
-	ENDIF
-
-	IF IS_CHAR_IN_ZONE dummy_ped_for_zone OLDTOWN
-		PRINT_STRING_IN_STRING_NOW F_START OLDTOWN 5000 1 // The dummy_ped_for_zone is proceeding south in Old Town
-	ENDIF
-
-	IF IS_CHAR_IN_ZONE dummy_ped_for_zone LEONARD
-		PRINT_STRING_IN_STRING_NOW F_START LEONARD 5000 1 // The dummy_ped_for_zone is proceeding south in Leonard Heights
-	ENDIF
-
-	IF IS_CHAR_IN_ZONE dummy_ped_for_zone SUMMER
-		PRINT_STRING_IN_STRING_NOW F_START SUMMER 5000 1 // The dummy_ped_for_zone is proceeding south in Summerton
-	ENDIF
-
-	IF IS_CHAR_IN_ZONE dummy_ped_for_zone GTWCENT
-		PRINT_STRING_IN_STRING_NOW F_START GTWCENT 5000 1 // The dummy_ped_for_zone is proceeding south in Central Gostburg
-	ENDIF
-
-	IF IS_CHAR_IN_ZONE dummy_ped_for_zone LILCHIN
-		PRINT_STRING_IN_STRING_NOW F_START LILCHIN 5000 1 // The dummy_ped_for_zone is proceeding south in Little Shanghai
-	ENDIF
-
-	IF IS_CHAR_IN_ZONE dummy_ped_for_zone SUMMER
-		PRINT_STRING_IN_STRING_NOW F_START SUMMER 5000 1 // The dummy_ped_for_zone is proceeding south in Summerton
-	ENDIF
+	GOTO display_fire_location_end
 ENDIF
 
+IF IS_CHAR_IN_ZONE dummy_ped_for_zone UL_ZON0
+	PRINT_STRING_IN_STRING_NOW F_START UL_ZON0 5000 1 // The dummy_ped_for_zone is proceeding south in Upstate Liberty
+	//GOTO display_fire_location_end
+ENDIF
+
+display_fire_location_end:
 DELETE_CHAR dummy_ped_for_zone
 
 IF displayed_timer = 0

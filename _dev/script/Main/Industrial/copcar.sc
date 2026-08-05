@@ -111,6 +111,9 @@ ENDIF
 
 IF IS_COLLISION_IN_MEMORY LEVEL_SUBURBAN
 	IF IS_PLAYER_IN_ZONE player UL_ZON0
+	OR IS_PLAYER_IN_ZONE player LOVEEI1
+	OR IS_PLAYER_IN_ZONE player LOVEEI2
+	OR IS_PLAYER_IN_ZONE player LOVEEI3
 		IF IS_PLAYER_IN_ZONE player GT_ZON0
 			GENERATE_RANDOM_FLOAT_IN_RANGE 912.647 1865.222 random_crim_x
 			GENERATE_RANDOM_FLOAT_IN_RANGE 780.918 1782.927 random_crim_y
@@ -444,183 +447,224 @@ IF got_siren_help_before = 0
 	got_siren_help_before = 1
 ENDIF
 
+
+// UPSTATE: Added GOTO display_criminal_location_end everywhere here, as Upstate zones overlap each other
+// so we want to go from the most to the least specific zone
 IF IS_CHAR_IN_ZONE criminal PORT_W
 	PRINT_STRING_IN_STRING_NOW C_BREIF PORT_W 5000 1 // The suspect is in the Callahan Point area.
+	GOTO display_criminal_location_end
 ENDIF
 
 IF IS_CHAR_IN_ZONE criminal PORT_S
 	PRINT_STRING_IN_STRING_NOW C_BREIF PORT_S 5000 1 // The suspect is in the Atlantic Quays area.
+	GOTO display_criminal_location_end
 ENDIF
 
 IF IS_CHAR_IN_ZONE criminal PORT_E
 	PRINT_STRING_IN_STRING_NOW C_BREIF PORT_E 5000 1 // The suspect is in the Portland Harbour area.
+	GOTO display_criminal_location_end
 ENDIF
 
 IF IS_CHAR_IN_ZONE criminal PORT_I
 	PRINT_STRING_IN_STRING_NOW C_BREIF PORT_I 5000 1 // The suspect is in the Trenton area.
+	GOTO display_criminal_location_end
 ENDIF
 
 IF IS_CHAR_IN_ZONE criminal S_VIEW
 	PRINT_STRING_IN_STRING_NOW C_BREIF S_VIEW 5000 1 // The suspect is in the Portland View area.
+	GOTO display_criminal_location_end
 ENDIF
 
 IF IS_CHAR_IN_ZONE criminal CHINA
 	PRINT_STRING_IN_STRING_NOW C_BREIF CHINA 5000 1 // The criminal is proceeding south in Chinatown
+	GOTO display_criminal_location_end
 ENDIF
 
 IF IS_CHAR_IN_ZONE criminal EASTBAY
 	PRINT_STRING_IN_STRING_NOW C_BREIF EASTBAY 5000 1 // The criminal is proceeding south in Portland Beach
+	GOTO display_criminal_location_end
 ENDIF
 
 IF IS_CHAR_IN_ZONE criminal LITTLEI
 	PRINT_STRING_IN_STRING_NOW C_BREIF LITTLEI 5000 1 // The criminal is proceeding south in Saint Mark's
+	GOTO display_criminal_location_end
 ENDIF
 
 IF IS_CHAR_IN_ZONE criminal REDLIGH
 	PRINT_STRING_IN_STRING_NOW C_BREIF REDLIGH 5000 1 // The criminal is proceeding south in Red Light District
+	GOTO display_criminal_location_end
 ENDIF
 
 IF IS_CHAR_IN_ZONE criminal TOWERS
 	PRINT_STRING_IN_STRING_NOW C_BREIF TOWERS 5000 1 // The criminal is proceeding south in Hepburn Heights
+	GOTO display_criminal_location_end
 ENDIF
 
 IF IS_CHAR_IN_ZONE criminal HARWOOD
 	PRINT_STRING_IN_STRING_NOW C_BREIF HARWOOD 5000 1 // The criminal is proceeding south in Harwood
+	GOTO display_criminal_location_end
 ENDIF
 
 IF IS_CHAR_IN_ZONE criminal ROADBR1
 	PRINT_STRING_IN_STRING_NOW C_BREIF ROADBR1 5000 1 // The criminal is proceeding south in Callahan Bridge
+	GOTO display_criminal_location_end
 ENDIF
 
 IF IS_CHAR_IN_ZONE criminal ROADBR2
 	PRINT_STRING_IN_STRING_NOW C_BREIF ROADBR2 5000 1 // The criminal is proceeding south in Callahan Bridge
+	GOTO display_criminal_location_end
 ENDIF
 
 //IF IS_CHAR_IN_ZONE criminal TUNNELP
 //	PRINT_STRING_IN_STRING_NOW C_BREIF TUNNELP 5000 1 // The criminal is proceeding south in Porter Tunnel
+//	GOTO display_criminal_location_end
 //ENDIF
 
 IF IS_CHAR_IN_ZONE criminal STADIUM
 	PRINT_STRING_IN_STRING_NOW C_BREIF STADIUM 5000 1 // The criminal is proceeding south in Aspatria
+	GOTO display_criminal_location_end
 ENDIF
 
 IF IS_CHAR_IN_ZONE criminal HOSPI_2
 	PRINT_STRING_IN_STRING_NOW C_BREIF HOSPI_2 5000 1 // The criminal is proceeding south in Rockford
+	GOTO display_criminal_location_end
 ENDIF
 
 IF IS_CHAR_IN_ZONE criminal UNIVERS
 	PRINT_STRING_IN_STRING_NOW C_BREIF UNIVERS 5000 1 // The criminal is proceeding south in Liberty Campus
+	GOTO display_criminal_location_end
 ENDIF
 
 IF IS_CHAR_IN_ZONE criminal CONSTRU
 	PRINT_STRING_IN_STRING_NOW C_BREIF CONSTRU 5000 1 // The criminal is proceeding south in Fort Staunton
+	GOTO display_criminal_location_end
 ENDIF
 
 IF IS_CHAR_IN_ZONE criminal PARK
 	PRINT_STRING_IN_STRING_NOW C_BREIF PARK 5000 1 // The criminal is proceeding south in Belleville Park
+	GOTO display_criminal_location_end
 ENDIF
 
 IF IS_CHAR_IN_ZONE criminal COM_EAS
 	PRINT_STRING_IN_STRING_NOW C_BREIF COM_EAS 5000 1 // The criminal is proceeding south in Newport
+	GOTO display_criminal_location_end
 ENDIF
 
 IF IS_CHAR_IN_ZONE criminal SHOPING
 	PRINT_STRING_IN_STRING_NOW C_BREIF SHOPING 5000 1 // The criminal is proceeding south in Bedford Point
+	GOTO display_criminal_location_end
 ENDIF
 
 IF IS_CHAR_IN_ZONE criminal YAKUSA
 	PRINT_STRING_IN_STRING_NOW C_BREIF YAKUSA 5000 1 // The criminal is proceeding south in Torrington
+	GOTO display_criminal_location_end
 ENDIF
 
 IF IS_CHAR_IN_ZONE criminal AIRPORT
 	PRINT_STRING_IN_STRING_NOW C_BREIF AIRPORT 5000 1 // The criminal is proceeding south in Francis International Airport
+	GOTO display_criminal_location_end
 ENDIF
 
 IF IS_CHAR_IN_ZONE criminal PROJECT
 	PRINT_STRING_IN_STRING_NOW C_BREIF PROJECT 5000 1 // The criminal is proceeding south in Wichita Gardens
+	GOTO display_criminal_location_end
 ENDIF
 
 IF IS_CHAR_IN_ZONE criminal SUB_IND
 	PRINT_STRING_IN_STRING_NOW C_BREIF SUB_IND 5000 1 // The criminal is proceeding south in Pike Creek
+	GOTO display_criminal_location_end
 ENDIF
 
 IF IS_CHAR_IN_ZONE criminal SWANKS
 	PRINT_STRING_IN_STRING_NOW C_BREIF SWANKS 5000 1 // The criminal is proceeding south in Cedar Grove
+	GOTO display_criminal_location_end
 ENDIF
 
 IF IS_CHAR_IN_ZONE criminal BIG_DAM
 	PRINT_STRING_IN_STRING_NOW C_BREIF BIG_DAM 5000 1 // The criminal is proceeding south in Cochrane Dam
+	GOTO display_criminal_location_end
 ENDIF
 
-IF IS_CHAR_IN_ZONE criminal UL_ZON0
-AND NOT IS_CHAR_IN_ZONE criminal GT_ZON0
-	PRINT_STRING_IN_STRING_NOW C_BREIF UL_ZON0 5000 1 // The criminal is proceeding south in Upstate Liberty
-
-	IF IS_CHAR_IN_ZONE criminal WARSAW
-		PRINT_STRING_IN_STRING_NOW C_BREIF WARSAW 5000 1 // The criminal is proceeding south in Warsaw
-	ENDIF
-	
-	IF IS_CHAR_IN_ZONE criminal BAXTER
-		PRINT_STRING_IN_STRING_NOW C_BREIF BAXTER 5000 1 // The criminal is proceeding south in Baxter
-	ENDIF
-
-	IF IS_CHAR_IN_ZONE criminal CARRIN
-		PRINT_STRING_IN_STRING_NOW C_BREIF CARRIN 5000 1 // The criminal is proceeding south in Carrington
-	ENDIF
-
-	IF IS_CHAR_IN_ZONE criminal LOVEEI1
-	OR IS_CHAR_IN_ZONE criminal LOVEEI2
-	OR IS_CHAR_IN_ZONE criminal LOVEEI3
-		PRINT_STRING_IN_STRING_NOW C_BREIF LOVEES 5000 1 // The criminal is proceeding south in Love Estates
-	ENDIF
-
-	IF IS_CHAR_IN_ZONE criminal RIDGE
-		PRINT_STRING_IN_STRING_NOW C_BREIF RIDGE 5000 1 // The criminal is proceeding south in Cedar Ridge
-	ENDIF
+// Upstate locations
+IF IS_CHAR_IN_ZONE criminal WARSAW
+	PRINT_STRING_IN_STRING_NOW C_BREIF WARSAW 5000 1 // The criminal is proceeding south in Warsaw
+	GOTO display_criminal_location_end
 ENDIF
 
-IF IS_CHAR_IN_ZONE criminal UL_ZON0
-AND IS_CHAR_IN_ZONE criminal GT_ZON0
+IF IS_CHAR_IN_ZONE criminal BAXTER
+	PRINT_STRING_IN_STRING_NOW C_BREIF BAXTER 5000 1 // The criminal is proceeding south in Baxter
+	GOTO display_criminal_location_end
+ENDIF
+
+IF IS_CHAR_IN_ZONE criminal CARRIN
+	PRINT_STRING_IN_STRING_NOW C_BREIF CARRIN 5000 1 // The criminal is proceeding south in Carrington
+	GOTO display_criminal_location_end
+ENDIF
+
+IF IS_CHAR_IN_ZONE criminal LOVEEI1
+OR IS_CHAR_IN_ZONE criminal LOVEEI2
+OR IS_CHAR_IN_ZONE criminal LOVEEI3
+	PRINT_STRING_IN_STRING_NOW C_BREIF LOVEES 5000 1 // The criminal is proceeding south in Love Estates
+	GOTO display_criminal_location_end
+ENDIF
+
+IF IS_CHAR_IN_ZONE criminal RIDGE
+	PRINT_STRING_IN_STRING_NOW C_BREIF RIDGE 5000 1 // The criminal is proceeding south in Cedar Ridge
+	GOTO display_criminal_location_end
+ENDIF
+
+IF IS_CHAR_IN_ZONE criminal GTWAIR
+	PRINT_STRING_IN_STRING_NOW C_BREIF GTWAIR 5000 1 // The criminal is proceeding south in Gostburg Regional Airport
+	GOTO display_criminal_location_end
+ENDIF
+
+IF IS_CHAR_IN_ZONE criminal INDPARK
+	PRINT_STRING_IN_STRING_NOW C_BREIF INDPARK 5000 1 // The criminal is proceeding south in Industrial Park
+	GOTO display_criminal_location_end
+ENDIF
+
+IF IS_CHAR_IN_ZONE criminal CEDARW
+	PRINT_STRING_IN_STRING_NOW C_BREIF CEDARW 5000 1 // The criminal is proceeding south in Cedarwood Hills
+	GOTO display_criminal_location_end
+ENDIF
+
+IF IS_CHAR_IN_ZONE criminal OLDTOWN
+	PRINT_STRING_IN_STRING_NOW C_BREIF OLDTOWN 5000 1 // The criminal is proceeding south in Old Town
+	GOTO display_criminal_location_end
+ENDIF
+
+IF IS_CHAR_IN_ZONE criminal LEONARD
+	PRINT_STRING_IN_STRING_NOW C_BREIF LEONARD 5000 1 // The criminal is proceeding south in Leonard Heights
+	GOTO display_criminal_location_end
+ENDIF
+
+IF IS_CHAR_IN_ZONE criminal SUMMER
+	PRINT_STRING_IN_STRING_NOW C_BREIF SUMMER 5000 1 // The criminal is proceeding south in Summerton
+	GOTO display_criminal_location_end
+ENDIF
+
+IF IS_CHAR_IN_ZONE criminal GTWCENT
+	PRINT_STRING_IN_STRING_NOW C_BREIF GTWCENT 5000 1 // The criminal is proceeding south in Central Gostburg
+	GOTO display_criminal_location_end
+ENDIF
+
+IF IS_CHAR_IN_ZONE criminal LILCHIN
+	PRINT_STRING_IN_STRING_NOW C_BREIF LILCHIN 5000 1 // The criminal is proceeding south in Little Shanghai
+	GOTO display_criminal_location_end
+ENDIF
+
+IF IS_CHAR_IN_ZONE criminal GT_ZON0
 	PRINT_STRING_IN_STRING_NOW C_BREIF GT_ZON0 5000 1 // The criminal is proceeding south in Gostburg
+	GOTO display_criminal_location_end
+ENDIF
 
-	IF IS_CHAR_IN_ZONE criminal GTWAIR
-		PRINT_STRING_IN_STRING_NOW C_BREIF GTWAIR 5000 1 // The criminal is proceeding south in Gostburg Regional Airport
-	ENDIF
-
-	IF IS_CHAR_IN_ZONE criminal INDPARK
-		PRINT_STRING_IN_STRING_NOW C_BREIF INDPARK 5000 1 // The criminal is proceeding south in Industrial Park
-	ENDIF
-
-	IF IS_CHAR_IN_ZONE criminal CEDARW
-		PRINT_STRING_IN_STRING_NOW C_BREIF CEDARW 5000 1 // The criminal is proceeding south in Cedarwood Hills
-	ENDIF
-
-	IF IS_CHAR_IN_ZONE criminal OLDTOWN
-		PRINT_STRING_IN_STRING_NOW C_BREIF OLDTOWN 5000 1 // The criminal is proceeding south in Old Town
-	ENDIF
-
-	IF IS_CHAR_IN_ZONE criminal LEONARD
-		PRINT_STRING_IN_STRING_NOW C_BREIF LEONARD 5000 1 // The criminal is proceeding south in Leonard Heights
-	ENDIF
-
-	IF IS_CHAR_IN_ZONE criminal SUMMER
-		PRINT_STRING_IN_STRING_NOW C_BREIF SUMMER 5000 1 // The criminal is proceeding south in Summerton
-	ENDIF
-
-	IF IS_CHAR_IN_ZONE criminal GTWCENT
-		PRINT_STRING_IN_STRING_NOW C_BREIF GTWCENT 5000 1 // The criminal is proceeding south in Central Gostburg
-	ENDIF
-
-	IF IS_CHAR_IN_ZONE criminal LILCHIN
-		PRINT_STRING_IN_STRING_NOW C_BREIF LILCHIN 5000 1 // The criminal is proceeding south in Little Shanghai
-	ENDIF
-
-	IF IS_CHAR_IN_ZONE criminal SUMMER
-		PRINT_STRING_IN_STRING_NOW C_BREIF SUMMER 5000 1 // The criminal is proceeding south in Summerton
-	ENDIF
+IF IS_CHAR_IN_ZONE criminal UL_ZON0
+	PRINT_STRING_IN_STRING_NOW C_BREIF UL_ZON0 5000 1 // The criminal is proceeding south in Upstate Liberty
+	//GOTO display_criminal_location_end
 ENDIF
 
 
+display_criminal_location_end:
 GET_CHAR_COORDINATES criminal criminal_coord_x criminal_coord_y criminal_coord_z
 POLICE_RADIO_MESSAGE criminal_coord_x criminal_coord_y criminal_coord_z
 

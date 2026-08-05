@@ -1703,19 +1703,7 @@ cop_mission_loop:
 								GOTO cop_mission_loop
 							ENDIF
 						ENDWHILE
-
-						flag_player_on_mission = 1 // SCFIX
-						// UPSTATE: Display 'Liberty Ranger' if the mission is started in the countryside
-						IF IS_COLLISION_IN_MEMORY LEVEL_SUBURBAN
-						AND IS_PLAYER_IN_ZONE player UL_ZON0
-						AND NOT IS_PLAYER_IN_ZONE player GT_ZON0
-							PRINT_BIG ( COP_M2 ) 4000 5
-						ELSE
-							PRINT_BIG ( COP_M ) 4000 5
-						ENDIF
-						WAIT 0
-						LOAD_AND_LAUNCH_MISSION copcar.sc	//	this doesn't have a fade - maybe should always be loaded?
-						been_in_a_copcar_before = 1
+						GOTO cop_mission_loop_start_mission
 					ENDIF
 				ELSE
 					IF IS_BUTTON_PRESSED PAD1 SQUARE
@@ -1731,15 +1719,22 @@ cop_mission_loop:
 							ENDIF
 						ENDWHILE
 
+cop_mission_loop_start_mission:
 						flag_player_on_mission = 1 // SCFIX
 						// UPSTATE: Display 'Liberty Ranger' if the mission is started in the countryside
 						IF IS_COLLISION_IN_MEMORY LEVEL_SUBURBAN
-						AND IS_PLAYER_IN_ZONE player UL_ZON0
 						AND NOT IS_PLAYER_IN_ZONE player GT_ZON0
-							PRINT_BIG ( COP_M2 ) 4000 5
-						ELSE
-							PRINT_BIG ( COP_M ) 4000 5
+							IF IS_PLAYER_IN_ZONE player UL_ZON0
+							OR IS_PLAYER_IN_ZONE player LOVEEI1
+							OR IS_PLAYER_IN_ZONE player LOVEEI2
+							OR IS_PLAYER_IN_ZONE player LOVEEI3
+								PRINT_BIG ( COP_M2 ) 4000 5
+								GOTO cop_mission_loop_load_mission
+							ENDIF
 						ENDIF
+						PRINT_BIG ( COP_M ) 4000 5
+
+cop_mission_loop_load_mission:
 						WAIT 0
 						LOAD_AND_LAUNCH_MISSION copcar.sc	//	this doesn't have a fade - maybe should always be loaded?
 						been_in_a_copcar_before = 1
