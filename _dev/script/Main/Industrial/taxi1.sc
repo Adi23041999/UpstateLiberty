@@ -113,15 +113,9 @@ ENDIF
 
 //	random_ped_grabber:
 
-	IF NOT controlmode = 3
-		IF IS_BUTTON_PRESSED PAD1 RIGHTSHOCK
-		AND flag_player_on_mission = 1
-			GOTO taxi_fail_button_pressed
-		ENDIF
-	ELSE
-		IF IS_BUTTON_PRESSED PAD1 SQUARE
-		AND flag_player_on_mission = 1
-			GOTO taxi_fail_button_pressed
+	IF flag_player_on_mission = 1
+		IF GOSUB process_r3_cancel
+			GOTO mission_taxi1_failed
 		ENDIF
 	ENDIF
 
@@ -210,15 +204,9 @@ OR NOT IS_CAR_STOPPED taxi_car1
 		GOTO mission_taxi1_passed
 	ENDIF 
 
-	IF NOT controlmode = 3
-		IF IS_BUTTON_PRESSED PAD1 RIGHTSHOCK
-		AND flag_player_on_mission = 1
-			GOTO taxi_fail_button_pressed
-		ENDIF
-	ELSE
-		IF IS_BUTTON_PRESSED PAD1 SQUARE
-		AND flag_player_on_mission = 1
-			GOTO taxi_fail_button_pressed
+	IF flag_player_on_mission = 1
+		IF GOSUB process_r3_cancel
+			GOTO mission_taxi1_failed
 		ENDIF
 	ENDIF
 
@@ -296,17 +284,11 @@ WHILE NOT IS_CHAR_IN_CAR taxi_ped1 taxi_car1
 			GOTO mission_taxi1_passed
 		ENDIF
 
-		IF NOT controlmode = 3
-			IF IS_BUTTON_PRESSED PAD1 RIGHTSHOCK
-			AND flag_player_on_mission = 1
-				GOTO taxi_fail_button_pressed
-			ENDIF
-		ELSE
-			IF IS_BUTTON_PRESSED PAD1 SQUARE
-			AND flag_player_on_mission = 1
-				GOTO taxi_fail_button_pressed
-			ENDIF
+		IF flag_player_on_mission = 1
+		IF GOSUB process_r3_cancel
+			GOTO mission_taxi1_failed
 		ENDIF
+	ENDIF
 		
 		IF taxi_countdown_already_started = 1
 		AND taxi_countdown = 0
@@ -1483,16 +1465,9 @@ WHILE NOT IS_CAR_STOPPED_IN_AREA_3D taxi_car1 taxi_destx1 taxi_desty1 taxi_destz
 			GOTO mission_taxi1_failed				
 		ENDIF
 
-		GET_CONTROLLER_MODE controlmode
-		IF NOT controlmode = 3
-			IF IS_BUTTON_PRESSED PAD1 RIGHTSHOCK
-			AND flag_player_on_mission = 1
-				GOTO taxi_fail_button_pressed
-			ENDIF
-		ELSE
-			IF IS_BUTTON_PRESSED PAD1 SQUARE
-			AND flag_player_on_mission = 1
-				GOTO taxi_fail_button_pressed
+		IF flag_player_on_mission = 1
+			IF GOSUB process_r3_cancel
+				GOTO mission_taxi1_failed
 			ENDIF
 		ENDIF
 
@@ -1660,28 +1635,6 @@ taxi_fucked:
 	GOTO mission_taxi1_failed
 
 
-taxi_fail_button_pressed:
-
-	GET_CONTROLLER_MODE controlmode
-	IF NOT controlmode = 3
-		WHILE IS_BUTTON_PRESSED PAD1 RIGHTSHOCK
-			WAIT 0
-			IF NOT IS_PLAYER_PLAYING player	// ok to fail if player is arrested?
-				GOTO mission_taxi1_failed
-			ENDIF
-		ENDWHILE
-	ELSE
-		WHILE IS_BUTTON_PRESSED PAD1 SQUARE
-			WAIT 0
-			IF NOT IS_PLAYER_PLAYING player	// ok to fail if player is arrested?
-				GOTO mission_taxi1_failed
-			ENDIF
-		ENDWHILE
-	ENDIF
-
-	GOTO mission_taxi1_failed
-
-
 // Mission taxi1 failed
 /*
 mission_taxi1_failed: 
@@ -1708,7 +1661,7 @@ mission_taxi1_passed:
 		
 	GOTO Start_taxi_mission
 RETURN
-		
+
 mission_taxi1_failed: //taxi_ped_leave:
 
 	IF NOT IS_CHAR_DEAD taxi_ped1
@@ -1735,15 +1688,8 @@ mission_taxi1_failed: //taxi_ped_leave:
 						GOTO taxi_ped_leave2				
 					ENDIF
 
-					GET_CONTROLLER_MODE controlmode
-					IF NOT controlmode = 3
-						IF IS_BUTTON_PRESSED PAD1 RIGHTSHOCK
-						AND flag_player_on_mission = 1
-							GOTO taxi_ped_leave2
-						ENDIF
-					ELSE
-						IF IS_BUTTON_PRESSED PAD1 SQUARE
-						AND flag_player_on_mission = 1
+					IF flag_player_on_mission = 1
+						IF GOSUB process_r3_cancel
 							GOTO taxi_ped_leave2
 						ENDIF
 					ENDIF

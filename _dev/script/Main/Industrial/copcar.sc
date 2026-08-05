@@ -17,7 +17,7 @@ MISSION_END
 
 // Variables for mission
 
-VAR_INT	got_range_message	player_in_range	car_model criminal_car	range_int mission_end_button total_criminals_killed players_cop_car_health
+VAR_INT	got_range_message	player_in_range	car_model criminal_car	range_int /*mission_end_button*/ total_criminals_killed players_cop_car_health
 VAR_INT criminal_created_flag criminal criminal_blip random_gun	cop_time_limit got_car_crim_is_in timer_reset_flag vigilante_bonus_kills location got_cop_breif
 VAR_INT game_time_flag game_timer_start	copcar_timer game_time_present game_time_difference	timer_in_secs players_cop_car vigilante	vigilante_score copcar_cancelled_flag
 
@@ -59,7 +59,7 @@ cop_time_limit 		  = 0
 got_car_crim_is_in 	  = 0
 timer_reset_flag 	  = 0
 game_time_flag		  = 0
-mission_end_button	  = 0
+//mission_end_button	  = 0
 location			  = 0
 copcar_cancelled_flag = 0
 
@@ -1026,38 +1026,15 @@ AND NOT IS_PLAYER_IN_MODEL player CAR_FBI
 	ENDIF
 ENDIF
 
-GET_CONTROLLER_MODE controlmode
-
 IF IS_PLAYER_IN_MODEL player CAR_POLICE
 OR IS_PLAYER_IN_MODEL player CAR_ENFORCER
 OR IS_PLAYER_IN_MODEL player CAR_RHINO
 OR IS_PLAYER_IN_MODEL player CAR_FBI
-	IF NOT controlmode = 3
-		IF IS_BUTTON_PRESSED PAD1 RIGHTSHOCK
-			mission_end_button = 1
-		ENDIF
-	ELSE
-		IF IS_BUTTON_PRESSED PAD1 SQUARE
-			mission_end_button = 1
-		ENDIF
+	IF GOSUB process_r3_cancel
+		PRINT_NOW C_CANC 3000 1//"Police mission cancelled!"
+		copcar_cancelled_flag = 1
 	ENDIF
 	game_time_flag = 0
-ENDIF
-
-IF mission_end_button = 1
-	IF NOT controlmode = 3
-		IF NOT IS_BUTTON_PRESSED PAD1 RIGHTSHOCK
-			PRINT_NOW C_CANC 3000 1//"Police mission cancelled!"
-			copcar_cancelled_flag = 1
-			RETURN
-		ENDIF
-	ELSE
-		IF NOT IS_BUTTON_PRESSED PAD1 SQUARE
-			PRINT_NOW C_CANC 3000 1//"Police mission cancelled!"
-			copcar_cancelled_flag = 1
-			RETURN
-		ENDIF
-	ENDIF
 ENDIF
 
 RETURN///////////////////////////////////////////////////////////////////////////////////

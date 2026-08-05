@@ -20,7 +20,7 @@ MISSION_END
 VAR_INT	ped_time_limit players_ambulance flag_got_range_message	ped_time_limit_temp	ped_counter	number_of_injured_peds brackets_var
 VAR_INT ambulance_health_last ambulance_health_now time_drop max_peds_in_car peds_in_car player_in_range_flag score_am bonus_time_flag
 VAR_INT saved_peds	hospital_blip first_rescue_flag	time_chunk first_chunk_flag	ambulance_level	time_chunk_in_secs car_full_flag paramedic_location
-VAR_INT drop_off_time_bonus	hospital_blip_flag random_scream mission_end_button_ambulance ped_sex_flag players_ambulance_health	saved_peds_this_go
+VAR_INT drop_off_time_bonus	hospital_blip_flag random_scream /*mission_end_button_ambulance*/ ped_sex_flag players_ambulance_health	saved_peds_this_go
 VAR_INT injured_ped_1 injured_ped_1_blip injured_ped_1_flag
 VAR_INT injured_ped_2 injured_ped_2_blip injured_ped_2_flag
 VAR_INT injured_ped_3 injured_ped_3_blip injured_ped_3_flag
@@ -99,7 +99,7 @@ score_am				= 0
 bonus_time_flag			= 0
 drop_off_time_bonus		= 0
 hospital_blip_flag		= 0
-mission_end_button_ambulance = 0
+//mission_end_button_ambulance = 0
 car_full_flag = 0
 saved_peds_this_go = 0
 paramedic_location = 0
@@ -505,33 +505,7 @@ AND flag_got_range_message = 0
 	GOTO ambulance_failed
 ENDIF
 
-GET_CONTROLLER_MODE controlmode
-
-IF NOT controlmode = 3
-	IF IS_BUTTON_PRESSED PAD1 RIGHTSHOCK
-		mission_end_button_ambulance = 1
-	ENDIF
-ELSE
-	IF IS_BUTTON_PRESSED PAD1 SQUARE
-		mission_end_button_ambulance = 1
-	ENDIF
-ENDIF
-
-IF mission_end_button_ambulance = 1
-	IF NOT controlmode = 3
-		IF NOT IS_BUTTON_PRESSED PAD1 RIGHTSHOCK
-			PRINT_NOW A_CANC 3000 1//"~r~Ambulance mission cancelled!"
-			GOTO ambulance_failed
-		ENDIF
-	ELSE
-		IF NOT IS_BUTTON_PRESSED PAD1 SQUARE
-			PRINT_NOW A_CANC 3000 1//"~r~Ambulance mission cancelled!"
-			GOTO ambulance_failed
-		ENDIF
-	ENDIF
-ENDIF
-
-IF NOT IS_PLAYER_IN_MODEL player CAR_AMBULANCE
+IF GOSUB process_r3_cancel
 	PRINT_NOW A_CANC 3000 1//"~r~Ambulance mission cancelled!"
 	GOTO ambulance_failed
 ENDIF
@@ -927,30 +901,9 @@ ambulance_loop:
 
 WAIT 0
 
-GET_CONTROLLER_MODE controlmode
-
-IF NOT controlmode = 3
-	IF IS_BUTTON_PRESSED PAD1 RIGHTSHOCK
-		mission_end_button_ambulance = 1
-	ENDIF
-ELSE
-	IF IS_BUTTON_PRESSED PAD1 SQUARE
-		mission_end_button_ambulance = 1
-	ENDIF
-ENDIF
-
-IF mission_end_button_ambulance = 1
-	IF NOT controlmode = 3
-		IF NOT IS_BUTTON_PRESSED PAD1 RIGHTSHOCK
-			PRINT_NOW A_CANC 3000 1//"~r~Ambulance mission cancelled!"
-			GOTO ambulance_failed
-		ENDIF
-	ELSE
-		IF NOT IS_BUTTON_PRESSED PAD1 SQUARE
-			PRINT_NOW A_CANC 3000 1//"~r~Ambulance mission cancelled!"
-			GOTO ambulance_failed
-		ENDIF
-	ENDIF
+IF GOSUB process_r3_cancel
+	PRINT_NOW A_CANC 3000 1//"~r~Ambulance mission cancelled!"
+	GOTO ambulance_failed
 ENDIF
 
 IF NOT IS_PLAYER_IN_MODEL player CAR_AMBULANCE

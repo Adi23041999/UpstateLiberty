@@ -6941,3 +6941,52 @@ van_heist_garage_pager:
 
 	GOTO van_heist_garage_pager
 }
+
+// UPSTATE: START - R3 double-press feature
+VAR_INT r3_cancel_flag, r3_cancel_timer, r3_cancel_stage
+
+process_r3_cancel:
+r3_cancel_flag = 0
+GET_CONTROLLER_MODE controlmode
+IF NOT controlmode = 3
+	IF IS_BUTTON_PRESSED PAD1 RIGHTSHOCK
+		r3_cancel_flag = 1
+	ENDIF
+ELSE
+	IF IS_BUTTON_PRESSED PAD1 SQUARE
+		r3_cancel_flag = 1
+	ENDIF
+ENDIF
+
+IF r3_cancel_flag = 1
+	IF r3_cancel_timer = -1
+		GET_GAME_TIMER r3_cancel_timer
+		r3_cancel_timer += 2500
+		PRINT_HELP CAN_CON
+		r3_cancel_stage = 1
+	ELSE
+		IF r3_cancel_stage = 2
+			CLEAR_HELP
+			r3_cancel_stage = 3
+		ENDIF
+	ENDIF
+ELSE
+	IF NOT r3_cancel_stage = 0
+		IF r3_cancel_stage = 3
+			r3_cancel_timer = -1
+			r3_cancel_stage = 0
+			// RETURN_TRUE // Already inferred from 'r3_cancel_stage = 3'
+			RETURN
+		ENDIF
+		r3_cancel_stage = 2
+		GET_GAME_TIMER current_time
+		IF current_time > r3_cancel_timer
+			r3_cancel_timer = -1
+			r3_cancel_stage = 0
+			CLEAR_HELP
+		ENDIF
+	ENDIF
+ENDIF
+RETURN_FALSE
+RETURN
+// UPSTATE: END

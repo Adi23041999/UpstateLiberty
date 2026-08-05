@@ -20,6 +20,11 @@ time_since_murdering_shopkeeper1 = -60000
 out_of_stock_uzi = 0
 out_of_stock_pistol = 0
 
+// UPSTATE: START - R3 double-press feature
+r3_cancel_stage = 0
+r3_cancel_timer = -1
+// UPSTATE: END
+
 //INDUSTRIAL********************************************************************************
 
 //WEAPONS

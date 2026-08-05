@@ -19,7 +19,7 @@ MISSION_END
 
 VAR_INT	fire_time_limit	fire_to_extinguish fire_to_extinguish_blip car_on_fire random_car_model	fires_extinguished
 VAR_INT car_on_fire_created	player_in_range_fire flag_got_range_mssg intermediate_int score_ft displayed_timer
-VAR_INT total_score displayed_counter first_fire_flag mission_end_button_ft	fire_location dummy_ped_for_zone
+VAR_INT total_score displayed_counter first_fire_flag /*mission_end_button_ft*/	fire_location dummy_ped_for_zone
 VAR_INT players_firetruck players_firetruck_health car_on_fire_health
 
 VAR_FLOAT random_fire_x random_fire_y time_divider time_divider_divider
@@ -60,7 +60,7 @@ fires_extinguished		= 0
 displayed_counter		= 0
 total_score				= 0
 first_fire_flag			= 0
-mission_end_button_ft	= 0
+//mission_end_button_ft	= 0
 fire_location			= 0
 time_divider_divider	= 2.0
 
@@ -78,30 +78,9 @@ IF NOT IS_PLAYER_IN_MODEL player CAR_FIRETRUCK
 	GOTO failed
 ENDIF
 
-GET_CONTROLLER_MODE controlmode
-
-IF NOT controlmode = 3
-	IF IS_BUTTON_PRESSED PAD1 RIGHTSHOCK
-		mission_end_button_ft = 1
-	ENDIF
-ELSE
-	IF IS_BUTTON_PRESSED PAD1 SQUARE
-		mission_end_button_ft = 1
-	ENDIF
-ENDIF
-
-IF mission_end_button_ft = 1
-	IF NOT controlmode = 3
-		IF NOT IS_BUTTON_PRESSED PAD1 RIGHTSHOCK
-			PRINT_NOW F_CANC 3000 1//"Fire truck mission cancelled!"
-			GOTO failed
-		ENDIF
-	ELSE
-		IF NOT IS_BUTTON_PRESSED PAD1 SQUARE
-			PRINT_NOW F_CANC 3000 1//"Fire truck mission cancelled!"
-			GOTO failed
-		ENDIF
-	ENDIF
+IF GOSUB process_r3_cancel
+	PRINT_NOW F_CANC 3000 1//"Fire truck mission cancelled!"
+	GOTO failed
 ENDIF
 
 //IF IS_PLAYER_IN_AREA_2D player 778.0 -1110.0 1540.0 190.0 0	 //INDUSTRIAL
@@ -323,30 +302,9 @@ OR NOT TIMERA > 3000
 		GOTO failed
 	ENDIF
 
-	GET_CONTROLLER_MODE controlmode
-
-	IF NOT controlmode = 3
-		IF IS_BUTTON_PRESSED PAD1 RIGHTSHOCK
-			mission_end_button_ft = 1
-		ENDIF
-	ELSE
-		IF IS_BUTTON_PRESSED PAD1 SQUARE
-			mission_end_button_ft = 1
-		ENDIF
-	ENDIF
-
-	IF mission_end_button_ft = 1
-		IF NOT controlmode = 3
-			IF NOT IS_BUTTON_PRESSED PAD1 RIGHTSHOCK
-				PRINT_NOW F_CANC 3000 1//"Fire truck mission cancelled!"
-				GOTO failed
-			ENDIF
-		ELSE
-			IF NOT IS_BUTTON_PRESSED PAD1 SQUARE
-				PRINT_NOW F_CANC 3000 1//"Fire truck mission cancelled!"
-				GOTO failed
-			ENDIF
-		ENDIF
+	IF GOSUB process_r3_cancel
+		PRINT_NOW F_CANC 3000 1//"Fire truck mission cancelled!"
+		GOTO failed
 	ENDIF
 
 ENDWHILE
@@ -613,30 +571,9 @@ WHILE NOT IS_SCRIPT_FIRE_EXTINGUISHED fire_to_extinguish
 		EXPLODE_CAR car_on_fire
 	ENDIF
 
-	GET_CONTROLLER_MODE controlmode
-
-	IF NOT controlmode = 3
-		IF IS_BUTTON_PRESSED PAD1 RIGHTSHOCK
-			mission_end_button_ft = 1
-		ENDIF
-	ELSE
-		IF IS_BUTTON_PRESSED PAD1 SQUARE
-			mission_end_button_ft = 1
-		ENDIF
-	ENDIF
-
-	IF mission_end_button_ft = 1
-		IF NOT controlmode = 3
-			IF NOT IS_BUTTON_PRESSED PAD1 RIGHTSHOCK
-				PRINT_NOW F_CANC 3000 1//"Fire truck mission cancelled!"
-				GOTO failed
-			ENDIF
-		ELSE
-			IF NOT IS_BUTTON_PRESSED PAD1 SQUARE
-				PRINT_NOW F_CANC 3000 1//"Fire truck mission cancelled!"
-				GOTO failed
-			ENDIF
-		ENDIF
+	IF GOSUB process_r3_cancel
+		PRINT_NOW F_CANC 3000 1//"Fire truck mission cancelled!"
+		GOTO failed
 	ENDIF
 
 ENDWHILE
