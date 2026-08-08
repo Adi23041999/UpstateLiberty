@@ -1020,6 +1020,14 @@ door_crash_flag = 0
 door_position_a1 = 0.0
 barriers_been_added = 0
 
+// Upstate variables
+VAR_INT flag_player_on_dirt_track_mission
+VAR_INT flag_dirt_track_bfinject_course_0_status
+VAR_INT dirt_track_bfinject_course_1_best_time dirt_track_bfinject_course_1_best_lap
+
+flag_player_on_dirt_track_mission = 0
+flag_dirt_track_bfinject_course_0_status = 1
+
 // Let the initial mission setup finish
 WAIT 0
 WAIT 0
@@ -1033,6 +1041,8 @@ START_NEW_SCRIPT t4x4_mission2_loop
 START_NEW_SCRIPT t4x4_mission3_loop
 
 START_NEW_SCRIPT multistorey_mission_loop
+
+START_NEW_SCRIPT ul_missions_start
 
 START_NEW_SCRIPT taxi_mission1_loop
 
@@ -1502,6 +1512,41 @@ ENDIF
 GOTO multistorey_mission_loop
 }
 
+// All Upstate checkpoint missions are started from a single script
+ul_missions_start:
+{
+VAR_INT dirt_track_course_variation
+LVAR_INT dirt_track_bfinject_trigger
+
+ul_missions_loop:
+WAIT mission_trigger_wait_time
+
+IF IS_PLAYER_PLAYING player
+	IF flag_player_on_mission = 0
+
+		// Dirt track
+		IF IS_PLAYER_IN_ZONE player GT_ZON0
+			IF IS_PLAYER_IN_MODEL player CAR_BFINJECT
+				IF dirt_track_bfinject_trigger = 0
+				AND LOCATE_PLAYER_IN_CAR_3D player 986.5 987.1 103.7 3.0 3.0 2.0 FALSE
+
+					dirt_track_course_variation = 0 // BF Injection course
+					flag_player_on_mission = 1
+					PRINT_BIG ( DTRK_1 ) 15000 2
+					WAIT 0
+					LOAD_AND_LAUNCH_MISSION ul_dirttrack.sc
+				ENDIF
+
+				dirt_track_bfinject_trigger = 1
+			ELSE
+				dirt_track_bfinject_trigger = 0
+			ENDIF
+		ENDIF
+	ENDIF
+ENDIF
+
+GOTO ul_missions_loop
+}
 
 
 // ********************************** Ambulance Mission **********************************

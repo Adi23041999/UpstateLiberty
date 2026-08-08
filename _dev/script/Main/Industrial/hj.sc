@@ -65,6 +65,12 @@ IF ARE_ANY_CAR_CHEATS_ACTIVATED
 	GOTO mission_start_hj
 ENDIF
 
+// UPSTATE: START - disable HJ during the dirt track missions
+IF NOT flag_player_on_dirt_track_mission = 0
+	GOTO mission_start_hj
+ENDIF
+// UPSTATE: END
+
 IF IS_PLAYER_IN_ANY_CAR player
 
 	STORE_CAR_PLAYER_IS_IN_NO_SAVE player car_player_is_in_hj
