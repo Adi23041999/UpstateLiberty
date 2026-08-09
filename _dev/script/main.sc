@@ -1021,12 +1021,12 @@ door_position_a1 = 0.0
 barriers_been_added = 0
 
 // Upstate variables
-VAR_INT flag_player_on_dirt_track_mission
-VAR_INT flag_dirt_track_bfinject_course_0_status
-VAR_INT dirt_track_bfinject_course_1_best_time dirt_track_bfinject_course_1_best_lap
-
-flag_player_on_dirt_track_mission = 0
-flag_dirt_track_bfinject_course_0_status = 1
+VAR_INT flag_player_on_dirt_track_mission flag_dirt_track_warning_shown flag_dirt_track_bfinject_passed flag_dirt_track_bobcat_passed
+VAR_INT flag_dirt_track_bfinject_course_0_status dirt_track_bfinject_course_0_best_time dirt_track_bfinject_course_0_best_lap
+VAR_INT flag_dirt_track_bfinject_course_1_status dirt_track_bfinject_course_1_best_time dirt_track_bfinject_course_1_best_lap
+VAR_INT flag_dirt_track_bfinject_course_2_status dirt_track_bfinject_course_2_best_time dirt_track_bfinject_course_2_best_lap
+VAR_INT flag_dirt_track_bfinject_course_3_status dirt_track_bfinject_course_3_best_time dirt_track_bfinject_course_3_best_lap
+VAR_INT flag_dirt_track_bfinject_course_4_status dirt_track_bfinject_course_4_best_time dirt_track_bfinject_course_4_best_lap
 
 // Let the initial mission setup finish
 WAIT 0
@@ -1516,7 +1516,7 @@ GOTO multistorey_mission_loop
 ul_missions_start:
 {
 VAR_INT dirt_track_course_variation
-LVAR_INT dirt_track_bfinject_trigger
+LVAR_INT dirt_track_bfinject_trigger dirt_track_bobcat_trigger
 
 ul_missions_loop:
 WAIT mission_trigger_wait_time
@@ -1538,9 +1538,25 @@ IF IS_PLAYER_PLAYING player
 				ENDIF
 
 				dirt_track_bfinject_trigger = 1
-			ELSE
-				dirt_track_bfinject_trigger = 0
+				GOTO ul_missions_loop
 			ENDIF
+			dirt_track_bfinject_trigger = 0
+
+			IF IS_PLAYER_IN_MODEL player CAR_BOBCAT
+				IF dirt_track_bobcat_trigger = 0
+				AND LOCATE_PLAYER_IN_CAR_3D player 1101.5 912.5 118.9 3.0 3.0 2.0 FALSE
+
+					dirt_track_course_variation = 1 // Bobcat course
+					flag_player_on_mission = 1
+					PRINT_BIG ( DTRK_2 ) 15000 2
+					WAIT 0
+					LOAD_AND_LAUNCH_MISSION ul_dirttrack.sc
+				ENDIF
+
+				dirt_track_bobcat_trigger = 1
+				GOTO ul_missions_loop
+			ENDIF
+			dirt_track_bobcat_trigger = 0
 		ENDIF
 	ENDIF
 ENDIF

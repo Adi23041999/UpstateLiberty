@@ -25,6 +25,17 @@ r3_cancel_stage = 0
 r3_cancel_timer = -1
 // UPSTATE: END
 
+// UPSTATE: START - dirt track
+flag_player_on_dirt_track_mission = 0
+flag_dirt_track_bfinject_course_0_status = 1
+
+// TEMP
+flag_dirt_track_bfinject_course_1_status = 1
+flag_dirt_track_bfinject_course_2_status = 1
+flag_dirt_track_bfinject_course_3_status = 1
+flag_dirt_track_bfinject_course_4_status = 1
+// UPSTATE: END
+
 //INDUSTRIAL********************************************************************************
 
 //WEAPONS

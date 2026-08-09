@@ -20,7 +20,7 @@ VAR_INT ul_car_gt_block1, ul_car_gt_block2, ul_car_gt_block3, ul_car_gt_block4, 
 VAR_INT ul_car_gt_sub1, ul_car_gt_sub2, ul_car_gt_sub3, ul_car_gt_sub4, ul_car_gt_sub5, ul_car_gt_sub6, ul_car_gt_sub7, ul_car_gt_sub8, ul_car_gt_sub9, ul_car_gt_sub10
 VAR_INT ul_car_gt_sub11, ul_car_gt_sub12, ul_car_gt_sub13, ul_car_gt_sub14, ul_car_gt_sub15, ul_car_gt_sub16, ul_car_gt_sub17
 
-VAR_INT ul_car_gt_dirt1, ul_car_gt_dirt2, ul_car_gt_dirt3, ul_car_gt_dirt4, ul_car_gt_dirt5, ul_car_gt_dirt6
+VAR_INT ul_car_gt_dirt1, ul_car_gt_dirt2, ul_car_gt_dirt3, ul_car_gt_dirt4, ul_car_gt_dirt5, ul_car_gt_dirt6, ul_car_gt_dirt7
 
 VAR_INT ul_car_gt_bank1, ul_car_gt_bank2, ul_car_gt_bank3, ul_car_gt_bank4, ul_car_gt_bank5, ul_car_gt_bank6, ul_car_gt_bank7, ul_car_gt_bank8, ul_car_gt_bank9, ul_car_gt_bank10
 VAR_INT ul_car_gt_bank11, ul_car_gt_bank12, ul_car_gt_bank13
@@ -263,7 +263,7 @@ SWITCH_CAR_GENERATOR ul_car_gt_sub17 101
 CREATE_CAR_GENERATOR 1110.4271 876.3316 118.1756 11.0 CAR_LANDSTALKER -1 -1 0 0 0 0 10000 ul_car_gt_dirt1
 SWITCH_CAR_GENERATOR ul_car_gt_dirt1 101
 
-CREATE_CAR_GENERATOR 986.5441 987.1586 103.7962 78.0 CAR_BFINJECT -1 -1 0 0 0 0 10000 ul_car_gt_dirt2
+CREATE_CAR_GENERATOR 986.5 987.1 103.7 78.0 CAR_BFINJECT -1 -1 0 0 0 0 10000 ul_car_gt_dirt2 // Time trial mission
 SWITCH_CAR_GENERATOR ul_car_gt_dirt2 101
 
 CREATE_CAR_GENERATOR 934.2471 1006.5012 104.0 90.0 CAR_PATRIOT -1 -1 0 0 0 0 10000 ul_car_gt_dirt3
@@ -277,6 +277,9 @@ SWITCH_CAR_GENERATOR ul_car_gt_dirt5 101
 
 CREATE_CAR_GENERATOR 653.1826 872.4072 127.7662 227.0 CAR_LANDSTALKER -1 -1 0 0 0 0 10000 ul_car_gt_dirt6
 SWITCH_CAR_GENERATOR ul_car_gt_dirt6 101
+
+CREATE_CAR_GENERATOR 1101.5 912.5 118.9 177.3 CAR_BOBCAT -1 -1 0 0 0 0 10000 ul_car_gt_dirt7 // East car park by Cedarwood Hills. Time trial mission
+SWITCH_CAR_GENERATOR ul_car_gt_dirt7 101
 
 // Bankarea
 CREATE_CAR_GENERATOR 1342.44 1663.75 131.44 196.0 CAR_CHEETAH -1 -1 0 0 0 0 10000 ul_car_gt_bank1 //Wang Cars showroom
