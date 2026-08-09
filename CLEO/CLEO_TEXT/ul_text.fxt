@@ -69,5 +69,8 @@ TT_E2 ~r~You failed to beat the target time.
 TT_E3 ~r~You failed to beat the Course Record.
 TT_F2 ~r~You left the course!
 TT_F1 ~g~< COURSE ~1~ >
+TT_L1 ~r~ Locked.
 TT_L4 ~g~Course Target: ~1~ seconds
+TT_L5 ~g~Best Time: ~1~ seconds
+TT_L6 ~g~Best Lap Time: ~1~ seconds
 TT_WARN ~h~Yellow checkpoints ~w~indicate dangerous spots. Slow down when approaching them.
