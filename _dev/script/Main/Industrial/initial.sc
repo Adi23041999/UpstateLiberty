@@ -823,6 +823,10 @@ MARK_ROADS_BETWEEN_LEVELS 496.7 75.5 -30.0 484.0 44.2 0.0
 //SWITCH_ROADS_OFF -287.8 396.5 70.0 -269.0 418.0 100.0 //tunnel to Miami	(EAST)
 //SWITCH_ROADS_OFF -877.1 545.9 60.0 -901.3 575.0 100.0 //tunnel to Miami	(WEST)
 
+// UPSTATE: Treat the Shoreside tunnels as if Upstate was a fourth level
+MARK_ROADS_BETWEEN_LEVELS -287.8 396.5 70.0 -269.0 418.0 100.0 //tunnel to Miami	(EAST)
+MARK_ROADS_BETWEEN_LEVELS -877.1 545.9 60.0 -901.3 575.0 100.0 //tunnel to Miami	(WEST)
+
 SWITCH_ROADS_OFF -690.4 101.2 10.0 -704.4 78.9 30.0  // players savehouse
 
 SWITCH_ROADS_OFF -1194.1 98.6 50.0 -1234.0 119.2 80.0  //
@@ -836,6 +840,10 @@ SWITCH_ROADS_OFF -1194.1 98.6 50.0 -1234.0 119.2 80.0  //
 // airport
 SWITCH_ROADS_OFF 1661.438 1600.888 85.571 1757.618 1850.281 185.571
 SWITCH_ROADS_OFF 1138.213 1804.202 85.571 1661.438 1850.281 185.571
+
+// Separate Gostburg and the countryside car nodes as if they were separate levels
+MARK_ROADS_BETWEEN_LEVELS 784.6 1039.0 115.0 795.6 1106.9 140.0 // Highway
+MARK_ROADS_BETWEEN_LEVELS 890.8 1274.7 120.0 895.7 1302.4 140.0 // Road from Carrington
 
 /**************************** Zone info ****************************/
 
