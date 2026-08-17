@@ -55,8 +55,9 @@ ULFAR37 ~g~Destination ~w~'Wang Cars' ~g~in Central Gostburg.
 ULPAG1 Upstate Firefighter complete!
 ULTUNNL The tunnels to Upstate are now open! You can now explore Upstate Liberty and the city of Gostburg.
 COP_M2 'LIBERTY RANGER'
-DTRK_1 'BF INJECTION TIME TRIALS'
-DTRK_2 'BOBCAT TIME TRIALS'
+DTRK_1 'OVER THE HILL: BF INJECTION'
+DTRK_2 'OVER THE HILL: BOBCAT'
+DTRK_3 'OVER THE HILL: PATRIOT'
 CAN_CON Press the ~h~~k~~TOGGLE_SUBMISSIONS~ button~w~ again to cancel the mission.
 TT_D1 Lap ~1~ of 3. Lap time: ~1~ seconds.
 TT_D2 Lap ~1~ of 3. Lap time: ~1~ seconds. New lap record!

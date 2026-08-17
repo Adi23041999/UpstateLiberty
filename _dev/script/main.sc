@@ -1021,19 +1021,23 @@ door_position_a1 = 0.0
 barriers_been_added = 0
 
 // Upstate variables
-VAR_INT flag_player_on_dirt_track_mission flag_dirt_track_warning_shown flag_dirt_track_bfinject_passed flag_dirt_track_bobcat_passed
+VAR_INT flag_player_on_dirt_track_mission flag_dirt_track_warning_shown
+VAR_INT flag_dirt_track_bfinject_passed flag_dirt_track_bobcat_passed flag_dirt_track_patriot_passed
 
 VAR_INT flag_dirt_track_bfinject_course_0_status dirt_track_bfinject_course_0_best_time dirt_track_bfinject_course_0_best_lap
 VAR_INT flag_dirt_track_bfinject_course_1_status dirt_track_bfinject_course_1_best_time dirt_track_bfinject_course_1_best_lap
 VAR_INT flag_dirt_track_bfinject_course_2_status dirt_track_bfinject_course_2_best_time dirt_track_bfinject_course_2_best_lap
 VAR_INT flag_dirt_track_bfinject_course_3_status dirt_track_bfinject_course_3_best_time dirt_track_bfinject_course_3_best_lap
-VAR_INT flag_dirt_track_bfinject_course_4_status dirt_track_bfinject_course_4_best_time dirt_track_bfinject_course_4_best_lap
 
 VAR_INT flag_dirt_track_bobcat_course_0_status dirt_track_bobcat_course_0_best_time dirt_track_bobcat_course_0_best_lap
 VAR_INT flag_dirt_track_bobcat_course_1_status dirt_track_bobcat_course_1_best_time dirt_track_bobcat_course_1_best_lap
 VAR_INT flag_dirt_track_bobcat_course_2_status dirt_track_bobcat_course_2_best_time dirt_track_bobcat_course_2_best_lap
 VAR_INT flag_dirt_track_bobcat_course_3_status dirt_track_bobcat_course_3_best_time dirt_track_bobcat_course_3_best_lap
-VAR_INT flag_dirt_track_bobcat_course_4_status dirt_track_bobcat_course_4_best_time dirt_track_bobcat_course_4_best_lap
+
+VAR_INT flag_dirt_track_patriot_course_0_status dirt_track_patriot_course_0_best_time dirt_track_patriot_course_0_best_lap
+VAR_INT flag_dirt_track_patriot_course_1_status dirt_track_patriot_course_1_best_time dirt_track_patriot_course_1_best_lap
+VAR_INT flag_dirt_track_patriot_course_2_status dirt_track_patriot_course_2_best_time dirt_track_patriot_course_2_best_lap
+VAR_INT flag_dirt_track_patriot_course_3_status dirt_track_patriot_course_3_best_time dirt_track_patriot_course_3_best_lap
 
 // Let the initial mission setup finish
 WAIT 0
@@ -1523,7 +1527,7 @@ GOTO multistorey_mission_loop
 ul_missions_start:
 {
 VAR_INT dirt_track_course_variation
-LVAR_INT dirt_track_bfinject_trigger dirt_track_bobcat_trigger
+LVAR_INT dirt_track_bfinject_trigger dirt_track_bobcat_trigger dirt_track_patriot_trigger
 
 ul_missions_loop:
 WAIT mission_trigger_wait_time
@@ -1564,6 +1568,22 @@ IF IS_PLAYER_PLAYING player
 				GOTO ul_missions_loop
 			ENDIF
 			dirt_track_bobcat_trigger = 0
+
+			IF IS_PLAYER_IN_MODEL player CAR_PATRIOT
+				IF dirt_track_patriot_trigger = 0
+				AND LOCATE_PLAYER_IN_CAR_3D player 934.2 1006.5 104.0 3.0 3.0 2.0 FALSE
+
+					dirt_track_course_variation = 2 // Patriot course
+					flag_player_on_mission = 1
+					PRINT_BIG ( DTRK_3 ) 15000 2
+					WAIT 0
+					LOAD_AND_LAUNCH_MISSION ul_dirttrack.sc
+				ENDIF
+
+				dirt_track_patriot_trigger = 1
+				GOTO ul_missions_loop
+			ENDIF
+			dirt_track_patriot_trigger = 0
 		ENDIF
 	ENDIF
 ENDIF

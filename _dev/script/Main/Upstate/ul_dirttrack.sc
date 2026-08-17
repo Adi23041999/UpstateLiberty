@@ -18,8 +18,8 @@ LVAR_INT dirt_track_curr_checkpoint_blip dirt_track_next_checkpoint_blip dirt_tr
 
 VAR_INT dirt_track_total_time dirt_track_new_record_or_passed_all
 
-VAR_FLOAT dirt_track_car_x dirt_track_car_y dirt_track_car_z dirt_track_car_forward_x dirt_track_car_forward_y dirt_track_dot_x dirt_track_dot_y
-VAR_FLOAT dirt_track_player_start_x dirt_track_player_start_y
+VAR_FLOAT dirt_track_car_x dirt_track_car_y dirt_track_car_z dirt_track_car_forward_x dirt_track_car_forward_y dirt_track_camera_x dirt_track_camera_y dirt_track_camera_ground_z
+VAR_FLOAT dirt_track_player_start_x dirt_track_player_start_y dirt_track_car_start_angle_override
 
 VAR_FLOAT dirt_track_car_end_x dirt_track_car_end_y dirt_track_car_end_z dirt_track_car_end_heading
 
@@ -30,13 +30,17 @@ VAR_INT dirt_track_dangerous_checkpoint
 LVAR_INT dirt_track_temp_checkpoint_index dirt_track_num_checkpoints dirt_track_target_time
 LVAR_FLOAT dirt_track_temp_checkpoint_x dirt_track_temp_checkpoint_y dirt_track_temp_checkpoint_z
 
-CONST_INT dirt_track_num_laps 3
-CONST_INT dirt_track_num_courses 5
+#ifdef _DEBUG
+VAR_INT dirt_track_debug_mode
+#endif
 
-CONST_FLOAT dirt_track_course_bounds_x1 746.6
+CONST_INT dirt_track_num_laps 3
+CONST_INT dirt_track_num_courses 4
+
+CONST_FLOAT dirt_track_course_bounds_x1 706.6
 CONST_FLOAT dirt_track_course_bounds_y1 1038.0
 
-CONST_FLOAT dirt_track_course_bounds_x2 1187.7
+CONST_FLOAT dirt_track_course_bounds_x2 1127.7
 CONST_FLOAT dirt_track_course_bounds_y2 594.8
 
 dirt_track_start:
@@ -45,19 +49,32 @@ SCRIPT_NAME DTRACK
 flag_player_on_mission = 1
 flag_player_on_dirt_track_mission = 1
 
-IF dirt_track_course_variation = 0
-    dirt_track_car_model_id = 114 // CAR_BFINJECT
-    dirt_track_car_end_x = 986.5
-    dirt_track_car_end_y = 987.1
-    dirt_track_car_end_z = 103.7
-    dirt_track_car_end_heading = 78.0
-ELSE
-    dirt_track_car_model_id = 112 // CAR_BOBCAT
-    dirt_track_car_end_x = 1101.5
-    dirt_track_car_end_y = 912.5
-    dirt_track_car_end_z = 118.9
-    dirt_track_car_end_heading = 177.3
-ENDIF
+SWITCH dirt_track_course_variation
+    CASE 0
+        dirt_track_car_model_id = 114 // CAR_BFINJECT
+        dirt_track_car_end_x = 986.5
+        dirt_track_car_end_y = 987.1
+        dirt_track_car_end_z = 103.7
+        dirt_track_car_end_heading = 78.0
+        BREAK
+    CASE 1
+        dirt_track_car_model_id = 112 // CAR_BOBCAT
+        dirt_track_car_end_x = 1101.5
+        dirt_track_car_end_y = 912.5
+        dirt_track_car_end_z = 118.9
+        dirt_track_car_end_heading = 177.3
+        BREAK
+    CASE 2
+        dirt_track_car_model_id = 96 // CAR_BOBCAT
+        dirt_track_car_end_x = 934.2
+        dirt_track_car_end_y = 1006.5
+        dirt_track_car_end_z = 104.0
+        dirt_track_car_end_heading = 270.0
+        BREAK
+    CASE 3
+        // TODO: Landstalker
+        BREAK
+ENDSWITCH
 
 SET_PLAYER_CONTROL player OFF
 SWITCH_WIDESCREEN ON
@@ -72,7 +89,55 @@ dirt_track_course_select:
 SET_PLAYER_CONTROL player OFF
 SWITCH_WIDESCREEN ON
 
-SET_FIXED_CAMERA_POSITION 1016.4 763.6 115.8 0.0 0.0 0.0
+dirt_track_selected_course_in_menu = 1
+SWITCH dirt_track_course_variation
+    CASE 0
+        IF flag_dirt_track_bfinject_passed = 0
+            IF flag_dirt_track_bfinject_course_0_status = 2
+                dirt_track_selected_course_in_menu = 2
+            ENDIF
+            IF flag_dirt_track_bfinject_course_1_status = 2
+                dirt_track_selected_course_in_menu = 3
+            ENDIF
+            IF flag_dirt_track_bfinject_course_2_status = 2
+                dirt_track_selected_course_in_menu = 4
+            ENDIF
+        ENDIF
+        SET_FIXED_CAMERA_POSITION 994.3 991.2 142.5 0.0 0.0 0.0
+        BREAK
+    CASE 1
+        IF flag_dirt_track_bobcat_passed = 0
+            IF flag_dirt_track_bobcat_course_0_status = 2
+                dirt_track_selected_course_in_menu = 2
+            ENDIF
+            IF flag_dirt_track_bobcat_course_1_status = 2
+                dirt_track_selected_course_in_menu = 3
+            ENDIF
+            IF flag_dirt_track_bobcat_course_2_status = 2
+                dirt_track_selected_course_in_menu = 4
+            ENDIF
+        ENDIF
+        SET_FIXED_CAMERA_POSITION 1016.4 763.6 115.8 0.0 0.0 0.0
+        BREAK
+    CASE 2
+        IF flag_dirt_track_patriot_passed = 0
+            IF flag_dirt_track_patriot_course_0_status = 2
+                dirt_track_selected_course_in_menu = 2
+            ENDIF
+            IF flag_dirt_track_patriot_course_1_status = 2
+                dirt_track_selected_course_in_menu = 3
+            ENDIF
+            IF flag_dirt_track_patriot_course_2_status = 2
+                dirt_track_selected_course_in_menu = 4
+            ENDIF
+        ENDIF
+        SET_FIXED_CAMERA_POSITION 790.7 910.6 122.1 0.0 0.0 0.0
+        BREAK
+    CASE 3
+        // TODO: Landstalker
+        BREAK
+ENDSWITCH
+
 POINT_CAMERA_AT_POINT 914.7 875.9 100.0 JUMP_CUT
 
 CLEAR_PRINTS
@@ -81,39 +146,6 @@ DO_FADE 1500 FADE_IN
 WHILE GET_FADING_STATUS
     WAIT 0
 ENDWHILE
-
-dirt_track_selected_course_in_menu = 1
-IF dirt_track_course_variation = 0
-    IF flag_dirt_track_bfinject_passed = 0
-        IF flag_dirt_track_bfinject_course_0_status = 2
-            dirt_track_selected_course_in_menu = 2
-        ENDIF
-        IF flag_dirt_track_bfinject_course_1_status = 2
-            dirt_track_selected_course_in_menu = 3
-        ENDIF
-        IF flag_dirt_track_bfinject_course_2_status = 2
-            dirt_track_selected_course_in_menu = 4
-        ENDIF
-        IF flag_dirt_track_bfinject_course_3_status = 2
-            dirt_track_selected_course_in_menu = 5
-        ENDIF
-    ENDIF
-ELSE
-    IF flag_dirt_track_bobcat_passed = 0
-        IF flag_dirt_track_bobcat_course_0_status = 2
-            dirt_track_selected_course_in_menu = 2
-        ENDIF
-        IF flag_dirt_track_bobcat_course_1_status = 2
-            dirt_track_selected_course_in_menu = 3
-        ENDIF
-        IF flag_dirt_track_bobcat_course_2_status = 2
-            dirt_track_selected_course_in_menu = 4
-        ENDIF
-        IF flag_dirt_track_bobcat_course_3_status = 2
-            dirt_track_selected_course_in_menu = 5
-        ENDIF
-    ENDIF
-ENDIF
 
 WAIT 500
 TIMERA = 0
@@ -202,11 +234,12 @@ IF IS_BUTTON_PRESSED PAD2 LEFTSHOCK
     flag_dirt_track_bfinject_course_1_status = 1
     flag_dirt_track_bfinject_course_2_status = 1
     flag_dirt_track_bfinject_course_3_status = 1
-    flag_dirt_track_bfinject_course_4_status = 1
     flag_dirt_track_bobcat_course_1_status = 1
     flag_dirt_track_bobcat_course_2_status = 1
     flag_dirt_track_bobcat_course_3_status = 1
-    flag_dirt_track_bobcat_course_4_status = 1
+    flag_dirt_track_patriot_course_1_status = 1
+    flag_dirt_track_patriot_course_2_status = 1
+    flag_dirt_track_patriot_course_3_status = 1
 ENDIF
 #endif
 
@@ -242,7 +275,11 @@ ENDIF
 dirt_track_temp_checkpoint_index = 1
 GOSUB dirt_track_get_checkpoint_coords
 
-TURN_CAR_TO_FACE_COORD dirt_track_car dirt_track_temp_checkpoint_x dirt_track_temp_checkpoint_y
+IF dirt_track_car_start_angle_override < 0.0
+    TURN_CAR_TO_FACE_COORD dirt_track_car dirt_track_temp_checkpoint_x dirt_track_temp_checkpoint_y
+ELSE
+    SET_CAR_HEADING dirt_track_car dirt_track_car_start_angle_override
+ENDIF
 
 dirt_track_current_lap = 1
 dirt_track_curr_checkpoint_index = 1
@@ -382,6 +419,24 @@ IF LOCATE_PLAYER_IN_CAR_3D player dirt_track_temp_checkpoint_x dirt_track_temp_c
     GOSUB dirt_track_remove_blips
 ENDIF
 
+#ifdef _DEBUG
+IF IS_BUTTON_PRESSED PAD2 RIGHTSHOCK
+    WHILE IS_BUTTON_PRESSED PAD2 RIGHTSHOCK
+        WAIT 0
+    ENDWHILE
+    IF dirt_track_debug_mode = 0
+        dirt_track_debug_mode = 1
+    ELSE
+        dirt_track_debug_mode = 0
+    ENDIF
+ENDIF
+
+IF dirt_track_debug_mode = 1
+    PRINT_WITH_NUMBER_NOW NUMBER dirt_track_curr_checkpoint_index 1 1
+ENDIF
+
+#endif
+
 GOTO dirt_track_course_loop
 
 dirt_track_course_finished:
@@ -398,24 +453,53 @@ IF NOT IS_CAR_DEAD dirt_track_car
     GET_CAR_FORWARD_Y dirt_track_car dirt_track_car_forward_y
 
     // X axis
-    dirt_track_dot_x = 8.0 * dirt_track_car_forward_y
-    dirt_track_dot_y = -8.0 * dirt_track_car_forward_x
+    dirt_track_camera_x = 8.0 * dirt_track_car_forward_y
+    dirt_track_camera_y = -8.0 * dirt_track_car_forward_x
 
     // Y axis
     dirt_track_car_forward_x *= -20.0
     dirt_track_car_forward_y *= -20.0
 
-    dirt_track_dot_x -= dirt_track_car_forward_x
-    dirt_track_dot_y -= dirt_track_car_forward_y
+    dirt_track_camera_x -= dirt_track_car_forward_x
+    dirt_track_camera_y -= dirt_track_car_forward_y
 
-    dirt_track_car_x += dirt_track_dot_x
-    dirt_track_car_y += dirt_track_dot_y
+    dirt_track_camera_x += dirt_track_car_x
+    dirt_track_camera_y += dirt_track_car_y
+
     dirt_track_car_z += 1.5
 
-    SET_FIXED_CAMERA_POSITION dirt_track_car_x dirt_track_car_y dirt_track_car_z 0.0 0.0 0.0
+    GET_GROUND_Z_FOR_3D_COORD dirt_track_camera_x dirt_track_camera_y 1000.0 dirt_track_camera_ground_z
+    IF dirt_track_camera_ground_z > dirt_track_car_z
+        // Try again from the other side of the car, as the camera would be inside geometry
+        GET_CAR_FORWARD_X dirt_track_car dirt_track_car_forward_x
+        GET_CAR_FORWARD_Y dirt_track_car dirt_track_car_forward_y
+
+        // X axis
+        dirt_track_camera_x = -8.0 * dirt_track_car_forward_y
+        dirt_track_camera_y = 8.0 * dirt_track_car_forward_x
+
+        // Y axis
+        dirt_track_car_forward_x *= -20.0
+        dirt_track_car_forward_y *= -20.0
+
+        dirt_track_camera_x -= dirt_track_car_forward_x
+        dirt_track_camera_y -= dirt_track_car_forward_y
+
+        dirt_track_camera_x += dirt_track_car_x
+        dirt_track_camera_y += dirt_track_car_y
+
+        GET_GROUND_Z_FOR_3D_COORD dirt_track_camera_x dirt_track_camera_y 1000.0 dirt_track_camera_ground_z
+        IF dirt_track_camera_ground_z > dirt_track_car_z
+            // If it's *still* obstructed, give up
+            GOTO dirt_track_course_finished_skip_camera
+        ENDIF
+    ENDIF
+
+    SET_FIXED_CAMERA_POSITION dirt_track_camera_x dirt_track_camera_y dirt_track_car_z 0.0 0.0 0.0
     POINT_CAMERA_AT_PLAYER player FIXED JUMP_CUT
 ENDIF
 
+dirt_track_course_finished_skip_camera:
 GOSUB dirt_track_try_pass_course
 
 dirt_track_current_time_secs = dirt_track_total_time / 1000
@@ -430,25 +514,41 @@ WAIT 5000
 CLEAR_PRINTS
 
 IF dirt_track_new_record_or_passed_all = 2
-    IF dirt_track_course_variation = 0
-        IF flag_dirt_track_bfinject_passed = 0
-            flag_dirt_track_bfinject_passed = 1
+    SWITCH dirt_track_course_variation
+        CASE 0
+            IF flag_dirt_track_bfinject_passed = 0
+                flag_dirt_track_bfinject_passed = 1
 
-            REGISTER_MISSION_GIVEN
-            REGISTER_MISSION_PASSED DTRK_1
+                REGISTER_MISSION_GIVEN
+                REGISTER_MISSION_PASSED DTRK_1
 
-            GOTO dirt_track_passed
-        ENDIF
-    ELSE
-        IF flag_dirt_track_bobcat_passed = 0
-            flag_dirt_track_bobcat_passed = 1
+                GOTO dirt_track_passed
+            ENDIF
+            BREAK
+        CASE 1
+            IF flag_dirt_track_bobcat_passed = 0
+                flag_dirt_track_bobcat_passed = 1
 
-            REGISTER_MISSION_GIVEN
-            REGISTER_MISSION_PASSED DTRK_2
+                REGISTER_MISSION_GIVEN
+                REGISTER_MISSION_PASSED DTRK_2
 
-            GOTO dirt_track_passed
-        ENDIF
-    ENDIF
+                GOTO dirt_track_passed
+            ENDIF
+            BREAK
+        CASE 2
+            IF flag_dirt_track_patriot_passed = 0
+                flag_dirt_track_patriot_passed = 1
+
+                REGISTER_MISSION_GIVEN
+                REGISTER_MISSION_PASSED DTRK_3
+
+                GOTO dirt_track_passed
+            ENDIF
+            BREAK
+        CASE 3
+            // TODO: Landstalker
+            BREAK
+    ENDSWITCH
 ENDIF
 
 SET_PLAYER_CONTROL player OFF
@@ -535,11 +635,14 @@ RETURN
 
 dirt_track_get_checkpoint_coords:
 dirt_track_dangerous_checkpoint = 0
+dirt_track_car_start_angle_override = -1.0
 // IF...GOTO exists but isn't supported in gta3sc
 IS_THING_EQUAL_TO_THING dirt_track_course_variation 0
 GOTO_IF_TRUE dirt_track_bfinject_courses
 IS_THING_EQUAL_TO_THING dirt_track_course_variation 1
 GOTO_IF_TRUE dirt_track_bobcat_courses
+IS_THING_EQUAL_TO_THING dirt_track_course_variation 2
+GOTO_IF_TRUE dirt_track_patriot_courses
 
 RETURN
 
@@ -552,58 +655,62 @@ IS_THING_EQUAL_TO_THING dirt_track_course_index 2
 GOTO_IF_TRUE dirt_track_bfinject_course_2
 IS_THING_EQUAL_TO_THING dirt_track_course_index 3
 GOTO_IF_TRUE dirt_track_bfinject_course_3
-IS_THING_EQUAL_TO_THING dirt_track_course_index 4
-GOTO_IF_TRUE dirt_track_bfinject_course_4
 RETURN
 
 dirt_track_bfinject_course_0:
-dirt_track_num_checkpoints = 7
-dirt_track_target_time = 70000
+dirt_track_num_checkpoints = 8
+dirt_track_target_time = 999999999
 dirt_track_course_pass_status = flag_dirt_track_bfinject_course_0_status
 dirt_track_course_best_time = dirt_track_bfinject_course_0_best_time
 dirt_track_course_best_lap = dirt_track_bfinject_course_0_best_lap
+dirt_track_car_start_angle_override = 43.8
 
 SWITCH dirt_track_temp_checkpoint_index
     CASE 0
-        dirt_track_temp_checkpoint_x = 911.4
-        dirt_track_temp_checkpoint_y = 872.5
-        dirt_track_temp_checkpoint_z = 95.1
+        dirt_track_temp_checkpoint_x = 908.7
+        dirt_track_temp_checkpoint_y = 880.1
+        dirt_track_temp_checkpoint_z = 94.0
         BREAK
     CASE 1
-        dirt_track_temp_checkpoint_x = 870.7
-        dirt_track_temp_checkpoint_y = 851.0
-        dirt_track_temp_checkpoint_z = 80.6
+        dirt_track_temp_checkpoint_x = 889.8
+        dirt_track_temp_checkpoint_y = 935.5
+        dirt_track_temp_checkpoint_z = 91.5
         BREAK
     CASE 2
-        dirt_track_temp_checkpoint_x = 892.8
-        dirt_track_temp_checkpoint_y = 842.2
-        dirt_track_temp_checkpoint_z = 78.2
+        dirt_track_temp_checkpoint_x = 878.6
+        dirt_track_temp_checkpoint_y = 957.4
+        dirt_track_temp_checkpoint_z = 98.6
         BREAK
     CASE 3
-        dirt_track_temp_checkpoint_x = 916.8
-        dirt_track_temp_checkpoint_y = 784.6
-        dirt_track_temp_checkpoint_z = 76.4
+        dirt_track_temp_checkpoint_x = 872.1
+        dirt_track_temp_checkpoint_y = 934.2
+        dirt_track_temp_checkpoint_z = 99.5
         BREAK
     CASE 4
-        dirt_track_temp_checkpoint_x = 959.9
-        dirt_track_temp_checkpoint_y = 742.1
-        dirt_track_temp_checkpoint_z = 63.8
+        dirt_track_temp_checkpoint_x = 958.7
+        dirt_track_temp_checkpoint_y = 944.3
+        dirt_track_temp_checkpoint_z = 104.5
         BREAK
     CASE 5
-        dirt_track_temp_checkpoint_x = 921.0
-        dirt_track_temp_checkpoint_y = 756.5
-        dirt_track_temp_checkpoint_z = 63.7
+        dirt_track_temp_checkpoint_x = 1020.0
+        dirt_track_temp_checkpoint_y = 915.3
+        dirt_track_temp_checkpoint_z = 100.9
         BREAK
     CASE 6
-        dirt_track_temp_checkpoint_x = 916.5
-        dirt_track_temp_checkpoint_y = 821.2
-        dirt_track_temp_checkpoint_z = 77.0
+        dirt_track_temp_checkpoint_x = 1025.6
+        dirt_track_temp_checkpoint_y = 869.3
+        dirt_track_temp_checkpoint_z = 92.5
+        BREAK
+    CASE 7
+        dirt_track_temp_checkpoint_x = 968.3
+        dirt_track_temp_checkpoint_y = 874.8
+        dirt_track_temp_checkpoint_z = 91.5
         BREAK
 ENDSWITCH
 RETURN
 
 dirt_track_bfinject_course_1:
-dirt_track_num_checkpoints = 17
+dirt_track_num_checkpoints = 12
 dirt_track_target_time = 999999999
 dirt_track_course_pass_status = flag_dirt_track_bfinject_course_1_status
 dirt_track_course_best_time = dirt_track_bfinject_course_1_best_time
@@ -611,89 +718,62 @@ dirt_track_course_best_lap = dirt_track_bfinject_course_1_best_lap
 
 SWITCH dirt_track_temp_checkpoint_index
     CASE 0
-        dirt_track_temp_checkpoint_x = 915.6
+        dirt_track_temp_checkpoint_x = 909.8
         dirt_track_temp_checkpoint_y = 873.8
-        dirt_track_temp_checkpoint_z = 94.9
+        dirt_track_temp_checkpoint_z = 94.1
         BREAK
     CASE 1
-        dirt_track_dangerous_checkpoint = 1
-        dirt_track_temp_checkpoint_x = 917.4
-        dirt_track_temp_checkpoint_y = 820.6
-        dirt_track_temp_checkpoint_z = 76.9
+        dirt_track_temp_checkpoint_x = 870.8
+        dirt_track_temp_checkpoint_y = 850.5
+        dirt_track_temp_checkpoint_z = 80.5
         BREAK
     CASE 2
-        dirt_track_temp_checkpoint_x = 910.1
-        dirt_track_temp_checkpoint_y = 737.8
-        dirt_track_temp_checkpoint_z = 62.2
-        BREAK
-    CASE 3
-        dirt_track_temp_checkpoint_x = 881.9
-        dirt_track_temp_checkpoint_y = 763.1
-        dirt_track_temp_checkpoint_z = 66.1
-        BREAK
-    CASE 4
-        dirt_track_temp_checkpoint_x = 848.0
-        dirt_track_temp_checkpoint_y = 786.9
-        dirt_track_temp_checkpoint_z = 68.6
-        BREAK
-    CASE 5
-        dirt_track_temp_checkpoint_x = 824.5
-        dirt_track_temp_checkpoint_y = 832.7
-        dirt_track_temp_checkpoint_z = 76.5
-        BREAK
-    CASE 6
-        dirt_track_dangerous_checkpoint = 1
-        dirt_track_temp_checkpoint_x = 858.5
-        dirt_track_temp_checkpoint_y = 854.0
-        dirt_track_temp_checkpoint_z = 84.1
-        BREAK
-    CASE 7
         dirt_track_temp_checkpoint_x = 894.6
         dirt_track_temp_checkpoint_y = 840.4
         dirt_track_temp_checkpoint_z = 77.9
         BREAK
-    CASE 8
+    CASE 3
         dirt_track_temp_checkpoint_x = 917.6
         dirt_track_temp_checkpoint_y = 784.1
         dirt_track_temp_checkpoint_z = 76.3
         BREAK
-    CASE 9
+    CASE 4
         dirt_track_temp_checkpoint_x = 979.4
         dirt_track_temp_checkpoint_y = 749.2
         dirt_track_temp_checkpoint_z = 64.7
         BREAK
-    CASE 10
+    CASE 5
         dirt_track_temp_checkpoint_x = 1000.9
         dirt_track_temp_checkpoint_y = 771.3
         dirt_track_temp_checkpoint_z = 69.0
         BREAK
-    CASE 11
+    CASE 6
         dirt_track_temp_checkpoint_x = 957.7
         dirt_track_temp_checkpoint_y = 791.6
         dirt_track_temp_checkpoint_z = 73.3
         BREAK
-    CASE 12
+    CASE 7
         dirt_track_dangerous_checkpoint = 1
         dirt_track_temp_checkpoint_x = 983.8
         dirt_track_temp_checkpoint_y = 804.2
         dirt_track_temp_checkpoint_z = 74.7
         BREAK
-    CASE 13
+    CASE 8
         dirt_track_temp_checkpoint_x = 1057.6
         dirt_track_temp_checkpoint_y = 827.2
         dirt_track_temp_checkpoint_z = 81.8
         BREAK
-    CASE 14
+    CASE 9
         dirt_track_temp_checkpoint_x = 1025.6
         dirt_track_temp_checkpoint_y = 867.3
         dirt_track_temp_checkpoint_z = 92.6
         BREAK
-    CASE 15
+    CASE 10
         dirt_track_temp_checkpoint_x = 1004.5
         dirt_track_temp_checkpoint_y = 893.6
         dirt_track_temp_checkpoint_z = 91.0
         BREAK
-    CASE 16
+    CASE 11
         dirt_track_temp_checkpoint_x = 917.2
         dirt_track_temp_checkpoint_y = 906.9
         dirt_track_temp_checkpoint_z = 86.2
@@ -809,105 +889,11 @@ ENDSWITCH
 RETURN
 
 dirt_track_bfinject_course_3:
-dirt_track_num_checkpoints = 16
+dirt_track_num_checkpoints = 23
 dirt_track_target_time = 999999999
 dirt_track_course_pass_status = flag_dirt_track_bfinject_course_3_status
 dirt_track_course_best_time = dirt_track_bfinject_course_3_best_time
 dirt_track_course_best_lap = dirt_track_bfinject_course_3_best_lap
-
-SWITCH dirt_track_temp_checkpoint_index
-    CASE 0
-        dirt_track_temp_checkpoint_x = 913.6
-        dirt_track_temp_checkpoint_y = 875.9
-        dirt_track_temp_checkpoint_z = 94.9
-        BREAK
-    CASE 1
-        dirt_track_temp_checkpoint_x = 917.9
-        dirt_track_temp_checkpoint_y = 939.1
-        dirt_track_temp_checkpoint_z = 88.4
-        BREAK
-    CASE 2
-        dirt_track_temp_checkpoint_x = 907.4
-        dirt_track_temp_checkpoint_y = 1005.8
-        dirt_track_temp_checkpoint_z = 98.2
-        BREAK
-    CASE 3
-        dirt_track_temp_checkpoint_x = 880.2
-        dirt_track_temp_checkpoint_y = 967.6
-        dirt_track_temp_checkpoint_z = 98.5
-        BREAK
-    CASE 4
-        dirt_track_temp_checkpoint_x = 920.3
-        dirt_track_temp_checkpoint_y = 870.9
-        dirt_track_temp_checkpoint_z = 94.3
-        BREAK
-    CASE 5
-        dirt_track_temp_checkpoint_x = 988.7
-        dirt_track_temp_checkpoint_y = 828.1
-        dirt_track_temp_checkpoint_z = 83.2
-        BREAK
-    CASE 6
-        dirt_track_temp_checkpoint_x = 1053.7
-        dirt_track_temp_checkpoint_y = 798.1
-        dirt_track_temp_checkpoint_z = 78.2
-        BREAK
-    CASE 7
-        dirt_track_dangerous_checkpoint = 1
-        dirt_track_temp_checkpoint_x = 981.2
-        dirt_track_temp_checkpoint_y = 805.2
-        dirt_track_temp_checkpoint_z = 75.2
-        BREAK
-    CASE 8
-        dirt_track_temp_checkpoint_x = 956.6
-        dirt_track_temp_checkpoint_y = 791.8
-        dirt_track_temp_checkpoint_z = 73.4
-        BREAK
-    CASE 9
-        dirt_track_temp_checkpoint_x = 1007.8
-        dirt_track_temp_checkpoint_y = 762.1
-        dirt_track_temp_checkpoint_z = 68.0
-        BREAK
-    CASE 10
-        dirt_track_temp_checkpoint_x = 911.9
-        dirt_track_temp_checkpoint_y = 736.8
-        dirt_track_temp_checkpoint_z = 62.4
-        BREAK
-    CASE 11
-        dirt_track_temp_checkpoint_x = 876.8
-        dirt_track_temp_checkpoint_y = 768.4
-        dirt_track_temp_checkpoint_z = 66.9
-        BREAK
-    CASE 12
-        dirt_track_dangerous_checkpoint = 1
-        dirt_track_temp_checkpoint_x = 825.0
-        dirt_track_temp_checkpoint_y = 784.8
-        dirt_track_temp_checkpoint_z = 66.9
-        BREAK
-    CASE 13
-        dirt_track_temp_checkpoint_x = 776.3
-        dirt_track_temp_checkpoint_y = 801.0
-        dirt_track_temp_checkpoint_z = 67.9
-        BREAK
-    CASE 14
-        dirt_track_temp_checkpoint_x = 816.1
-        dirt_track_temp_checkpoint_y = 831.1
-        dirt_track_temp_checkpoint_z = 76.6
-        BREAK
-    CASE 15
-        dirt_track_dangerous_checkpoint = 1
-        dirt_track_temp_checkpoint_x = 858.6
-        dirt_track_temp_checkpoint_y = 854.4
-        dirt_track_temp_checkpoint_z = 84.2
-        BREAK
-ENDSWITCH
-RETURN
-
-dirt_track_bfinject_course_4:
-dirt_track_num_checkpoints = 23
-dirt_track_target_time = 999999999
-dirt_track_course_pass_status = flag_dirt_track_bfinject_course_4_status
-dirt_track_course_best_time = dirt_track_bfinject_course_4_best_time
-dirt_track_course_best_lap = dirt_track_bfinject_course_4_best_lap
 
 SWITCH dirt_track_temp_checkpoint_index
     CASE 0
@@ -1041,8 +1027,6 @@ IS_THING_EQUAL_TO_THING dirt_track_course_index 2
 GOTO_IF_TRUE dirt_track_bobcat_course_2
 IS_THING_EQUAL_TO_THING dirt_track_course_index 3
 GOTO_IF_TRUE dirt_track_bobcat_course_3
-IS_THING_EQUAL_TO_THING dirt_track_course_index 4
-GOTO_IF_TRUE dirt_track_bobcat_course_4
 RETURN
 
 dirt_track_bobcat_course_0:
@@ -1051,43 +1035,44 @@ dirt_track_target_time = 70000
 dirt_track_course_pass_status = flag_dirt_track_bobcat_course_0_status
 dirt_track_course_best_time = dirt_track_bobcat_course_0_best_time
 dirt_track_course_best_lap = dirt_track_bobcat_course_0_best_lap
+dirt_track_car_start_angle_override = 182.5
 
 SWITCH dirt_track_temp_checkpoint_index
     CASE 0
-        dirt_track_temp_checkpoint_x = 914.9
-        dirt_track_temp_checkpoint_y = 871.5
-        dirt_track_temp_checkpoint_z = 94.4
+        dirt_track_dangerous_checkpoint = 1
+        dirt_track_temp_checkpoint_x = 915.8
+        dirt_track_temp_checkpoint_y = 823.0
+        dirt_track_temp_checkpoint_z = 77.1
         BREAK
     CASE 1
-        dirt_track_dangerous_checkpoint = 1
-        dirt_track_temp_checkpoint_x = 916.4
-        dirt_track_temp_checkpoint_y = 821.5
-        dirt_track_temp_checkpoint_z = 77.0
-        BREAK
-    CASE 2
         dirt_track_temp_checkpoint_x = 908.9
         dirt_track_temp_checkpoint_y = 735.8
         dirt_track_temp_checkpoint_z = 62.3
         BREAK
-    CASE 3
+    CASE 2
         dirt_track_temp_checkpoint_x = 882.0
         dirt_track_temp_checkpoint_y = 765.4
         dirt_track_temp_checkpoint_z = 66.5
         BREAK
-    CASE 4
+    CASE 3
         dirt_track_temp_checkpoint_x = 848.0
         dirt_track_temp_checkpoint_y = 789.3
         dirt_track_temp_checkpoint_z = 68.8
         BREAK
-    CASE 5
+    CASE 4
         dirt_track_temp_checkpoint_x = 825.4
         dirt_track_temp_checkpoint_y = 838.2
         dirt_track_temp_checkpoint_z = 77.6
         BREAK
-    CASE 6
+    CASE 5
         dirt_track_temp_checkpoint_x = 858.4
         dirt_track_temp_checkpoint_y = 853.5
         dirt_track_temp_checkpoint_z = 84.0
+        BREAK
+    CASE 6
+        dirt_track_temp_checkpoint_x = 914.9
+        dirt_track_temp_checkpoint_y = 871.5
+        dirt_track_temp_checkpoint_z = 94.4
         BREAK
 ENDSWITCH
 RETURN
@@ -1098,6 +1083,7 @@ dirt_track_target_time = 99999999
 dirt_track_course_pass_status = flag_dirt_track_bobcat_course_1_status
 dirt_track_course_best_time = dirt_track_bobcat_course_1_best_time
 dirt_track_course_best_lap = dirt_track_bobcat_course_1_best_lap
+dirt_track_car_start_angle_override = 353.5
 
 SWITCH dirt_track_temp_checkpoint_index
     CASE 0
@@ -1179,7 +1165,7 @@ ENDSWITCH
 RETURN
 
 dirt_track_bobcat_course_2:
-dirt_track_num_checkpoints = 13
+dirt_track_num_checkpoints = 18
 dirt_track_target_time = 99999999
 dirt_track_course_pass_status = flag_dirt_track_bobcat_course_2_status
 dirt_track_course_best_time = dirt_track_bobcat_course_2_best_time
@@ -1187,208 +1173,105 @@ dirt_track_course_best_lap = dirt_track_bobcat_course_2_best_lap
 
 SWITCH dirt_track_temp_checkpoint_index
     CASE 0
-        dirt_track_temp_checkpoint_x = 914.4
-        dirt_track_temp_checkpoint_y = 879.4
-        dirt_track_temp_checkpoint_z = 94.6
+        dirt_track_temp_checkpoint_x = 911.4
+        dirt_track_temp_checkpoint_y = 874.0
+        dirt_track_temp_checkpoint_z = 94.4
         BREAK
     CASE 1
-        dirt_track_temp_checkpoint_x = 918.2
-        dirt_track_temp_checkpoint_y = 948.5
-        dirt_track_temp_checkpoint_z = 89.0
+        dirt_track_temp_checkpoint_x = 858.8
+        dirt_track_temp_checkpoint_y = 852.7
+        dirt_track_temp_checkpoint_z = 84.2
         BREAK
     CASE 2
-        dirt_track_temp_checkpoint_x = 905.4
-        dirt_track_temp_checkpoint_y = 1007.4
-        dirt_track_temp_checkpoint_z = 98.5
+        dirt_track_temp_checkpoint_x = 825.1
+        dirt_track_temp_checkpoint_y = 828.5
+        dirt_track_temp_checkpoint_z = 75.9
         BREAK
     CASE 3
-        dirt_track_temp_checkpoint_x = 868.9
-        dirt_track_temp_checkpoint_y = 946.5
-        dirt_track_temp_checkpoint_z = 98.3
+        dirt_track_temp_checkpoint_x = 860.0
+        dirt_track_temp_checkpoint_y = 772.1
+        dirt_track_temp_checkpoint_z = 67.8
         BREAK
     CASE 4
-        dirt_track_temp_checkpoint_x = 922.3
-        dirt_track_temp_checkpoint_y = 949.8
-        dirt_track_temp_checkpoint_z = 105.1
+        dirt_track_temp_checkpoint_x = 882.1
+        dirt_track_temp_checkpoint_y = 734.2
+        dirt_track_temp_checkpoint_z = 62.9
         BREAK
     CASE 5
-        dirt_track_temp_checkpoint_x = 982.3
-        dirt_track_temp_checkpoint_y = 940.9
-        dirt_track_temp_checkpoint_z = 104.5
+        dirt_track_temp_checkpoint_x = 919.6
+        dirt_track_temp_checkpoint_y = 757.3
+        dirt_track_temp_checkpoint_z = 63.9
         BREAK
     CASE 6
-        dirt_track_temp_checkpoint_x = 1022.1
-        dirt_track_temp_checkpoint_y = 869.8
-        dirt_track_temp_checkpoint_z = 92.3
+        dirt_track_temp_checkpoint_x = 928.4
+        dirt_track_temp_checkpoint_y = 822.2
+        dirt_track_temp_checkpoint_z = 77.3
         BREAK
     CASE 7
-        dirt_track_temp_checkpoint_x = 912.5
-        dirt_track_temp_checkpoint_y = 872.5
-        dirt_track_temp_checkpoint_z = 94.5
+        dirt_track_temp_checkpoint_x = 952.9
+        dirt_track_temp_checkpoint_y = 823.7
+        dirt_track_temp_checkpoint_z = 88.1
         BREAK
     CASE 8
-        dirt_track_temp_checkpoint_x = 859.6
-        dirt_track_temp_checkpoint_y = 851.9
-        dirt_track_temp_checkpoint_z = 84.1
+        dirt_track_dangerous_checkpoint = 1
+        dirt_track_temp_checkpoint_x = 958.3
+        dirt_track_temp_checkpoint_y = 841.2
+        dirt_track_temp_checkpoint_z = 83.8
         BREAK
     CASE 9
-        dirt_track_temp_checkpoint_x = 851.3
-        dirt_track_temp_checkpoint_y = 828.4
-        dirt_track_temp_checkpoint_z = 79.8
+        dirt_track_temp_checkpoint_x = 916.2
+        dirt_track_temp_checkpoint_y = 881.5
+        dirt_track_temp_checkpoint_z = 94.2
         BREAK
     CASE 10
-        dirt_track_temp_checkpoint_x = 894.7
-        dirt_track_temp_checkpoint_y = 820.6
-        dirt_track_temp_checkpoint_z = 86.6
+        dirt_track_temp_checkpoint_x = 917.8
+        dirt_track_temp_checkpoint_y = 954.4
+        dirt_track_temp_checkpoint_z = 89.7
         BREAK
     CASE 11
-        dirt_track_temp_checkpoint_x = 953.4
-        dirt_track_temp_checkpoint_y = 823.4
-        dirt_track_temp_checkpoint_z = 88.0
+        dirt_track_temp_checkpoint_x = 901.4
+        dirt_track_temp_checkpoint_y = 1006.7
+        dirt_track_temp_checkpoint_z = 98.1
         BREAK
     CASE 12
-        dirt_track_temp_checkpoint_x = 960.5
-        dirt_track_temp_checkpoint_y = 840.7
-        dirt_track_temp_checkpoint_z = 84.2
+        dirt_track_temp_checkpoint_x = 870.8
+        dirt_track_temp_checkpoint_y = 957.7
+        dirt_track_temp_checkpoint_z = 98.5
+        BREAK
+    CASE 13
+        dirt_track_temp_checkpoint_x = 892.1
+        dirt_track_temp_checkpoint_y = 939.3
+        dirt_track_temp_checkpoint_z = 103.3
+        BREAK
+    CASE 14
+        dirt_track_temp_checkpoint_x = 960.4
+        dirt_track_temp_checkpoint_y = 944.3
+        dirt_track_temp_checkpoint_z = 104.6
+        BREAK
+    CASE 15
+        dirt_track_temp_checkpoint_x = 1024.5
+        dirt_track_temp_checkpoint_y = 908.3
+        dirt_track_temp_checkpoint_z = 98.6
+        BREAK
+    CASE 16
+        dirt_track_temp_checkpoint_x = 1021.7
+        dirt_track_temp_checkpoint_y = 868.1
+        dirt_track_temp_checkpoint_z = 92.5
+        BREAK
+    CASE 17
+        dirt_track_temp_checkpoint_x = 969.7
+        dirt_track_temp_checkpoint_y = 873.4
+        dirt_track_temp_checkpoint_z = 91.7
         BREAK
 ENDSWITCH
 RETURN
 
 dirt_track_bobcat_course_3:
-dirt_track_num_checkpoints = 23
+dirt_track_num_checkpoints = 25
 dirt_track_target_time = 99999999
 dirt_track_course_pass_status = flag_dirt_track_bobcat_course_3_status
 dirt_track_course_best_time = dirt_track_bobcat_course_3_best_time
 dirt_track_course_best_lap = dirt_track_bobcat_course_3_best_lap
-
-SWITCH dirt_track_temp_checkpoint_index
-    CASE 0
-        dirt_track_temp_checkpoint_x = 915.1
-        dirt_track_temp_checkpoint_y = 875.2
-        dirt_track_temp_checkpoint_z = 95.0
-        BREAK
-    CASE 1
-        dirt_track_temp_checkpoint_x = 870.2
-        dirt_track_temp_checkpoint_y = 850.6
-        dirt_track_temp_checkpoint_z = 80.6
-        BREAK
-    CASE 2
-        dirt_track_temp_checkpoint_x = 893.7
-        dirt_track_temp_checkpoint_y = 841.1
-        dirt_track_temp_checkpoint_z = 78.1
-        BREAK
-    CASE 3
-        dirt_track_temp_checkpoint_x = 917.8
-        dirt_track_temp_checkpoint_y = 783.7
-        dirt_track_temp_checkpoint_z = 76.2
-        BREAK
-    CASE 4
-        dirt_track_temp_checkpoint_x = 956.1
-        dirt_track_temp_checkpoint_y = 740.5
-        dirt_track_temp_checkpoint_z = 63.5
-        BREAK
-    CASE 5
-        dirt_track_temp_checkpoint_x = 881.5
-        dirt_track_temp_checkpoint_y = 739.3
-        dirt_track_temp_checkpoint_z = 62.8
-        BREAK
-    CASE 6
-        dirt_track_temp_checkpoint_x = 874.9
-        dirt_track_temp_checkpoint_y = 769.5
-        dirt_track_temp_checkpoint_z = 67.0
-        BREAK
-    CASE 7
-        dirt_track_dangerous_checkpoint = 1
-        dirt_track_temp_checkpoint_x = 815.6
-        dirt_track_temp_checkpoint_y = 783.8
-        dirt_track_temp_checkpoint_z = 67.2
-        BREAK
-    CASE 8
-        dirt_track_temp_checkpoint_x = 774.1
-        dirt_track_temp_checkpoint_y = 802.4
-        dirt_track_temp_checkpoint_z = 68.3
-        BREAK
-    CASE 9
-        dirt_track_temp_checkpoint_x = 773.0
-        dirt_track_temp_checkpoint_y = 875.3
-        dirt_track_temp_checkpoint_z = 78.9
-        BREAK
-    CASE 10
-        dirt_track_temp_checkpoint_x = 812.8
-        dirt_track_temp_checkpoint_y = 851.1
-        dirt_track_temp_checkpoint_z = 85.2
-        BREAK
-    CASE 11
-        dirt_track_temp_checkpoint_x = 812.3
-        dirt_track_temp_checkpoint_y = 879.4
-        dirt_track_temp_checkpoint_z = 81.7
-        BREAK
-    CASE 12
-        dirt_track_temp_checkpoint_x = 874.6
-        dirt_track_temp_checkpoint_y = 878.6
-        dirt_track_temp_checkpoint_z = 81.7
-        BREAK
-    CASE 13
-        dirt_track_temp_checkpoint_x = 916.1
-        dirt_track_temp_checkpoint_y = 876.1
-        dirt_track_temp_checkpoint_z = 95.0
-        BREAK
-    CASE 14
-        dirt_track_temp_checkpoint_x = 979.5
-        dirt_track_temp_checkpoint_y = 874.2
-        dirt_track_temp_checkpoint_z = 92.5
-        BREAK
-    CASE 15
-        dirt_track_temp_checkpoint_x = 1032.3
-        dirt_track_temp_checkpoint_y = 884.2
-        dirt_track_temp_checkpoint_z = 94.1
-        BREAK
-    CASE 16
-        dirt_track_temp_checkpoint_x = 987.4
-        dirt_track_temp_checkpoint_y = 938.8
-        dirt_track_temp_checkpoint_z = 104.5
-        BREAK
-    CASE 17
-        dirt_track_temp_checkpoint_x = 968.5
-        dirt_track_temp_checkpoint_y = 955.4
-        dirt_track_temp_checkpoint_z = 103.9
-        BREAK
-    CASE 18
-        dirt_track_temp_checkpoint_x = 1007.8
-        dirt_track_temp_checkpoint_y = 986.5
-        dirt_track_temp_checkpoint_z = 104.3
-        BREAK
-    CASE 19
-        dirt_track_dangerous_checkpoint = 1
-        dirt_track_temp_checkpoint_x = 1027.7
-        dirt_track_temp_checkpoint_y = 988.2
-        dirt_track_temp_checkpoint_z = 104.8
-        BREAK
-    CASE 20
-        dirt_track_dangerous_checkpoint = 1
-        dirt_track_temp_checkpoint_x = 1020.6
-        dirt_track_temp_checkpoint_y = 936.2
-        dirt_track_temp_checkpoint_z = 100.7
-        BREAK
-    CASE 21
-        dirt_track_temp_checkpoint_x = 999.4
-        dirt_track_temp_checkpoint_y = 913.9
-        dirt_track_temp_checkpoint_z = 95.9
-        BREAK
-    CASE 22
-        dirt_track_temp_checkpoint_x = 968.4
-        dirt_track_temp_checkpoint_y = 894.6
-        dirt_track_temp_checkpoint_z = 90.6
-        BREAK
-ENDSWITCH
-RETURN
-
-dirt_track_bobcat_course_4:
-dirt_track_num_checkpoints = 25
-dirt_track_target_time = 99999999
-dirt_track_course_pass_status = flag_dirt_track_bobcat_course_4_status
-dirt_track_course_best_time = dirt_track_bobcat_course_4_best_time
-dirt_track_course_best_lap = dirt_track_bobcat_course_4_best_lap
 
 SWITCH dirt_track_temp_checkpoint_index
     CASE 0
@@ -1521,6 +1404,371 @@ SWITCH dirt_track_temp_checkpoint_index
 ENDSWITCH
 RETURN
 
+dirt_track_patriot_courses:
+IS_THING_EQUAL_TO_THING dirt_track_course_index 0
+GOTO_IF_TRUE dirt_track_patriot_course_0
+IS_THING_EQUAL_TO_THING dirt_track_course_index 1
+GOTO_IF_TRUE dirt_track_patriot_course_1
+IS_THING_EQUAL_TO_THING dirt_track_course_index 2
+GOTO_IF_TRUE dirt_track_patriot_course_2
+IS_THING_EQUAL_TO_THING dirt_track_course_index 3
+GOTO_IF_TRUE dirt_track_patriot_course_3
+RETURN
+
+dirt_track_patriot_course_0:
+dirt_track_num_checkpoints = 7
+dirt_track_target_time = 70000
+dirt_track_course_pass_status = flag_dirt_track_patriot_course_0_status
+dirt_track_course_best_time = dirt_track_patriot_course_0_best_time
+dirt_track_course_best_lap = dirt_track_patriot_course_0_best_lap
+
+SWITCH dirt_track_temp_checkpoint_index
+    CASE 0
+        dirt_track_temp_checkpoint_x = 911.4
+        dirt_track_temp_checkpoint_y = 872.5
+        dirt_track_temp_checkpoint_z = 95.1
+        BREAK
+    CASE 1
+        dirt_track_temp_checkpoint_x = 870.7
+        dirt_track_temp_checkpoint_y = 851.0
+        dirt_track_temp_checkpoint_z = 80.6
+        BREAK
+    CASE 2
+        dirt_track_temp_checkpoint_x = 892.8
+        dirt_track_temp_checkpoint_y = 842.2
+        dirt_track_temp_checkpoint_z = 78.2
+        BREAK
+    CASE 3
+        dirt_track_temp_checkpoint_x = 916.8
+        dirt_track_temp_checkpoint_y = 784.6
+        dirt_track_temp_checkpoint_z = 76.4
+        BREAK
+    CASE 4
+        dirt_track_temp_checkpoint_x = 959.9
+        dirt_track_temp_checkpoint_y = 742.1
+        dirt_track_temp_checkpoint_z = 63.8
+        BREAK
+    CASE 5
+        dirt_track_temp_checkpoint_x = 921.0
+        dirt_track_temp_checkpoint_y = 756.5
+        dirt_track_temp_checkpoint_z = 63.7
+        BREAK
+    CASE 6
+        dirt_track_temp_checkpoint_x = 916.5
+        dirt_track_temp_checkpoint_y = 821.2
+        dirt_track_temp_checkpoint_z = 77.0
+        BREAK
+ENDSWITCH
+RETURN
+
+dirt_track_patriot_course_1:
+dirt_track_num_checkpoints = 15
+dirt_track_target_time = 99999999
+dirt_track_course_pass_status = flag_dirt_track_patriot_course_1_status
+dirt_track_course_best_time = dirt_track_patriot_course_1_best_time
+dirt_track_course_best_lap = dirt_track_patriot_course_1_best_lap
+
+SWITCH dirt_track_temp_checkpoint_index
+    CASE 0
+        dirt_track_temp_checkpoint_x = 893.8
+        dirt_track_temp_checkpoint_y = 820.8
+        dirt_track_temp_checkpoint_z = 86.6
+        BREAK
+    CASE 1
+        dirt_track_temp_checkpoint_x = 954.0
+        dirt_track_temp_checkpoint_y = 823.8
+        dirt_track_temp_checkpoint_z = 87.8
+        BREAK
+    CASE 2
+        dirt_track_temp_checkpoint_x = 1057.5
+        dirt_track_temp_checkpoint_y = 824.8
+        dirt_track_temp_checkpoint_z = 80.8
+        BREAK
+    CASE 3
+        dirt_track_temp_checkpoint_x = 1033.6
+        dirt_track_temp_checkpoint_y = 883.4
+        dirt_track_temp_checkpoint_z = 94.0
+        BREAK
+    CASE 4
+        dirt_track_temp_checkpoint_x = 980.8
+        dirt_track_temp_checkpoint_y = 941.0
+        dirt_track_temp_checkpoint_z = 104.6
+        BREAK
+    CASE 5
+        dirt_track_temp_checkpoint_x = 876.9
+        dirt_track_temp_checkpoint_y = 933.8
+        dirt_track_temp_checkpoint_z = 99.9
+        BREAK
+    CASE 6
+        dirt_track_temp_checkpoint_x = 853.6
+        dirt_track_temp_checkpoint_y = 997.3
+        dirt_track_temp_checkpoint_z = 99.7
+        BREAK
+    CASE 7
+        dirt_track_temp_checkpoint_x = 825.8
+        dirt_track_temp_checkpoint_y = 1001.3
+        dirt_track_temp_checkpoint_z = 99.5
+        BREAK
+    CASE 8
+        dirt_track_temp_checkpoint_x = 784.8
+        dirt_track_temp_checkpoint_y = 962.0
+        dirt_track_temp_checkpoint_z = 96.0
+        BREAK
+    CASE 9
+        dirt_track_temp_checkpoint_x = 824.6
+        dirt_track_temp_checkpoint_y = 913.4
+        dirt_track_temp_checkpoint_z = 93.3
+        BREAK
+    CASE 10
+        dirt_track_temp_checkpoint_x = 852.4
+        dirt_track_temp_checkpoint_y = 936.4
+        dirt_track_temp_checkpoint_z = 94.3
+        BREAK
+    CASE 11
+        dirt_track_temp_checkpoint_x = 831.6
+        dirt_track_temp_checkpoint_y = 973.0
+        dirt_track_temp_checkpoint_z = 94.2
+        BREAK
+    CASE 12
+        dirt_track_temp_checkpoint_x = 811.6
+        dirt_track_temp_checkpoint_y = 935.6
+        dirt_track_temp_checkpoint_z = 94.1
+        BREAK
+    CASE 13
+        dirt_track_temp_checkpoint_x = 842.1
+        dirt_track_temp_checkpoint_y = 880.6
+        dirt_track_temp_checkpoint_z = 86.0
+        BREAK
+    CASE 14
+        dirt_track_temp_checkpoint_x = 851.2
+        dirt_track_temp_checkpoint_y = 834.3
+        dirt_track_temp_checkpoint_z = 80.3
+        BREAK
+ENDSWITCH
+RETURN
+
+dirt_track_patriot_course_2:
+dirt_track_num_checkpoints = 16
+dirt_track_target_time = 999999999
+dirt_track_course_pass_status = flag_dirt_track_bfinject_course_3_status
+dirt_track_course_best_time = dirt_track_bfinject_course_3_best_time
+dirt_track_course_best_lap = dirt_track_bfinject_course_3_best_lap
+
+SWITCH dirt_track_temp_checkpoint_index
+    CASE 0
+        dirt_track_temp_checkpoint_x = 913.6
+        dirt_track_temp_checkpoint_y = 875.9
+        dirt_track_temp_checkpoint_z = 94.9
+        BREAK
+    CASE 1
+        dirt_track_temp_checkpoint_x = 917.9
+        dirt_track_temp_checkpoint_y = 939.1
+        dirt_track_temp_checkpoint_z = 88.4
+        BREAK
+    CASE 2
+        dirt_track_temp_checkpoint_x = 907.4
+        dirt_track_temp_checkpoint_y = 1005.8
+        dirt_track_temp_checkpoint_z = 98.2
+        BREAK
+    CASE 3
+        dirt_track_temp_checkpoint_x = 880.2
+        dirt_track_temp_checkpoint_y = 967.6
+        dirt_track_temp_checkpoint_z = 98.5
+        BREAK
+    CASE 4
+        dirt_track_temp_checkpoint_x = 920.3
+        dirt_track_temp_checkpoint_y = 870.9
+        dirt_track_temp_checkpoint_z = 94.3
+        BREAK
+    CASE 5
+        dirt_track_temp_checkpoint_x = 988.7
+        dirt_track_temp_checkpoint_y = 828.1
+        dirt_track_temp_checkpoint_z = 83.2
+        BREAK
+    CASE 6
+        dirt_track_temp_checkpoint_x = 1053.7
+        dirt_track_temp_checkpoint_y = 798.1
+        dirt_track_temp_checkpoint_z = 78.2
+        BREAK
+    CASE 7
+        dirt_track_dangerous_checkpoint = 1
+        dirt_track_temp_checkpoint_x = 981.2
+        dirt_track_temp_checkpoint_y = 805.2
+        dirt_track_temp_checkpoint_z = 75.2
+        BREAK
+    CASE 8
+        dirt_track_temp_checkpoint_x = 956.6
+        dirt_track_temp_checkpoint_y = 791.8
+        dirt_track_temp_checkpoint_z = 73.4
+        BREAK
+    CASE 9
+        dirt_track_temp_checkpoint_x = 1007.8
+        dirt_track_temp_checkpoint_y = 762.1
+        dirt_track_temp_checkpoint_z = 68.0
+        BREAK
+    CASE 10
+        dirt_track_temp_checkpoint_x = 911.9
+        dirt_track_temp_checkpoint_y = 736.8
+        dirt_track_temp_checkpoint_z = 62.4
+        BREAK
+    CASE 11
+        dirt_track_temp_checkpoint_x = 876.8
+        dirt_track_temp_checkpoint_y = 768.4
+        dirt_track_temp_checkpoint_z = 66.9
+        BREAK
+    CASE 12
+        dirt_track_dangerous_checkpoint = 1
+        dirt_track_temp_checkpoint_x = 825.0
+        dirt_track_temp_checkpoint_y = 784.8
+        dirt_track_temp_checkpoint_z = 66.9
+        BREAK
+    CASE 13
+        dirt_track_temp_checkpoint_x = 776.3
+        dirt_track_temp_checkpoint_y = 801.0
+        dirt_track_temp_checkpoint_z = 67.9
+        BREAK
+    CASE 14
+        dirt_track_temp_checkpoint_x = 816.1
+        dirt_track_temp_checkpoint_y = 831.1
+        dirt_track_temp_checkpoint_z = 76.6
+        BREAK
+    CASE 15
+        dirt_track_dangerous_checkpoint = 1
+        dirt_track_temp_checkpoint_x = 858.6
+        dirt_track_temp_checkpoint_y = 854.4
+        dirt_track_temp_checkpoint_z = 84.2
+        BREAK
+ENDSWITCH
+RETURN
+
+dirt_track_patriot_course_3:
+dirt_track_num_checkpoints = 23
+dirt_track_target_time = 99999999
+dirt_track_course_pass_status = flag_dirt_track_bobcat_course_3_status
+dirt_track_course_best_time = dirt_track_bobcat_course_3_best_time
+dirt_track_course_best_lap = dirt_track_bobcat_course_3_best_lap
+
+SWITCH dirt_track_temp_checkpoint_index
+    CASE 0
+        dirt_track_temp_checkpoint_x = 916.1
+        dirt_track_temp_checkpoint_y = 876.1
+        dirt_track_temp_checkpoint_z = 95.0
+        BREAK
+    CASE 1
+        dirt_track_temp_checkpoint_x = 979.5
+        dirt_track_temp_checkpoint_y = 874.2
+        dirt_track_temp_checkpoint_z = 92.5
+        BREAK
+    CASE 2
+        dirt_track_temp_checkpoint_x = 1032.3
+        dirt_track_temp_checkpoint_y = 884.2
+        dirt_track_temp_checkpoint_z = 94.1
+        BREAK
+    CASE 3
+        dirt_track_temp_checkpoint_x = 987.4
+        dirt_track_temp_checkpoint_y = 938.8
+        dirt_track_temp_checkpoint_z = 104.5
+        BREAK
+    CASE 4
+        dirt_track_temp_checkpoint_x = 968.5
+        dirt_track_temp_checkpoint_y = 955.4
+        dirt_track_temp_checkpoint_z = 103.9
+        BREAK
+    CASE 5
+        dirt_track_temp_checkpoint_x = 1007.8
+        dirt_track_temp_checkpoint_y = 986.5
+        dirt_track_temp_checkpoint_z = 104.3
+        BREAK
+    CASE 6
+        dirt_track_dangerous_checkpoint = 1
+        dirt_track_temp_checkpoint_x = 1027.7
+        dirt_track_temp_checkpoint_y = 988.2
+        dirt_track_temp_checkpoint_z = 104.8
+        BREAK
+    CASE 7
+        dirt_track_dangerous_checkpoint = 1
+        dirt_track_temp_checkpoint_x = 1020.6
+        dirt_track_temp_checkpoint_y = 936.2
+        dirt_track_temp_checkpoint_z = 100.7
+        BREAK
+    CASE 8
+        dirt_track_temp_checkpoint_x = 999.4
+        dirt_track_temp_checkpoint_y = 913.9
+        dirt_track_temp_checkpoint_z = 95.9
+        BREAK
+    CASE 9
+        dirt_track_temp_checkpoint_x = 968.4
+        dirt_track_temp_checkpoint_y = 894.6
+        dirt_track_temp_checkpoint_z = 90.6
+        BREAK
+    CASE 10
+        dirt_track_temp_checkpoint_x = 915.1
+        dirt_track_temp_checkpoint_y = 875.2
+        dirt_track_temp_checkpoint_z = 95.0
+        BREAK
+    CASE 11
+        dirt_track_temp_checkpoint_x = 870.2
+        dirt_track_temp_checkpoint_y = 850.6
+        dirt_track_temp_checkpoint_z = 80.6
+        BREAK
+    CASE 12
+        dirt_track_temp_checkpoint_x = 893.7
+        dirt_track_temp_checkpoint_y = 841.1
+        dirt_track_temp_checkpoint_z = 78.1
+        BREAK
+    CASE 13
+        dirt_track_temp_checkpoint_x = 917.8
+        dirt_track_temp_checkpoint_y = 783.7
+        dirt_track_temp_checkpoint_z = 76.2
+        BREAK
+    CASE 14
+        dirt_track_temp_checkpoint_x = 956.1
+        dirt_track_temp_checkpoint_y = 740.5
+        dirt_track_temp_checkpoint_z = 63.5
+        BREAK
+    CASE 15
+        dirt_track_temp_checkpoint_x = 881.5
+        dirt_track_temp_checkpoint_y = 739.3
+        dirt_track_temp_checkpoint_z = 62.8
+        BREAK
+    CASE 16
+        dirt_track_temp_checkpoint_x = 874.9
+        dirt_track_temp_checkpoint_y = 769.5
+        dirt_track_temp_checkpoint_z = 67.0
+        BREAK
+    CASE 17
+        dirt_track_temp_checkpoint_x = 847.5
+        dirt_track_temp_checkpoint_y = 791.6
+        dirt_track_temp_checkpoint_z = 69.1
+        BREAK
+    CASE 18
+        dirt_track_temp_checkpoint_x = 806.1
+        dirt_track_temp_checkpoint_y = 824.5
+        dirt_track_temp_checkpoint_z = 74.7
+        BREAK
+    CASE 19
+        dirt_track_temp_checkpoint_x = 774.1
+        dirt_track_temp_checkpoint_y = 856.5
+        dirt_track_temp_checkpoint_z = 76.7
+        BREAK
+    CASE 20
+        dirt_track_temp_checkpoint_x = 812.8
+        dirt_track_temp_checkpoint_y = 851.1
+        dirt_track_temp_checkpoint_z = 85.2
+        BREAK
+    CASE 21
+        dirt_track_temp_checkpoint_x = 812.3
+        dirt_track_temp_checkpoint_y = 879.4
+        dirt_track_temp_checkpoint_z = 81.7
+        BREAK
+    CASE 22
+        dirt_track_temp_checkpoint_x = 874.6
+        dirt_track_temp_checkpoint_y = 878.6
+        dirt_track_temp_checkpoint_z = 81.7
+        BREAK
+ENDSWITCH
+RETURN
+
 dirt_track_try_pass_course:
 dirt_track_new_record_or_passed_all = 0
 // IF...GOTO exists but isn't supported in gta3sc
@@ -1528,6 +1776,8 @@ IS_THING_EQUAL_TO_THING dirt_track_course_variation 0
 GOTO_IF_TRUE dirt_track_try_pass_bfinject_course
 IS_THING_EQUAL_TO_THING dirt_track_course_variation 1
 GOTO_IF_TRUE dirt_track_try_pass_bobcat_course
+IS_THING_EQUAL_TO_THING dirt_track_course_variation 2
+GOTO_IF_TRUE dirt_track_try_pass_patriot_course
 
 PRINT_NOW TT_E2 7000 1 // ~r~You failed to beat the target time.
 RETURN
@@ -1599,35 +1849,15 @@ SWITCH dirt_track_course_index
             IF dirt_track_total_time < dirt_track_target_time
                 ADD_SCORE player 1000
                 PLAYER_MADE_PROGRESS 1
-                flag_dirt_track_bfinject_course_4_status = 2
+                flag_dirt_track_bfinject_course_3_status = 2
                 dirt_track_bfinject_course_3_best_time = dirt_track_total_time
-
-                flag_dirt_track_bfinject_course_3_status = 1
-            ELSE
-                GOTO dirt_track_display_target_time_failed
-            ENDIF
-        ELSE
-            IF dirt_track_total_time < dirt_track_bfinject_course_3_best_time
-                dirt_track_bfinject_course_3_best_time = dirt_track_total_time
-                GOTO dirt_track_display_new_record
-            ENDIF
-            GOTO dirt_track_display_record_failed
-        ENDIF
-        BREAK
-    CASE 4
-        IF flag_dirt_track_bfinject_course_4_status = 1
-            IF dirt_track_total_time < dirt_track_target_time
-                ADD_SCORE player 1000
-                PLAYER_MADE_PROGRESS 1
-                flag_dirt_track_bfinject_course_4_status = 2
-                dirt_track_bfinject_course_4_best_time = dirt_track_total_time
 
                 GOTO dirt_track_display_all_courses_complete
             ENDIF
             GOTO dirt_track_display_target_time_failed
         ELSE
-            IF dirt_track_total_time < dirt_track_bfinject_course_4_best_time
-                dirt_track_bfinject_course_4_best_time = dirt_track_total_time
+            IF dirt_track_total_time < dirt_track_bfinject_course_3_best_time
+                dirt_track_bfinject_course_3_best_time = dirt_track_total_time
                 GOTO dirt_track_display_new_record
             ENDIF
             GOTO dirt_track_display_record_failed
@@ -1705,13 +1935,12 @@ SWITCH dirt_track_course_index
             IF dirt_track_total_time < dirt_track_target_time
                 ADD_SCORE player 1000
                 PLAYER_MADE_PROGRESS 1
-                flag_dirt_track_bobcat_course_4_status = 2
+                flag_dirt_track_bobcat_course_3_status = 2
                 dirt_track_bobcat_course_3_best_time = dirt_track_total_time
 
-                flag_dirt_track_bobcat_course_3_status = 1
-            ELSE
-                GOTO dirt_track_display_target_time_failed
+                GOTO dirt_track_display_all_courses_complete
             ENDIF
+            GOTO dirt_track_display_target_time_failed
         ELSE
             IF dirt_track_total_time < dirt_track_bobcat_course_3_best_time
                 dirt_track_bobcat_course_3_best_time = dirt_track_total_time
@@ -1720,20 +1949,87 @@ SWITCH dirt_track_course_index
             GOTO dirt_track_display_record_failed
         ENDIF
         BREAK
-    CASE 4
-        IF flag_dirt_track_bobcat_course_4_status = 1
+ENDSWITCH
+
+PRINT_NOW TT_E10 7000 1 // You beat the target time. Next course unlocked.
+RETURN
+
+dirt_track_try_pass_patriot_course:
+SWITCH dirt_track_course_index
+    CASE 0
+        IF flag_dirt_track_patriot_course_0_status = 1
             IF dirt_track_total_time < dirt_track_target_time
                 ADD_SCORE player 1000
                 PLAYER_MADE_PROGRESS 1
-                flag_dirt_track_bobcat_course_4_status = 2
-                dirt_track_bobcat_course_4_best_time = dirt_track_total_time
+                flag_dirt_track_patriot_course_0_status = 2
+                dirt_track_patriot_course_0_best_time = dirt_track_total_time
+
+                flag_dirt_track_patriot_course_1_status = 1
+            ELSE
+                GOTO dirt_track_display_target_time_failed
+            ENDIF
+        ELSE
+            IF dirt_track_total_time < dirt_track_patriot_course_0_best_time
+                dirt_track_patriot_course_0_best_time = dirt_track_total_time
+                GOTO dirt_track_display_new_record
+            ENDIF
+            GOTO dirt_track_display_record_failed
+        ENDIF
+        BREAK
+    CASE 1
+        IF flag_dirt_track_patriot_course_1_status = 1
+            IF dirt_track_total_time < dirt_track_target_time
+                ADD_SCORE player 1000
+                PLAYER_MADE_PROGRESS 1
+                flag_dirt_track_patriot_course_1_status = 2
+                dirt_track_patriot_course_1_best_time = dirt_track_total_time
+
+                flag_dirt_track_patriot_course_2_status = 1
+            ELSE
+                GOTO dirt_track_display_target_time_failed
+            ENDIF
+        ELSE
+            IF dirt_track_total_time < dirt_track_patriot_course_1_best_time
+                dirt_track_patriot_course_1_best_time = dirt_track_total_time
+                GOTO dirt_track_display_new_record
+            ENDIF
+            GOTO dirt_track_display_record_failed
+        ENDIF
+        BREAK
+    CASE 2
+        IF flag_dirt_track_patriot_course_2_status = 1
+            IF dirt_track_total_time < dirt_track_target_time
+                ADD_SCORE player 1000
+                PLAYER_MADE_PROGRESS 1
+                flag_dirt_track_patriot_course_2_status = 2
+                dirt_track_patriot_course_2_best_time = dirt_track_total_time
+
+                flag_dirt_track_patriot_course_3_status = 1
+            ELSE
+                GOTO dirt_track_display_target_time_failed
+            ENDIF
+        ELSE
+            IF dirt_track_total_time < dirt_track_patriot_course_2_best_time
+                dirt_track_patriot_course_2_best_time = dirt_track_total_time
+                GOTO dirt_track_display_new_record
+            ENDIF
+            GOTO dirt_track_display_record_failed
+        ENDIF
+        BREAK
+    CASE 3
+        IF flag_dirt_track_patriot_course_3_status = 1
+            IF dirt_track_total_time < dirt_track_target_time
+                ADD_SCORE player 1000
+                PLAYER_MADE_PROGRESS 1
+                flag_dirt_track_patriot_course_3_status = 2
+                dirt_track_patriot_course_3_best_time = dirt_track_total_time
 
                 GOTO dirt_track_display_all_courses_complete
             ENDIF
             GOTO dirt_track_display_target_time_failed
         ELSE
-            IF dirt_track_total_time < dirt_track_bobcat_course_4_best_time
-                dirt_track_bobcat_course_4_best_time = dirt_track_total_time
+            IF dirt_track_total_time < dirt_track_patriot_course_3_best_time
+                dirt_track_patriot_course_3_best_time = dirt_track_total_time
                 GOTO dirt_track_display_new_record
             ENDIF
             GOTO dirt_track_display_record_failed
@@ -1767,6 +2063,8 @@ IS_THING_EQUAL_TO_THING dirt_track_course_variation 0
 GOTO_IF_TRUE dirt_track_try_update_bfinject_lap_record
 IS_THING_EQUAL_TO_THING dirt_track_course_variation 1
 GOTO_IF_TRUE dirt_track_try_update_bobcat_lap_record
+IS_THING_EQUAL_TO_THING dirt_track_course_variation 2
+GOTO_IF_TRUE dirt_track_try_update_patriot_lap_record
 RETURN
 
 dirt_track_try_update_bfinject_lap_record:
@@ -1802,15 +2100,6 @@ SWITCH dirt_track_course_index
         IF dirt_track_bfinject_course_3_best_lap = 0
         OR dirt_track_lap_time < dirt_track_bfinject_course_3_best_lap
             dirt_track_bfinject_course_3_best_lap = dirt_track_lap_time
-
-            //RETURN_TRUE // Inferred
-            RETURN
-        ENDIF
-        BREAK
-    CASE 4
-        IF dirt_track_bfinject_course_4_best_lap = 0
-        OR dirt_track_lap_time < dirt_track_bfinject_course_4_best_lap
-            dirt_track_bfinject_course_4_best_lap = dirt_track_lap_time
 
             //RETURN_TRUE // Inferred
             RETURN
@@ -1858,10 +2147,43 @@ SWITCH dirt_track_course_index
             RETURN
         ENDIF
         BREAK
-    CASE 4
-        IF dirt_track_bobcat_course_4_best_lap = 0
-        OR dirt_track_lap_time < dirt_track_bobcat_course_4_best_lap
-            dirt_track_bobcat_course_4_best_lap = dirt_track_lap_time
+ENDSWITCH
+RETURN_FALSE
+RETURN
+
+dirt_track_try_update_patriot_lap_record:
+SWITCH dirt_track_course_index
+    CASE 0
+        IF dirt_track_patriot_course_0_best_lap = 0
+        OR dirt_track_lap_time < dirt_track_patriot_course_0_best_lap
+            dirt_track_patriot_course_0_best_lap = dirt_track_lap_time
+
+            //RETURN_TRUE // Inferred
+            RETURN
+        ENDIF
+        BREAK
+    CASE 1
+        IF dirt_track_patriot_course_1_best_lap = 0
+        OR dirt_track_lap_time < dirt_track_patriot_course_1_best_lap
+            dirt_track_patriot_course_1_best_lap = dirt_track_lap_time
+
+            //RETURN_TRUE // Inferred
+            RETURN
+        ENDIF
+        BREAK
+    CASE 2
+        IF dirt_track_patriot_course_2_best_lap = 0
+        OR dirt_track_lap_time < dirt_track_patriot_course_2_best_lap
+            dirt_track_patriot_course_2_best_lap = dirt_track_lap_time
+
+            //RETURN_TRUE // Inferred
+            RETURN
+        ENDIF
+        BREAK
+    CASE 3
+        IF dirt_track_patriot_course_3_best_lap = 0
+        OR dirt_track_lap_time < dirt_track_patriot_course_3_best_lap
+            dirt_track_patriot_course_3_best_lap = dirt_track_lap_time
 
             //RETURN_TRUE // Inferred
             RETURN

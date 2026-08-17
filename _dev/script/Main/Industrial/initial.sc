@@ -29,6 +29,7 @@ r3_cancel_timer = -1
 flag_player_on_dirt_track_mission = 0
 flag_dirt_track_bfinject_course_0_status = 1
 flag_dirt_track_bobcat_course_0_status = 1
+flag_dirt_track_patriot_course_0_status = 1
 
 //INDUSTRIAL********************************************************************************
 
