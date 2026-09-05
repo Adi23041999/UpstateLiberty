@@ -6,7 +6,6 @@
 class ModelTraits
 {
 public:
-	static class CGarage* aGarages;
 	static std::vector<int32> DoorModelIds;
 	static std::vector<int32> TreeModelIds;
 	static std::vector<int32> BannerModelIds;
@@ -18,7 +17,6 @@ public:
 	static void CollectModels();
 
 	static bool Patch_IsModelIndexADoor(int32 modelIndexDoor);
-	static void Patch_SetGarageDoorToRotate(int16 garageIndex);
 	
 	static bool IsTreeModel(int16 modelIndex);
 	static bool IsBannerModel(int16 modelIndex);

@@ -15,3 +15,8 @@ void Upstate::Initialize()
 	Debug::Initialize();
 #endif
 }
+
+CGarage* Upstate::GetGarages()
+{
+	return injector::ReadMemory<CGarage*>(0x421E74 + 1);
+}

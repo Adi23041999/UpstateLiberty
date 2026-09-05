@@ -2,8 +2,10 @@
 #include "CFileMgr.h"
 #include "CFileLoader.h"
 #include "CGarages.h"
+#include "Upstate.h"
 
-CGarage* ModelTraits::aGarages = nullptr;
+static inline CdeclEvent <AddressListMulti<0x44E912, GAME_10EN, H_CALL>, PRIORITY_AFTER, ArgPickN<int16, 0>, void(int16)> setGarageDoorToRotateEvent;
+
 std::vector<int32> ModelTraits::DoorModelIds;
 std::vector<int32> ModelTraits::TreeModelIds;
 std::vector<int32> ModelTraits::BannerModelIds;
@@ -19,96 +21,99 @@ void ModelTraits::Initialize()
 		{ 
 			CollectModels();
 		};
+	setGarageDoorToRotateEvent += [](int16 garageIndex)
+		{
+			CGarage& pGarage = Upstate::GetGarages()[garageIndex];
+
+			// VC fix for rotated doors that are initially open
+			pGarage.m_fDoorCurrentAngle = Min(pGarage.m_fDoorOpenAngle, pGarage.m_fDoorCurrentAngle);
+			pGarage.UpdateDoorsHeight();
+		};
 }
 
 void ModelTraits::DoPatches()
 {
-	aGarages = injector::ReadMemory<CGarage*>(0x421E74 + 1);
-
 	injector::MakeJMP(0x428D90, Patch_IsModelIndexADoor);
-	injector::MakeJMP(0x427510, Patch_SetGarageDoorToRotate);
 
-	injector::MakeInline<0x41B730>([](injector::reg_pack& regs) // CCarCtrl::WeaveForObject
+	static auto Tree_CCarCtrl__WeaveForObject = safetyhook::create_mid(0x41B730, +[](SafetyHookContext& regs)
 		{
 			int16 modelIndex = regs.eax;
-			regs.eip = IsTreeModel(modelIndex) ? 0x41B7D2 : 0x41B7D6;
+			if (IsTreeModel(modelIndex)) regs.eip = 0x41B7D2;
 		});
-	injector::MakeInline<0x4743E0>([](injector::reg_pack& regs) // CEntity::PreRender
+	static auto Tree_CEntity__PreRender = safetyhook::create_mid(0x4743E0, +[](SafetyHookContext& regs)
 		{
 			int16 modelIndex = regs.ebx;
-			regs.eip = IsTreeModel(modelIndex) ? 0x474482 : 0x474486;
+			if (IsTreeModel(modelIndex)) regs.eip = 0x474482;
 		});
-	injector::MakeInline<0x4B4348>([](injector::reg_pack& regs) // CWorld::RepositionCertainDynamicObjects
+	static auto Tree_CWorld__RepositionCertainDynamicObjects = safetyhook::create_mid(0x4B4348, +[](SafetyHookContext& regs)
 		{
 			int16 modelIndex = regs.eax;
-			regs.eip = IsTreeModel(modelIndex) ? 0x4B4534 : 0x4B441A;
+			if (IsTreeModel(modelIndex)) regs.eip = 0x4B4534;
 		});
-
-	injector::MakeInline<0x4744A0>([](injector::reg_pack& regs) // CEntity::PreRender
+	static auto Banner_CEntity__PreRender = safetyhook::create_mid(0x4744A0, +[](SafetyHookContext& regs)
 		{
 			int16 modelIndex = regs.ebx;
-			regs.eip = IsBannerModel(modelIndex) ? 0x474542 : 0x474549;
+			if (IsBannerModel(modelIndex)) regs.eip = 0x474542;
 		});
-
-	injector::MakeInline<0x4749F8>([](injector::reg_pack& regs) // CRender::PreRender
+	static auto Glass_CEntity__PreRender = safetyhook::create_mid(0x4749F8, +[](SafetyHookContext& regs)
 		{
 			int16 modelIndex = regs.eax;
-			regs.eip = IsGlassModel(modelIndex) ? 0x474A01 : 0x474A70;
+			if (IsGlassModel(modelIndex)) regs.eip = 0x474A01;
 		});
-	injector::MakeInline<0x478808>([](injector::reg_pack& regs) // CFileLoader::LoadObjectInstance
+	static auto Glass_CFileLoader__LoadObjectInstance = safetyhook::create_mid(0x478808, +[](SafetyHookContext& regs)
 		{
 			int16 modelIndex = regs.eax;
-			regs.eip = IsGlassModel(modelIndex) ? 0x478811 : 0x478880;
+			if (IsGlassModel(modelIndex)) regs.eip = 0x478811;
 		});
-	injector::MakeInline<0x49756E>([](injector::reg_pack& regs) // CPhysical::ApplyCollision
+	static auto Glass_CPhysical__ApplyCollision = safetyhook::create_mid(0x49756E, +[](SafetyHookContext& regs)
 		{
 			int16 modelIndex = regs.eax;
-			regs.eip = IsGlassModel(modelIndex) ? 0x497577 : 0x4975F0;
+			if (IsGlassModel(modelIndex)) regs.eip = 0x497577;
 		});
-	injector::MakeInline<0x497654>([](injector::reg_pack& regs) // CPhysical::ApplyCollision
+	static auto Glass_CPhysical__ApplyCollision2 = safetyhook::create_mid(0x497654, +[](SafetyHookContext& regs)
 		{
 			int16 modelIndex = regs.eax;
-			regs.eip = IsGlassModel(modelIndex) ? 0x49765D : 0x4976D0;
+			if (IsGlassModel(modelIndex)) regs.eip = 0x49765D;
 		});
-	injector::MakeInline<0x497B9C>([](injector::reg_pack& regs) // CPhysical::ApplyCollision
+	static auto Glass_CPhysical__ApplyCollision3 = safetyhook::create_mid(0x497B9C, +[](SafetyHookContext& regs)
 		{
 			int16 modelIndex = regs.eax;
-			regs.eip = IsGlassModel(modelIndex) ? 0x497BA5 : 0x497C20;
+			if (IsGlassModel(modelIndex)) regs.eip = 0x497BA5;
 		});
-	injector::MakeInline<0x497D1C>([](injector::reg_pack& regs) // CPhysical::ApplyCollision
+	static auto Glass_CPhysical__ApplyCollision4 = safetyhook::create_mid(0x497D1C, +[](SafetyHookContext& regs)
 		{
 			int16 modelIndex = regs.eax;
-			regs.eip = IsGlassModel(modelIndex) ? 0x497D25 : 0x497DA0;
+			if (IsGlassModel(modelIndex)) regs.eip = 0x497D25;
 		});
-	injector::MakeInline<0x4A9C78>([](injector::reg_pack& regs) // CRenderer::ScanSectorList
+	static auto Glass_CRenderer__ScanSectorList = safetyhook::create_mid(0x4A9C78, +[](SafetyHookContext& regs)
 		{
 			int16 modelIndex = regs.eax;
-			regs.eip = IsGlassModel(modelIndex) ? 0x4A9C81 : 0x4A9CF0;
+			if (IsGlassModel(modelIndex)) regs.eip = 0x4A9C81;
 		});
-	injector::MakeInline<0x4A9F05>([](injector::reg_pack& regs) // CRenderer::ScanSectorList_Priority
+	static auto Glass_CRenderer__ScanSectorList_Priority = safetyhook::create_mid(0x4A9F05, +[](SafetyHookContext& regs)
 		{
 			int16 modelIndex = regs.eax;
-			regs.eip = IsGlassModel(modelIndex) ? 0x4A9F0E : 0x4A9F80;
+			if (IsGlassModel(modelIndex)) regs.eip = 0x4A9F0E;
 		});
-	injector::MakeInline<0x4B14A2>([](injector::reg_pack& regs) // CWorld::TriggerExplosionSectorList
+	static auto Glass_CWorld__TriggerExplosionSectorList = safetyhook::create_mid(0x4B14A2, +[](SafetyHookContext& regs)
 		{
 			int16 modelIndex = regs.eax;
-			regs.eip = IsGlassModel(modelIndex) ? 0x4B14AB : 0x4B1520;
+			if (IsGlassModel(modelIndex)) regs.eip = 0x4B14AB;
 		});
-	injector::MakeInline<0x4F44C5>([](injector::reg_pack& regs) // CPopulation::ConvertToRealObject
+	static auto Glass_CPopulation__ConvertToRealObject = safetyhook::create_mid(0x4F44C5, +[](SafetyHookContext& regs)
 		{
 			int16 modelIndex = regs.eax;
-			regs.eip = IsGlassModel(modelIndex) ? 0x4F44CE : 0x4F4540;
+			if (IsGlassModel(modelIndex)) regs.eip = 0x4F44CE;
 		});
-	injector::MakeInline<0x4F45E0>([](injector::reg_pack& regs) // CPopulation::ConvertToDummyObject
+	static auto Glass_CPopulation__ConvertToDummyObject = safetyhook::create_mid(0x4F45E0, +[](SafetyHookContext& regs)
 		{
 			int16 modelIndex = regs.eax;
-			regs.eip = IsGlassModel(modelIndex) ? 0x4F45E9 : 0x4F4660;
+			if (IsGlassModel(modelIndex)) regs.eip = 0x4F45E9;
 		});
-	injector::MakeInline<0x50467D>([](injector::reg_pack& regs) // CGlass::WasGlassHitByBullet
+	static auto Glass_CGlass__WasGlassHitByBullet = safetyhook::create_mid(0x50467D, +[](SafetyHookContext& regs)
 		{
 			int16 modelIndex = regs.eax;
-			regs.eip = IsGlassModel(modelIndex) ? 0x504686 : 0x504700;
+			if (IsGlassModel(modelIndex)) regs.eip = 0x504686;
 		});
 }
 
@@ -120,6 +125,12 @@ void ModelTraits::CollectModels()
 		TREE,
 		BANNER,
 		GLASS,
+		//IsStreetLight
+		//IsExplosiveThingModel
+		//IsFence
+		//MI_BUOY
+		//MI_FIRE_HYDRANT
+		//CWorld::RepositionOneObject
 	};
 	char* line;
 	int32 section = NONE;
@@ -195,20 +206,6 @@ void ModelTraits::CollectModels()
 bool ModelTraits::Patch_IsModelIndexADoor(int32 modelIndexDoor)
 {
 	return std::find(DoorModelIds.begin(), DoorModelIds.end(), modelIndexDoor) != DoorModelIds.end();
-}
-
-void ModelTraits::Patch_SetGarageDoorToRotate(int16 garageIndex)
-{
-	CGarage& pGarage = aGarages[garageIndex];
-	if (pGarage.m_bDoorSwingOpen)
-		return;
-	pGarage.m_bDoorSwingOpen = true;
-	pGarage.m_fDoorOpenAngle /= 2.0f;
-	pGarage.m_fDoorOpenAngle -= 0.1f;
-
-	// VC fix for rotated doors that are initially open
-	pGarage.m_fDoorCurrentAngle = Min(pGarage.m_fDoorOpenAngle, pGarage.m_fDoorCurrentAngle);
-	pGarage.UpdateDoorsHeight();
 }
 
 bool ModelTraits::IsTreeModel(int16 modelIndex)
