@@ -175,6 +175,8 @@ SET_CAR_HEADING cs_bank_car4 180.0
 CHANGE_CAR_COLOUR cs_bank_car4 8 74
 CREATE_CHAR_INSIDE_CAR cs_bank_car4 PEDTYPE_DUMMY PED_B_MAN1 cs_bank_car4_ped
 
+SET_VISIBILITY_OF_CLOSEST_OBJECT_OF_TYPE 1512.666 1430.93 125.998 5.0 gtw_bankdoor FALSE // UPSTATE: hide the bank door
+
 WAIT 0
 
 SWITCH_WORLD_PROCESSING OFF
@@ -1443,6 +1445,8 @@ SWITCH_RUBBISH ON
 GOSUB intro_set2
 GOSUB intro_set3
 // SCFIX: END
+
+SET_VISIBILITY_OF_CLOSEST_OBJECT_OF_TYPE 1512.666 1430.93 125.998 5.0 gtw_bankdoor TRUE // UPSTATE: show the bank door
 
 // *******************************END OF JAIL BREAK CUTSCENE***************************
 

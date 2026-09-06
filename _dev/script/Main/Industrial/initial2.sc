@@ -1088,7 +1088,7 @@ CREATE_COLLECTABLE1 388.7392 1678.113 158.3995 //Top of the canopy in fuel depot
 
 CREATE_COLLECTABLE1 703.7411 891.2822 126.8365 //Dirt track stands
 CREATE_COLLECTABLE1 914.8866 875.9498 96.112 //Top of the jump hill in the dirt track center
-CREATE_COLLECTABLE1 853.6412 943.6592 92.461 //In an obstacle hole on the dirt track
+CREATE_COLLECTABLE1 853.6412 943.6592 93.6764 //In an obstacle hole on the dirt track
 CREATE_COLLECTABLE1 1347.4153 982.3499 122.5408 //Old Town: hole in the wall leading to the skatepark
 CREATE_COLLECTABLE1 1359.3994 1047.9858 125.0141 //Old Town: door steps on of the buildings in the alleway
 CREATE_COLLECTABLE1 1471.6254 1084.8708 121.0274 //Old Town: driveway on an inner area on the eastern side
@@ -1118,7 +1118,7 @@ CREATE_COLLECTABLE1 1726.5562 1687.6536 130.9613 //Airport: stairs leading to th
 CREATE_COLLECTABLE1 1659.4325 1751.7853 153.5235 //Airport: on top of the big plane
 CREATE_COLLECTABLE1 610.7187 1804.077 140.8012 //Airport: very end of the runway under the ramp
 CREATE_COLLECTABLE1 1342.4901 1412.7347 129.3136 //Bankarea: behind museum
-CREATE_COLLECTABLE1 1513.6219 1451.3843 126.5615 //Bankarea: in the intro alleyway
+CREATE_COLLECTABLE1 1524.6160 1439.6790 126.7207 //Bankarea: in the intro alleyway
 CREATE_COLLECTABLE1 1492.106 1236.3715 123.7359 //Bankarea: alleyway between large resisdential buildings
 CREATE_COLLECTABLE1 1549.1244 1364.4619 109.4407 //Bankarea: sewer generator room
 CREATE_COLLECTABLE1 1504.5182 1366.4753 117.701 //Bankarea: in the bank vault interior; access from sewers
