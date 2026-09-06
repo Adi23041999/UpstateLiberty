@@ -1,4 +1,6 @@
 objs
+3462, LOD_treepatch_sub, suburb2, 1, 1000, 4
+3463, lcc_treepatch_sub, trees2, 1, 299, 4
 3499, lcc_telewire22, ul_details, 1, 250, 4
 3508, lcc_scrapsign, lcc_autoyard, 1, 200, 0
 3509, lcc_decals14, ul_details, 1, 290, 68
