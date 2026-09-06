@@ -1349,18 +1349,10 @@ SWITCH_CAR_GENERATOR gen_car23 101
 //CHINATOWN
 
 CREATE_CAR_GENERATOR 1027.5 -873.1 14.5 270.0 CAR_IDAHO -1 -1 0 40 0 0 10000 gen_car28 //Fuzzball car park
-#ifdef _DEBUG
 SWITCH_CAR_GENERATOR gen_car28 101
-#else
-SWITCH_CAR_GENERATOR gen_car28 0
-#endif
 
 CREATE_CAR_GENERATOR 1006.18 -838.49 14.5 90.0 CAR_ESPERANTO -1 -1 0 50 0 0 10000 gen_car29 //Fuzzball car park
-#ifdef _DEBUG
 SWITCH_CAR_GENERATOR gen_car29 101
-#else
-SWITCH_CAR_GENERATOR gen_car29 0
-#endif
 
 CREATE_CAR_GENERATOR 857.1 -790.19 14.5 0.0 CAR_PONY -1 -1 0 90 0 0 10000 gen_car30 //South west Chinatown (down alleyway that leads to roof)
 SWITCH_CAR_GENERATOR gen_car30 101
