@@ -1,4 +1,5 @@
 objs
+3460, plc_stinger, plc_stinger, 1, 100, 0
 3504, ulp_tallpost, docklight, 1, 150, 0
 3505, ulp_blimp3dhalf, ulp_happyblimp, 1, 200, 4
 3506, ulp_blimpbin, ulp_happyblimp, 1, 50, 4
